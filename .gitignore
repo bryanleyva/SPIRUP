@@ -1,0 +1,19 @@
+# Logs
+wp-content/debug.log
+*.log
+
+# Cache / temporales de WordPress
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/wc-logs/
+wp-content/uploads/woocommerce_uploads/
+
+# Sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
