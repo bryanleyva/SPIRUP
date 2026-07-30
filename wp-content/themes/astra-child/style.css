@@ -286,12 +286,12 @@ body.astra-child,
 /* Panel teal a TODO el ancho (gradiente vertical como en el diseno) */
 .spirup-parte3__panel {
 	background: linear-gradient(180deg, #3a8b86 0%, #59a497 48%, #81c5ac 100%);
-	padding-bottom: clamp(30px, 3.4vw, 90px);
+	padding-bottom: clamp(30px, 3vw, 60px);
 }
 .spirup-parte3__inner {
-	max-width: min(94vw, 2600px);
+	max-width: min(94vw, 1240px);       /* compacto como el diseno (~1000px) */
 	margin: 0 auto;
-	padding: 0 clamp(16px, 1.5vw, 36px);
+	padding: 0 clamp(16px, 1.4vw, 30px);
 }
 /* Badge "Que contiene" */
 .spirup-parte3__badge {
@@ -300,27 +300,27 @@ body.astra-child,
 	border: 1px solid rgba(255, 255, 255, .28);
 	color: #e6f6f2;
 	border-radius: 999px;
-	padding: clamp(7px, 0.55vw, 14px) clamp(16px, 1.3vw, 34px);
-	font-size: clamp(13px, 0.95vw, 24px);
+	padding: clamp(7px, 0.5vw, 11px) clamp(16px, 1.1vw, 26px);
+	font-size: clamp(13px, 0.9vw, 16px);
 	letter-spacing: .01em;
 }
 .spirup-parte3__title {
-	margin: clamp(14px, 1.4vw, 34px) 0 clamp(24px, 2.4vw, 60px);
+	margin: clamp(14px, 1.2vw, 26px) 0 clamp(22px, 2vw, 40px);
 	color: #fff;
 	font-weight: 800;
 	line-height: 1.12;
-	font-size: clamp(22px, 2.5vw, 74px);
+	font-size: clamp(22px, 2.4vw, 34px);
 }
 /* Tarjetas repartidas a todo el ancho */
 .spirup-parte3__cards {
 	display: flex;
-	gap: clamp(14px, 1.5vw, 40px);
+	gap: clamp(14px, 1.4vw, 26px);
 	align-items: stretch;
 }
 .spirup-card {
 	flex: 1 1 0;
 	min-width: 0;
-	border-radius: clamp(14px, 1.1vw, 26px);
+	border-radius: clamp(14px, 1vw, 20px);
 	overflow: hidden;
 	background: #d6f0e6;                 /* zona de texto (clara) */
 	box-shadow: 0 10px 24px rgba(9, 52, 60, .12);
@@ -333,28 +333,28 @@ body.astra-child,
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: clamp(18px, 1.8vw, 46px) 10px;
+	padding: clamp(16px, 1.5vw, 28px) 10px;
 }
 .spirup-card__top img {
 	display: block;
 	width: auto;
-	height: clamp(38px, 3.4vw, 86px);
+	height: clamp(34px, 3vw, 50px);
 }
 .spirup-card__body {
-	padding: clamp(14px, 1.3vw, 34px) clamp(10px, 1vw, 26px) clamp(18px, 1.6vw, 40px);
+	padding: clamp(14px, 1.2vw, 26px) clamp(10px, 0.9vw, 20px) clamp(16px, 1.4vw, 30px);
 }
 .spirup-card__body strong {
 	display: block;
 	color: var(--spirup-dark);
 	font-weight: 700;
-	font-size: clamp(15px, 1.25vw, 34px);
+	font-size: clamp(15px, 1.2vw, 22px);
 	margin-bottom: 0.35em;
 }
 .spirup-card__body span {
 	display: block;
 	color: #37585d;
 	line-height: 1.3;
-	font-size: clamp(13px, 1.02vw, 27px);
+	font-size: clamp(13px, 1vw, 17px);
 }
 @media (max-width: 760px) {
 	.spirup-parte3__cards { flex-wrap: wrap; }
@@ -369,25 +369,25 @@ body.astra-child,
 }
 /* Mismo contenedor que las tarjetas -> alineada con ellas */
 .spirup-cta__inner {
-	max-width: min(94vw, 2600px);
+	max-width: min(94vw, 1240px);
 	margin: 0 auto;
-	padding: clamp(22px, 2.2vw, 64px) clamp(16px, 1.5vw, 36px);
+	padding: clamp(22px, 2.2vw, 44px) clamp(16px, 1.4vw, 30px);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: clamp(16px, 2vw, 44px);
+	gap: clamp(16px, 2vw, 40px);
 	flex-wrap: wrap;
 }
 .spirup-cta__title {
 	margin: 0;
 	color: var(--spirup-dark);
 	font-weight: 800;
-	font-size: clamp(20px, 2vw, 62px);
+	font-size: clamp(20px, 2vw, 32px);
 }
 .spirup-cta__actions {
 	display: flex;
 	align-items: center;
-	gap: clamp(12px, 1.2vw, 30px);
+	gap: clamp(12px, 1.2vw, 24px);
 	flex-wrap: wrap;
 }
 .spirup-cta__btn {
@@ -395,8 +395,8 @@ body.astra-child,
 	font-weight: 600;
 	text-decoration: none;
 	white-space: nowrap;
-	padding: clamp(12px, 1vw, 30px) clamp(24px, 2vw, 62px);
-	font-size: clamp(16px, 1.15vw, 34px);
+	padding: clamp(12px, 1vw, 20px) clamp(24px, 2vw, 40px);
+	font-size: clamp(16px, 1.15vw, 20px);
 	transition: transform .12s ease, box-shadow .15s ease, background .15s ease;
 }
 .spirup-cta__btn--solid {
@@ -417,15 +417,581 @@ body.astra-child,
 }
 
 /* ==========================================================================
-   Footer provisional
+   PARTE 4: Potencial de las microalgas (foto + texto)
+   ========================================================================== */
+.spirup-parte4 {
+	background: #fff;
+}
+.spirup-parte4__inner {
+	display: grid;
+	grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+	align-items: center;
+	gap: clamp(20px, 2.6vw, 80px);
+}
+.spirup-parte4__media {
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+}
+.spirup-parte4__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.spirup-parte4__text {
+	padding: clamp(30px, 3vw, 90px) clamp(24px, 4vw, 150px) clamp(30px, 3vw, 90px) 0;
+	max-width: 1100px;
+}
+.spirup-parte4__title {
+	color: var(--spirup-teal);
+	font-weight: 800;
+	line-height: 1.14;
+	font-size: clamp(22px, 2.35vw, 68px);
+	margin: 0 0 clamp(14px, 1.2vw, 32px);
+}
+.spirup-parte4__desc {
+	color: #5b6d70;
+	line-height: 1.5;
+	font-size: clamp(14px, 1.05vw, 28px);
+	margin: 0 0 clamp(18px, 1.7vw, 44px);
+	max-width: 44em;
+}
+.spirup-parte4__list {
+	list-style: none;
+	margin: 0 0 clamp(22px, 2vw, 52px);
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(11px, 0.9vw, 24px);
+}
+.spirup-parte4__list li {
+	display: flex;
+	align-items: center;
+	gap: clamp(10px, 0.8vw, 20px);
+	color: var(--spirup-dark);
+	font-weight: 600;
+	font-size: clamp(14px, 1.1vw, 30px);
+}
+.spirup-parte4__list .ico {
+	flex: 0 0 auto;
+	display: inline-flex;
+	width: clamp(20px, 1.5vw, 40px);
+	height: clamp(20px, 1.5vw, 40px);
+}
+.spirup-parte4__list .ico svg { width: 100%; height: 100%; }
+.spirup-parte4__list .is-no .ico { color: #E97000; }
+.spirup-parte4__list .is-yes .ico { color: var(--spirup-teal); }
+.spirup-parte4__btn {
+	display: inline-block;
+	border: 2px solid #bcd4d1;
+	color: var(--spirup-teal);
+	border-radius: 999px;
+	padding: clamp(11px, 1vw, 28px) clamp(22px, 1.9vw, 56px);
+	font-weight: 600;
+	text-decoration: none;
+	font-size: clamp(14px, 1.05vw, 30px);
+	transition: background .15s ease;
+}
+.spirup-parte4__btn:hover { background: rgba(47, 145, 143, .08); }
+
+/* ==========================================================================
+   PARTE 5: "Energia que dura" (grid de 6 tarjetas)
+   ========================================================================== */
+.spirup-parte5 {
+	background: #d9ede3;
+	padding: clamp(40px, 4vw, 120px) 0 clamp(50px, 5vw, 140px);
+}
+.spirup-parte5__inner {
+	max-width: min(92vw, 2400px);
+	margin: 0 auto;
+	padding: 0 clamp(16px, 1.5vw, 40px);
+	text-align: center;
+}
+.spirup-parte5__title {
+	color: var(--spirup-teal);
+	font-weight: 800;
+	line-height: 1.14;
+	font-size: clamp(22px, 2.4vw, 72px);
+	margin: 0 0 clamp(12px, 1vw, 28px);
+}
+.spirup-parte5__sub {
+	color: #5b6d70;
+	line-height: 1.5;
+	font-size: clamp(14px, 1.05vw, 28px);
+	max-width: 62em;
+	margin: 0 auto clamp(30px, 3vw, 84px);
+}
+.spirup-parte5__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: clamp(16px, 1.6vw, 46px);
+}
+.spirup-feature {
+	background: #c6e4d5;
+	border-radius: clamp(14px, 1.1vw, 30px);
+	padding: clamp(26px, 2.4vw, 72px) clamp(18px, 1.7vw, 50px) clamp(30px, 2.8vw, 82px);
+	text-align: center;
+}
+.spirup-feature__ico {
+	display: inline-flex;
+	color: var(--spirup-teal);
+	width: clamp(34px, 2.6vw, 74px);
+	height: clamp(34px, 2.6vw, 74px);
+	margin-bottom: clamp(14px, 1.2vw, 34px);
+}
+.spirup-feature__ico svg { width: 100%; height: 100%; }
+.spirup-feature h3 {
+	color: var(--spirup-dark);
+	font-weight: 700;
+	line-height: 1.2;
+	font-size: clamp(16px, 1.25vw, 34px);
+	margin: 0 0 clamp(8px, 0.6vw, 18px);
+}
+.spirup-feature p {
+	color: #4b6468;
+	line-height: 1.4;
+	font-size: clamp(13px, 1vw, 26px);
+	margin: 0;
+}
+@media (max-width: 900px) {
+	.spirup-parte5__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+	.spirup-parte4__inner { grid-template-columns: 1fr; gap: 0; }
+	.spirup-parte4__text {
+		padding: clamp(24px, 6vw, 48px) clamp(18px, 6vw, 48px) clamp(34px, 8vw, 60px);
+		max-width: 100%;
+	}
+}
+@media (max-width: 560px) {
+	.spirup-parte5__grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   PARTE 6: Banner "Si tu dia no para" (foto latas + barra degradada)
+   ========================================================================== */
+.spirup-parte6__photo img { display: block; width: 100%; height: auto; }
+.spirup-parte6__bar {
+	background: linear-gradient(90deg, #badd3d 0%, #4dc88b 48%, #108fa7 100%);
+}
+.spirup-parte6__barinner {
+	max-width: min(94vw, 2600px);
+	margin: 0 auto;
+	padding: clamp(12px, 1vw, 30px) clamp(20px, 2vw, 60px);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: clamp(14px, 2vw, 44px);
+	flex-wrap: wrap;
+}
+.spirup-parte6__slogan {
+	color: #fff;
+	font-weight: 700;
+	font-size: clamp(18px, 1.7vw, 50px);
+}
+.spirup-parte6__btn {
+	background: #0f2a3a;
+	color: #fff;
+	border-radius: 999px;
+	text-decoration: none;
+	padding: clamp(9px, 0.8vw, 22px) clamp(20px, 1.5vw, 46px);
+	font-weight: 600;
+	font-size: clamp(13px, 1vw, 28px);
+	white-space: nowrap;
+	transition: background .15s ease;
+}
+.spirup-parte6__btn:hover { background: #1b3f52; }
+
+/* ==========================================================================
+   PARTE 7: Historia + linea de tiempo
+   ========================================================================== */
+.spirup-parte7 { background: #d5e9e1; }
+.spirup-parte7__inner {
+	max-width: min(92vw, 2400px);
+	margin: 0 auto;
+	padding: clamp(40px, 4vw, 120px) clamp(16px, 1.5vw, 40px);
+	display: grid;
+	grid-template-columns: 1.15fr 0.85fr;
+	gap: clamp(30px, 4vw, 120px);
+	align-items: start;
+}
+.spirup-parte7__title {
+	color: var(--spirup-teal);
+	font-weight: 800;
+	line-height: 1.14;
+	font-size: clamp(22px, 2.3vw, 68px);
+	margin: 0 0 clamp(16px, 1.4vw, 36px);
+}
+.spirup-parte7__text p {
+	color: #4d6266;
+	line-height: 1.55;
+	font-size: clamp(14px, 1.05vw, 28px);
+	margin: 0 0 clamp(14px, 1.2vw, 30px);
+}
+.spirup-parte7__text strong { color: var(--spirup-dark); font-weight: 700; }
+.spirup-parte7__timeline { padding-top: clamp(6px, 1vw, 30px); }
+.spirup-tl {
+	position: relative;
+	padding: 0 0 clamp(20px, 1.8vw, 50px) clamp(24px, 1.4vw, 44px);
+	border-left: 2px solid rgba(233, 112, 0, .35);
+	margin-left: 6px;
+}
+.spirup-tl:last-child { padding-bottom: 0; }
+.spirup-tl::before {
+	content: "";
+	position: absolute;
+	left: -8px;
+	top: 3px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #E97000;
+	box-shadow: 0 0 0 3px #d5e9e1;
+}
+.spirup-tl h3 {
+	color: #E97000;
+	font-weight: 700;
+	margin: 0 0 6px;
+	font-size: clamp(16px, 1.2vw, 32px);
+}
+.spirup-tl p {
+	color: #4d6266;
+	line-height: 1.4;
+	margin: 0;
+	font-size: clamp(13px, 1vw, 26px);
+}
+
+/* ==========================================================================
+   PARTE 8: Productos "Elige como quieres tu SPIR UP"
+   ========================================================================== */
+.spirup-parte8 {
+	background: linear-gradient(180deg, #1e7477 0%, #2d807f 35%, #529f94 72%, #80c4ac 100%);
+}
+.spirup-parte8__inner {
+	max-width: min(92vw, 2400px);
+	margin: 0 auto;
+	padding: clamp(40px, 4vw, 120px) clamp(16px, 1.5vw, 40px) clamp(50px, 5vw, 140px);
+}
+.spirup-parte8__title {
+	color: #fff;
+	text-align: center;
+	font-weight: 800;
+	font-size: clamp(22px, 2.4vw, 72px);
+	margin: 0 0 clamp(30px, 3vw, 84px);
+}
+.spirup-parte8__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: clamp(16px, 1.5vw, 40px);
+}
+.spirup-product {
+	background: #fff;
+	border-radius: clamp(14px, 1.1vw, 28px);
+	overflow: hidden;
+	box-shadow: 0 12px 30px rgba(9, 52, 60, .18);
+	display: flex;
+	flex-direction: column;
+}
+.spirup-product__img {
+	background: linear-gradient(160deg, #eef7f3, #dcefe8);
+	aspect-ratio: 1 / 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.spirup-product__ph { color: #a6cec2; width: 26%; display: inline-flex; }
+.spirup-product__ph svg { width: 100%; height: auto; }
+.spirup-product__row {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 10px;
+	padding: clamp(14px, 1.2vw, 30px) clamp(14px, 1.1vw, 28px) clamp(16px, 1.3vw, 32px);
+}
+.spirup-product__info { display: flex; flex-direction: column; }
+.spirup-product__info h3 {
+	color: var(--spirup-dark);
+	font-weight: 700;
+	margin: 0;
+	font-size: clamp(15px, 1.15vw, 30px);
+}
+.spirup-product__meta {
+	color: #7a8f92;
+	font-size: clamp(12px, 0.9vw, 22px);
+	margin: 2px 0 6px;
+}
+.spirup-product__price {
+	color: var(--spirup-dark);
+	font-weight: 700;
+	font-size: clamp(14px, 1.05vw, 28px);
+}
+.spirup-product__cart {
+	flex: 0 0 auto;
+	width: clamp(38px, 3vw, 72px);
+	height: clamp(38px, 3vw, 72px);
+	border-radius: 50%;
+	border: 0;
+	cursor: pointer;
+	background: #eaf5f0;
+	color: var(--spirup-teal);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background .15s ease, color .15s ease;
+}
+.spirup-product__cart svg { width: 52%; height: 52%; }
+.spirup-product__cart:hover { background: var(--spirup-teal); color: #fff; }
+
+@media (max-width: 900px) {
+	.spirup-parte8__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+	.spirup-parte7__inner { grid-template-columns: 1fr; gap: clamp(24px, 5vw, 48px); }
+}
+@media (max-width: 560px) {
+	.spirup-parte8__grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   PARTE 9: Reserva tu lugar (registro de correo)
+   ========================================================================== */
+.spirup-parte9 { background: #fff; }
+.spirup-parte9__inner {
+	max-width: min(760px, 92vw);
+	margin: 0 auto;
+	padding: clamp(44px, 4.5vw, 130px) clamp(16px, 1.5vw, 40px) clamp(48px, 5vw, 140px);
+	text-align: center;
+}
+.spirup-parte9__title {
+	color: #1585a3;
+	font-weight: 800;
+	line-height: 1.15;
+	font-size: clamp(22px, 2.3vw, 66px);
+	margin: 0 0 clamp(18px, 1.6vw, 44px);
+}
+.spirup-parte9__lead {
+	color: #566a6d;
+	line-height: 1.55;
+	font-size: clamp(14px, 1.05vw, 28px);
+	margin: 0 auto clamp(14px, 1.1vw, 28px);
+	max-width: 40em;
+}
+.spirup-parte9__form {
+	display: flex;
+	align-items: center;
+	max-width: 640px;
+	margin: clamp(22px, 2vw, 50px) auto clamp(12px, 1vw, 26px);
+	border: 1.5px solid #cdddda;
+	border-radius: 999px;
+	background: #fff;
+	padding: clamp(4px, 0.4vw, 10px) clamp(6px, 0.5vw, 12px) clamp(4px, 0.4vw, 10px) clamp(20px, 1.6vw, 44px);
+}
+.spirup-parte9__form input {
+	flex: 1;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: var(--spirup-dark);
+	font-family: inherit;
+	font-size: clamp(15px, 1.05vw, 26px);
+	padding: clamp(12px, 1vw, 26px) 0;
+}
+.spirup-parte9__form input::placeholder { color: #9aabad; }
+.spirup-parte9__form button {
+	flex: 0 0 auto;
+	width: clamp(40px, 3vw, 70px);
+	height: clamp(40px, 3vw, 70px);
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--spirup-teal);
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background .15s ease, color .15s ease;
+}
+.spirup-parte9__form button svg { width: 52%; height: 52%; }
+.spirup-parte9__form button:hover { background: var(--spirup-teal); color: #fff; }
+.spirup-parte9__note {
+	color: var(--spirup-teal);
+	font-size: clamp(12px, 0.9vw, 22px);
+	margin: 0;
+}
+
+/* ==========================================================================
+   Paginas legales (Politica de privacidad, etc.)
+   ========================================================================== */
+.spirup-legal { background: #fff; }
+.spirup-legal__inner {
+	max-width: min(92vw, 1180px);
+	margin: 0 auto;
+	padding: clamp(30px, 3vw, 70px) clamp(16px, 2vw, 40px) clamp(30px, 3vw, 60px);
+	color: #4d6266;
+}
+.spirup-legal__title {
+	display: flex;
+	align-items: center;
+	gap: clamp(10px, 1vw, 20px);
+	color: var(--spirup-dark);
+	font-weight: 800;
+	line-height: 1.1;
+	font-size: clamp(30px, 3.4vw, 52px);
+	margin: 0 0 clamp(18px, 1.6vw, 32px);
+}
+.spirup-legal__bolt {
+	flex: 0 0 auto;
+	display: inline-flex;
+	color: #62c04a;
+	width: clamp(30px, 3vw, 54px);
+	height: clamp(30px, 3vw, 54px);
+}
+.spirup-legal__bolt svg { width: 100%; height: 100%; }
+.spirup-legal__intro {
+	line-height: 1.5;
+	font-size: clamp(15px, 1.05vw, 19px);
+	margin: 0 0 6px;
+}
+.spirup-legal__h2 {
+	color: var(--spirup-teal);
+	font-weight: 800;
+	line-height: 1.2;
+	font-size: clamp(22px, 2vw, 32px);
+	margin: clamp(30px, 2.6vw, 54px) 0 clamp(14px, 1.1vw, 22px);
+}
+.spirup-legal p {
+	line-height: 1.55;
+	font-size: clamp(15px, 1.05vw, 19px);
+	margin: 0 0 clamp(12px, 1vw, 18px);
+}
+.spirup-legal__list {
+	margin: 0 0 clamp(14px, 1.1vw, 22px);
+	padding-left: 1.3em;
+}
+.spirup-legal__list li {
+	line-height: 1.5;
+	font-size: clamp(15px, 1.05vw, 19px);
+	margin-bottom: 8px;
+}
+.spirup-legal strong { color: var(--spirup-dark); }
+.spirup-legal a { color: var(--spirup-teal); }
+.spirup-legal em { font-style: italic; }
+
+.spirup-legal__tablewrap { overflow-x: auto; margin: 0 0 clamp(14px, 1.1vw, 22px); }
+.spirup-legal__table {
+	width: 100%;
+	min-width: 620px;
+	border-collapse: collapse;
+	font-size: clamp(14px, 1vw, 18px);
+}
+.spirup-legal__table th {
+	background: var(--spirup-teal);
+	color: #fff;
+	text-align: left;
+	font-weight: 700;
+	padding: clamp(12px, 1vw, 18px) clamp(14px, 1.1vw, 22px);
+}
+.spirup-legal__table td {
+	background: #e6f3ee;
+	color: #3a5559;
+	padding: clamp(12px, 1vw, 18px) clamp(14px, 1.1vw, 22px);
+	border: 3px solid #fff;
+	vertical-align: middle;
+	line-height: 1.4;
+}
+.spirup-legal__td--moment {
+	font-weight: 600;
+	color: var(--spirup-dark);
+	background: #d7ecdf;
+}
+.spirup-legal__contact { margin-top: clamp(20px, 2vw, 40px); }
+
+/* Tabla de zonas de envio (filas en degradado teal -> menta) */
+.spirup-zona {
+	width: 100%;
+	min-width: 620px;
+	border-collapse: collapse;
+	font-size: clamp(14px, 1vw, 18px);
+}
+.spirup-zona td {
+	padding: clamp(14px, 1.1vw, 22px);
+	border: 3px solid #fff;
+	vertical-align: top;
+	line-height: 1.4;
+}
+.spirup-zona .zname { font-weight: 700; white-space: nowrap; }
+.spirup-zona .zprice { font-weight: 700; white-space: nowrap; }
+.spirup-zona tr.z1 td { background: #1f797a; color: #fff; }
+.spirup-zona tr.z1 .zdist { font-weight: 700; }
+.spirup-zona tr.z2 td { background: #61a19f; color: #fff; }
+.spirup-zona tr.z3 td { background: #a9cec8; color: #17343d; }
+.spirup-zona tr.z4 td { background: #d5e9e1; color: #17343d; }
+
+.spirup-legal__law {
+	background: linear-gradient(90deg, #badd3d 0%, #4dc88b 50%, #108fa7 100%);
+}
+.spirup-legal__law-inner {
+	max-width: min(92vw, 1180px);
+	margin: 0 auto;
+	padding: clamp(22px, 2vw, 44px) clamp(16px, 2vw, 40px);
+}
+.spirup-legal__law strong {
+	display: block;
+	color: #0f3a44;
+	font-weight: 700;
+	line-height: 1.5;
+	font-size: clamp(15px, 1.1vw, 22px);
+}
+
+/* ==========================================================================
+   Footer
    ========================================================================== */
 .spirup-footer {
-	background: var(--spirup-dark);
-	color: rgba(255, 255, 255, .75);
-	text-align: center;
-	padding: 26px 0;
-	font-size: 14px;
+	background: #1e7477;
 }
+.spirup-footer__inner {
+	max-width: min(92vw, 2400px);
+	margin: 0 auto;
+	padding: clamp(40px, 3.5vw, 110px) clamp(16px, 1.5vw, 40px) clamp(34px, 3vw, 90px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(22px, 2vw, 56px);
+}
+.spirup-footer__logo { line-height: 0; }
+.spirup-footer__logo img {
+	height: clamp(64px, 5vw, 150px);
+	width: auto;
+	display: block;
+}
+.spirup-footer__links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: clamp(20px, 2.4vw, 70px);
+}
+.spirup-footer__links a {
+	color: rgba(255, 255, 255, .82);
+	text-decoration: none;
+	font-size: clamp(14px, 1vw, 26px);
+	transition: color .15s ease;
+}
+.spirup-footer__links a:hover { color: #fff; }
+.spirup-footer__social {
+	display: flex;
+	align-items: center;
+	gap: clamp(18px, 1.6vw, 44px);
+}
+.spirup-footer__social a {
+	color: #fff;
+	display: inline-flex;
+	width: clamp(24px, 1.9vw, 52px);
+	height: clamp(24px, 1.9vw, 52px);
+	transition: opacity .15s ease;
+}
+.spirup-footer__social a:hover { opacity: .7; }
+.spirup-footer__social svg { width: 100%; height: 100%; }
 
 /* ==========================================================================
    Responsive: menu hamburguesa
