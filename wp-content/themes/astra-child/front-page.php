@@ -110,7 +110,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 4: Potencial de las microalgas ===================== */ ?>
-	<section class="spirup-parte4">
+	<section class="spirup-parte4" id="por-que">
 		<div class="spirup-parte4__inner">
 			<div class="spirup-parte4__media">
 				<img src="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?>"
@@ -164,7 +164,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		),
 	);
 	?>
-	<section class="spirup-parte5">
+	<section class="spirup-parte5" id="beneficios">
 		<div class="spirup-parte5__inner">
 			<h2 class="spirup-parte5__title">Energía que dura, sin el bajón que ya conoces</h2>
 			<p class="spirup-parte5__sub">No te pedimos que dejes de tomar café o gaseosa. Solo que pruebes una alternativa que te da más y te quita menos.</p>
@@ -197,7 +197,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 7: Historia + linea de tiempo ===================== */ ?>
-	<section class="spirup-parte7">
+	<section class="spirup-parte7" id="conocenos">
 		<div class="spirup-parte7__inner">
 			<div class="spirup-parte7__text">
 				<h2 class="spirup-parte7__title">De una pregunta de laboratorio a una lata que puedes disfrutar hoy</h2>
@@ -232,7 +232,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		array( 'name' => 'Pack Spir Up x 12','meta' => '12 latas','price' => 'S/ 94.80' ),
 	);
 	?>
-	<section class="spirup-parte8">
+	<section class="spirup-parte8" id="productos">
 		<div class="spirup-parte8__inner">
 			<h2 class="spirup-parte8__title">Elige cómo quieres tu SPIR UP</h2>
 			<div class="spirup-parte8__grid">
@@ -258,7 +258,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 9: Reserva tu lugar (registro de correo) ===================== */ ?>
-	<section class="spirup-parte9">
+	<section class="spirup-parte9" id="reservar">
 		<div class="spirup-parte9__inner">
 			<h2 class="spirup-parte9__title">Reserva tu lugar en el lanzamiento de SPIR UP</h2>
 			<p class="spirup-parte9__lead">La primera producción de Spir Up estará disponible para un grupo selecto de personas antes de su lanzamiento oficial.</p>

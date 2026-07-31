@@ -24,9 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$spirup_priv_url = $spirup_priv ? get_permalink( $spirup_priv ) : '#';
 			$spirup_terms = get_page_by_path( 'terminos-y-condiciones' );
 			$spirup_terms_url = $spirup_terms ? get_permalink( $spirup_terms ) : '#';
+			$spirup_lr = get_page_by_path( 'libro-de-reclamaciones' );
+			$spirup_lr_url = $spirup_lr ? get_permalink( $spirup_lr ) : '#';
 			?>
 			<nav class="spirup-footer__links" aria-label="Enlaces legales">
-				<a href="#reclamaciones">Libros de reclamaciones</a>
+				<a href="<?php echo esc_url( $spirup_lr_url ); ?>">Libros de reclamaciones</a>
 				<a href="<?php echo esc_url( $spirup_priv_url ); ?>">Política de privacidad</a>
 				<a href="<?php echo esc_url( $spirup_terms_url ); ?>">Términos y condiciones</a>
 			</nav>
