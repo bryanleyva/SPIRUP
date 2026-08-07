@@ -49,6 +49,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </div><!-- .spirup-site -->
 
+<?php /* ===================== Carrito lateral (drawer) ===================== */ ?>
+<?php if ( function_exists( 'spirup_cart_drawer_content' ) ) : ?>
+<div class="spirup-cart" id="spirup-cart" hidden>
+	<div class="spirup-cart__overlay" data-act="close"></div>
+	<aside class="spirup-cart__panel" role="dialog" aria-label="Carrito de compra" aria-modal="true">
+		<div class="spirup-cart__head">
+			<img class="spirup-cart__logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imagenes/logo.png' ); ?>" alt="Spir Up">
+			<button type="button" class="spirup-cart__close" data-act="close" aria-label="Cerrar carrito">&times;</button>
+		</div>
+		<div id="spirup-cart-inner">
+			<?php spirup_cart_drawer_content(); ?>
+		</div>
+	</aside>
+</div>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>

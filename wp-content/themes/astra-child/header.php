@@ -65,8 +65,10 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"></path></svg>
 				</a>
 
-				<a href="<?php echo $home; ?>#productos" class="spirup-iconbtn spirup-iconbtn--cart" aria-label="Carrito">
+				<?php $spirup_cart_count = ( function_exists( 'WC' ) && WC()->cart ) ? WC()->cart->get_cart_contents_count() : 0; ?>
+				<a href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : $home . '#productos' ); ?>" class="spirup-iconbtn spirup-iconbtn--cart" data-spirup-cart-open aria-label="Carrito">
 					<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6"></path></svg>
+					<span class="spirup-cart-count<?php echo $spirup_cart_count ? ' is-visible' : ''; ?>"><?php echo esc_html( $spirup_cart_count ); ?></span>
 				</a>
 			</div>
 

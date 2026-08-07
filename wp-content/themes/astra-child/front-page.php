@@ -21,36 +21,34 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<section class="spirup-figura">
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/grupo figuras 1.png' ); ?>"
-			alt="Refrescante por naturaleza. Funcional por ciencia.">
+			src="<?php echo esc_url( $img . '/grupo figuras 2.png' ); ?>"
+			alt="Un sorbo de vitalidad, un sorbo de SPIR UP.">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora ↗</a>
 	</section>
 
 	<?php /* ===================== PARTE 2 ===================== */ ?>
 	<section class="spirup-parte2">
 		<div class="spirup-parte2__inner">
-			<?php /* Capa de FONDO (aqua + composicion completa). */ ?>
+			<?php /* Composicion (una lata + agua + badges + onda hacia el teal). */ ?>
 			<img class="spirup-figura__img"
-				src="<?php echo esc_url( $img . '/parte2-bg.png' ); ?>"
+				src="<?php echo esc_url( $img . '/unalata-bg.png' ); ?>"
 				alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
 
-			<?php /* Lata 3D girando, DETRAS del agua (entre el fondo y la capa frontal). */ ?>
+			<?php /* Lata 3D girando, encajada en el hueco del agua. */ ?>
 			<div id="spirup-lata3d" class="spirup-lata3d" aria-label="Lata Spir Up Citrus Blue en 3D"></div>
 
-			<?php /* Capa FRONTAL: solo agua/limones/badges con fondo transparente,
-			         para que el splash quede POR DELANTE de la lata. */ ?>
-			<img class="spirup-parte2__front"
-				src="<?php echo esc_url( $img . '/parte2-front.png' ); ?>"
-				alt="" aria-hidden="true">
+			<?php /* Flechas para girar la lata (como el mockup). */ ?>
+			<button class="spirup-lata-arrow spirup-lata-arrow--prev" data-dir="prev" type="button" aria-label="Girar lata a la izquierda">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+			</button>
+			<button class="spirup-lata-arrow spirup-lata-arrow--next" data-dir="next" type="button" aria-label="Girar lata a la derecha">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+			</button>
 		</div>
 	</section>
 
 	<?php /* ===================== PARTE 3: Ingredientes ===================== */ ?>
 	<section class="spirup-parte3">
-		<?php /* Onda de conexion (transparente arriba = aqua; teal abajo). */ ?>
-		<img class="spirup-parte3__wave"
-			src="<?php echo esc_url( $img . '/parte3-wave.png' ); ?>" alt="" aria-hidden="true">
-
 		<div class="spirup-parte3__panel">
 			<div class="spirup-parte3__inner">
 				<span class="spirup-parte3__badge">Que contiene</span>
@@ -225,31 +223,38 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	/* ===================== PARTE 8: Productos "Elige como quieres tu SPIR UP" ===================== */
 	$cart_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6"/></svg>';
 	$can_svg  = '<svg viewBox="0 0 48 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><rect x="10" y="6" width="28" height="84" rx="8"/><path d="M14 6c0-2 2-3 4-3h12c2 0 4 1 4 3"/><path d="M12 26h24"/></svg>';
-	$sp8_products = array(
-		array( 'name' => 'Citrus Blue',      'meta' => '355 ml',  'price' => 'S/ 7.90'  ),
-		array( 'name' => 'Rebel Blue',       'meta' => '355 ml',  'price' => 'S/ 7.90'  ),
-		array( 'name' => 'Pack Spir Up x 6', 'meta' => '6 latas', 'price' => 'S/ 47.40' ),
-		array( 'name' => 'Pack Spir Up x 12','meta' => '12 latas','price' => 'S/ 94.80' ),
-	);
+	$sp8_products = function_exists( 'wc_get_products' )
+		? wc_get_products( array( 'status' => 'publish', 'limit' => 4, 'orderby' => 'menu_order date', 'order' => 'ASC' ) )
+		: array();
 	?>
 	<section class="spirup-parte8" id="productos">
 		<div class="spirup-parte8__inner">
 			<h2 class="spirup-parte8__title">Elige cómo quieres tu SPIR UP</h2>
 			<div class="spirup-parte8__grid">
-				<?php foreach ( $sp8_products as $p ) : ?>
+				<?php foreach ( $sp8_products as $product ) :
+					$pid  = $product->get_id();
+					$meta = wp_strip_all_tags( $product->get_short_description() );
+					?>
 					<article class="spirup-product">
 						<div class="spirup-product__img">
-							<span class="spirup-product__ph"><?php echo $can_svg; // phpcs:ignore ?></span>
+							<?php if ( $product->get_image_id() ) : ?>
+								<?php echo $product->get_image( 'woocommerce_thumbnail' ); // phpcs:ignore ?>
+							<?php else : ?>
+								<span class="spirup-product__ph"><?php echo $can_svg; // phpcs:ignore ?></span>
+							<?php endif; ?>
 						</div>
 						<div class="spirup-product__row">
 							<div class="spirup-product__info">
-								<h3><?php echo esc_html( $p['name'] ); ?></h3>
-								<span class="spirup-product__meta"><?php echo esc_html( $p['meta'] ); ?></span>
-								<span class="spirup-product__price"><?php echo esc_html( $p['price'] ); ?></span>
+								<h3><?php echo esc_html( $product->get_name() ); ?></h3>
+								<?php if ( $meta ) : ?><span class="spirup-product__meta"><?php echo esc_html( $meta ); ?></span><?php endif; ?>
+								<span class="spirup-product__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 							</div>
-							<button class="spirup-product__cart" type="button" aria-label="Añadir al carrito">
+							<a href="?add-to-cart=<?php echo esc_attr( $pid ); ?>"
+								data-product_id="<?php echo esc_attr( $pid ); ?>" data-quantity="1"
+								class="spirup-product__cart add_to_cart_button ajax_add_to_cart" rel="nofollow"
+								aria-label="Añadir <?php echo esc_attr( $product->get_name() ); ?> al carrito">
 								<?php echo $cart_svg; // phpcs:ignore ?>
-							</button>
+							</a>
 						</div>
 					</article>
 				<?php endforeach; ?>

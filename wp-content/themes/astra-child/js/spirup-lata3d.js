@@ -262,9 +262,9 @@
   }
 
   /* ---------- interacción ---------- */
-  var autoSpin = true;
+  var autoSpin = false;         // sin giro automatico: queda de frente (SPIR UP)
   var hovering = false;
-  var spinVel = 0.0038;
+  var spinVel = 0;              // se puede girar arrastrando con el cursor
   var dragging = false;
   var lastX = 0, momentum = 0;
   var bubbleAmt = 0;
@@ -300,6 +300,15 @@
   el.addEventListener('pointerup', endDrag);
   el.addEventListener('pointercancel', endDrag);
   el.style.cursor = 'grab';
+
+  /* flechas ‹ › : dan un impulso de giro a la lata */
+  var arrows = document.querySelectorAll('.spirup-lata-arrow');
+  for (var ai = 0; ai < arrows.length; ai++) {
+    arrows[ai].addEventListener('click', function () {
+      momentum = (this.getAttribute('data-dir') === 'prev' ? 1 : -1) * 0.26;
+      autoSpin = false;
+    });
+  }
 
   /* ---------- loop ---------- */
   var clock = new THREE.Clock();
