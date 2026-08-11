@@ -98,6 +98,19 @@ function spirup_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'spirup_enqueue_styles' );
 
 /**
+ * Favicon / icono del sitio: el rayo de SPIR UP en la pestana del navegador
+ * (en vez del icono por defecto de WordPress).
+ */
+function spirup_favicon() {
+	$icon = get_stylesheet_directory_uri() . '/imagenes/favicon.png';
+	echo "\n<link rel=\"icon\" type=\"image/png\" href=\"" . esc_url( $icon ) . "\">\n";
+	echo "<link rel=\"shortcut icon\" type=\"image/png\" href=\"" . esc_url( $icon ) . "\">\n";
+	echo "<link rel=\"apple-touch-icon\" href=\"" . esc_url( $icon ) . "\">\n";
+}
+add_action( 'wp_head', 'spirup_favicon', 5 );
+add_action( 'admin_head', 'spirup_favicon' );
+
+/**
  * Anadir una clase identificadora al <body>.
  */
 function spirup_body_class( $classes ) {
@@ -246,6 +259,38 @@ function spirup_cart_update() {
 }
 add_action( 'wp_ajax_spirup_cart_update', 'spirup_cart_update' );
 add_action( 'wp_ajax_nopriv_spirup_cart_update', 'spirup_cart_update' );
+
+/* ==========================================================================
+   Catalogo simple: SIN paginas de producto individuales.
+   Solo se puede anadir al carrito y pagar. Al abrir una URL /producto/... se
+   vuelve al inicio (nunca se muestra la pagina de producto ni "tienda en obras").
+   ========================================================================== */
+
+// 1) Si se accede a una pagina de producto, redirigir a la seccion de productos.
+//    Prioridad 1 = corre ANTES del "coming soon / tienda en obras" de WooCommerce.
+add_action( 'template_redirect', function () {
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		wp_safe_redirect( home_url( '/#productos' ) );
+		exit;
+	}
+}, 1 );
+
+// 2) Que los enlaces de producto de WooCommerce (imagen/titulo en cualquier loop)
+//    no apunten a la pagina del producto, sino a la seccion de productos del inicio.
+add_filter( 'woocommerce_loop_product_link', function () {
+	return home_url( '/#productos' );
+} );
+
+/* ==========================================================================
+   Checkout: forzar el CLASICO (el que disenamos: crema + teal), no el bloque
+   nuevo de WooCommerce (la "pantalla rara" en ingles con el boton morado).
+   ========================================================================== */
+add_filter( 'the_content', function ( $content ) {
+	if ( function_exists( 'is_checkout' ) && is_checkout() && ! is_wc_endpoint_url() ) {
+		return do_shortcode( '[woocommerce_checkout]' );
+	}
+	return $content;
+}, 20 );
 
 /**
  * A partir de aqui: hooks, custom post types, integracion WooCommerce,

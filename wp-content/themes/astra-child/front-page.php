@@ -31,68 +31,30 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-parte2__inner">
 			<?php /* Composicion (una lata + agua + badges + onda hacia el teal). */ ?>
 			<img class="spirup-figura__img"
-				src="<?php echo esc_url( $img . '/unalata-bg.png' ); ?>"
+				src="<?php echo esc_url( $img . '/parte2 (2).png' ); ?>"
 				alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
 
-			<?php /* Lata 3D girando, encajada en el hueco del agua. */ ?>
-			<div id="spirup-lata3d" class="spirup-lata3d" aria-label="Lata Spir Up Citrus Blue en 3D"></div>
-
-			<?php /* Flechas para girar la lata (como el mockup). */ ?>
-			<button class="spirup-lata-arrow spirup-lata-arrow--prev" data-dir="prev" type="button" aria-label="Girar lata a la izquierda">
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
-			</button>
-			<button class="spirup-lata-arrow spirup-lata-arrow--next" data-dir="next" type="button" aria-label="Girar lata a la derecha">
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-			</button>
+			<?php /* Lata 3D (Citrus Blue) fija de frente, encajada en el hueco del agua. */ ?>
+			<div id="spirup-lata3d" class="spirup-lata3d" aria-label="Lata Spir Up Citrus Blue"></div>
 		</div>
 	</section>
 
 	<?php /* ===================== PARTE 3: Ingredientes ===================== */ ?>
 	<section class="spirup-parte3">
-		<div class="spirup-parte3__panel">
-			<div class="spirup-parte3__inner">
-				<span class="spirup-parte3__badge">Que contiene</span>
-				<h2 class="spirup-parte3__title">Ingredientes con propósito, nada de relleno</h2>
+		<?php /* Imagen compuesta (ola/corte + panel teal + remolino + tarjetas con icono).
+		         El texto va superpuesto en % para calzar a cualquier ancho. */ ?>
+		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/parte3queescomplicada.png' ); ?>" alt="" aria-hidden="true">
 
-				<div class="spirup-parte3__cards">
-					<div class="spirup-card">
-						<div class="spirup-card__top">
-							<img src="<?php echo esc_url( $img . '/ing-icon-1.png' ); ?>" alt="" aria-hidden="true">
-						</div>
-						<div class="spirup-card__body">
-							<strong>Microalgas</strong>
-							<span>Bioactivos funcionales de origen natural</span>
-						</div>
-					</div>
-					<div class="spirup-card">
-						<div class="spirup-card__top">
-							<img src="<?php echo esc_url( $img . '/ing-icon-2.png' ); ?>" alt="" aria-hidden="true">
-						</div>
-						<div class="spirup-card__body">
-							<strong>Agua gasificada</strong>
-							<span>Contenido controlado de sodio</span>
-						</div>
-					</div>
-					<div class="spirup-card">
-						<div class="spirup-card__top">
-							<img src="<?php echo esc_url( $img . '/ing-icon-3.png' ); ?>" alt="" aria-hidden="true">
-						</div>
-						<div class="spirup-card__body">
-							<strong>Extractos naturales</strong>
-							<span>Sin saborizantes artificiales</span>
-						</div>
-					</div>
-					<div class="spirup-card">
-						<div class="spirup-card__top">
-							<img src="<?php echo esc_url( $img . '/ing-icon-4.png' ); ?>" alt="" aria-hidden="true">
-						</div>
-						<div class="spirup-card__body">
-							<strong>Sin azúcar añadida</strong>
-							<span>Dulzor equilibrado sin culpa</span>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="spirup-parte3__head">
+			<span class="spirup-parte3__badge">Que contiene</span>
+			<h2 class="spirup-parte3__title">Ingredientes con propósito, nada de relleno</h2>
+		</div>
+
+		<div class="spirup-parte3__cards">
+			<div class="spirup-p3card"><strong>Microalgas</strong><span>Bioactivos funcionales de origen natural</span></div>
+			<div class="spirup-p3card"><strong>Agua gasificada</strong><span>Contenido controlado de sodio</span></div>
+			<div class="spirup-p3card"><strong>Extractos naturales</strong><span>Sin saborizantes artificiales</span></div>
+			<div class="spirup-p3card"><strong>Sin azúcar añadida</strong><span>Dulzor equilibrado sin culpa</span></div>
 		</div>
 	</section>
 
@@ -122,7 +84,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
 					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
 				</ul>
-				<a class="spirup-parte4__btn" href="#ciencia">Conoce la ciencia detrás »</a>
+				<a class="spirup-parte4__btn" href="#ciencia">Conoce la ciencia detrás ↗</a>
 			</div>
 		</div>
 	</section>
@@ -132,39 +94,39 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	$sp5_features = array(
 		array(
 			'svg'   => '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-			'title' => 'Antioxidante de origen natural',
-			'desc'  => 'Con ficocianina, un bioactivo de microalgas reconocido por su potencial antioxidante.',
+			'title' => 'Ficocianina',
+			'desc'  => 'Bioactivo natural de microalgas.',
 		),
 		array(
-			'svg'   => '<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="10" ry="4.3"/><ellipse cx="12" cy="12" rx="10" ry="4.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.3" transform="rotate(120 12 12)"/>',
-			'title' => 'Ayuda frente al estrés oxidativo',
-			'desc'  => 'Los antioxidantes ayudan a proteger las células frente al estrés oxidativo generado naturalmente por el organismo.',
+			'svg'   => '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',
+			'title' => 'Antioxidantes',
+			'desc'  => 'Ayudan a proteger tus células.',
 		),
 		array(
 			'svg'   => '<rect x="2" y="7.5" width="16" height="9" rx="2.5"/><path d="M21.5 10.5v3"/><path d="M6.5 12h4"/><path d="M8.5 10v4"/>',
-			'title' => 'Innovación que puedes disfrutar',
-			'desc'  => 'Investigación biotecnológica transformada en una bebida gasificada práctica y refrescante.',
+			'title' => 'Ciencia aplicada',
+			'desc'  => 'Investigación convertida en una bebida.',
 		),
 		array(
 			'svg'   => '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.5 4 6 4 9.5s-1.4 7-4 9.5c-2.6-2.5-4-6-4-9.5s1.4-7 4-9.5z"/>',
-			'title' => 'Funcional por formulación',
-			'desc'  => 'Sin azúcar añadida, baja en calorías y con bioactivos seleccionados con criterio científico.',
+			'title' => 'Sin azúcar',
+			'desc'  => 'Baja en calorías y deliciosa.',
 		),
 		array(
 			'svg'   => '<rect x="1.6" y="9" width="3.4" height="6" rx="1"/><rect x="19" y="9" width="3.4" height="6" rx="1"/><path d="M5 12h14"/><path d="M6.6 10.4v3.2"/><path d="M17.4 10.4v3.2"/>',
-			'title' => 'El potencial de las microalgas',
-			'desc'  => 'La ficocianina es un bioactivo de microalgas ampliamente estudiado por su potencial antioxidante y su rol en el bienestar celular.',
+			'title' => 'Microalgas',
+			'desc'  => 'Innovación inspirada en la naturaleza.',
 		),
 		array(
-			'svg'   => '<path d="M9 3h6"/><path d="M10 3v5.5L4.6 18a1.6 1.6 0 0 0 1.4 2.4h12A1.6 1.6 0 0 0 19.4 18L14 8.5V3"/><path d="M7.5 14h9"/>',
-			'title' => 'Bienestar con propósito',
-			'desc'  => 'Una bebida desarrollada bajo un enfoque de innovación y economía circular, pensada para cuidar de ti y del entorno.',
+			'svg'   => '<path d="M7 19H4.8a1.8 1.8 0 0 1-1.55-2.7L7.2 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.55-2.66l-1.23-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.3 13.6 7.2 9.5 3.1 10.6"/><path d="m9.34 5.81 1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.94 6.84"/><path d="m13.38 9.63 4.1 1.1 1.1-4.1"/>',
+			'title' => 'Sostenibilidad',
+			'desc'  => 'Pensada para ti y el planeta.',
 		),
 	);
 	?>
 	<section class="spirup-parte5" id="beneficios">
 		<div class="spirup-parte5__inner">
-			<h2 class="spirup-parte5__title">Energía que dura, sin el bajón que ya conoces</h2>
+			<h2 class="spirup-parte5__title">Refrescante por naturaleza.<br>Respaldada por la ciencia.</h2>
 			<p class="spirup-parte5__sub">No te pedimos que dejes de tomar café o gaseosa. Solo que pruebes una alternativa que te da más y te quita menos.</p>
 			<div class="spirup-parte5__grid">
 				<?php foreach ( $sp5_features as $f ) : ?>
@@ -196,24 +158,25 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 7: Historia + linea de tiempo ===================== */ ?>
 	<section class="spirup-parte7" id="conocenos">
+		<img class="spirup-parte7__wm" src="<?php echo esc_url( $img . '/recurso 7 1.png' ); ?>" alt="" aria-hidden="true">
 		<div class="spirup-parte7__inner">
 			<div class="spirup-parte7__text">
-				<h2 class="spirup-parte7__title">De una pregunta de laboratorio a una lata que puedes disfrutar hoy</h2>
-				<p>Spir Up nació de una pregunta simple: <strong>¿cómo llevamos el potencial de las microalgas a algo que la gente realmente quiera tomar?</strong> Después de años de investigación, llegamos a una bebida que une ciencia, sabor y bienestar. Su ingrediente clave: <strong>ficocianina</strong>, un bioactivo de microalgas reconocido por su potencial antioxidante.</p>
-				<p>Somos una marca peruana que cree que cuidarse también puede ser refrescante. Hoy, ese trabajo de laboratorio cabe en tu mano.</p>
+				<h2 class="spirup-parte7__title">La ciencia también puede ser refrescante</h2>
+				<p><strong>Spir Up</strong> nació de una pregunta simple: ¿cómo transformar la investigación científica en una bebida que la gente realmente disfrute?</p>
+				<p>Tras múltiples etapas de formulación y aprendizaje, desarrollamos una propuesta refrescante elaborada con <strong>ficocianina</strong>, un valioso nutriente extraído de microalgas. Somos una marca peruana convencida de que la ciencia impacta más cuando se integra a la vida cotidiana. Creamos experiencias que conectan la innovación científica con tu bienestar, porque creemos firmemente que <strong>cuidarte también se debe disfrutar.</strong></p>
 			</div>
 			<div class="spirup-parte7__timeline">
 				<div class="spirup-tl">
-					<h3>El porqué</h3>
-					<p>Vimos en las microalgas un potencial desaprovechado para el bienestar diario.</p>
+					<h3>El origen</h3>
+					<p>Encontramos una oportunidad en las microalgas.</p>
 				</div>
 				<div class="spirup-tl">
-					<h3>El cómo</h3>
-					<p>Luego de múltiples etapas de investigación, formulación y validación.</p>
+					<h3>El desarrollo</h3>
+					<p>Investigación, formulación y aprendizaje.</p>
 				</div>
 				<div class="spirup-tl">
-					<h3>El ahora</h3>
-					<p>Una bebida gasificada lista para acompañar tu ritmo, sin tecnicismos de por medio.</p>
+					<h3>El resultado</h3>
+					<p>Una bebida innovadora lista para disfrutar.</p>
 				</div>
 			</div>
 		</div>
@@ -265,7 +228,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== PARTE 9: Reserva tu lugar (registro de correo) ===================== */ ?>
 	<section class="spirup-parte9" id="reservar">
 		<div class="spirup-parte9__inner">
-			<h2 class="spirup-parte9__title">Reserva tu lugar en el lanzamiento de SPIR UP</h2>
+			<h2 class="spirup-parte9__title">Únete al lanzamiento exclusivo de SPIR UP</h2>
 			<p class="spirup-parte9__lead">La primera producción de Spir Up estará disponible para un grupo selecto de personas antes de su lanzamiento oficial.</p>
 			<p class="spirup-parte9__lead">Déjanos tu correo y recibe acceso prioritario, novedades exclusivas y la oportunidad de conseguir las primeras unidades.</p>
 			<form class="spirup-parte9__form" action="#" method="post" onsubmit="return false;">

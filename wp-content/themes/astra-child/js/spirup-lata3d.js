@@ -62,7 +62,7 @@
      can     = grupo que gira sobre su eje vertical (dentro de canLean), asi la
                lata se ve inclinada pero rota en su sitio sin bambolearse. */
   var canLean = new THREE.Group();
-  canLean.rotation.z = -0.08;  // leve inclinacion lateral
+  canLean.rotation.z = -0.17;  // inclinacion lateral (top hacia la derecha)
   canLean.rotation.x = 0.05;   // leve inclinacion hacia atras
   scene.add(canLean);
 
@@ -78,7 +78,7 @@
   wrapTex.wrapS = THREE.RepeatWrapping;
   wrapTex.wrapT = THREE.ClampToEdgeWrapping;
   wrapTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  wrapTex.offset.x = 0.5; // arranca mostrando el panel frontal SPIR UP
+  wrapTex.offset.x = 0.43; // centra el panel frontal SPIR UP hacia la camara
 
   /* cuerpo */
   var body = new THREE.Mesh(
@@ -278,37 +278,8 @@
   el.addEventListener('pointerenter', function () { setHover(true); });
   el.addEventListener('pointerleave', function () { if (!dragging) setHover(false); });
 
-  el.addEventListener('pointerdown', function (e) {
-    dragging = true; lastX = e.clientX; momentum = 0;
-    setHover(true);
-    el.style.cursor = 'grabbing';
-    el.setPointerCapture(e.pointerId);
-  });
-  el.addEventListener('pointermove', function (e) {
-    if (!dragging) return;
-    var dx = e.clientX - lastX;
-    lastX = e.clientX;
-    can.rotation.y += dx * 0.0075;
-    momentum = dx * 0.0075;
-  });
-  function endDrag(e) {
-    if (!dragging) return;
-    dragging = false;
-    el.style.cursor = 'grab';
-    if (e && e.pointerType === 'touch') setHover(false);
-  }
-  el.addEventListener('pointerup', endDrag);
-  el.addEventListener('pointercancel', endDrag);
-  el.style.cursor = 'grab';
-
-  /* flechas ‹ › : dan un impulso de giro a la lata */
-  var arrows = document.querySelectorAll('.spirup-lata-arrow');
-  for (var ai = 0; ai < arrows.length; ai++) {
-    arrows[ai].addEventListener('click', function () {
-      momentum = (this.getAttribute('data-dir') === 'prev' ? 1 : -1) * 0.26;
-      autoSpin = false;
-    });
-  }
+  /* Rotacion BLOQUEADA: la lata queda siempre de frente (SPIR UP), nunca muestra
+     el reverso (informacion nutricional). Solo reacciona el hover (burbujas). */
 
   /* ---------- loop ---------- */
   var clock = new THREE.Clock();

@@ -20,7 +20,7 @@ get_header();
 
 		<h1 class="spirup-legal__title">
 			<span class="spirup-legal__bolt" aria-hidden="true">
-				<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3.5 13.6c-.4.5-.05 1.2.58 1.2H10l-1.7 6.9c-.16.66.66 1.1 1.12.6L20.5 10c.4-.5.05-1.2-.58-1.2H14l1.6-6.2c.17-.66-.65-1.12-1.12-.6z"/></svg>
+				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imagenes/image 11.png' ); ?>" alt="">
 			</span>
 			Políticas de privacidad
 		</h1>

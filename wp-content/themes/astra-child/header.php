@@ -29,7 +29,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<div class="spirup-topbar">
 		<div class="spirup-topbar__inner">
 			<span>¡LA PRIMERA BEBIDA GASIFICADA CON FICOCIANINA DE MICROALGAS!</span>
-			<span class="spirup-topbar__dot">🌊</span>
+			<span class="spirup-topbar__dot">☺️</span>
 			<span>ENVÍOS A NIVEL NACIONAL. <strong>¡COMPRA AHORA!</strong></span>
 		</div>
 	</div>
