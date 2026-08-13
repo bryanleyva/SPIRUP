@@ -56,7 +56,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<aside class="spirup-cart__panel" role="dialog" aria-label="Carrito de compra" aria-modal="true">
 		<div class="spirup-cart__head">
 			<img class="spirup-cart__logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imagenes/logo.png' ); ?>" alt="Spir Up">
-			<button type="button" class="spirup-cart__close" data-act="close" aria-label="Cerrar carrito">&times;</button>
+			<button type="button" class="spirup-cart__close" data-act="close" aria-label="Cerrar carrito">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+			</button>
 		</div>
 		<div id="spirup-cart-inner">
 			<?php spirup_cart_drawer_content(); ?>

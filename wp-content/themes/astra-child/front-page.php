@@ -70,8 +70,8 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-cta__inner">
 			<h3 class="spirup-cta__title">¿Listo para probarlo?</h3>
 			<div class="spirup-cta__actions">
-				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#pedir">Pedir ahora ↗</a>
-				<a class="spirup-cta__btn spirup-cta__btn--ghost" href="#detalles">Más detalles</a>
+				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#productos">Pedir ahora ↗</a>
+				<a class="spirup-cta__btn spirup-cta__btn--ghost" href="#por-que">Más detalles</a>
 			</div>
 		</div>
 	</section>
@@ -91,7 +91,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
 					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
 				</ul>
-				<a class="spirup-parte4__btn" href="#ciencia">Conoce la ciencia detrás ↗</a>
+				<a class="spirup-parte4__btn" href="#beneficios">Conoce la ciencia detrás ↗</a>
 			</div>
 		</div>
 	</section>
@@ -158,7 +158,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-parte6__bar">
 			<div class="spirup-parte6__barinner">
 				<span class="spirup-parte6__slogan">Si tu día no para, Spir Up tampoco</span>
-				<a class="spirup-parte6__btn" href="#pedir">¿Listo para probarlo? ↗</a>
+				<a class="spirup-parte6__btn" href="#productos">¿Listo para probarlo? ↗</a>
 			</div>
 		</div>
 	</section>
