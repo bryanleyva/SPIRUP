@@ -34,8 +34,15 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				src="<?php echo esc_url( $img . '/parte2 (2).png' ); ?>"
 				alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
 
-			<?php /* Lata 3D (Citrus Blue) fija de frente, encajada en el hueco del agua. */ ?>
+			<?php /* Lata 3D (Citrus Blue) fija de frente, encajada en el hueco del agua.
+				En ESCRITORIO se ve el 3D interactivo; en MOVIL (donde Safari iOS no
+				renderiza WebGL de forma fiable) se muestra la lata estatica de abajo. */ ?>
 			<div id="spirup-lata3d" class="spirup-lata3d" aria-label="Lata Spir Up Citrus Blue"></div>
+
+			<?php /* Lata estatica: fallback para movil (captura del propio 3D = identica). */ ?>
+			<img class="spirup-lata2d"
+				src="<?php echo esc_url( $img . '/lata-citrus.png' ); ?>"
+				alt="Lata Spir Up Citrus Blue" aria-hidden="true">
 		</div>
 	</section>
 
@@ -201,7 +208,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<article class="spirup-product">
 						<div class="spirup-product__img">
 							<?php if ( $product->get_image_id() ) : ?>
-								<?php echo $product->get_image( 'woocommerce_thumbnail' ); // phpcs:ignore ?>
+								<?php echo $product->get_image( 'large' ); // phpcs:ignore -- 'large' es sin recorte: se ve la lata completa ?>
 							<?php else : ?>
 								<span class="spirup-product__ph"><?php echo $can_svg; // phpcs:ignore ?></span>
 							<?php endif; ?>

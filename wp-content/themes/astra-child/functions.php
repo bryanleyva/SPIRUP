@@ -17,10 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function spirup_enqueue_styles() {
 
-	// Fuente Poppins (Google Fonts).
+	// Fuente Inter (Google Fonts): alternativa gratuita cercana a PP Neue Montreal.
+	// Precarga del CSS de fuentes para acelerar el render en movil.
 	wp_enqueue_style(
-		'spirup-poppins',
-		'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',
+		'spirup-inter',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
 		array(),
 		null
 	);
@@ -38,7 +39,7 @@ function spirup_enqueue_styles() {
 	wp_enqueue_style(
 		'spirup-child-style',
 		get_stylesheet_uri(),
-		array( 'astra-parent-style', 'spirup-poppins' ),
+		array( 'astra-parent-style', 'spirup-inter' ),
 		file_exists( $child_css ) ? filemtime( $child_css ) : '1.0.0'
 	);
 
