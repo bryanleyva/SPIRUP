@@ -29,10 +29,21 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== PARTE 2 ===================== */ ?>
 	<section class="spirup-parte2">
 		<div class="spirup-parte2__inner">
-			<?php /* Composicion (una lata + agua + badges + onda hacia el teal). */ ?>
-			<img class="spirup-figura__img"
-				src="<?php echo esc_url( $img . '/parte2 (2).png' ); ?>"
-				alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
+			<?php /* Titulo/subtitulo como HTML: solo en MOVIL (para agrandarlo y
+				centrarlo). En escritorio el texto va horneado en la imagen. */ ?>
+			<div class="spirup-parte2__head">
+				<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
+				<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
+			</div>
+
+			<?php /* Composicion (agua + badges + onda). En MOVIL se usa la version
+				SIN texto (parte2-clean.png) para no duplicar el titulo HTML. */ ?>
+			<picture>
+				<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/parte2-clean.png' ); ?>">
+				<img class="spirup-figura__img"
+					src="<?php echo esc_url( $img . '/parte2 (2).png' ); ?>"
+					alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
+			</picture>
 
 			<?php /* Lata 3D (Citrus Blue) fija de frente, encajada en el hueco del agua.
 				En ESCRITORIO se ve el 3D interactivo; en MOVIL (donde Safari iOS no
