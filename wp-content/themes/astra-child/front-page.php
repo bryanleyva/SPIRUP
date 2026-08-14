@@ -28,14 +28,15 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 2 ===================== */ ?>
 	<section class="spirup-parte2">
-		<div class="spirup-parte2__inner">
-			<?php /* Titulo/subtitulo como HTML: solo en MOVIL (para agrandarlo y
-				centrarlo). En escritorio el texto va horneado en la imagen. */ ?>
-			<div class="spirup-parte2__head">
-				<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
-				<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
-			</div>
+		<?php /* Titulo/subtitulo como HTML: solo en MOVIL (para agrandarlo y centrarlo
+			SIN encimarse sobre el splash). En escritorio el texto va horneado en la imagen.
+			Va FUERA de __inner para no afectar la posicion de la lata. */ ?>
+		<div class="spirup-parte2__head">
+			<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
+			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
+		</div>
 
+		<div class="spirup-parte2__inner">
 			<?php /* Composicion (agua + badges + onda). En MOVIL se usa la version
 				SIN texto (parte2-clean.png) para no duplicar el titulo HTML. */ ?>
 			<picture>
