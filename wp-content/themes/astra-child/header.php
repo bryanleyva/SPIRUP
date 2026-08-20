@@ -25,6 +25,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 <div class="spirup-site">
 
+	<!-- Cabecera fija: topbar + header se mantienen arriba al hacer scroll -->
+	<div class="spirup-sticky">
+
 	<!-- Barra de anuncio superior -->
 	<div class="spirup-topbar">
 		<div class="spirup-topbar__inner">
@@ -74,3 +77,5 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 		</div>
 	</header>
+
+	</div><!-- /.spirup-sticky -->
