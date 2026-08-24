@@ -3,184 +3,113 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SPIR UP · Lata + agua</title>
+<title>SPIR UP · Lata + agua realista</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --agua:   #46b6d8;   /* cian del agua */
-    --agua2:  #7fd6ec;   /* cian claro */
-    --brillo: #eafaff;   /* brillo/espuma */
-  }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ height:100%; }
   body{
     min-height:100%;
     font-family:'Montserrat',system-ui,sans-serif;
-    color:#eaf6f5;
-    background:
-      radial-gradient(120% 90% at 50% 18%, #1f6f76 0%, #124a54 45%, #0c2f38 100%);
+    color:#17343d;
+    background:radial-gradient(120% 90% at 50% 25%, #eaf6f3 0%, #cfeae6 55%, #bfe2df 100%);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding:32px 16px; overflow:hidden;
   }
-  h1{
-    font-family:'Manrope',sans-serif; font-weight:800;
-    font-size:clamp(20px,3vw,34px); letter-spacing:-.01em;
-    text-align:center; margin-bottom:6px;
-  }
-  p.sub{ opacity:.7; font-size:14px; text-align:center; margin-bottom:18px; }
+  h1{ font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(20px,3vw,32px); letter-spacing:-.01em; text-align:center; }
+  p.sub{ opacity:.6; font-size:14px; text-align:center; margin:6px 0 18px; }
 
-  /* Escenario */
   .stage{
     position:relative;
-    width:min(92vw,680px);
+    width:min(92vw,640px);
     aspect-ratio:1/1;
     display:grid; place-items:center;
   }
-  /* SVG del agua: ocupa todo el escenario, detras de la lata */
-  .fx{ position:absolute; inset:0; width:100%; height:100%; z-index:1; overflow:visible; }
+
+  /* AGUA REAL (PNG transparente). Detras de la lata. Se revela con .play */
+  .splash{
+    position:absolute; inset:0; margin:auto;
+    width:100%; height:100%;
+    object-fit:contain;
+    z-index:1;
+    opacity:0;
+    transform:scale(.9);
+    /* recorte circular que crece desde la lata hacia afuera */
+    clip-path:circle(4% at 50% 54%);
+    will-change:clip-path, transform, opacity;
+  }
+  .stage.play .splash{
+    animation:splashIn 1.15s cubic-bezier(.18,.85,.22,1) forwards;
+  }
+  @keyframes splashIn{
+    0%  { opacity:0; transform:scale(.86); clip-path:circle(4% at 50% 54%); }
+    35% { opacity:1; }
+    100%{ opacity:1; transform:scale(1);  clip-path:circle(85% at 50% 54%); }
+  }
+
+  /* LATA encima */
   .can{
     position:relative; z-index:2;
     width:clamp(150px,34%,240px); height:auto;
-    filter:drop-shadow(8px 22px 26px rgba(0,0,0,.45));
-    transform-origin:50% 60%;
-    animation:canPop .7s cubic-bezier(.2,.9,.25,1) both;
+    filter:drop-shadow(6px 18px 22px rgba(9,52,60,.28));
+    transform-origin:50% 62%;
   }
-  @keyframes canPop{
-    0%{ transform:translateY(14px) scale(.96); opacity:0; }
-    100%{ transform:none; opacity:1; }
-  }
+  .stage.play .can{ animation:canPop .7s cubic-bezier(.2,.9,.25,1) both; }
+  @keyframes canPop{ 0%{ transform:translateY(12px) scale(.97); } 100%{ transform:none; } }
 
-  /* Botón repetir */
+  /* Aviso si falta el archivo del agua */
+  .missing{
+    position:absolute; z-index:3; inset:auto 0 8% 0; text-align:center;
+    font-size:13px; color:#8a6d1f; background:#fff5d6; border:1px solid #ecd98a;
+    padding:8px 14px; border-radius:10px; width:max-content; max-width:90%; margin:0 auto;
+    display:none;
+  }
+  .missing.show{ display:block; }
+
   .replay{
-    margin-top:26px;
-    font-family:'Manrope',sans-serif; font-weight:700; font-size:15px;
+    margin-top:24px; font-family:'Manrope',sans-serif; font-weight:700; font-size:15px;
     color:#0c2f38; background:#7fd6ec; border:0; border-radius:999px;
     padding:12px 30px; cursor:pointer; transition:transform .12s ease, background .15s ease;
   }
   .replay:hover{ background:#a5e4f4; transform:translateY(-1px); }
   .replay:active{ transform:scale(.97); }
-
-  /* Cada gota/chorro (círculos del SVG) hereda el filtro gooey del grupo */
-  .liquid circle{ fill:url(#ag); transform-box:fill-box; transform-origin:center; }
-  .liquid .clara{ fill:var(--agua2); }
-  #sparks circle{ transform-box:fill-box; transform-origin:center; }
-  .spark{ fill:var(--brillo); }
 </style>
 </head>
 <body>
 
   <h1>SPIR UP · el agua sale a los costados</h1>
-  <p class="sub">Demo del efecto de agua sobre la nueva lata</p>
+  <p class="sub">El splash real (splash-agua.png) aparece y se queda quieto</p>
 
   <div class="stage" id="stage">
-    <svg class="fx" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <defs>
-        <!-- filtro "gooey": funde los circulos en liquido -->
-        <filter id="goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur"/>
-          <feColorMatrix in="blur" mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="goo"/>
-          <feBlend in="SourceGraphic" in2="goo"/>
-        </filter>
-        <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#8fdcf0"/>
-          <stop offset="1" stop-color="#37a9cf"/>
-        </linearGradient>
-      </defs>
-      <!-- el agua (liquido gooey) -->
-      <g class="liquid" filter="url(#goo)" id="liquid"></g>
-      <!-- destellos/espuma por encima (sin gooey) -->
-      <g id="sparks"></g>
-    </svg>
-
+    <img class="splash" id="splash" src="imagenes/splash-agua.png" alt="" aria-hidden="true">
     <img class="can" id="can" src="imagenes/lata-spir-up%201%20(2).png" alt="Lata Spir Up Citrus Blue">
+    <div class="missing" id="missing">
+      Falta <b>imagenes/splash-agua.png</b> (PNG transparente del agua). Colócalo ahí y recarga.
+    </div>
   </div>
 
   <button class="replay" id="replay" type="button">Repetir efecto ↺</button>
 
 <script>
 (function(){
-  var svgNS='http://www.w3.org/2000/svg';
-  var liquid=document.getElementById('liquid');
-  var sparks=document.getElementById('sparks');
   var stage=document.getElementById('stage');
-  var replay=document.getElementById('replay');
+  var splash=document.getElementById('splash');
+  var missing=document.getElementById('missing');
 
-  // centro de la lata dentro del viewBox 800x800
-  var CX=400, CY=430;
-  var EDGE=66;           // distancia del centro al costado de la lata
-
-  function rand(a,b){ return a+Math.random()*(b-a); }
-
-  function circle(parent, x, y, r, cls){
-    var c=document.createElementNS(svgNS,'circle');
-    c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',r);
-    if(cls) c.setAttribute('class',cls);
-    parent.appendChild(c);
-    return c;
-  }
-
-  // Un CHORRO denso que sale del costado de la lata: muchos circulos solapados a
-  // lo largo de un arco -> el filtro gooey los funde en un tentaculo de agua.
-  // Aparecen en secuencia (de la lata a la punta) = el agua "sale disparada".
-  function jet(dir){ // dir: -1 izquierda, +1 derecha
-    var ox=CX+dir*EDGE, oy=CY+rand(-20,20);
-    var reach=rand(250,320);          // largo del chorro
-    var lift=rand(70,120);            // arco hacia arriba
-    var drop=rand(60,130);            // caida al final
-    var N=20;                         // densidad (solapados)
-
-    for(var i=0;i<=N;i++){
-      var t=i/N;                                  // 0 lata -> 1 punta
-      var px=ox + dir*reach*Math.pow(t,0.92);
-      var py=oy - lift*Math.sin(t*Math.PI*0.85) + drop*t*t;   // sube y cae (arco)
-      var r=Math.max(3.5, 30*(1-t) + 6*(1-t) + rand(-2,3));   // grueso->fino
-      var c=circle(liquid, px, py, r, t>0.5?'clara':null);
-      c.animate(
-        [ { transform:'scale(0)', opacity:0 },
-          { transform:'scale(1)',  opacity:1 } ],
-        { duration:360, delay:i*32, easing:'cubic-bezier(.2,.85,.25,1)', fill:'both' }
-      );
-    }
-
-    // La PUNTA se rompe en gotas que salen volando (despues de formarse el chorro)
-    var tipDelay = N*32 + 200;
-    var drops=Math.round(rand(6,9));
-    for(var d=0; d<drops; d++){
-      var tx=ox+dir*reach, ty=oy-lift*0.2+drop;
-      var dc=circle(liquid, tx, ty, rand(4,10), 'clara');
-      var vx=dir*rand(60,180), vy=rand(-120,60);
-      dc.animate(
-        [ { transform:'translate(0,0) scale(1)', opacity:1, offset:0 },
-          { transform:'translate('+vx*0.5+'px,'+(vy*0.5-30)+'px) scale(.9)', opacity:.95, offset:.5 },
-          { transform:'translate('+vx+'px,'+(vy+90)+'px) scale(.35)', opacity:0, offset:1 } ],
-        { duration:rand(700,1100), delay:tipDelay+rand(0,150), easing:'cubic-bezier(.2,.6,.3,1)', fill:'forwards' }
-      );
-    }
-
-    // Espuma/brillo blanco cerca del nacimiento del chorro
-    for(var s=0;s<5;s++){
-      var sp=circle(sparks, ox+dir*rand(10,90), oy+rand(-70,50), rand(2,4.5), 'spark');
-      sp.animate(
-        [ {opacity:0},{opacity:.9},{opacity:0} ],
-        { duration:rand(700,1200), delay:rand(60,420), fill:'forwards' }
-      );
-    }
-  }
+  // Aviso si el PNG del agua aun no existe
+  splash.addEventListener('error', function(){ missing.classList.add('show'); });
 
   function play(){
-    liquid.innerHTML='';
-    sparks.innerHTML='';
-    var can=document.getElementById('can');
-    can.style.animation='none'; void can.offsetWidth; can.style.animation='';
-    // dos chorros por lado (uno alto y otro bajo) para dar volumen, en ambos costados
-    jet(-1); setTimeout(function(){ jet(-1); }, 120);
-    setTimeout(function(){ jet(1); }, 70);
-    setTimeout(function(){ jet(1); }, 190);
+    stage.classList.remove('play');
+    void stage.offsetWidth;      // reinicia la animacion
+    stage.classList.add('play');
   }
 
-  replay.addEventListener('click', play);
-  window.addEventListener('load', function(){ setTimeout(play, 250); });
+  document.getElementById('replay').addEventListener('click', play);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(play,200); });
+  } else { setTimeout(play,200); }
 })();
 </script>
 </body>
