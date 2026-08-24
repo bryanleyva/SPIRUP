@@ -177,7 +177,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 7: Historia + linea de tiempo ===================== */ ?>
 	<section class="spirup-parte7" id="conocenos">
-		<img class="spirup-parte7__wm" src="<?php echo esc_url( $img . '/recurso 7 1.png' ); ?>" alt="" aria-hidden="true">
+		<img class="spirup-parte7__wm" src="<?php echo esc_url( $img . '/Recurso 7 1.png' ); ?>" alt="" aria-hidden="true">
 		<div class="spirup-parte7__inner">
 			<div class="spirup-parte7__text">
 				<h2 class="spirup-parte7__title">La ciencia también puede ser refrescante</h2>
