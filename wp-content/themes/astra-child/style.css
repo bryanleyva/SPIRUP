@@ -639,11 +639,12 @@ html { scroll-behavior: smooth; }
    PARTE 5: "Energia que dura" (grid de 6 tarjetas)
    ========================================================================== */
 .spirup-parte5 {
-	background: #d9ede3;
+	/* mismo aqua que el top de Group 50.png (parte6) para conectar sin costura */
+	background: #e6f2ed;
 	padding: clamp(40px, 4vw, 120px) 0 clamp(50px, 5vw, 140px);
 }
 .spirup-parte5__inner {
-	max-width: min(92vw, 1180px);
+	max-width: min(92vw, 960px);   /* mas compacto -> descripciones en 2 lineas */
 	margin: 0 auto;
 	padding: 0 clamp(16px, 1.5vw, 40px);
 	text-align: center;
@@ -659,7 +660,7 @@ html { scroll-behavior: smooth; }
 	color: #5b6d70;
 	line-height: 1.5;
 	font-size: clamp(14px, 1.05vw, 28px);
-	max-width: 62em;
+	max-width: 34em;   /* mas angosto -> el subtitulo cae en 2 lineas */
 	margin: 0 auto clamp(30px, 3vw, 84px);
 }
 .spirup-parte5__grid {
@@ -692,7 +693,8 @@ html { scroll-behavior: smooth; }
 	color: #4b6468;
 	line-height: 1.4;
 	font-size: clamp(13px, 1vw, 26px);
-	margin: 0;
+	margin: 0 auto;
+	max-width: 19ch;   /* fuerza las descripciones a 2 lineas (parejas, como el target) */
 }
 @media (max-width: 900px) {
 	.spirup-parte5__grid { grid-template-columns: repeat(2, 1fr); }

@@ -164,7 +164,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== PARTE 6: Banner "Si tu dia no para" ===================== */ ?>
 	<section class="spirup-parte6">
 		<div class="spirup-parte6__photo">
-			<img src="<?php echo esc_url( $img . '/group41-cans.jpg' ); ?>"
+			<img src="<?php echo esc_url( $img . '/Group 50.png' ); ?>"
 				alt="Latas Spir Up Rebel Blue y Citrus Blue">
 		</div>
 		<div class="spirup-parte6__bar">
