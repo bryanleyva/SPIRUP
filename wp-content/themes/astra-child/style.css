@@ -783,7 +783,7 @@ html { scroll-behavior: smooth; }
 	margin: 0 0 clamp(18px, 1.6vw, 40px);
 	max-width: none;                        /* el quiebre lo fuerza el <br> del titulo */
 }
-.spirup-parte7__text { max-width: 34em; }   /* texto mas angosto, no expandido al ancho */
+.spirup-parte7__text { max-width: 30em; }   /* texto un poco mas angosto */
 .spirup-parte7__text p {
 	color: #4d6266;
 	line-height: 1.6;
