@@ -92,7 +92,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<section class="spirup-parte4" id="por-que">
 		<div class="spirup-parte4__inner">
 			<div class="spirup-parte4__media">
-				<img src="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?>"
+				<img src="<?php echo esc_url( $img . '/Vector 8.png' ); ?>"
 					alt="Lata Spir Up Citrus Blue con gafas de sol junto a una piscina">
 			</div>
 			<div class="spirup-parte4__text">

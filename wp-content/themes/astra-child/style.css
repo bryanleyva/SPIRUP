@@ -563,34 +563,32 @@ html { scroll-behavior: smooth; }
 }
 .spirup-parte4__inner {
 	display: grid;
-	grid-template-columns: minmax(0, 50%) minmax(0, 50%);
-	align-items: stretch;
+	grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+	align-items: center;   /* el texto se centra vertical junto a la imagen */
 }
 .spirup-parte4__media {
-	align-self: stretch;
-	display: flex;
-	overflow: hidden;
-	background: #74c4d1;   /* color de la piscina: por si asoma el borde transparente */
+	display: block;
+	background: transparent;   /* el borde curvo transparente deja ver el blanco */
 }
+/* Imagen con su corte CURVO (Vector 8.png): se muestra completa, pegada al
+   borde izquierdo; la curva de la derecha revela el fondo blanco de la seccion. */
 .spirup-parte4__media img {
 	display: block;
 	width: 100%;
-	height: calc(100% + 8px);   /* un pelo mas alto + recorte: tapa la franja transparente superior */
-	margin-top: -4px;
-	object-fit: cover;
-	object-position: left center;
+	height: auto;
+	object-fit: contain;
 }
 .spirup-parte4__text {
 	align-self: center;
-	padding: clamp(30px, 3.5vw, 90px) clamp(24px, 5vw, 120px);
-	max-width: 860px;
+	padding: clamp(30px, 3vw, 80px) clamp(28px, 4.5vw, 100px) clamp(30px, 3vw, 80px) clamp(20px, 2.5vw, 56px);
+	max-width: 760px;
 }
 .spirup-parte4__title {
 	color: var(--spirup-teal);
 	font-weight: 800;
 	line-height: 1.14;
-	font-size: clamp(22px, 2.35vw, 36px);
-	margin: 0 0 clamp(14px, 1.2vw, 32px);
+	font-size: clamp(28px, 3.5vw, 58px);   /* grande -> ~4 lineas, llena el espacio blanco */
+	margin: 0 0 clamp(18px, 1.6vw, 40px);
 }
 .spirup-parte4__desc {
 	color: #5b6d70;
