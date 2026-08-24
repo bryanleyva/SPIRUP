@@ -19,6 +19,12 @@ Text Domain:  astra-child
 	--spirup-orange: #f5a623;
 	--spirup-white:  #ffffff;
 	--spirup-max:    1240px;
+
+	/* Tipografia: cuerpo Montserrat, titulos Manrope (~PP Neue Montreal),
+	   banner de inicio Kaushan Script (~Northwell). */
+	--font-body:   'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-title:  'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-script: 'Kaushan Script', 'Segoe Script', cursive;
 }
 
 /* ==========================================================================
@@ -26,7 +32,7 @@ Text Domain:  astra-child
    ========================================================================== */
 body.astra-child,
 .spirup-site {
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	font-family: var(--font-body);
 	color: var(--spirup-dark);
 }
 .spirup-site * { box-sizing: border-box; }
@@ -50,15 +56,17 @@ html, body { max-width: 100%; overflow-x: clip; }
 .spirup-site video,
 .spirup-site iframe { max-width: 100%; }
 
-/* Tipografia unificada: Inter (sans-serif, cercana a PP Neue Montreal) en TODA
-   la pagina, incluidos los titulos (Astra aplica una serif/Montserrat por
-   defecto en los encabezados). */
+/* Cuerpo de texto + UI: Montserrat. (!important para ganarle a Astra) */
 body,
-h1, h2, h3, h4, h5, h6,
-.entry-title, .widget-title,
 button, input, select, textarea,
 .button, .wp-block-button__link {
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+	font-family: var(--font-body) !important;
+}
+/* Titulos/encabezados: Manrope (alternativa gratuita a PP Neue Montreal) */
+h1, h2, h3, h4, h5, h6,
+.entry-title, .widget-title,
+.spirup-parte6__slogan {
+	font-family: var(--font-title) !important;
 }
 
 /* Scroll suave al navegar a secciones por ancla (#por-que, #beneficios...) */
@@ -886,7 +894,7 @@ html { scroll-behavior: smooth; }
 .spirup-product__info { display: flex; flex-direction: column; }
 .spirup-product__info h3,
 .spirup-product__meta,
-.spirup-product__price { font-family: 'Inter', sans-serif; }
+.spirup-product__price { font-family: var(--font-body); }
 .spirup-product__info h3 {
 	color: var(--spirup-dark);
 	font-weight: 700;
