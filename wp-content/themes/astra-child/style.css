@@ -749,7 +749,7 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    PARTE 7: Historia + linea de tiempo
    ========================================================================== */
-.spirup-parte7 { background: #d5e9e1; position: relative; overflow: hidden; }
+.spirup-parte7 { background: #e6f2ed; position: relative; overflow: hidden; }
 /* Marca de agua (rayo SPIR UP), detras del contenido y contenida en la seccion */
 .spirup-parte7__wm {
 	position: absolute;
@@ -809,7 +809,7 @@ html { scroll-behavior: smooth; }
 	height: 14px;
 	border-radius: 50%;
 	background: #E97000;
-	box-shadow: 0 0 0 3px #d5e9e1;
+	box-shadow: 0 0 0 3px #e6f2ed;
 }
 .spirup-tl h3 {
 	color: #E97000;
