@@ -180,7 +180,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<img class="spirup-parte7__wm" src="<?php echo esc_url( $img . '/Recurso 7 1.png' ); ?>" alt="" aria-hidden="true">
 		<div class="spirup-parte7__inner">
 			<div class="spirup-parte7__text">
-				<h2 class="spirup-parte7__title">La ciencia también puede ser refrescante</h2>
+				<h2 class="spirup-parte7__title">La ciencia también<br>puede ser refrescante</h2>
 				<p><strong>Spir Up</strong> nació de una pregunta simple: ¿cómo transformar la investigación científica en una bebida que la gente realmente disfrute?</p>
 				<p>Tras múltiples etapas de formulación y aprendizaje, desarrollamos una propuesta refrescante elaborada con <strong>ficocianina</strong>, un valioso nutriente extraído de microalgas. Somos una marca peruana convencida de que la ciencia impacta más cuando se integra a la vida cotidiana. Creamos experiencias que conectan la innovación científica con tu bienestar, porque creemos firmemente que <strong>cuidarte también se debe disfrutar.</strong></p>
 			</div>
