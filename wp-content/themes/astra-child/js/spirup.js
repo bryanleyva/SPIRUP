@@ -111,3 +111,56 @@
 		jQuery( document.body ).on( 'added_to_cart', function () { openCart(); } );
 	}
 } )();
+
+/* ==========================================================================
+   Navbar: se OCULTA al bajar el scroll y APARECE al subir.
+   ========================================================================== */
+( function () {
+	'use strict';
+	var sticky = document.querySelector( '.spirup-sticky' );
+	if ( ! sticky ) { return; }
+	var last = window.pageYOffset || 0;
+	var TH = 6;          // umbral para ignorar micro-movimientos
+	var TOP = 80;        // cerca del tope siempre se muestra
+	var ticking = false;
+
+	function update() {
+		var y = window.pageYOffset || 0;
+		if ( y < TOP ) {
+			sticky.classList.remove( 'is-hidden' );      // arriba del todo: visible
+		} else if ( y - last > TH ) {
+			sticky.classList.add( 'is-hidden' );          // bajando: ocultar
+		} else if ( last - y > TH ) {
+			sticky.classList.remove( 'is-hidden' );       // subiendo: mostrar
+		}
+		last = y;
+		ticking = false;
+	}
+
+	window.addEventListener( 'scroll', function () {
+		if ( ! ticking ) {
+			window.requestAnimationFrame( update );
+			ticking = true;
+		}
+	}, { passive: true } );
+} )();
+
+/* ==========================================================================
+   Parte 2: dispara el efecto de agua cuando la seccion entra en pantalla
+   (agrega .is-in al stage; la animacion del agua se define en CSS).
+   ========================================================================== */
+( function () {
+	'use strict';
+	var stage = document.querySelector( '[data-water-stage]' );
+	if ( ! stage ) { return; }
+	if ( ! ( 'IntersectionObserver' in window ) ) { stage.classList.add( 'is-in' ); return; }
+	var io = new IntersectionObserver( function ( entries ) {
+		entries.forEach( function ( en ) {
+			if ( en.isIntersecting ) {
+				stage.classList.add( 'is-in' );   // se queda (la animacion no se revierte)
+				io.disconnect();
+			}
+		} );
+	}, { threshold: 0.35 } );
+	io.observe( stage );
+} )();

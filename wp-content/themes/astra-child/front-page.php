@@ -27,34 +27,21 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 2 ===================== */ ?>
-	<section class="spirup-parte2">
-		<?php /* Titulo/subtitulo como HTML: solo en MOVIL (para agrandarlo y centrarlo
-			SIN encimarse sobre el splash). En escritorio el texto va horneado en la imagen.
-			Va FUERA de __inner para no afectar la posicion de la lata. */ ?>
+	<section class="spirup-parte2" id="una-lata">
 		<div class="spirup-parte2__head">
 			<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
 			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
 		</div>
 
-		<div class="spirup-parte2__inner">
-			<?php /* Composicion (agua + badges + onda). En MOVIL se usa la version
-				SIN texto (parte2-clean.png) para no duplicar el titulo HTML. */ ?>
-			<picture>
-				<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/parte2-clean.png' ); ?>">
-				<img class="spirup-figura__img"
-					src="<?php echo esc_url( $img . '/parte2 (2).png' ); ?>"
-					alt="Una lata con ciencia adentro. 355 ml de bebida gasificada formulada con un bioactivo reconocido por su potencial antioxidante.">
-			</picture>
-
-			<?php /* Lata 3D (Citrus Blue) fija de frente, encajada en el hueco del agua.
-				En ESCRITORIO se ve el 3D interactivo; en MOVIL (donde Safari iOS no
-				renderiza WebGL de forma fiable) se muestra la lata estatica de abajo. */ ?>
-			<div id="spirup-lata3d" class="spirup-lata3d" aria-label="Lata Spir Up Citrus Blue"></div>
-
-			<?php /* Lata estatica: fallback para movil (captura del propio 3D = identica). */ ?>
-			<img class="spirup-lata2d"
-				src="<?php echo esc_url( $img . '/lata-citrus.png' ); ?>"
-				alt="Lata Spir Up Citrus Blue" aria-hidden="true">
+		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) + una
+			capa de agua que APARECE al hacer scroll y se queda quieta. El JS agrega
+			.is-in a [data-water-stage] cuando la seccion entra en pantalla; la
+			animacion del agua se define en CSS (proximo paso). El fondo va despues. */ ?>
+		<div class="spirup-parte2__stage" data-water-stage>
+			<div class="spirup-parte2__water" aria-hidden="true"></div>
+			<img class="spirup-parte2__can"
+				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
+				alt="Lata Spir Up Citrus Blue">
 		</div>
 	</section>
 
