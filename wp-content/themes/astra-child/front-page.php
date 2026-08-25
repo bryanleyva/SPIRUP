@@ -21,8 +21,8 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<section class="spirup-figura">
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/grupo figuras 2.png' ); ?>"
-			alt="Un sorbo de vitalidad, un sorbo de SPIR UP.">
+			src="<?php echo esc_url( $img . '/parte1f.png' ); ?>"
+			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora ↗</a>
 	</section>
 
@@ -33,12 +33,29 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
 		</div>
 
-		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) + una
-			capa de agua que APARECE al hacer scroll y se queda quieta. El JS agrega
-			.is-in a [data-water-stage] cuando la seccion entra en pantalla; la
-			animacion del agua se define en CSS (proximo paso). El fondo va despues. */ ?>
+		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) +
+			una ola de agua SIMULADA que rompe por detras de la lata al entrar la
+			seccion en pantalla, y que despues sigue rompiendo en ciclo.
+			js/spirup.js agrega .is-in a [data-water-stage] cuando la seccion entra;
+			js/spirup-splash.js corre la simulacion en WebGL, por detras, dentro de
+			.spirup-parte2__water. Sin WebGL cae a la foto splash-agua.png.
+			Ajustes de aqui abajo:
+			  spread = ancho de la escena, medido en anchos de lata
+			  x / y  = de donde sale el chorro, sobre la lata (0-1)
+			  jet    = fuerza de la ola
+			  flow   = agua de fondo entre ola y ola
+			  shine  = intensidad de los reflejos
+			  tint   = color del agua (el aqua de la lata, #56b6bd, algo mas vivo) */ ?>
 		<div class="spirup-parte2__stage" data-water-stage>
-			<div class="spirup-parte2__water" aria-hidden="true"></div>
+			<div class="spirup-parte2__water" aria-hidden="true"
+				data-splash-src="<?php echo esc_url( $img . '/splash-agua' ); ?>"
+				data-splash-spread="3.3"
+				data-splash-x="0.50"
+				data-splash-y="0.60"
+				data-splash-jet="1"
+				data-splash-flow="1"
+				data-splash-shine="1"
+				data-splash-tint="#62d3d6"></div>
 			<img class="spirup-parte2__can"
 				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
 				alt="Lata Spir Up Citrus Blue">
@@ -47,20 +64,30 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 3: Ingredientes ===================== */ ?>
 	<section class="spirup-parte3">
-		<?php /* Imagen compuesta (ola/corte + panel teal + remolino + tarjetas con icono).
-		         El texto va superpuesto en % para calzar a cualquier ancho. */ ?>
-		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/parte3queescomplicada.png' ); ?>" alt="" aria-hidden="true">
-
-		<div class="spirup-parte3__head">
-			<span class="spirup-parte3__badge">Que contiene</span>
-			<h2 class="spirup-parte3__title">Ingredientes con propósito, nada de relleno</h2>
-		</div>
-
-		<div class="spirup-parte3__cards">
-			<div class="spirup-p3card"><strong>Microalgas</strong><span>Bioactivos funcionales de origen natural</span></div>
-			<div class="spirup-p3card"><strong>Agua gasificada</strong><span>Contenido controlado de sodio</span></div>
-			<div class="spirup-p3card"><strong>Extractos naturales</strong><span>Sin saborizantes artificiales</span></div>
-			<div class="spirup-p3card"><strong>Sin azúcar añadida</strong><span>Dulzor equilibrado sin culpa</span></div>
+		<div class="spirup-parte3__inner">
+			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
+			<div class="spirup-parte3__grid">
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c-2.2-4 1.6-6.5-.2-11"/><path d="M12 21c-1-6 2.4-8.5.2-14"/><path d="M17 21c2-4-1.4-6.6.4-11"/></svg></span>
+					<strong>Microalgas</strong>
+					<span>Bioactivos funcionales de origen natural</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="14" r="3.4"/><circle cx="15.5" cy="9.5" r="2.2"/><circle cx="16.5" cy="16.5" r="1.4"/></svg></span>
+					<strong>Agua gasificada</strong>
+					<span>Contenido controlado de sodio</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 6 19 6c0 8-6 13-14 13z"/><path d="M8.5 15.5c2.2-3.2 5-5.2 8.2-6.2"/></svg></span>
+					<strong>Extractos naturales</strong>
+					<span>Sin saborizantes artificiales</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/><path d="M3 21 21 3"/></svg></span>
+					<strong>Sin azúcar añadida</strong>
+					<span>Dulzor equilibrado sin culpa</span>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -79,7 +106,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<section class="spirup-parte4" id="por-que">
 		<div class="spirup-parte4__inner">
 			<div class="spirup-parte4__media">
-				<img src="<?php echo esc_url( $img . '/Vector 8.png' ); ?>"
+				<img src="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?>"
 					alt="Lata Spir Up Citrus Blue con gafas de sol junto a una piscina">
 			</div>
 			<div class="spirup-parte4__text">
@@ -90,7 +117,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
 					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
 				</ul>
-				<a class="spirup-parte4__btn" href="#beneficios">Conoce la ciencia detrás ↗</a>
+				<p class="spirup-parte4__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
 			</div>
 		</div>
 	</section>

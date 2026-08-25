@@ -71,6 +71,17 @@ function spirup_enqueue_styles() {
 
 	// Lata 3D (Three.js) - solo en la portada.
 	if ( is_front_page() ) {
+		// Splash de agua detras de la lata (Parte 2). Depende de spirup-js,
+		// que es quien marca el stage con .is-in al entrar en pantalla.
+		$splash_js = get_stylesheet_directory() . '/js/spirup-splash.js';
+		wp_enqueue_script(
+			'spirup-splash',
+			get_stylesheet_directory_uri() . '/js/spirup-splash.js',
+			array( 'spirup-js' ),
+			file_exists( $splash_js ) ? filemtime( $splash_js ) : '1.0.0',
+			true
+		);
+
 		wp_enqueue_script(
 			'threejs',
 			'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
