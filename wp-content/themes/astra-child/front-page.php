@@ -62,35 +62,6 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* ===================== PARTE 3: Ingredientes ===================== */ ?>
-	<section class="spirup-parte3">
-		<div class="spirup-parte3__inner">
-			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
-			<div class="spirup-parte3__grid">
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c-2.2-4 1.6-6.5-.2-11"/><path d="M12 21c-1-6 2.4-8.5.2-14"/><path d="M17 21c2-4-1.4-6.6.4-11"/></svg></span>
-					<strong>Microalgas</strong>
-					<span>Bioactivos funcionales de origen natural</span>
-				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="14" r="3.4"/><circle cx="15.5" cy="9.5" r="2.2"/><circle cx="16.5" cy="16.5" r="1.4"/></svg></span>
-					<strong>Agua gasificada</strong>
-					<span>Contenido controlado de sodio</span>
-				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 6 19 6c0 8-6 13-14 13z"/><path d="M8.5 15.5c2.2-3.2 5-5.2 8.2-6.2"/></svg></span>
-					<strong>Extractos naturales</strong>
-					<span>Sin saborizantes artificiales</span>
-				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/><path d="M3 21 21 3"/></svg></span>
-					<strong>Sin azúcar añadida</strong>
-					<span>Dulzor equilibrado sin culpa</span>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<?php /* ===================== Franja CTA amarilla ===================== */ ?>
 	<section class="spirup-cta">
 		<div class="spirup-cta__inner">
@@ -118,6 +89,35 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
 				</ul>
 				<p class="spirup-parte4__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
+			</div>
+		</div>
+	</section>
+
+	<?php /* ===================== PARTE 3: Ingredientes (va despues de parte4) ===================== */ ?>
+	<section class="spirup-parte3">
+		<div class="spirup-parte3__inner">
+			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
+			<div class="spirup-parte3__grid">
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c-2.2-4 1.6-6.5-.2-11"/><path d="M12 21c-1-6 2.4-8.5.2-14"/><path d="M17 21c2-4-1.4-6.6.4-11"/></svg></span>
+					<strong>Microalgas</strong>
+					<span>Bioactivos funcionales de origen natural</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="14" r="3.4"/><circle cx="15.5" cy="9.5" r="2.2"/><circle cx="16.5" cy="16.5" r="1.4"/></svg></span>
+					<strong>Agua gasificada</strong>
+					<span>Contenido controlado de sodio</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 6 19 6c0 8-6 13-14 13z"/><path d="M8.5 15.5c2.2-3.2 5-5.2 8.2-6.2"/></svg></span>
+					<strong>Extractos naturales</strong>
+					<span>Sin saborizantes artificiales</span>
+				</div>
+				<div class="spirup-p3card">
+					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/><path d="M3 21 21 3"/></svg></span>
+					<strong>Sin azúcar añadida</strong>
+					<span>Dulzor equilibrado sin culpa</span>
+				</div>
 			</div>
 		</div>
 	</section>
