@@ -95,6 +95,11 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 3: Ingredientes (va despues de parte4) ===================== */ ?>
 	<section class="spirup-parte3">
+		<?php /* Escritorio: imagen con la CURVA superior que corta la figura de arriba
+			(parte4), el swirl y las tarjetas. Transparente arriba/abajo. */ ?>
+		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/Group 50 (1).png' ); ?>"
+			alt="Ingredientes con propósito, nada de relleno">
+		<?php /* Movil: version HTML con texto legible (la imagen ancha no calza). */ ?>
 		<div class="spirup-parte3__inner">
 			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
 			<div class="spirup-parte3__grid">
