@@ -48,9 +48,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<?php $home = esc_url( home_url( '/' ) ); ?>
 			<nav class="spirup-nav" id="spirup-nav" aria-label="Menu principal">
 				<a href="<?php echo $home; ?>">Spir Up</a>
-				<a href="<?php echo $home; ?>#por-que">¿Por qué Spir Up?</a>
 				<a href="<?php echo $home; ?>#beneficios">Beneficios</a>
 				<a href="<?php echo $home; ?>#conocenos">Conócenos</a>
+				<a href="<?php echo esc_url( home_url( '/producto/' ) ); ?>">Producto</a>
 			</nav>
 
 			<div class="spirup-header__actions">
