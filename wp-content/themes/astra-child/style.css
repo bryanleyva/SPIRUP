@@ -605,6 +605,20 @@ html { scroll-behavior: smooth; }
 .spirup-bloque__list .is-yes .ico { color: var(--spirup-teal); }
 .spirup-bloque__claim { color: #E97000; font-size: 1.12vw; line-height: 1.45; margin: 0; }
 .spirup-bloque__claim strong { font-weight: 800; }
+/* Descripciones "Del cultivo" encimadas bajo cada label (El origen/desarrollo/resultado) */
+.spirup-bloque__steps p {
+	position: absolute;
+	top: 81.2%;
+	transform: translateX(-50%);
+	text-align: center;
+	color: #4d6266;
+	font-size: 1.02vw;
+	line-height: 1.38;
+	margin: 0;
+}
+.spirup-bloque__steps .s1 { left: 13%; }
+.spirup-bloque__steps .s2 { left: 31.1%; }
+.spirup-bloque__steps .s3 { left: 48.9%; }
 
 .spirup-mobileflow { display: none; }
 

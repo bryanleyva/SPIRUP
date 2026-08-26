@@ -86,6 +86,12 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				</ul>
 				<p class="spirup-bloque__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
 			</div>
+			<?php /* Descripciones de "Del cultivo" encimadas bajo cada label (no venian en la imagen) */ ?>
+			<div class="spirup-bloque__steps">
+				<p class="s1">Exploramos el<br>potencial de las<br>microalgas y sus<br>compuestos<br>bioactivos.</p>
+				<p class="s2">Trabajamos en la<br>formulación para<br>equilibrar&nbsp; funcionalidad,<br>sabor y una experiencia<br>refrescante.</p>
+				<p class="s3">Exploramos el<br>potencial de las<br>microalgas y sus<br>compuestos<br>bioactivos.</p>
+			</div>
 		</div>
 	</section>
 
