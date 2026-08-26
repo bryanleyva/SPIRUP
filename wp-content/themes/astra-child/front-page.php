@@ -93,7 +93,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 3: Ingredientes (va despues de parte4) ===================== */ ?>
-	<section class="spirup-parte3">
+	<section class="spirup-parte3" id="beneficios">
 		<?php /* Escritorio: imagen con la CURVA superior que corta la figura de arriba
 			(parte4), el swirl y las tarjetas. Transparente arriba/abajo. */ ?>
 		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/parte3-ingredientes.png' ); ?>"
@@ -126,75 +126,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php
-	/* ===================== PARTE 5: Energía que dura ===================== */
-	$sp5_features = array(
-		array(
-			'svg'   => '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-			'title' => 'Ficocianina',
-			'desc'  => 'Bioactivo natural de microalgas.',
-		),
-		array(
-			'svg'   => '<path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>',
-			'title' => 'Antioxidantes',
-			'desc'  => 'Ayudan a proteger tus células.',
-		),
-		array(
-			'svg'   => '<rect x="2" y="7.5" width="16" height="9" rx="2.5"/><path d="M21.5 10.5v3"/><path d="M6.5 12h4"/><path d="M8.5 10v4"/>',
-			'title' => 'Ciencia aplicada',
-			'desc'  => 'Investigación convertida en una bebida.',
-		),
-		array(
-			'svg'   => '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.5 4 6 4 9.5s-1.4 7-4 9.5c-2.6-2.5-4-6-4-9.5s1.4-7 4-9.5z"/>',
-			'title' => 'Sin azúcar',
-			'desc'  => 'Baja en calorías y deliciosa.',
-		),
-		array(
-			'svg'   => '<rect x="1.6" y="9" width="3.4" height="6" rx="1"/><rect x="19" y="9" width="3.4" height="6" rx="1"/><path d="M5 12h14"/><path d="M6.6 10.4v3.2"/><path d="M17.4 10.4v3.2"/>',
-			'title' => 'Microalgas',
-			'desc'  => 'Innovación inspirada en la naturaleza.',
-		),
-		array(
-			'svg'   => '<path d="M7 19H4.8a1.8 1.8 0 0 1-1.55-2.7L7.2 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.55-2.66l-1.23-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.3 13.6 7.2 9.5 3.1 10.6"/><path d="m9.34 5.81 1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.94 6.84"/><path d="m13.38 9.63 4.1 1.1 1.1-4.1"/>',
-			'title' => 'Sostenibilidad',
-			'desc'  => 'Pensada para ti y el planeta.',
-		),
-	);
-	?>
-	<section class="spirup-parte5" id="beneficios">
-		<div class="spirup-parte5__inner">
-			<h2 class="spirup-parte5__title">Refrescante por naturaleza.<br>Respaldada por la ciencia.</h2>
-			<p class="spirup-parte5__sub">No te pedimos que dejes de tomar café o gaseosa. Solo que pruebes una alternativa que te da más y te quita menos.</p>
-			<div class="spirup-parte5__grid">
-				<?php foreach ( $sp5_features as $f ) : ?>
-					<div class="spirup-feature">
-						<span class="spirup-feature__ico">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><?php echo $f['svg']; // phpcs:ignore ?></svg>
-						</span>
-						<h3><?php echo esc_html( $f['title'] ); ?></h3>
-						<p><?php echo esc_html( $f['desc'] ); ?></p>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-
-	<?php /* ===================== PARTE 6: Banner "Si tu dia no para" ===================== */ ?>
-	<section class="spirup-parte6">
-		<div class="spirup-parte6__photo">
-			<img src="<?php echo esc_url( $img . '/Group 50.png' ); ?>"
-				alt="Latas Spir Up Rebel Blue y Citrus Blue">
-		</div>
-		<div class="spirup-parte6__bar">
-			<div class="spirup-parte6__barinner">
-				<span class="spirup-parte6__slogan">Si tu día no para, Spir Up tampoco</span>
-				<a class="spirup-parte6__btn" href="#productos">¿Listo para probarlo? ↗</a>
-			</div>
-		</div>
-	</section>
-
-	<?php /* ===================== PARTE 7: Historia + linea de tiempo ===================== */ ?>
-	<?php /* ===================== PARTE 7: Del cultivo a la planta ===================== */ ?>
+	<?php /* ===================== Del cultivo a la planta (despues de Ingredientes) ===================== */ ?>
 	<section class="spirup-cultivo" id="conocenos">
 		<div class="spirup-cultivo__inner">
 			<div class="spirup-cultivo__body">
