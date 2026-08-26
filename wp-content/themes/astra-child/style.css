@@ -470,12 +470,12 @@ html { scroll-behavior: smooth; }
 /* ESCRITORIO: la seccion ES la imagen Group 50 (1).png (fondo teal + CURVA
    superior que corta la figura de arriba + swirl + tarjetas). Es transparente
    arriba de la ola, asi que se sube con margin-top negativo para cortar parte4. */
-.spirup-parte3 { position: relative; }
+.spirup-parte3 { position: relative; background: #fff; }  /* blanco = continua la seccion de arriba, sin franja crema */
 .spirup-parte3__img {
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: -1.5vw;   /* imagen recortada: la ola toca el borde de la piscina, corte exacto */
+	margin-top: -8vw;   /* la ola corta hacia arriba dentro de la piscina, conecta sin espacio */
 	position: relative;
 	z-index: 2;
 }
