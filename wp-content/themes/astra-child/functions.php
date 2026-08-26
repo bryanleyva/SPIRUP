@@ -141,13 +141,14 @@ add_filter( 'body_class', 'spirup_body_class' );
  * y los enlaces del footer funcionen en cualquier entorno (local o servidor).
  */
 function spirup_ensure_pages() {
-	if ( get_option( 'spirup_pages_v1' ) ) {
+	if ( get_option( 'spirup_pages_v2' ) ) {
 		return;
 	}
 	$pages = array(
 		'politica-de-privacidad' => 'Política de privacidad',
 		'terminos-y-condiciones' => 'Términos y condiciones',
 		'libro-de-reclamaciones' => 'Libro de reclamaciones',
+		'producto'               => 'Producto',
 	);
 	foreach ( $pages as $slug => $title ) {
 		if ( ! get_page_by_path( $slug ) ) {
@@ -161,7 +162,7 @@ function spirup_ensure_pages() {
 			);
 		}
 	}
-	update_option( 'spirup_pages_v1', 1 );
+	update_option( 'spirup_pages_v2', 1 );
 }
 add_action( 'init', 'spirup_ensure_pages' );
 
