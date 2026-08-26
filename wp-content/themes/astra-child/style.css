@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: -13.5vw;   /* la zona transparente sobre la ola sube y corta parte4 */
+	margin-top: -15.5vw;   /* la zona transparente sobre la ola sube y corta parte4 */
 	position: relative;
 	z-index: 2;
 }

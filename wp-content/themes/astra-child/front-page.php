@@ -82,7 +82,6 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			</div>
 			<div class="spirup-parte4__text">
 				<h2 class="spirup-parte4__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
-				<p class="spirup-parte4__desc">Años de investigación científica convertidos en una bebida gasificada, rica y fácil de disfrutar. Con un sabor refrescante, desarrollado para disfrutarlo todos los días.</p>
 				<ul class="spirup-parte4__list">
 					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una gaseosa común</li>
 					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
@@ -97,7 +96,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<section class="spirup-parte3">
 		<?php /* Escritorio: imagen con la CURVA superior que corta la figura de arriba
 			(parte4), el swirl y las tarjetas. Transparente arriba/abajo. */ ?>
-		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/Group 50 (1).png' ); ?>"
+		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/parte3-ingredientes.png' ); ?>"
 			alt="Ingredientes con propósito, nada de relleno">
 		<?php /* Movil: version HTML con texto legible (la imagen ancha no calza). */ ?>
 		<div class="spirup-parte3__inner">
