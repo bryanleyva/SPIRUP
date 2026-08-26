@@ -890,7 +890,12 @@ html { scroll-behavior: smooth; }
    PARTE 8: Productos "Elige como quieres tu SPIR UP"
    ========================================================================== */
 /* ==========================================================================
-   SHOWCASE de sabores (Citrus Blue / Rebel Blue) con selector
+   PAGINA PRODUCTO
+   ========================================================================== */
+.spirup-producto__hero img { display: block; width: 100%; height: auto; }
+
+/* ==========================================================================
+   SHOWCASE de sabores (Citrus Blue / Rebel Blue)
    ========================================================================== */
 .spirup-showcase {
 	position: relative;
@@ -953,6 +958,7 @@ html { scroll-behavior: smooth; }
 	appearance: none; -webkit-appearance: none; border: 0; background: none; box-shadow: none;
 	cursor: pointer; font: inherit; font-size: clamp(14px, 1.05vw, 18px); text-align: left; padding: 3px 0;
 	color: #9aa7aa; font-weight: 700; transition: color .2s; border-bottom: 2px solid transparent;
+	text-decoration: none; display: inline-block; width: fit-content;
 }
 .spirup-showcase__tab:hover { color: var(--accent); }
 .spirup-showcase__tab.is-active { color: var(--accent); border-bottom-color: var(--accent); }
