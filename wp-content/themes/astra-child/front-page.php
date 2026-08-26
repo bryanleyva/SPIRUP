@@ -194,27 +194,26 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	</section>
 
 	<?php /* ===================== PARTE 7: Historia + linea de tiempo ===================== */ ?>
-	<section class="spirup-parte7" id="conocenos">
-		<img class="spirup-parte7__wm" src="<?php echo esc_url( $img . '/Recurso 7 1.png' ); ?>" alt="" aria-hidden="true">
-		<div class="spirup-parte7__inner">
-			<div class="spirup-parte7__text">
-				<h2 class="spirup-parte7__title">La ciencia también<br>puede ser refrescante</h2>
-				<p><strong>Spir Up</strong> nació de una pregunta simple: ¿cómo transformar la investigación científica en una bebida que la gente realmente disfrute?</p>
-				<p>Tras múltiples etapas de formulación y aprendizaje, desarrollamos una propuesta refrescante elaborada con <strong>ficocianina</strong>, un valioso nutriente extraído de microalgas. Somos una marca peruana convencida de que la ciencia impacta más cuando se integra a la vida cotidiana. Creamos experiencias que conectan la innovación científica con tu bienestar, porque creemos firmemente que <strong>cuidarte también se debe disfrutar.</strong></p>
+	<?php /* ===================== PARTE 7: Del cultivo a la planta ===================== */ ?>
+	<section class="spirup-cultivo" id="conocenos">
+		<div class="spirup-cultivo__inner">
+			<div class="spirup-cultivo__body">
+				<h2 class="spirup-cultivo__title">Del cultivo a la planta</h2>
+				<p class="spirup-cultivo__sub">Cada etapa agrega valor</p>
+				<?php /* Diagrama (circulos + flechas + labels El origen/desarrollo/resultado). Labels en los tercios. */ ?>
+				<div class="spirup-cultivo__flow">
+					<img class="spirup-cultivo__diagram" src="<?php echo esc_url( $img . '/cultivo-diagrama.png' ); ?>"
+						alt="El origen, el desarrollo y el resultado de Spir Up">
+					<div class="spirup-cultivo__steps">
+						<p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p>
+						<p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p>
+						<p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p>
+					</div>
+				</div>
 			</div>
-			<div class="spirup-parte7__timeline">
-				<div class="spirup-tl">
-					<h3>El origen</h3>
-					<p>Encontramos una oportunidad en las microalgas.</p>
-				</div>
-				<div class="spirup-tl">
-					<h3>El desarrollo</h3>
-					<p>Investigación, formulación y aprendizaje.</p>
-				</div>
-				<div class="spirup-tl">
-					<h3>El resultado</h3>
-					<p>Una bebida innovadora lista para disfrutar.</p>
-				</div>
+			<div class="spirup-cultivo__media">
+				<img src="<?php echo esc_url( $img . '/cultivo-foto.png' ); ?>"
+					alt="Biotecnóloga trabajando en el laboratorio de Spir Up">
 			</div>
 		</div>
 	</section>

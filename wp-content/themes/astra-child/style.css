@@ -786,79 +786,58 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    PARTE 7: Historia + linea de tiempo
    ========================================================================== */
-.spirup-parte7 { background: #e6f2ed; position: relative; overflow: hidden; }
-/* Marca de agua (rayo SPIR UP), detras del contenido y contenida en la seccion */
-.spirup-parte7__wm {
-	position: absolute;
-	top: 50%;
-	left: 53%;
-	transform: translate(-50%, -50%) rotate(8deg);
-	height: 165%;
-	width: auto;
-	z-index: 0;
-	pointer-events: none;
-	user-select: none;
-	filter: brightness(1.06);
-}
-.spirup-parte7__inner {
-	position: relative;
-	z-index: 1;
-	max-width: min(94vw, 1760px);
-	margin: 0 auto;
-	padding: clamp(36px, 3.4vw, 96px) clamp(16px, 2vw, 56px);
+/* PARTE 7: Del cultivo a la planta (diagrama + foto biotecnologa) */
+.spirup-cultivo { background: #d5e9e1; }   /* mismo mint que el fondo del diagrama, sin costura */
+.spirup-cultivo__inner {
 	display: grid;
-	grid-template-columns: 1.25fr 0.9fr;
-	gap: clamp(30px, 5vw, 150px);
-	align-items: start;
+	grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+	align-items: stretch;
 }
-.spirup-parte7__title {
+.spirup-cultivo__body {
+	align-self: center;
+	padding: clamp(36px, 4vw, 96px) clamp(24px, 3.2vw, 80px);
+}
+.spirup-cultivo__title {
 	color: var(--spirup-teal);
 	font-weight: 800;
-	line-height: 1.15;
-	font-size: clamp(24px, 2.5vw, 40px);   /* mas compacto, como el diseno */
+	line-height: 1.12;
 	letter-spacing: -0.01em;
-	margin: 0 0 clamp(18px, 1.6vw, 40px);
-	max-width: none;                        /* el quiebre lo fuerza el <br> del titulo */
-}
-.spirup-parte7__text { max-width: 30em; }   /* texto un poco mas angosto */
-.spirup-parte7__text p {
-	color: #4d6266;
-	line-height: 1.6;
-	font-size: clamp(15px, 1.15vw, 22px);
-	margin: 0 0 clamp(16px, 1.3vw, 32px);
-}
-.spirup-parte7__text strong { color: var(--spirup-dark); font-weight: 700; }
-/* El timeline arranca mas abajo (alineado con el primer parrafo, no pegado arriba) */
-.spirup-parte7__timeline { padding-top: clamp(20px, 5vw, 96px); }
-.spirup-tl {
-	position: relative;
-	padding: 0 0 clamp(30px, 3.2vw, 76px) clamp(24px, 1.4vw, 44px);   /* mas separacion entre items */
-	border-left: 2px solid rgba(233, 112, 0, .35);
-	margin-left: 6px;
-}
-.spirup-tl:last-child { padding-bottom: 0; }
-.spirup-tl::before {
-	content: "";
-	position: absolute;
-	left: -8px;
-	top: 3px;
-	width: 14px;
-	height: 14px;
-	border-radius: 50%;
-	background: #E97000;
-	box-shadow: 0 0 0 3px #e6f2ed;
-}
-.spirup-tl h3 {
-	color: #E97000;
-	font-weight: 700;
+	font-size: clamp(26px, 2.7vw, 46px);
 	margin: 0 0 6px;
-	font-size: clamp(16px, 1.2vw, 32px);
 }
-.spirup-tl p {
+.spirup-cultivo__sub {
+	color: #6a7f82;
+	font-size: clamp(13px, 1vw, 19px);
+	margin: 0 0 clamp(30px, 3.6vw, 64px);
+}
+/* diagrama + descripciones comparten el mismo ancho para que alineen bajo cada label */
+.spirup-cultivo__flow { max-width: 760px; }
+.spirup-cultivo__diagram {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 0 clamp(10px, 1vw, 20px);
+}
+.spirup-cultivo__steps {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);   /* labels del diagrama caen en los tercios */
+}
+.spirup-cultivo__steps p {
+	margin: 0 auto;
+	max-width: 15em;
+	padding: 0 10px;
+	text-align: center;
 	color: #4d6266;
-	line-height: 1.4;
-	margin: 0;
-	font-size: clamp(13px, 1vw, 26px);
+	line-height: 1.45;
+	font-size: clamp(12px, 0.95vw, 17px);
+}
+.spirup-cultivo__media { position: relative; min-height: 100%; }
+.spirup-cultivo__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
 }
 
 /* ==========================================================================
@@ -962,7 +941,12 @@ html { scroll-behavior: smooth; }
 	.spirup-parte8__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-	.spirup-parte7__inner { grid-template-columns: 1fr; gap: clamp(24px, 5vw, 48px); }
+	/* Cultivo: apilar (texto+diagrama arriba, foto abajo) */
+	.spirup-cultivo__inner { grid-template-columns: 1fr; }
+	.spirup-cultivo__body { text-align: center; padding-bottom: clamp(28px, 5vw, 48px); }
+	.spirup-cultivo__flow { max-width: 560px; margin: 0 auto; }
+	.spirup-cultivo__media { min-height: 0; }
+	.spirup-cultivo__media img { height: auto; max-height: 60vh; }
 }
 @media (max-width: 560px) {
 	.spirup-parte8__grid { grid-template-columns: 1fr; }
@@ -1365,7 +1349,7 @@ html { scroll-behavior: smooth; }
 	/* Titulos: mismo tamano en todas las secciones */
 	.spirup-parte4__title,
 	.spirup-parte5__title,
-	.spirup-parte7__title,
+	.spirup-cultivo__title,
 	.spirup-parte8__title,
 	.spirup-parte9__title,
 	.spirup-cta__title {
@@ -1374,7 +1358,6 @@ html { scroll-behavior: smooth; }
 	/* Textos/parrafos: un poco mas grandes y parejos */
 	.spirup-parte4__desc,
 	.spirup-parte5__sub,
-	.spirup-parte7__text p,
 	.spirup-parte9__lead {
 		font-size: 15.5px;
 	}
@@ -1383,8 +1366,6 @@ html { scroll-behavior: smooth; }
 	.spirup-parte4__desc { margin-left: auto; margin-right: auto; }
 	.spirup-parte4__list { align-items: center; }
 	.spirup-parte4__list li { justify-content: center; }
-	.spirup-parte7__text { text-align: center; }
-	.spirup-parte7__title { max-width: none; }   /* en movil el titulo va centrado a todo el ancho */
 	.spirup-cta__inner { justify-content: center; text-align: center; }
 }
 
