@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: -7vw;   /* la ola queda mas abajo, con franja cream (como el mockup) */
+	margin-top: -1.5vw;   /* imagen recortada: la ola toca el borde de la piscina, corte exacto */
 	position: relative;
 	z-index: 2;
 }
