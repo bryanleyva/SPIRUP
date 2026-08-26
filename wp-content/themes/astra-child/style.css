@@ -889,6 +889,89 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    PARTE 8: Productos "Elige como quieres tu SPIR UP"
    ========================================================================== */
+/* ==========================================================================
+   SHOWCASE de sabores (Citrus Blue / Rebel Blue) con selector
+   ========================================================================== */
+.spirup-showcase {
+	position: relative;
+	background: #fff;
+	overflow: hidden;
+	padding: clamp(56px, 6vw, 130px) clamp(16px, 4vw, 80px) clamp(60px, 7vw, 150px);
+	--accent: #2f9aa6;                 /* citrus por defecto */
+}
+.spirup-showcase[data-flavor="rebel"] { --accent: #2743a6; }
+.spirup-showcase__wm {
+	position: absolute;
+	top: clamp(24px, 2.6vw, 54px);
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: 800;
+	letter-spacing: 0.02em;
+	font-size: clamp(42px, 8vw, 128px);
+	color: var(--accent);
+	opacity: 0.15;
+	white-space: nowrap;
+	pointer-events: none;
+	line-height: 1;
+}
+.spirup-showcase__inner {
+	position: relative;
+	z-index: 1;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: clamp(18px, 3vw, 64px);
+}
+.spirup-showcase__side { display: flex; flex-direction: column; gap: clamp(22px, 2.6vw, 46px); }
+.spirup-showcase__side--left { text-align: right; align-items: flex-end; }
+.spirup-showcase__side--right { text-align: left; align-items: flex-start; }
+.spirup-showcase__desc strong {
+	display: block; color: var(--accent); font-weight: 800;
+	font-size: clamp(16px, 1.4vw, 24px); line-height: 1.22; margin-bottom: 8px; max-width: 14em;
+}
+.spirup-showcase__desc p { margin: 0; color: #5b6f72; line-height: 1.5; font-size: clamp(13px, 1vw, 17px); max-width: 22em; }
+.spirup-showcase__side--left .spirup-showcase__desc strong,
+.spirup-showcase__side--left .spirup-showcase__desc p { margin-left: auto; }
+.spirup-feat h3 { margin: 0 0 4px; color: var(--accent); font-weight: 800; font-size: clamp(15px, 1.2vw, 22px); }
+.spirup-feat p { margin: 0; color: #5b6f72; line-height: 1.45; font-size: clamp(13px, 1vw, 17px); max-width: 18em; }
+.spirup-showcase__side--left .spirup-feat p { margin-left: auto; }
+
+.spirup-showcase__stage { position: relative; display: flex; justify-content: center; align-items: flex-end; }
+.spirup-showcase__can {
+	display: block; height: clamp(300px, 34vw, 520px); width: auto;
+	filter: drop-shadow(0 26px 40px rgba(20, 40, 60, .22));
+}
+.spirup-showcase__can.is-rebel { display: none; }
+.spirup-showcase[data-flavor="rebel"] .is-citrus { display: none; }
+.spirup-showcase[data-flavor="rebel"] .is-rebel { display: block; }
+
+.spirup-showcase__lbl { margin: 0 0 12px; font-weight: 700; color: #17343d; font-size: clamp(15px, 1.2vw, 20px); }
+.spirup-showcase__tabs { display: inline-flex; flex-direction: column; gap: 8px; }
+.spirup-showcase__tab {
+	appearance: none; -webkit-appearance: none; border: 0; background: none; box-shadow: none;
+	cursor: pointer; font: inherit; font-size: clamp(14px, 1.05vw, 18px); text-align: left; padding: 3px 0;
+	color: #9aa7aa; font-weight: 700; transition: color .2s; border-bottom: 2px solid transparent;
+}
+.spirup-showcase__tab:hover { color: var(--accent); }
+.spirup-showcase__tab.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+.spirup-showcase__tab:focus { outline: none; background: none; box-shadow: none; }
+.spirup-showcase__tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (max-width: 820px) {
+	.spirup-showcase__inner { grid-template-columns: 1fr; justify-items: center; gap: clamp(26px, 6vw, 44px); }
+	.spirup-showcase__side { text-align: center; align-items: center; }
+	.spirup-showcase__side--left { order: 2; }
+	.spirup-showcase__stage { order: 1; }
+	.spirup-showcase__side--right { order: 3; }
+	.spirup-showcase__side--left .spirup-showcase__desc strong,
+	.spirup-showcase__side--left .spirup-showcase__desc p,
+	.spirup-showcase__side--left .spirup-feat p { margin-left: auto; margin-right: auto; }
+	.spirup-showcase__tabs { align-items: center; }
+	.spirup-showcase__tab { text-align: center; }
+}
+
 .spirup-parte8 {
 	background: linear-gradient(180deg, #318481 0%, #2d807f 30%, #529f94 70%, #80c4ac 100%);
 }
