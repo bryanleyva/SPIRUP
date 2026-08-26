@@ -73,8 +73,26 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
+	<?php /* ===================== BLOQUE CONECTADO (desktop >820px): parte4 + Ingredientes + Del cultivo en una sola imagen ===================== */ ?>
+	<section class="spirup-bloque" id="por-que">
+		<div class="spirup-bloque__inner">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/bloque-conectado.png' ); ?>" alt="">
+			<div class="spirup-bloque__p4">
+				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
+				<ul class="spirup-bloque__list">
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una gaseosa común</li>
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
+					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
+				</ul>
+				<p class="spirup-bloque__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
+			</div>
+		</div>
+	</section>
+
+	<?php /* ===================== MOVIL (<=820px): flujo HTML de las 3 secciones ===================== */ ?>
+	<div class="spirup-mobileflow">
 	<?php /* ===================== PARTE 4: Potencial de las microalgas ===================== */ ?>
-	<section class="spirup-parte4" id="por-que">
+	<section class="spirup-parte4">
 		<div class="spirup-parte4__inner">
 			<div class="spirup-parte4__media">
 				<img src="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?>"
@@ -149,6 +167,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			</div>
 		</div>
 	</section>
+	</div><?php /* /.spirup-mobileflow */ ?>
 
 	<?php
 	/* ===================== PARTE 8: Productos "Elige como quieres tu SPIR UP" ===================== */
