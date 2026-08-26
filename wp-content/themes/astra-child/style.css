@@ -1153,6 +1153,26 @@ html { scroll-behavior: smooth; }
 }
 .spirup-legal__contact { margin-top: clamp(20px, 2vw, 40px); }
 
+/* Con el respaldo de: fila de logos */
+.spirup-respaldo { margin-top: clamp(40px, 4.5vw, 80px); }
+.spirup-respaldo__label {
+	color: #17343d;
+	font-weight: 700;
+	margin: 0 0 clamp(18px, 1.8vw, 32px);
+	font-size: clamp(15px, 1.1vw, 20px);
+}
+.spirup-respaldo__logos {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: clamp(22px, 3.6vw, 60px);
+}
+.spirup-respaldo__logos img {
+	height: clamp(36px, 3.6vw, 54px);
+	width: auto;
+	object-fit: contain;
+}
+
 /* Tabla de zonas de envio (filas en degradado teal -> menta) */
 .spirup-zona {
 	width: 100%;

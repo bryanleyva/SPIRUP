@@ -138,7 +138,31 @@ get_header();
 		<h2 class="spirup-legal__h2">11. Cambios a esta política</h2>
 		<p>Podemos actualizar esta política para reflejar cambios legales, operativos o en nuestros proveedores. La versión vigente siempre estará publicada en esta página, con la fecha de última actualización.</p>
 
-		<p class="spirup-legal__contact">Si tienes preguntas sobre esta política o el tratamiento de tus datos: 📧 <a href="mailto:info@spirup.com">info@spirup.com</a></p>
+		<p class="spirup-legal__contact">Si tiene alguna pregunta sobre nuestras prácticas de privacidad o sobre la presente Política de privacidad, o bien si desea ejercer cualquiera de sus derechos, puede llamarnos por teléfono, enviar un correo electrónico a <a href="mailto:info@spirup.com">info@spirup.com</a> o ponerse en contacto con nosotros a través de la dirección CIBUS CORP S.A.C.,&nbsp; Av. Marco Puente Llanos,&nbsp; Asoc. Florida 1 de Califronia Mz C Lt 11. LIMA - LIMA - ATE</p>
+
+		<?php
+		/* Con el respaldo de: logos en orden (ministerio, proinnovate, startup, cayetano, bioincuba).
+		   Sube los PNG a /imagenes/ con estos nombres; solo se muestran los que existan. */
+		$sp_respaldos = array(
+			array( 'produce',     'Ministerio de la Producción del Perú' ),
+			array( 'proinnovate', 'ProInnóvate' ),
+			array( 'startup',     'StartUp Perú' ),
+			array( 'cayetano',    'Universidad Peruana Cayetano Heredia' ),
+			array( 'bioincuba',   'Bioincuba' ),
+		);
+		$sp_dir = get_stylesheet_directory();
+		$sp_url = get_stylesheet_directory_uri();
+		?>
+		<div class="spirup-respaldo">
+			<p class="spirup-respaldo__label">Con el respaldo de:</p>
+			<div class="spirup-respaldo__logos">
+				<?php foreach ( $sp_respaldos as $sp_r ) :
+					$sp_file = '/imagenes/respaldo-' . $sp_r[0] . '.png';
+					if ( file_exists( $sp_dir . $sp_file ) ) : ?>
+						<img src="<?php echo esc_url( $sp_url . $sp_file ); ?>" alt="<?php echo esc_attr( $sp_r[1] ); ?>">
+					<?php endif; endforeach; ?>
+			</div>
+		</div>
 	</div>
 
 	<div class="spirup-legal__law">
