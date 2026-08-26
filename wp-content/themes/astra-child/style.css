@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: -15.5vw;   /* la zona transparente sobre la ola sube y corta parte4 */
+	margin-top: -7vw;   /* la ola queda mas abajo, con franja cream (como el mockup) */
 	position: relative;
 	z-index: 2;
 }
