@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
 	display: block;
 	width: 100%;
 	height: auto;
-	margin-top: -8vw;   /* la ola corta hacia arriba dentro de la piscina, conecta sin espacio */
+	margin-top: -11vw;   /* la ola corta bien arriba dentro de la piscina (como el figma), sin tapar el texto */
 	position: relative;
 	z-index: 2;
 }
