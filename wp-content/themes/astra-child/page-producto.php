@@ -41,6 +41,10 @@ get_header();
 		<div class="spirup-prodimg__wrap">
 			<img class="spirup-prodimg__bg" src="<?php echo esc_url( $img . '/Group 49 (1).png' ); ?>" alt="Sabores Spir Up Citrus Blue y Rebel Blue">
 
+			<?php /* Anclas para los botones "Explora nuestros sabores" */ ?>
+			<span id="citrus" class="ov-anchor" style="top:30%;"></span>
+			<span id="rebel" class="ov-anchor" style="top:64%;"></span>
+
 			<?php /* --- Beneficios: titulo + descripciones --- */ ?>
 			<div class="ov ov-cabecera" style="top:9.6%;left:50%;">
 				<h2 class="ov-title">Refrescante por naturaleza.<br>Respaldada por la ciencia.</h2>
@@ -55,33 +59,33 @@ get_header();
 
 			<?php /* --- Paneles de producto --- */ ?>
 			<?php foreach ( $panels as $p ) :
-				$y = $p['y'];
+				$y   = $p['y'];
 				$acc = 'citrus' === $p['flavor'] ? 'is-citrus' : 'is-rebel';
 				if ( 'intro' === $p['type'] ) : ?>
 					<?php /* Izq: descripcion */ ?>
-					<div class="ov ov-block ov-left <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y ); ?>%;left:25%;">
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y ); ?>%;left:13%;">
 						<strong class="ov-h">Bebida carbonatada sin&nbsp;azúcar con ficocianina</strong>
-						<span class="ov-p">un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias</span>
+						<span class="ov-p">un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias.</span>
 					</div>
 					<?php /* Der: explora */ ?>
-					<div class="ov ov-block ov-right <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y ); ?>%;left:75%;">
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 2 ); ?>%;left:71%;">
 						<span class="ov-lbl">Explora nuestros sabores</span>
 						<a class="ov-tab<?php echo 'rebel' === $p['flavor'] ? ' is-on' : ''; ?>" href="#rebel">Rebel Blue</a>
 						<a class="ov-tab<?php echo 'citrus' === $p['flavor'] ? ' is-on' : ''; ?>" href="#citrus">Citrus Blue</a>
 					</div>
 				<?php else : ?>
 					<?php /* Izq: 2 atributos */ ?>
-					<div class="ov ov-block ov-left <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.6 ); ?>%;left:25%;">
-						<strong class="ov-h">Agua gasificada</strong><span class="ov-p">Frescura que se siente</span>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.2 ); ?>%;left:13%;">
+						<strong class="ov-h">Agua gasificada</strong><span class="ov-p">Frescura que se siente.</span>
 					</div>
-					<div class="ov ov-block ov-left <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 2.4 ); ?>%;left:25%;">
-						<strong class="ov-h">Ficocianina</strong><span class="ov-p">Antioxidantes de origen&nbsp;natural</span>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 4.2 ); ?>%;left:13%;">
+						<strong class="ov-h">Ficocianina</strong><span class="ov-p">Antioxidantes de origen&nbsp;natural.</span>
 					</div>
-					<?php /* Der: 2 atributos */ ?>
-					<div class="ov ov-block ov-right <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.6 ); ?>%;left:75%;">
+					<?php /* Der: 2 atributos (Vitamina C en naranja) */ ?>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.2 ); ?>%;left:71%;">
 						<strong class="ov-h">Extractos naturales</strong><span class="ov-p"><?php echo esc_html( $p['extractos'] ); ?></span>
 					</div>
-					<div class="ov ov-block ov-right <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 2.4 ); ?>%;left:75%;">
+					<div class="ov ov-block ov-vitc <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 4.2 ); ?>%;left:71%;">
 						<strong class="ov-h">Vitamina C</strong><span class="ov-p">Soporte para tus defensas</span>
 					</div>
 				<?php endif; ?>

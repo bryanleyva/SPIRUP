@@ -901,29 +901,33 @@ html { scroll-behavior: smooth; }
 	container-type: inline-size;   /* cqw = 1% del ancho de la imagen */
 }
 .spirup-prodimg__bg { display: block; width: 100%; height: auto; }
-.ov { position: absolute; transform: translate(-50%, -50%); margin: 0; }
-
+.ov { position: absolute; transform: translateY(-50%); margin: 0; }
+.ov-anchor { width: 1px; height: 1px; left: 0; scroll-margin-top: 130px; }
+/* cabecera y descripciones de beneficios van centradas */
+.ov-cabecera, .ov-benefdesc { transform: translate(-50%, -50%); }
 .ov-cabecera { width: 64%; text-align: center; }
 .ov-title { color: var(--spirup-teal); font-weight: 800; line-height: 1.15; font-size: 2.15cqw; margin: 0 0 0.9cqw; }
 .ov-sub { color: #5b6d70; line-height: 1.5; font-size: 1.05cqw; margin: 0 auto; max-width: 34em; }
 .ov-benefdesc { width: 22%; text-align: center; color: #5b6d70; font-size: 0.95cqw; line-height: 1.4; }
 
-.ov-block { width: 24%; display: flex; flex-direction: column; gap: 0.25cqw; }
-.ov-left { text-align: right; align-items: flex-end; }
-.ov-right { text-align: left; align-items: flex-start; }
-.ov-h { font-weight: 800; font-size: 1.4cqw; line-height: 1.18; }
-.ov-p { color: #5b6f72; font-size: 1cqw; line-height: 1.4; }
-.ov-lbl { font-weight: 700; color: #17343d; font-size: 1.2cqw; margin-bottom: 0.35cqw; }
-.ov-tab { font-weight: 700; font-size: 1.05cqw; text-decoration: none; color: #9aa7aa; padding: 0.15cqw 0; }
-.ov-block.is-citrus .ov-h { color: #2f9aa6; }
+/* bloques de producto: SIEMPRE alineados a la izquierda */
+.ov-block { width: 27%; display: flex; flex-direction: column; gap: 0.2cqw; text-align: left; align-items: flex-start; }
+.ov-h { font-weight: 800; font-size: 1.5cqw; line-height: 1.16; }
+.ov-p { color: #7b8f92; font-size: 1.05cqw; line-height: 1.45; }
+.ov-lbl { font-weight: 800; font-size: 1.5cqw; line-height: 1.16; margin-bottom: 0.5cqw; }
+.ov-tab { font-weight: 700; font-size: 1.15cqw; text-decoration: none; color: #9aa7aa; padding: 0.2cqw 0; }
+.ov-block.is-citrus .ov-h,
+.ov-block.is-citrus .ov-lbl { color: #2f9aa6; }
 .ov-block.is-citrus .ov-tab.is-on { color: #2f9aa6; }
-.ov-block.is-rebel .ov-h { color: #2743a6; }
+.ov-block.is-rebel .ov-h,
+.ov-block.is-rebel .ov-lbl { color: #2743a6; }
 .ov-block.is-rebel .ov-tab.is-on { color: #2743a6; }
+/* Vitamina C siempre en naranja */
+.ov-block.ov-vitc .ov-h { color: #E97000; }
 
-/* En movil la imagen (diseno de escritorio) es muy angosta: se puede hacer scroll horizontal del bloque */
 @container (max-width: 640px) {
-	.ov-h { font-size: 2.4cqw; }
-	.ov-p, .ov-benefdesc, .ov-sub, .ov-tab, .ov-lbl { font-size: 2cqw; }
+	.ov-h, .ov-lbl { font-size: 2.6cqw; }
+	.ov-p, .ov-benefdesc, .ov-sub, .ov-tab { font-size: 2.1cqw; }
 	.ov-title { font-size: 4cqw; }
 }
 
