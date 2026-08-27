@@ -76,14 +76,14 @@ get_header();
 					</div>
 				<?php else : ?>
 					<?php /* Izq: 2 atributos */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.82 ); ?>%;left:5.5%;">
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 3.9 ); ?>%;left:5.5%;">
 						<strong class="ov-h">Agua gasificada</strong><span class="ov-p">Frescura que se<br>siente.</span>
 					</div>
 					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 3.56 ); ?>%;left:5.5%;">
 						<strong class="ov-h">Ficocianina</strong><span class="ov-p">Antioxidantes de<br>origen&nbsp; natural.</span>
 					</div>
 					<?php /* Der: 2 atributos (Vitamina C en naranja) */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.82 ); ?>%;left:70%;">
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 3.9 ); ?>%;left:70%;">
 						<strong class="ov-h">Extractos naturales</strong><span class="ov-p"><?php echo wp_kses( $p['extractos'], array( 'br' => array() ) ); ?></span>
 					</div>
 					<div class="ov ov-block ov-vitc <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 3.56 ); ?>%;left:70%;">
