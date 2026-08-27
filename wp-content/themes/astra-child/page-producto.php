@@ -69,7 +69,11 @@ get_header();
 	</section>
 
 	<?php /* ===================== Showcase por sabor (Citrus Blue / Rebel Blue) ===================== */ ?>
-	<?php foreach ( $sp_flavors as $key => $fl ) : ?>
+	<?php
+	foreach ( $sp_flavors as $key => $fl ) :
+		$can_img = '<div class="spirup-showcase__stage"><img class="spirup-showcase__can is-' . esc_attr( $key ) . '" src="' . esc_url( $img . '/' . $fl['can'] ) . '" alt="Lata Spir Up ' . esc_attr( $fl['name'] ) . '"></div>';
+		?>
+		<?php /* Panel A: intro (descripcion + lata + explora) */ ?>
 		<section class="spirup-showcase" id="<?php echo esc_attr( $key ); ?>" data-flavor="<?php echo esc_attr( $key ); ?>">
 			<span class="spirup-showcase__wm"><?php echo esc_html( $fl['wm'] ); ?></span>
 			<div class="spirup-showcase__inner">
@@ -78,6 +82,25 @@ get_header();
 						<strong>Bebida carbonatada sin&nbsp;azúcar con ficocianina</strong>
 						<p>un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias</p>
 					</div>
+				</div>
+				<?php echo $can_img; // phpcs:ignore ?>
+				<div class="spirup-showcase__side spirup-showcase__side--right">
+					<div class="spirup-showcase__explora">
+						<p class="spirup-showcase__lbl">Explora nuestros sabores</p>
+						<div class="spirup-showcase__tabs">
+							<a class="spirup-showcase__tab<?php echo 'rebel' === $key ? ' is-active' : ''; ?>" href="#rebel">Rebel Blue</a>
+							<a class="spirup-showcase__tab<?php echo 'citrus' === $key ? ' is-active' : ''; ?>" href="#citrus">Citrus Blue</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<?php /* Panel B: detalles (4 atributos + lata) */ ?>
+		<section class="spirup-showcase spirup-showcase--details" data-flavor="<?php echo esc_attr( $key ); ?>">
+			<span class="spirup-showcase__wm"><?php echo esc_html( $fl['wm'] ); ?></span>
+			<div class="spirup-showcase__inner">
+				<div class="spirup-showcase__side spirup-showcase__side--left">
 					<div class="spirup-feat">
 						<h3>Agua gasificada</h3>
 						<p>Frescura que se siente</p>
@@ -87,19 +110,8 @@ get_header();
 						<p>Antioxidantes de origen&nbsp;natural</p>
 					</div>
 				</div>
-
-				<div class="spirup-showcase__stage">
-					<img class="spirup-showcase__can is-<?php echo esc_attr( $key ); ?>" src="<?php echo esc_url( $img . '/' . $fl['can'] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $fl['name'] ); ?>">
-				</div>
-
+				<?php echo $can_img; // phpcs:ignore ?>
 				<div class="spirup-showcase__side spirup-showcase__side--right">
-					<div class="spirup-showcase__explora">
-						<p class="spirup-showcase__lbl">Explora nuestros sabores</p>
-						<div class="spirup-showcase__tabs">
-							<a class="spirup-showcase__tab<?php echo 'rebel' === $key ? ' is-active' : ''; ?>" href="#rebel">Rebel Blue</a>
-							<a class="spirup-showcase__tab<?php echo 'citrus' === $key ? ' is-active' : ''; ?>" href="#citrus">Citrus Blue</a>
-						</div>
-					</div>
 					<div class="spirup-feat">
 						<h3>Extractos naturales</h3>
 						<p><?php echo esc_html( $fl['extractos'] ); ?></p>

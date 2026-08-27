@@ -893,6 +893,8 @@ html { scroll-behavior: smooth; }
    PAGINA PRODUCTO
    ========================================================================== */
 .spirup-producto__hero img { display: block; width: 100%; height: auto; }
+/* panel de detalles va pegado a su panel intro (mismo sabor) */
+.spirup-showcase--details { padding-top: clamp(8px, 1vw, 22px); }
 
 /* ==========================================================================
    SHOWCASE de sabores (Citrus Blue / Rebel Blue)
