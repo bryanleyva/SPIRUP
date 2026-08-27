@@ -894,10 +894,9 @@ html { scroll-behavior: smooth; }
 .spirup-prodimg { background: #fff; }
 .spirup-prodimg__wrap {
 	position: relative;
-	width: 100%;
-	max-width: 1442px;
-	margin: 0 auto;
-	container-type: inline-size;   /* cqw = 1% del ancho de la imagen */
+	width: 100%;                    /* a sangre completa (toda la pantalla) */
+	margin: 0;
+	container-type: inline-size;    /* cqw = 1% del ancho de la imagen */
 }
 .spirup-prodimg__bg { display: block; width: 100%; height: auto; }
 .ov { position: absolute; margin: 0; }                 /* anclaje por esquina sup-izq */
@@ -1081,6 +1080,10 @@ html { scroll-behavior: smooth; }
 	gap: 10px;
 	padding: clamp(14px, 1.2vw, 30px) clamp(14px, 1.1vw, 28px) clamp(16px, 1.3vw, 32px);
 	background: #a9d9c6;   /* verde menta en el area de descripcion (como el mockup) */
+	/* misma altura aunque el nombre tenga 1 o 2 lineas -> todas las tarjetas iguales */
+	min-height: clamp(96px, 7vw, 128px);
+	box-sizing: border-box;
+	flex: 1 0 auto;   /* la barra verde rellena cualquier estiramiento (sin hueco blanco) */
 }
 .spirup-product__info { display: flex; flex-direction: column; }
 .spirup-product__info h3,
