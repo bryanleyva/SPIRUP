@@ -25,12 +25,13 @@ $benef2 = array(
 	array( 81.5, 'Pensada para ti y el planeta.' ),
 );
 
-/* Paneles de producto: y = centro vertical de la lata (% de la imagen) */
+/* Paneles de producto: y = centro vertical de la lata (% de la imagen).
+   Los <br> fijan los mismos quiebres de linea que el diseno. */
 $panels = array(
 	array( 'flavor' => 'citrus', 'type' => 'intro',   'y' => 40.0, 'extractos' => '' ),
-	array( 'flavor' => 'citrus', 'type' => 'details', 'y' => 56.0, 'extractos' => 'El poder de la naturaleza en el limón y la hierba luisa' ),
+	array( 'flavor' => 'citrus', 'type' => 'details', 'y' => 56.0, 'extractos' => 'El poder de la<br>naturaleza&nbsp; en el<br>limón y la hierba&nbsp; luisa' ),
 	array( 'flavor' => 'rebel',  'type' => 'intro',   'y' => 74.0, 'extractos' => '' ),
-	array( 'flavor' => 'rebel',  'type' => 'details', 'y' => 91.5, 'extractos' => 'El poder de la naturaleza en el blueberry y el limón' ),
+	array( 'flavor' => 'rebel',  'type' => 'details', 'y' => 91.5, 'extractos' => 'El poder de la<br>naturaleza&nbsp; en el<br>blueberry y el limón' ),
 );
 
 get_header();
@@ -62,31 +63,31 @@ get_header();
 				$y   = $p['y'];
 				$acc = 'citrus' === $p['flavor'] ? 'is-citrus' : 'is-rebel';
 				if ( 'intro' === $p['type'] ) : ?>
-					<?php /* Izq: descripcion */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y ); ?>%;left:13%;">
-						<strong class="ov-h">Bebida carbonatada sin&nbsp;azúcar con ficocianina</strong>
-						<span class="ov-p">un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias.</span>
+					<?php /* Izq: descripcion (debajo del watermark) */ ?>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 0.5 ); ?>%;left:5.5%;">
+						<strong class="ov-h">Bebida<br>carbonatada<br>sin&nbsp;azúcar con<br>ficocianina</strong>
+						<span class="ov-p">un potente<br>compuesto&nbsp; bioactivo<br>con&nbsp; propiedades<br>antioxidantes y<br>antiinflamatorias.</span>
 					</div>
-					<?php /* Der: explora */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 2 ); ?>%;left:71%;">
-						<span class="ov-lbl">Explora nuestros sabores</span>
+					<?php /* Der: explora (debajo del watermark) */ ?>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 0.5 ); ?>%;left:70%;">
+						<span class="ov-lbl">Explora nuestros<br>sabores</span>
 						<a class="ov-tab<?php echo 'rebel' === $p['flavor'] ? ' is-on' : ''; ?>" href="#rebel">Rebel Blue</a>
 						<a class="ov-tab<?php echo 'citrus' === $p['flavor'] ? ' is-on' : ''; ?>" href="#citrus">Citrus Blue</a>
 					</div>
 				<?php else : ?>
 					<?php /* Izq: 2 atributos */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.2 ); ?>%;left:13%;">
-						<strong class="ov-h">Agua gasificada</strong><span class="ov-p">Frescura que se siente.</span>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.6 ); ?>%;left:5.5%;">
+						<strong class="ov-h">Agua gasificada</strong><span class="ov-p">Frescura que se<br>siente.</span>
 					</div>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 4.2 ); ?>%;left:13%;">
-						<strong class="ov-h">Ficocianina</strong><span class="ov-p">Antioxidantes de origen&nbsp;natural.</span>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 3.4 ); ?>%;left:5.5%;">
+						<strong class="ov-h">Ficocianina</strong><span class="ov-p">Antioxidantes de<br>origen&nbsp; natural.</span>
 					</div>
 					<?php /* Der: 2 atributos (Vitamina C en naranja) */ ?>
-					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.2 ); ?>%;left:71%;">
-						<strong class="ov-h">Extractos naturales</strong><span class="ov-p"><?php echo esc_html( $p['extractos'] ); ?></span>
+					<div class="ov ov-block <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y - 4.6 ); ?>%;left:70%;">
+						<strong class="ov-h">Extractos naturales</strong><span class="ov-p"><?php echo wp_kses( $p['extractos'], array( 'br' => array() ) ); ?></span>
 					</div>
-					<div class="ov ov-block ov-vitc <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 4.2 ); ?>%;left:71%;">
-						<strong class="ov-h">Vitamina C</strong><span class="ov-p">Soporte para tus defensas</span>
+					<div class="ov ov-block ov-vitc <?php echo $acc; ?>" style="top:<?php echo esc_attr( $y + 3.4 ); ?>%;left:70%;">
+						<strong class="ov-h">Vitamina C</strong><span class="ov-p">Soporte para tus<br>defensas</span>
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>
