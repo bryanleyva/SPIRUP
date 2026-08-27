@@ -94,6 +94,54 @@ get_header();
 
 		</div>
 	</section>
+
+	<?php /* ===================== VERSION MOVIL apilada (<=820px) ===================== */ ?>
+	<div class="spirup-prodmobile">
+		<img class="spirup-prodmobile__latas" src="<?php echo esc_url( $img . '/producto-latas.png' ); ?>" alt="Latas Spir Up Citrus Blue y Rebel Blue">
+
+		<section class="spirup-parte5">
+			<div class="spirup-parte5__inner">
+				<h2 class="spirup-parte5__title">Refrescante por naturaleza.<br>Respaldada por la ciencia.</h2>
+				<p class="spirup-parte5__sub">No te pedimos que dejes de tomar café o gaseosa. Solo que pruebes una alternativa que te da más y te quita menos.</p>
+				<div class="spirup-parte5__grid">
+					<?php
+					$mbenef = array(
+						array( '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>', 'Ficocianina', 'Bioactivo natural de microalgas.' ),
+						array( '<path d="M12 21s-7-4.35-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.65 12 21 12 21z"/>', 'Antioxidantes', 'Ayudan a proteger tus células.' ),
+						array( '<circle cx="12" cy="12" r="2.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/>', 'Ciencia aplicada', 'Investigación convertida en una bebida.' ),
+						array( '<circle cx="12" cy="12" r="9.5"/><path d="M5 5l14 14"/>', 'Sin azúcar', 'Baja en calorías y deliciosa.' ),
+						array( '<path d="M7 19H4.8a1.8 1.8 0 0 1-1.55-2.7L7.2 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.55-2.66l-1.23-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.3 13.6 7.2 9.5 3.1 10.6"/><path d="m9.34 5.81 1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.94 6.84"/><path d="m13.38 9.63 4.1 1.1 1.1-4.1"/>', 'Sostenibilidad', 'Pensada para ti y el planeta.' ),
+					);
+					foreach ( $mbenef as $f ) : ?>
+						<div class="spirup-feature">
+							<span class="spirup-feature__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><?php echo $f[0]; // phpcs:ignore ?></svg></span>
+							<h3><?php echo esc_html( $f[1] ); ?></h3>
+							<p><?php echo esc_html( $f[2] ); ?></p>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<?php
+		$mflavors = array(
+			'citrus' => array( 'Citrus Blue', 'CITRUS BLUE', 'lata-citrus.png', 'El poder de la naturaleza en el limón y la hierba luisa' ),
+			'rebel'  => array( 'Rebel Blue', 'REBEL BLUE', 'lata-rebel.png', 'El poder de la naturaleza en el blueberry y el limón' ),
+		);
+		foreach ( $mflavors as $k => $f ) : ?>
+			<section class="spirup-mflavor is-<?php echo esc_attr( $k ); ?>">
+				<span class="spirup-mflavor__wm"><?php echo esc_html( $f[1] ); ?></span>
+				<img class="spirup-mflavor__can" src="<?php echo esc_url( $img . '/' . $f[2] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $f[0] ); ?>">
+				<p class="spirup-mflavor__desc"><strong>Bebida carbonatada sin azúcar con ficocianina</strong> un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias.</p>
+				<div class="spirup-mflavor__grid">
+					<div class="mfeat"><h3>Agua gasificada</h3><p>Frescura que se siente.</p></div>
+					<div class="mfeat"><h3>Ficocianina</h3><p>Antioxidantes de origen natural.</p></div>
+					<div class="mfeat"><h3>Extractos naturales</h3><p><?php echo esc_html( $f[3] ); ?></p></div>
+					<div class="mfeat mfeat--vitc"><h3>Vitamina C</h3><p>Soporte para tus defensas</p></div>
+				</div>
+			</section>
+		<?php endforeach; ?>
+	</div>
 </main>
 
 <?php
