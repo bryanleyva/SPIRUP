@@ -98,13 +98,13 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				</ul>
 				<p class="spirup-bloque__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
 			</div>
-			<?php /* Diagrama de "Del cultivo": 3 circulos (sin la cientifica) alineados sobre las etiquetas horneadas (centros 16.8 / 46 / 74.9%) */ ?>
+			<?php /* Diagrama de "Del cultivo": 3 circulos VACIOS (sin iconos) + flechas, alineados sobre las etiquetas horneadas (centros 16.8 / 46 / 74.9%) */ ?>
 			<div class="spirup-bloque__diagram" aria-hidden="true">
-				<img class="c c1" src="<?php echo esc_url( $img . '/cir1.png' ); ?>" alt="">
+				<span class="c c1"></span>
 				<span class="ar ar1"></span>
-				<img class="c c2" src="<?php echo esc_url( $img . '/cir2.png' ); ?>" alt="">
+				<span class="c c2"></span>
 				<span class="ar ar2"></span>
-				<img class="c c3" src="<?php echo esc_url( $img . '/cir3.png' ); ?>" alt="">
+				<span class="c c3"></span>
 			</div>
 			<?php /* Tarjetas de producto reales encimadas sobre los 4 marcos de "Elige" */ ?>
 			<div class="spirup-bloque__products">
