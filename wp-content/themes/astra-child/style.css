@@ -603,18 +603,18 @@ html { scroll-behavior: smooth; }
 .spirup-bloque__title {
 	color: var(--spirup-teal);
 	font-weight: 800;
-	line-height: 1.14;
+	line-height: 1.18;
 	letter-spacing: -0.01em;
-	font-size: 2.55vw;
-	margin: 0 0 1.6vw;
+	font-size: 2.65vw;
+	margin: 0 0 2.6vw;
 }
-.spirup-bloque__list { list-style: none; margin: 0 0 1.6vw; padding: 0; display: grid; gap: 0.75vw; }
-.spirup-bloque__list li { display: flex; align-items: center; gap: 0.85vw; color: var(--spirup-dark); font-weight: 600; font-size: 1.15vw; }
-.spirup-bloque__list .ico { width: 1.5vw; height: 1.5vw; flex: none; display: inline-flex; }
+.spirup-bloque__list { list-style: none; margin: 0 0 2.6vw; padding: 0; display: grid; gap: 1.5vw; }
+.spirup-bloque__list li { display: flex; align-items: center; gap: 1.05vw; color: var(--spirup-dark); font-weight: 600; font-size: 1.3vw; }
+.spirup-bloque__list .ico { width: 1.7vw; height: 1.7vw; flex: none; display: inline-flex; }
 .spirup-bloque__list .ico svg { width: 100%; height: 100%; }
 .spirup-bloque__list .is-no .ico { color: #E97000; }
 .spirup-bloque__list .is-yes .ico { color: var(--spirup-teal); }
-.spirup-bloque__claim { color: #E97000; font-size: 1.12vw; line-height: 1.45; margin: 0; }
+.spirup-bloque__claim { color: #E97000; font-size: 1.25vw; line-height: 1.55; margin: 0; }
 .spirup-bloque__claim strong { font-weight: 800; }
 /* Descripciones "Del cultivo" encimadas bajo cada label (El origen/desarrollo/resultado) */
 .spirup-bloque__steps p {
