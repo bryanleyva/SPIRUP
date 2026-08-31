@@ -77,7 +77,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== BLOQUE CONECTADO (desktop >820px): parte4 + Ingredientes + Del cultivo en una sola imagen ===================== */ ?>
 	<section class="spirup-bloque" id="por-que">
 		<div class="spirup-bloque__inner">
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/bloque-conectado.png' ); ?>" alt="">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/bloque68.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
 				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
 				<ul class="spirup-bloque__list">
@@ -87,11 +87,13 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				</ul>
 				<p class="spirup-bloque__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
 			</div>
-			<?php /* Descripciones de "Del cultivo" encimadas bajo cada label (no venian en la imagen) */ ?>
-			<div class="spirup-bloque__steps">
-				<p class="s1">Exploramos el<br>potencial de las<br>microalgas y sus<br>compuestos<br>bioactivos.</p>
-				<p class="s2">Trabajamos en la<br>formulación para<br>equilibrar&nbsp; funcionalidad,<br>sabor y una experiencia<br>refrescante.</p>
-				<p class="s3">Exploramos el<br>potencial de las<br>microalgas y sus<br>compuestos<br>bioactivos.</p>
+			<?php /* Diagrama de "Del cultivo": 3 circulos (sin la cientifica) alineados sobre las etiquetas horneadas (centros 16.8 / 46 / 74.9%) */ ?>
+			<div class="spirup-bloque__diagram" aria-hidden="true">
+				<img class="c c1" src="<?php echo esc_url( $img . '/cir1.png' ); ?>" alt="">
+				<span class="ar ar1"></span>
+				<img class="c c2" src="<?php echo esc_url( $img . '/cir2.png' ); ?>" alt="">
+				<span class="ar ar2"></span>
+				<img class="c c3" src="<?php echo esc_url( $img . '/cir3.png' ); ?>" alt="">
 			</div>
 		</div>
 	</section>
@@ -151,11 +153,11 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* ===================== Del cultivo a la planta (despues de Ingredientes) ===================== */ ?>
+	<?php /* ===================== Del cultivo a la Lata (despues de Ingredientes) ===================== */ ?>
 	<section class="spirup-cultivo" id="conocenos">
 		<div class="spirup-cultivo__inner">
 			<div class="spirup-cultivo__body">
-				<h2 class="spirup-cultivo__title">Del cultivo a la planta</h2>
+				<h2 class="spirup-cultivo__title">Del cultivo a la Lata</h2>
 				<p class="spirup-cultivo__sub">Cada etapa agrega valor</p>
 				<?php /* Diagrama (circulos + flechas + labels El origen/desarrollo/resultado). Labels en los tercios. */ ?>
 				<div class="spirup-cultivo__flow">
@@ -164,13 +166,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<div class="spirup-cultivo__steps">
 						<p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p>
 						<p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p>
-						<p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p>
+						<p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p>
 					</div>
 				</div>
-			</div>
-			<div class="spirup-cultivo__media">
-				<img src="<?php echo esc_url( $img . '/cultivo-foto.png' ); ?>"
-					alt="Biotecnóloga trabajando en el laboratorio de Spir Up">
 			</div>
 		</div>
 	</section>

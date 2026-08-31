@@ -616,20 +616,17 @@ html { scroll-behavior: smooth; }
 .spirup-bloque__list .is-yes .ico { color: var(--spirup-teal); }
 .spirup-bloque__claim { color: #E97000; font-size: 1.55vw; line-height: 1.5; margin: 0; }
 .spirup-bloque__claim strong { font-weight: 800; }
-/* Descripciones "Del cultivo" encimadas bajo cada label (El origen/desarrollo/resultado) */
-.spirup-bloque__steps p {
-	position: absolute;
-	top: 81.2%;
-	transform: translateX(-50%);
-	text-align: center;
-	color: #4d6266;
-	font-size: 1.02vw;
-	line-height: 1.38;
-	margin: 0;
-}
-.spirup-bloque__steps .s1 { left: 13%; }
-.spirup-bloque__steps .s2 { left: 31.1%; }
-.spirup-bloque__steps .s3 { left: 48.9%; }
+/* Diagrama "Del cultivo": 3 circulos alineados sobre las etiquetas horneadas
+   (centros 16.8 / 46 / 74.9%) en el hueco vacio (y 71-83%). Flechas en CSS. */
+.spirup-bloque__diagram { position: absolute; top: 71%; left: 0; width: 100%; height: 12%; }
+.spirup-bloque__diagram .c { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 8.5%; height: auto; }
+.spirup-bloque__diagram .c1 { left: 16.8%; }
+.spirup-bloque__diagram .c2 { left: 46%; }
+.spirup-bloque__diagram .c3 { left: 74.9%; }
+.spirup-bloque__diagram .ar { position: absolute; top: 50%; height: 2px; background: #1f86c4; transform: translateY(-50%); }
+.spirup-bloque__diagram .ar::after { content: ""; position: absolute; right: -1px; top: 50%; width: 8px; height: 8px; border-top: 2px solid #1f86c4; border-right: 2px solid #1f86c4; transform: translateY(-50%) rotate(45deg); }
+.spirup-bloque__diagram .ar1 { left: 22%; width: 16.5%; }
+.spirup-bloque__diagram .ar2 { left: 51%; width: 18.5%; }
 
 .spirup-mobileflow { display: none; }
 
@@ -1038,7 +1035,8 @@ html { scroll-behavior: smooth; }
 }
 
 .spirup-parte8 {
-	background: linear-gradient(180deg, #318481 0%, #2d807f 30%, #529f94 70%, #80c4ac 100%);
+	/* Arranca en el mismo teal donde corta bloque68.png (#2a7e7d) para empalmar sin costura */
+	background: linear-gradient(180deg, #2a7e7d 0%, #2d807f 25%, #529f94 70%, #80c4ac 100%);
 }
 .spirup-parte8__inner {
 	max-width: min(90vw, 1600px);
