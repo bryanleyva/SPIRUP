@@ -21,7 +21,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<section class="spirup-figura">
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/parte1f.png' ); ?>"
+			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
 			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora ↗</a>
 	</section>
@@ -33,29 +33,30 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
 		</div>
 
-		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) +
-			una ola de agua SIMULADA que rompe por detras de la lata al entrar la
-			seccion en pantalla, y que despues sigue rompiendo en ciclo.
+		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) + el
+			agua, que BROTA al entrar la seccion en pantalla y despues sigue
+			ondulando, como liquido en movimiento.
 			js/spirup.js agrega .is-in a [data-water-stage] cuando la seccion entra;
-			js/spirup-splash.js corre la simulacion en WebGL, por detras, dentro de
-			.spirup-parte2__water. Sin WebGL cae a la foto splash-agua.png.
-			Ajustes de aqui abajo:
-			  spread = ancho de la escena, medido en anchos de lata
-			  x / y  = de donde sale el chorro, sobre la lata (0-1)
-			  jet    = fuerza de la ola
-			  flow   = agua de fondo entre ola y ola
-			  shine  = intensidad de los reflejos
-			  tint   = color del agua (el aqua de la lata, #56b6bd, algo mas vivo) */ ?>
+			js/spirup-splash.js dibuja el agua dentro de .spirup-parte2__water.
+			El agua es una foto real con transparencia (splash-agua.png/.webp),
+			extraida del mockup parte2-clean.png y tenida de celeste; el original sin
+			tenir se guarda en splash-agua-neutro.png. Ajustes de aqui abajo:
+			  spread   = ancho del agua, medido en anchos de lata
+			  x / y    = donde cae el centro del agua sobre la lata (0-1)
+			  duration = cuanto tarda en formarse, en ms
+			  flow     = intensidad del oleaje continuo (0 = agua quieta)
+			  shine    = intensidad de los destellos que la recorren
+			  filter   = retoque final (el PNG ya va tenido) */ ?>
 		<div class="spirup-parte2__stage" data-water-stage>
 			<div class="spirup-parte2__water" aria-hidden="true"
 				data-splash-src="<?php echo esc_url( $img . '/splash-agua' ); ?>"
-				data-splash-spread="3.3"
+				data-splash-spread="2.9"
 				data-splash-x="0.50"
 				data-splash-y="0.60"
-				data-splash-jet="1"
+				data-splash-duration="1500"
 				data-splash-flow="1"
 				data-splash-shine="1"
-				data-splash-tint="#62d3d6"></div>
+				data-splash-filter="saturate(1.06)"></div>
 			<img class="spirup-parte2__can"
 				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
 				alt="Lata Spir Up Citrus Blue">
