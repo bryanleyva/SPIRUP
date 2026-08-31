@@ -595,7 +595,7 @@ html { scroll-behavior: smooth; }
 	top: 0;
 	left: 51%;
 	width: 43%;
-	height: 33.7%;
+	height: 26.28%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -617,22 +617,41 @@ html { scroll-behavior: smooth; }
 .spirup-bloque__claim { color: #E97000; font-size: 1.55vw; line-height: 1.5; margin: 0; }
 .spirup-bloque__claim strong { font-weight: 800; }
 /* Diagrama "Del cultivo": 3 circulos alineados sobre las etiquetas horneadas
-   (centros 16.8 / 46 / 74.9%) en el hueco vacio (y 71-83%). Flechas en CSS. */
-.spirup-bloque__diagram { position: absolute; top: 71%; left: 0; width: 100%; height: 12%; }
-.spirup-bloque__diagram .c { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 8.5%; height: auto; }
+   (centros 16.8 / 46 / 74.9%) en el hueco vacio (y 55-64% de la imagen full). Flechas en CSS. */
+.spirup-bloque__diagram { position: absolute; top: 55%; left: 0; width: 100%; height: 9%; }
+.spirup-bloque__diagram .c { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 6.5%; height: auto; }
 .spirup-bloque__diagram .c1 { left: 16.8%; }
 .spirup-bloque__diagram .c2 { left: 46%; }
 .spirup-bloque__diagram .c3 { left: 74.9%; }
 .spirup-bloque__diagram .ar { position: absolute; top: 50%; height: 2px; background: #1f86c4; transform: translateY(-50%); }
 .spirup-bloque__diagram .ar::after { content: ""; position: absolute; right: -1px; top: 50%; width: 8px; height: 8px; border-top: 2px solid #1f86c4; border-right: 2px solid #1f86c4; transform: translateY(-50%) rotate(45deg); }
-.spirup-bloque__diagram .ar1 { left: 22%; width: 16.5%; }
-.spirup-bloque__diagram .ar2 { left: 51%; width: 18.5%; }
+.spirup-bloque__diagram .ar1 { left: 23%; width: 15%; }
+.spirup-bloque__diagram .ar2 { left: 52%; width: 16.5%; }
+
+/* Tarjetas de producto reales encimadas sobre los 4 marcos horneados de "Elige".
+   Marcos: imagen(blanco) 83-91.5%, nombre/precio(mint) 92-96.5% de la imagen. */
+.spirup-bloque__products { position: absolute; inset: 0; }
+.spirup-bloque__products .bp { position: absolute; top: 83%; height: 13.5%; width: 17.61%; transform: translateX(-50%); display: flex; flex-direction: column; box-sizing: border-box; }
+.spirup-bloque__products .bp__img { height: 63%; display: flex; align-items: center; justify-content: center; padding: 0.4vw 0.6vw 0; }
+.spirup-bloque__products .bp__img img { max-height: 100%; max-width: 78%; width: auto; object-fit: contain; display: block; }
+.spirup-bloque__products .bp__ph { color: #cfe0dd; width: 34%; }
+.spirup-bloque__products .bp__ph svg { width: 100%; height: auto; }
+.spirup-bloque__products .bp__meta { height: 37%; display: flex; align-items: center; justify-content: space-between; gap: 0.4vw; padding: 0 8% 0.5vw; box-sizing: border-box; }
+.spirup-bloque__products .bp__info { display: flex; flex-direction: column; min-width: 0; gap: 0.15vw; }
+.spirup-bloque__products .bp__info h3 { margin: 0; font-size: 1vw; font-weight: 800; color: var(--spirup-dark); line-height: 1.12; }
+.spirup-bloque__products .bp__price { font-size: 1vw; font-weight: 800; color: var(--spirup-dark); line-height: 1; }
+.spirup-bloque__products .bp__price del { opacity: 0.5; font-weight: 600; margin-right: 0.3vw; }
+.spirup-bloque__products .bp__cart { flex: none; width: 2.4vw; height: 2.4vw; border-radius: 50%; background: #fff; color: var(--spirup-teal); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
+.spirup-bloque__products .bp__cart svg { width: 58%; height: 58%; }
 
 .spirup-mobileflow { display: none; }
+/* En desktop la seccion "Elige" ya va dentro de la imagen (parte8 solo para movil) */
+.spirup-parte8 { display: none; }
 
 @media (max-width: 820px) {
 	.spirup-bloque { display: none; }
 	.spirup-mobileflow { display: block; }
+	.spirup-parte8 { display: block; }
 }
 
 /* ==========================================================================

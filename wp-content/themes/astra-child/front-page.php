@@ -74,10 +74,21 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* ===================== BLOQUE CONECTADO (desktop >820px): parte4 + Ingredientes + Del cultivo en una sola imagen ===================== */ ?>
+	<?php
+	/* ===================== BLOQUE CONECTADO (desktop >820px): parte4 + Ingredientes + Del cultivo + Elige EN UNA SOLA IMAGEN (Group 68) =====================
+	   Se usa la imagen COMPLETA (seccion68.png) tal cual; encima solo va lo dinamico:
+	   texto de parte4, el diagrama de "Del cultivo" y las tarjetas de producto reales
+	   sobre los 4 marcos horneados de "Elige". */
+	$bp_cart_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6"/></svg>';
+	$bp_can_svg  = '<svg viewBox="0 0 48 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><rect x="10" y="6" width="28" height="84" rx="8"/><path d="M14 6c0-2 2-3 4-3h12c2 0 4 1 4 3"/><path d="M12 26h24"/></svg>';
+	$bp_products = function_exists( 'wc_get_products' )
+		? wc_get_products( array( 'status' => 'publish', 'limit' => 4, 'orderby' => 'menu_order date', 'order' => 'ASC' ) )
+		: array();
+	$bp_centers = array( 14.06, 35.2, 56.4, 77.5 ); // centros de los 4 marcos horneados (Group 68)
+	?>
 	<section class="spirup-bloque" id="por-que">
 		<div class="spirup-bloque__inner">
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/bloque68.png' ); ?>" alt="">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/seccion68.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
 				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
 				<ul class="spirup-bloque__list">
@@ -94,6 +105,35 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				<img class="c c2" src="<?php echo esc_url( $img . '/cir2.png' ); ?>" alt="">
 				<span class="ar ar2"></span>
 				<img class="c c3" src="<?php echo esc_url( $img . '/cir3.png' ); ?>" alt="">
+			</div>
+			<?php /* Tarjetas de producto reales encimadas sobre los 4 marcos de "Elige" */ ?>
+			<div class="spirup-bloque__products">
+				<?php $bp_i = 0; foreach ( $bp_products as $product ) :
+					if ( ! isset( $bp_centers[ $bp_i ] ) ) { break; }
+					$pid = $product->get_id();
+					?>
+					<article class="bp" style="left:<?php echo esc_attr( $bp_centers[ $bp_i ] ); ?>%;">
+						<div class="bp__img">
+							<?php if ( $product->get_image_id() ) : ?>
+								<?php echo $product->get_image( 'large' ); // phpcs:ignore ?>
+							<?php else : ?>
+								<span class="bp__ph"><?php echo $bp_can_svg; // phpcs:ignore ?></span>
+							<?php endif; ?>
+						</div>
+						<div class="bp__meta">
+							<div class="bp__info">
+								<h3><?php echo esc_html( $product->get_name() ); ?></h3>
+								<span class="bp__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							</div>
+							<a href="?add-to-cart=<?php echo esc_attr( $pid ); ?>"
+								data-product_id="<?php echo esc_attr( $pid ); ?>" data-quantity="1"
+								class="bp__cart add_to_cart_button ajax_add_to_cart" rel="nofollow"
+								aria-label="Añadir <?php echo esc_attr( $product->get_name() ); ?> al carrito">
+								<?php echo $bp_cart_svg; // phpcs:ignore ?>
+							</a>
+						</div>
+					</article>
+				<?php $bp_i++; endforeach; ?>
 			</div>
 		</div>
 	</section>
