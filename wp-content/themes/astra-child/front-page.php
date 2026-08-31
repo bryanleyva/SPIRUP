@@ -23,7 +23,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<img class="spirup-figura__img"
 			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
 			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
-		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora ↗</a>
+		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
 	</section>
 
 	<?php /* ===================== PARTE 2 ===================== */ ?>
