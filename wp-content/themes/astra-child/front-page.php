@@ -88,7 +88,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	?>
 	<section class="spirup-bloque" id="por-que">
 		<div class="spirup-bloque__inner">
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/seccion68.png' ); ?>" alt="">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group 68.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
 				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
 				<ul class="spirup-bloque__list">
