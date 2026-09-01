@@ -272,37 +272,29 @@ html { scroll-behavior: smooth; }
 	width: 100%;
 	height: auto;
 }
-/* Carrusel (marquee) sobre la franja verde ondulada del hero (misma animacion que la topbar) */
-.spirup-figura__marquee {
+/* Carrusel que recorre la ola verde: SVG con textPath sobre un path sinusoidal.
+   Dos copias identicas del texto + traslacion -1443 => flujo continuo siguiendo la curva. */
+.spirup-figura__wave {
 	position: absolute;
 	left: 0;
+	top: 75.6%;
 	width: 100%;
-	top: 80%;
-	height: 13%;
+	height: 24.4%;
 	overflow: hidden;
-	display: flex;
-	align-items: center;
 	pointer-events: none;
 }
-.spirup-figura__track {
-	display: flex;
-	align-items: center;
-	width: max-content;
-	animation: spirup-marquee 26s linear infinite;
-	will-change: transform;
-}
-.spirup-figura__mitem {
-	white-space: nowrap;
-	color: #2f6b74;
+.spirup-wavesvg { display: block; width: 100%; height: 100%; overflow: hidden; }
+.spirup-wavetext {
+	fill: #2f6b74;
 	font-weight: 600;
-	font-size: clamp(13px, 1.5vw, 30px);
+	font-size: 30px;
+	letter-spacing: 0.2px;
 }
-.spirup-figura__mico {
-	height: clamp(20px, 2.4vw, 46px);
-	width: auto;
-	flex: none;
-	margin: 0 clamp(24px, 3vw, 60px);
-	display: block;
+.spirup-wavebolt {
+	fill: #6cbf3f;
+	font-weight: 700;
+	font-size: 36px;
+	font-family: "Segoe UI Symbol", "Apple Symbols", sans-serif;
 }
 /* Boton superpuesto: posicion en % -> se mantiene sobre el mismo punto de la
    imagen a cualquier tamaño. El tamaño escala con el ancho (vw + clamp). */

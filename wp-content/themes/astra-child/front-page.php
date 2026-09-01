@@ -25,19 +25,36 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
 
-		<?php /* Carrusel (marquee) de valores sobre la franja verde ondulada */ ?>
-		<div class="spirup-figura__marquee" aria-label="Valores Spir Up">
-			<div class="spirup-figura__track">
-				<?php
-				$fig_items = array( 'Respaldada por investigación', 'Sin colorantes artificiales', 'Propuesta sostenible' );
-				$fig_ico = $img . '/Capa 1 (1).png';
-				for ( $fig_rep = 0; $fig_rep < 2; $fig_rep++ ) :
-					foreach ( $fig_items as $fig_t ) : ?>
-						<span class="spirup-figura__mitem"><?php echo esc_html( $fig_t ); ?></span>
-						<img class="spirup-figura__mico" src="<?php echo esc_url( $fig_ico ); ?>" alt="" aria-hidden="true">
-					<?php endforeach;
-				endfor; ?>
-			</div>
+		<?php
+		/* Carrusel que RECORRE la ola: el texto va sobre un path sinusoidal de UN
+		   periodo (id=spirupwavepath, x 0..1443) igual a la ola de la imagen.
+		   Se dibujan DOS copias identicas (la 2a corrida +1443) y el grupo entero
+		   se traslada -1443 en loop => el texto fluye siguiendo la curva, sin costura. */
+		$W = 1443; $cy = 84; $amp = 40; $d = 'M 0 ' . $cy;
+		$arc = 0.0; $px = 0.0; $py = $cy;
+		for ( $x = 3; $x <= $W; $x += 3 ) {
+			$y = $cy + $amp * sin( 2 * M_PI * $x / $W );
+			$arc += sqrt( ( $x - $px ) * ( $x - $px ) + ( $y - $py ) * ( $y - $py ) );
+			$px = $x; $py = $y;
+			if ( $x % 12 === 0 || $x >= $W - 3 ) { $d .= ' L ' . $x . ' ' . round( $y, 1 ); }
+		}
+		$arc = round( $arc ); // longitud de arco de un periodo (para que el texto lo llene exacto)
+		$wave_bolt = '&#160;&#160;<tspan class="spirup-wavebolt" dy="-1">&#9889;&#65038;</tspan>&#160;&#160;';
+		$wave_text = '&#160;&#160;Respaldada por investigación' . $wave_bolt . 'Sin colorantes artificiales' . $wave_bolt . 'Propuesta sostenible' . $wave_bolt;
+		?>
+		<div class="spirup-figura__wave" aria-hidden="true">
+			<svg class="spirup-wavesvg" viewBox="0 0 1443 168" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+				<defs><path id="spirupwavepath" d="<?php echo esc_attr( $d ); ?>" fill="none"></path></defs>
+				<g class="spirup-wavescroll">
+					<animateTransform attributeName="transform" type="translate" from="0 0" to="-1443 0" dur="16s" repeatCount="indefinite"></animateTransform>
+					<text class="spirup-wavetext" dy="9" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
+						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
+					</text>
+					<text class="spirup-wavetext" dy="9" transform="translate(1443 0)" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
+						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
+					</text>
+				</g>
+			</svg>
 		</div>
 	</section>
 
