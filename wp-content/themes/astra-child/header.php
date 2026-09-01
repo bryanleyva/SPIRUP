@@ -28,12 +28,23 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<!-- Cabecera fija: topbar + header se mantienen arriba al hacer scroll -->
 	<div class="spirup-sticky">
 
-	<!-- Barra de anuncio superior -->
-	<div class="spirup-topbar">
-		<div class="spirup-topbar__inner">
-			<span>¡LA PRIMERA BEBIDA GASIFICADA CON FICOCIANINA DE MICROALGAS!</span>
-			<span class="spirup-topbar__dot">☺️</span>
-			<span>ENVÍOS A NIVEL NACIONAL. <strong>¡COMPRA AHORA!</strong></span>
+	<!-- Barra de anuncio superior: carrusel (marquee) de texto + logos -->
+	<div class="spirup-topbar" aria-label="Anuncios Spir Up">
+		<div class="spirup-topbar__track">
+			<?php
+			$tb_items = array(
+				'NO ES SOLO AZUL. ES CIENCIA EN CADA SORBO',
+				'FICOCIANINA DE MICROALGAS + FRESCURA',
+				'¡DESCUBRE SPIR UP!',
+			);
+			$tb_ico = $img . '/Capa 1.png';
+			/* Se repite el grupo 2 veces: la animacion desplaza -50% => loop continuo y sin cortes */
+			for ( $tb_rep = 0; $tb_rep < 2; $tb_rep++ ) :
+				foreach ( $tb_items as $tb_t ) : ?>
+					<span class="spirup-topbar__item"><?php echo esc_html( $tb_t ); ?></span>
+					<img class="spirup-topbar__ico" src="<?php echo esc_url( $tb_ico ); ?>" alt="" aria-hidden="true">
+				<?php endforeach;
+			endfor; ?>
 		</div>
 	</div>
 

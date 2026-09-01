@@ -96,23 +96,39 @@ html { scroll-behavior: smooth; }
 .spirup-topbar {
 	background: var(--spirup-teal);
 	color: #fff;
-	font-size: clamp(12px, 0.82vw, 26px);
-	letter-spacing: .04em;
-	text-align: center;
+	overflow: hidden;
+	padding: clamp(9px, 0.7vw, 16px) 0;
 }
-.spirup-topbar__inner {
-	max-width: min(94vw, 3500px);
-	margin: 0 auto;
-	padding: clamp(9px, 0.7vw, 16px) 24px;
+/* Carrusel: la pista se desplaza -50% (el contenido va duplicado) => loop infinito */
+.spirup-topbar__track {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 12px;
-	flex-wrap: wrap;
+	width: max-content;
+	animation: spirup-marquee 30s linear infinite;
+	will-change: transform;
+}
+.spirup-topbar:hover .spirup-topbar__track { animation-play-state: paused; }
+.spirup-topbar__item {
+	white-space: nowrap;
+	font-size: clamp(12px, 0.82vw, 22px);
+	letter-spacing: .08em;
 	text-transform: uppercase;
 	font-weight: 500;
 }
-.spirup-topbar__dot { font-size: 14px; }
+.spirup-topbar__ico {
+	height: clamp(13px, 1vw, 18px);
+	width: auto;
+	flex: none;
+	margin: 0 clamp(20px, 2.4vw, 46px);
+	display: block;
+}
+@keyframes spirup-marquee {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.spirup-topbar__track { animation: none; }
+}
 
 /* ==========================================================================
    Cabecera
@@ -1660,7 +1676,8 @@ html { scroll-behavior: smooth; }
 
 	.spirup-header__inner { gap: 14px; }
 	.spirup-header__actions { margin-left: auto; }
-	.spirup-topbar__inner { font-size: 11px; gap: 8px; }
+	.spirup-topbar__item { font-size: 11px; }
+	.spirup-topbar__ico { height: 12px; margin: 0 22px; }
 }
 
 @media (max-width: 640px) {
