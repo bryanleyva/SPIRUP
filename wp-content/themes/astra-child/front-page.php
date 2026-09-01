@@ -21,9 +21,24 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<section class="spirup-figura">
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
+			src="<?php echo esc_url( $img . '/hero-carrusel.png' ); ?>"
 			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
+
+		<?php /* Carrusel (marquee) de valores sobre la franja verde ondulada */ ?>
+		<div class="spirup-figura__marquee" aria-label="Valores Spir Up">
+			<div class="spirup-figura__track">
+				<?php
+				$fig_items = array( 'Respaldada por investigación', 'Sin colorantes artificiales', 'Propuesta sostenible' );
+				$fig_ico = $img . '/Capa 1 (1).png';
+				for ( $fig_rep = 0; $fig_rep < 2; $fig_rep++ ) :
+					foreach ( $fig_items as $fig_t ) : ?>
+						<span class="spirup-figura__mitem"><?php echo esc_html( $fig_t ); ?></span>
+						<img class="spirup-figura__mico" src="<?php echo esc_url( $fig_ico ); ?>" alt="" aria-hidden="true">
+					<?php endforeach;
+				endfor; ?>
+			</div>
+		</div>
 	</section>
 
 	<?php /* ===================== PARTE 2 ===================== */ ?>
