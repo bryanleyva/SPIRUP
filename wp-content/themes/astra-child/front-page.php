@@ -84,11 +84,11 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	$bp_products = function_exists( 'wc_get_products' )
 		? wc_get_products( array( 'status' => 'publish', 'limit' => 4, 'orderby' => 'menu_order date', 'order' => 'ASC' ) )
 		: array();
-	$bp_centers = array( 14.06, 35.2, 56.4, 77.5 ); // centros de los 4 marcos horneados (Group 68)
+	$bp_centers = array( 15.35, 38.45, 61.55, 84.58 ); // centros de los 4 marcos horneados (Group 75)
 	?>
 	<section class="spirup-bloque" id="por-que">
 		<div class="spirup-bloque__inner">
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/seccion68.png' ); ?>" alt="">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group 75.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
 				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
 				<ul class="spirup-bloque__list">
