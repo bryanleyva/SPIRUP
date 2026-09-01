@@ -47,6 +47,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</footer>
 
+	<?php
+	/* ===================== Franja de respaldo institucional (logos) ===================== */
+	$sp_respaldos = array(
+		array( 'produce',     'Ministerio de la Producción del Perú' ),
+		array( 'proinnovate', 'ProInnóvate' ),
+		array( 'startup',     'StartUp Perú' ),
+		array( 'cayetano',    'Universidad Peruana Cayetano Heredia' ),
+		array( 'bioincuba',   'Bioincuba' ),
+	);
+	$sp_dir = get_stylesheet_directory();
+	$sp_url = get_stylesheet_directory_uri();
+	?>
+	<section class="spirup-respaldo-bar" aria-label="Con el respaldo de">
+		<div class="spirup-respaldo-bar__inner">
+			<?php foreach ( $sp_respaldos as $sp_r ) :
+				$sp_file = '/imagenes/respaldo-' . $sp_r[0] . '.png';
+				if ( file_exists( $sp_dir . $sp_file ) ) : ?>
+					<img src="<?php echo esc_url( $sp_url . $sp_file ); ?>" alt="<?php echo esc_attr( $sp_r[1] ); ?>">
+				<?php endif; endforeach; ?>
+		</div>
+	</section>
+
 </div><!-- .spirup-site -->
 
 <?php /* ===================== Carrito lateral (drawer) ===================== */ ?>
