@@ -443,8 +443,8 @@ html { scroll-behavior: smooth; }
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* contiene el mix-blend-mode de la capa de brillos del agua */
-	isolation: isolate;
+	/* SIN isolation: el mix-blend-mode del video debe mezclarse con el fondo
+	   #C6E7E6 de la seccion (con isolation se aislaba y la sombra no se borraba). */
 }
 .spirup-parte2__can {
 	position: relative;
