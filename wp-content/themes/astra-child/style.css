@@ -287,8 +287,9 @@ html { scroll-behavior: smooth; }
 .spirup-wavetext {
 	fill: #2f6b74;
 	font-weight: 600;
-	font-size: 30px;
+	font-size: 26px;
 	letter-spacing: 0.2px;
+	dominant-baseline: central;
 }
 .spirup-wavebolt {
 	fill: #6cbf3f;

@@ -30,7 +30,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		   periodo (id=spirupwavepath, x 0..1443) igual a la ola de la imagen.
 		   Se dibujan DOS copias identicas (la 2a corrida +1443) y el grupo entero
 		   se traslada -1443 en loop => el texto fluye siguiendo la curva, sin costura. */
-		$W = 1443; $cy = 84; $amp = 40; $d = 'M 0 ' . $cy;
+		$W = 1443; $cy = 102; $amp = 34; $d = 'M 0 ' . $cy;
 		$arc = 0.0; $px = 0.0; $py = $cy;
 		for ( $x = 3; $x <= $W; $x += 3 ) {
 			$y = $cy + $amp * sin( 2 * M_PI * $x / $W );
@@ -47,10 +47,10 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				<defs><path id="spirupwavepath" d="<?php echo esc_attr( $d ); ?>" fill="none"></path></defs>
 				<g class="spirup-wavescroll">
 					<animateTransform attributeName="transform" type="translate" from="0 0" to="-1443 0" dur="16s" repeatCount="indefinite"></animateTransform>
-					<text class="spirup-wavetext" dy="9" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
+					<text class="spirup-wavetext" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
 						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
 					</text>
-					<text class="spirup-wavetext" dy="9" transform="translate(1443 0)" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
+					<text class="spirup-wavetext" transform="translate(1443 0)" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
 						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
 					</text>
 				</g>
