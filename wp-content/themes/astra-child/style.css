@@ -460,9 +460,9 @@ html { scroll-behavior: smooth; }
 .spirup-parte2__video {
 	position: absolute;
 	z-index: 1;
-	top: 52%;
+	top: 50%;
 	left: 50%;
-	width: min(112vw, 1240px);
+	width: min(72vw, 560px);
 	max-width: none;
 	height: auto;
 	transform: translate(-50%, -50%);
@@ -471,11 +471,11 @@ html { scroll-behavior: smooth; }
 	   descarta lo mas oscuro. El brightness(.88) empuja el gris del fondo del
 	   video por debajo del #C6E7E6 para que 'lighten' lo elimine del todo =>
 	   solo queda el agua brillante, sin sombra. */
-	/* multiply + brillo alto: el fondo gris del video se sube a blanco (=> se
-	   vuelve invisible sobre el aqua) y solo el AGUA (mas oscura) se pinta encima.
-	   Saturacion/hue -> el agua toma color (azul-morado) y resalta. */
+	/* multiply + brillo alto: el fondo del video se sube a blanco (=> invisible
+	   sobre el aqua) y solo el AGUA (mas oscura) se pinta encima. Saturacion baja
+	   => el agua sale GRIS (resalta mejor sobre el aqua sin colores raros). */
 	mix-blend-mode: multiply;
-	filter: brightness(1.5) contrast(1.35) saturate(1.7) hue-rotate(-12deg);
+	filter: brightness(1.4) contrast(1.28) saturate(0.45);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
