@@ -471,8 +471,8 @@ html { scroll-behavior: smooth; }
 	   descarta lo mas oscuro. El brightness(.88) empuja el gris del fondo del
 	   video por debajo del #C6E7E6 para que 'lighten' lo elimine del todo =>
 	   solo queda el agua brillante, sin sombra. */
-	mix-blend-mode: lighten;
-	filter: brightness(1.18) contrast(1.55);
+	mix-blend-mode: screen;
+	filter: brightness(1.05) contrast(1.5) saturate(1.2);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
