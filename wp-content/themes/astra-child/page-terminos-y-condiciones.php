@@ -24,11 +24,7 @@ get_header();
 			Términos y condiciones
 		</h1>
 
-		<h2 class="spirup-legal__h2">1. Quiénes somos</h2>
-		<p>CIBUS CORP S.A.C., con RUC 20615736024 y domicilio en Av. Marco Puente Llanos, Asoc. Florida 1 de Califronia Mz C Lt 11. LIMA - LIMA - ATE (en adelante, "Spir Up"), opera el sitio web spirup.com (en adelante, "el Sitio"), a través del cual comercializa sus bebidas funcionales gasificadas.</p>
-		<p>Al navegar, registrarte o comprar en el Sitio, aceptas los presentes Términos y Condiciones en su totalidad. Si no estás de acuerdo con alguno de los puntos aquí descritos, te pedimos no utilizar el Sitio.</p>
-
-		<h2 class="spirup-legal__h2">2. Productos y disponibilidad</h2>
+		<h2 class="spirup-legal__h2">1. Productos y disponibilidad</h2>
 		<ul class="spirup-legal__list">
 			<li>Comercializamos Spir Up en sus variedades Citrus Blue y Rebel Blue, en presentación individual, six-pack o twelve-pack.</li>
 			<li>Las imágenes de los productos en el Sitio son referenciales; el empaque real puede variar ligeramente por motivos de producción.</li>
@@ -36,7 +32,7 @@ get_header();
 			<li>Spir Up se reserva el derecho de descontinuar sabores o presentaciones sin previo aviso.</li>
 		</ul>
 
-		<h2 class="spirup-legal__h2">3. Precios y medios de pago</h2>
+		<h2 class="spirup-legal__h2">2. Precios y medios de pago</h2>
 		<ul class="spirup-legal__list">
 			<li>Todos los precios publicados en el Sitio están expresados en soles (S/) e incluyen IGV, salvo que se indique lo contrario.</li>
 			<li>Los precios pueden variar sin previo aviso; el precio válido para tu compra es el vigente al momento de confirmar el pedido.</li>
@@ -44,10 +40,10 @@ get_header();
 			<li>El pedido se confirma solo cuando el pago ha sido validado por la pasarela.</li>
 		</ul>
 
-		<h2 class="spirup-legal__h2">4. Comprobante de pago</h2>
+		<h2 class="spirup-legal__h2">3. Comprobante de pago</h2>
 		<p>Emitimos boleta o factura electrónica según la información que registres al momento de la compra. Es tu responsabilidad verificar que los datos de facturación (DNI o RUC, razón social, dirección) sean correctos antes de confirmar el pedido, ya que no podemos modificar comprobantes ya emitidos.</p>
 
-		<h2 class="spirup-legal__h2">5. Despacho y entrega</h2>
+		<h2 class="spirup-legal__h2">4. Despacho y entrega</h2>
 		<ul class="spirup-legal__list">
 			<li>Los pedidos se despachan a través de nuestro operador logístico [Shalom / Olva Courier / nombre del proveedor].</li>
 			<li>Para Lima Metropolitana, el plazo estimado de entrega es de 2 a 4 días hábiles, contados desde la confirmación del pago.</li>
@@ -81,7 +77,7 @@ get_header();
 			</table>
 		</div>
 
-		<h2 class="spirup-legal__h2">6. Derecho de retracto y devoluciones</h2>
+		<h2 class="spirup-legal__h2">5. Derecho de retracto y devoluciones</h2>
 		<p>Conforme al Código de Protección y Defensa del Consumidor, tienes derecho a retractarte de tu compra dentro de los 7 días calendario siguientes a la recepción del producto, siempre que:</p>
 		<ul class="spirup-legal__list">
 			<li>El producto no haya sido consumido ni abierto.</li>
@@ -90,16 +86,16 @@ get_header();
 		</ul>
 		<p>Por tratarse de un producto de consumo (bebida), no se aceptan devoluciones ni cambios por cambio de opinión cuando el producto haya sido abierto, manipulado o consumido, salvo defecto de fábrica comprobado. En caso de defecto, Spir Up asumirá el costo de recojo/cambio y reemplazará el producto o reembolsará el monto pagado, a elección del cliente.</p>
 
-		<h2 class="spirup-legal__h2">7. Garantía y calidad del producto</h2>
+		<h2 class="spirup-legal__h2">6. Garantía y calidad del producto</h2>
 		<p>Todos nuestros productos cumplen con la normativa sanitaria peruana vigente (registro sanitario DIGESA) y se almacenan y transportan siguiendo la cadena de cuidado recomendada por el fabricante. La fecha de vencimiento se encuentra impresa en el empaque de cada producto.</p>
 
-		<h2 class="spirup-legal__h2">8. Libro de reclamaciones</h2>
+		<h2 class="spirup-legal__h2">7. Libro de reclamaciones</h2>
 		<p>Conforme a la normativa de INDECOPI, el Sitio cuenta con un Libro de Reclamaciones virtual disponible en [enlace/sección del sitio], donde puedes registrar tu queja o reclamo relacionado con la compra. Spir Up responderá dentro de los plazos que establece la ley (máximo 15 días hábiles).</p>
 
-		<h2 class="spirup-legal__h2">9. Propiedad intelectual</h2>
+		<h2 class="spirup-legal__h2">8. Propiedad intelectual</h2>
 		<p>Las marcas, logotipos, diseños, textos, fotografías y demás contenidos del Sitio son propiedad de Spir Up o de sus licenciantes, y están protegidos por la legislación de propiedad intelectual peruana. Queda prohibida su reproducción, distribución o uso comercial sin autorización previa y por escrito.</p>
 
-		<h2 class="spirup-legal__h2">10. Uso del Sitio</h2>
+		<h2 class="spirup-legal__h2">9. Uso del Sitio</h2>
 		<p>Al usar el Sitio, te comprometes a:</p>
 		<ul class="spirup-legal__list">
 			<li>Proporcionar información verdadera y actualizada al registrarte o comprar.</li>
@@ -108,20 +104,20 @@ get_header();
 		</ul>
 		<p>Spir Up se reserva el derecho de suspender o cancelar pedidos ante sospecha de fraude o incumplimiento de estos Términos.</p>
 
-		<h2 class="spirup-legal__h2">11. Limitación de responsabilidad</h2>
+		<h2 class="spirup-legal__h2">10. Limitación de responsabilidad</h2>
 		<p>Spir Up no será responsable por daños derivados de un uso indebido del producto, del incumplimiento de las indicaciones de consumo señaladas en el empaque, ni por causas de fuerza mayor (desastres naturales, paros, fallas de terceros proveedores) que afecten la entrega del pedido.</p>
 
-		<h2 class="spirup-legal__h2">12. Protección de datos personales</h2>
+		<h2 class="spirup-legal__h2">11. Protección de datos personales</h2>
 		<p>El tratamiento de tus datos personales se rige por nuestra Política de Privacidad, disponible en [enlace], elaborada conforme a la Ley N° 29733 y su reglamento.</p>
 
-		<h2 class="spirup-legal__h2">13. Modificaciones</h2>
+		<h2 class="spirup-legal__h2">12. Modificaciones</h2>
 		<p>Spir Up podrá modificar estos Términos y Condiciones en cualquier momento. Los cambios entrarán en vigencia desde su publicación en el Sitio, con la fecha de última actualización correspondiente. Te recomendamos revisarlos periódicamente.</p>
 
-		<h2 class="spirup-legal__h2">14. Ley aplicable y jurisdicción</h2>
+		<h2 class="spirup-legal__h2">13. Ley aplicable y jurisdicción</h2>
 		<p>Estos Términos y Condiciones se rigen por las leyes de la República del Perú. Cualquier controversia se someterá a los jueces y tribunales del distrito judicial de Lima, sin perjuicio del derecho del consumidor a recurrir a INDECOPI.</p>
 
-		<h2 class="spirup-legal__h2">15. Contacto</h2>
-		<p class="spirup-legal__contact">Si tienes preguntas sobre estos Términos o tu compra: 📧 <a href="mailto:info@spirup.com">info@spirup.com</a></p>
+		<h2 class="spirup-legal__h2">14. Contacto</h2>
+		<p class="spirup-legal__contact">Si tienes preguntas sobre esta política o el tratamiento de tus datos: 📧 <a href="mailto:info@spirup.com">info@spirup.com</a></p>
 	</div>
 
 	<div class="spirup-legal__law">
