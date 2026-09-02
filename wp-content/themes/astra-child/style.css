@@ -472,7 +472,7 @@ html { scroll-behavior: smooth; }
 	   video por debajo del #C6E7E6 para que 'lighten' lo elimine del todo =>
 	   solo queda el agua brillante, sin sombra. */
 	mix-blend-mode: lighten;
-	filter: brightness(0.88) contrast(1.05);
+	filter: brightness(1.18) contrast(1.55);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
