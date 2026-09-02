@@ -460,16 +460,19 @@ html { scroll-behavior: smooth; }
 .spirup-parte2__video {
 	position: absolute;
 	z-index: 1;
-	top: 54%;
+	top: 52%;
 	left: 50%;
-	width: min(96vw, 1040px);
+	width: min(112vw, 1240px);
 	max-width: none;
 	height: auto;
 	transform: translate(-50%, -50%);
 	pointer-events: none;
-	/* Bordes difuminados: el video se funde con el fondo #C6E7E6 sin recuadro visible */
-	-webkit-mask-image: radial-gradient(ellipse 62% 62% at 50% 50%, #000 60%, transparent 92%);
-	mask-image: radial-gradient(ellipse 62% 62% at 50% 50%, #000 60%, transparent 92%);
+	/* 'lighten' deja pasar solo lo mas claro que el fondo (el agua brillante) y
+	   descarta el fondo gris/oscuro del video => agua limpia, sin sombra ni caja. */
+	mix-blend-mode: lighten;
+	/* Difuminar los bordes para que no se vea el corte del video */
+	-webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 58%, transparent 90%);
+	mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 58%, transparent 90%);
 	opacity: 0;
 	transition: opacity .5s ease;
 }
