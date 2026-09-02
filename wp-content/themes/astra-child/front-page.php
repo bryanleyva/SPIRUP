@@ -79,16 +79,12 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			  flow     = intensidad del oleaje continuo (0 = agua quieta)
 			  shine    = intensidad de los destellos que la recorren
 			  filter   = retoque final (el PNG ya va tenido) */ ?>
-		<div class="spirup-parte2__stage" data-water-stage>
-			<div class="spirup-parte2__water" aria-hidden="true"
-				data-splash-src="<?php echo esc_url( $img . '/splash-agua' ); ?>"
-				data-splash-spread="2.9"
-				data-splash-x="0.50"
-				data-splash-y="0.60"
-				data-splash-duration="1500"
-				data-splash-flow="1"
-				data-splash-shine="1"
-				data-splash-filter="saturate(1.06)"></div>
+		<?php /* Agua (video) detras de la lata: se reproduce UNA vez al entrar en pantalla
+			(js/spirup.js -> data-splash-video) y queda estatica en el ultimo frame. */ ?>
+		<div class="spirup-parte2__stage" data-splash-video>
+			<video class="spirup-parte2__video" muted playsinline preload="auto" aria-hidden="true">
+				<source src="<?php echo esc_url( $img . '/a_esta_imagen_del_sppash_puede.mp4' ); ?>" type="video/mp4">
+			</video>
 			<img class="spirup-parte2__can"
 				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
 				alt="Lata Spir Up Citrus Blue">

@@ -454,16 +454,24 @@ html { scroll-behavior: smooth; }
 	height: auto;
 	filter: drop-shadow(6px 16px 22px rgba(9, 52, 60, .22));
 }
-.spirup-parte2__water {
+/* Agua en video, detras de la lata (mas ancha que ella). Arranca invisible y
+   aparece al reproducirse (js agrega .is-playing). mix-blend-mode integra el
+   fondo claro del video con el aqua de la seccion. */
+.spirup-parte2__video {
 	position: absolute;
-	inset: 0;
 	z-index: 1;
+	top: 54%;
+	left: 50%;
+	width: min(96vw, 1040px);
+	max-width: none;
+	height: auto;
+	transform: translate(-50%, -50%);
 	pointer-events: none;
-	/* El splash se dibuja aqui dentro desde js/spirup-splash.js cuando el
-	   stage recibe .is-in (IntersectionObserver en js/spirup.js). El agua
-	   desborda esta caja a proposito: es mas ancha que la lata. */
-	overflow: visible;
+	mix-blend-mode: multiply;
+	opacity: 0;
+	transition: opacity .5s ease;
 }
+.spirup-parte2__stage.is-playing .spirup-parte2__video { opacity: 1; }
 
 /* Chorro de agua simulada (lo inyecta js/spirup-splash.js).
    El canvas es WebGL: dentro corre una simulacion de particulas fundidas en
@@ -1308,18 +1316,19 @@ html { scroll-behavior: smooth; }
 .spirup-legal__title {
 	display: flex;
 	align-items: center;
-	gap: clamp(10px, 1vw, 20px);
+	gap: clamp(10px, 1vw, 18px);
 	color: var(--spirup-dark);
 	font-weight: 800;
-	line-height: 1.1;
-	font-size: clamp(30px, 3.4vw, 52px);
-	margin: 0 0 clamp(18px, 1.6vw, 32px);
+	line-height: 1.15;
+	font-size: clamp(22px, 2.1vw, 30px);
+	margin: 0 0 clamp(14px, 1.3vw, 24px);
 }
+/* Rayo EN LÍNEA junto al texto (siempre visible), tamaño acorde al título. */
 .spirup-legal__bolt {
 	flex: 0 0 auto;
 	display: inline-flex;
 	width: auto;
-	height: clamp(34px, 3.4vw, 62px);
+	height: clamp(24px, 2.4vw, 34px);
 }
 .spirup-legal__bolt svg,
 .spirup-legal__bolt img { width: auto; height: 100%; display: block; }
@@ -1332,8 +1341,8 @@ html { scroll-behavior: smooth; }
 	color: var(--spirup-teal);
 	font-weight: 800;
 	line-height: 1.2;
-	font-size: clamp(22px, 2vw, 32px);
-	margin: clamp(30px, 2.6vw, 54px) 0 clamp(14px, 1.1vw, 22px);
+	font-size: clamp(18px, 1.7vw, 24px);
+	margin: clamp(26px, 2.3vw, 46px) 0 clamp(12px, 1vw, 20px);
 }
 .spirup-legal p {
 	line-height: 1.55;
@@ -1464,6 +1473,34 @@ html { scroll-behavior: smooth; }
 	margin-left: calc(50% - 50vw);
 	padding: clamp(30px, 3vw, 66px) 0;
 }
+/* Divisores ONDULADOS (mismo estilo de ola del hero) arriba y abajo de la seccion gris.
+   Ola blanca que "entra" desde las secciones blancas 1 y 3 hacia la gris. */
+.spirup-lr__sec--gray {
+	position: relative;
+	overflow: hidden;
+	padding-top: clamp(58px, 6vw, 118px);
+	padding-bottom: clamp(58px, 6vw, 118px);
+}
+.spirup-lr__sec--gray::before,
+.spirup-lr__sec--gray::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: clamp(30px, 4.5vw, 72px);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	pointer-events: none;
+}
+.spirup-lr__sec--gray::before {
+	top: -1px;
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1443 100' preserveAspectRatio='none'><path fill='%23ffffff' d='M0 50 L48 55.4 L96 60.6 L144 65.3 L192 69.3 L240 72.5 L288 74.7 L336 75.8 L384 75.9 L432 74.8 L480 72.6 L528 69.4 L576 65.4 L624 60.7 L672 55.6 L720 50.2 L768 44.8 L816 39.6 L864 34.9 L912 30.8 L960 27.6 L1008 25.3 L1056 24.2 L1104 24.1 L1152 25.2 L1200 27.3 L1248 30.5 L1296 34.5 L1344 39.1 L1392 44.3 L1440 49.7 L1443 50 L1443 0 L0 0 Z'/></svg>");
+}
+.spirup-lr__sec--gray::after {
+	bottom: -1px;
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1443 100' preserveAspectRatio='none'><path fill='%23ffffff' d='M0 50 L48 55.4 L96 60.6 L144 65.3 L192 69.3 L240 72.5 L288 74.7 L336 75.8 L384 75.9 L432 74.8 L480 72.6 L528 69.4 L576 65.4 L624 60.7 L672 55.6 L720 50.2 L768 44.8 L816 39.6 L864 34.9 L912 30.8 L960 27.6 L1008 25.3 L1056 24.2 L1104 24.1 L1152 25.2 L1200 27.3 L1248 30.5 L1296 34.5 L1344 39.1 L1392 44.3 L1440 49.7 L1443 50 L1443 100 L0 100 Z'/></svg>");
+}
+
 /* Contenedor interno: alinea el contenido con las secciones 1 y 3 */
 .spirup-lr__wrap {
 	max-width: min(92vw, 1180px);
@@ -1860,3 +1897,40 @@ html { scroll-behavior: smooth; }
 .woocommerce-order-received .woocommerce-order-details,
 .woocommerce-order-received .woocommerce-customer-details,
 .woocommerce-order-received ul.woocommerce-order-overview { display: none; }
+
+/* ============================================================
+   LIBRO DE RECLAMACIONES — ajustes de encabezado e inputs
+   ============================================================ */
+/* FONDO BLANCO a TODO EL ANCHO (el tema pinta un rosado detrás). Mismo truco
+   full-bleed que la sección gris: el main se estira a 100vw y se pinta blanco.
+   El contenido sigue centrado (.spirup-lr__inner). Queda blanco / plomo / blanco. */
+.spirup-lr {
+	background: #fff;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	overflow-x: hidden;
+}
+
+/* El título y el rayo usan el mismo estilo global de .spirup-legal (rayo colgando
+   a la izquierda, texto alineado). Aquí solo la intro del Libro. */
+.spirup-lr .spirup-lr__intro {
+	color: #5b6d70;
+	line-height: 1.55;
+	font-size: clamp(15px, 1.02vw, 18px);
+	margin: 0 0 clamp(18px, 1.8vw, 36px);
+}
+
+/* Inputs / selects / textarea = "rectángulos para rellenar" con borde #1F797A */
+.spirup-lr__form .spirup-field input,
+.spirup-lr__form .spirup-field select,
+.spirup-lr__form .spirup-field textarea {
+	border-color: #1F797A;
+}
+.spirup-lr__form .spirup-field input:focus,
+.spirup-lr__form .spirup-field select:focus,
+.spirup-lr__form .spirup-field textarea:focus {
+	border-color: #17343d;
+}
+.spirup-lr__form .spirup-field select {
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231F797A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+}

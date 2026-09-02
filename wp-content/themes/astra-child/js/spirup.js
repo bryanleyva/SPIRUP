@@ -146,19 +146,29 @@
 } )();
 
 /* ==========================================================================
-   Parte 2: dispara el efecto de agua cuando la seccion entra en pantalla
-   (agrega .is-in al stage; la animacion del agua se define en CSS).
+   Parte 2: el agua (video) se reproduce UNA vez cuando la seccion entra en
+   pantalla y queda estatica en el ultimo frame (el video no hace loop).
    ========================================================================== */
 ( function () {
 	'use strict';
-	var stage = document.querySelector( '[data-water-stage]' );
+	var stage = document.querySelector( '[data-splash-video]' );
 	if ( ! stage ) { return; }
-	if ( ! ( 'IntersectionObserver' in window ) ) { stage.classList.add( 'is-in' ); return; }
+	var vid = stage.querySelector( 'video' );
+	if ( ! vid ) { return; }
+	function playOnce() {
+		stage.classList.add( 'is-playing' );
+		try {
+			vid.currentTime = 0;
+			var p = vid.play();
+			if ( p && p.catch ) { p.catch( function () {} ); }
+		} catch ( e ) {}
+	}
+	if ( ! ( 'IntersectionObserver' in window ) ) { playOnce(); return; }
 	var io = new IntersectionObserver( function ( entries ) {
 		entries.forEach( function ( en ) {
 			if ( en.isIntersecting ) {
-				stage.classList.add( 'is-in' );   // se queda (la animacion no se revierte)
-				io.disconnect();
+				playOnce();
+				io.disconnect();   // solo una vez; queda estatica al terminar
 			}
 		} );
 	}, { threshold: 0.35 } );
