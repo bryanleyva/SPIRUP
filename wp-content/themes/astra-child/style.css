@@ -452,7 +452,6 @@ html { scroll-behavior: smooth; }
 	display: block;
 	width: clamp(200px, 36vw, 420px);
 	height: auto;
-	filter: drop-shadow(6px 16px 22px rgba(9, 52, 60, .22));
 }
 /* Agua en video, detras de la lata (mas ancha que ella). Arranca invisible y
    aparece al reproducirse (js agrega .is-playing). mix-blend-mode integra el
