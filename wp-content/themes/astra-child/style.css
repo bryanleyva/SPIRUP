@@ -960,6 +960,25 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    PAGINA PRODUCTO: imagen group49(1).png de fondo + texto encimado
    ========================================================================== */
+/* ==========================================================================
+   Pagina Producto (plantilla Group 76 + lata con zoom al hover)
+   ========================================================================== */
+.spirup-prod76 { background: #fff; }
+.spirup-prod76__wrap { position: relative; width: 100%; }
+.spirup-prod76__bg { display: block; width: 100%; height: auto; }
+.spirup-prod76__can {
+	position: absolute;
+	left: 50%;
+	top: 19.3%;
+	transform: translate(-50%, -50%);
+	width: 14%;
+	height: auto;
+	cursor: pointer;
+	transition: transform 0.4s cubic-bezier(.2, .7, .3, 1);
+	filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.22));
+}
+.spirup-prod76__can:hover { transform: translate(-50%, -50%) scale(1.14); }
+
 .spirup-prodimg { background: #fff; }
 .spirup-prodimg__wrap {
 	position: relative;
