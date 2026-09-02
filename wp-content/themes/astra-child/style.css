@@ -459,31 +459,22 @@ html { scroll-behavior: smooth; }
 .spirup-parte2__video {
 	position: absolute;
 	z-index: 1;
-	top: 50%;
+	top: 52%;
 	left: 50%;
-	width: min(78vw, 600px);
+	width: min(112vw, 1240px);
 	max-width: none;
 	height: auto;
 	transform: translate(-50%, -50%);
 	pointer-events: none;
-	/* 'lighten' deja pasar solo lo mas claro que el fondo (el agua brillante) y
-	   descarta lo mas oscuro. El brightness(.88) empuja el gris del fondo del
-	   video por debajo del #C6E7E6 para que 'lighten' lo elimine del todo =>
-	   solo queda el agua brillante, sin sombra. */
 	/* multiply + brillo alto: el fondo del video se sube a blanco (=> invisible
-	   sobre el aqua) y solo el AGUA (mas oscura) se pinta encima. Saturacion baja
-	   => el agua sale GRIS (resalta mejor sobre el aqua sin colores raros). */
-	/* Color EXACTO del agua = #5b9ec8. grayscale(1)+sepia(1) llevan todo el video
-	   a UN solo tono conservando el brillo/movimiento del agua; hue-rotate lo gira
-	   a ese azul y saturate fija su intensidad. Asi el agua queda en #5b9ec8 sin
-	   depender del color crudo del video. */
-	mix-blend-mode: normal;
-	filter: grayscale(1) sepia(1) saturate(2) hue-rotate(160deg) brightness(0.9) contrast(1.05);
-	/* Mascara MAS cerrada: recorta el campo azul ancho (el fondo plano del video
-	   que se veia como una sombra) y deja solo el agua pegada a la lata, que se
-	   difumina antes de llegar a los bordes. */
-	-webkit-mask-image: radial-gradient(ellipse 48% 52% at 50% 50%, #000 28%, transparent 68%);
-	mask-image: radial-gradient(ellipse 48% 52% at 50% 50%, #000 28%, transparent 68%);
+	   sobre el aqua) y solo el AGUA (mas oscura) se pinta encima. Saturacion/hue
+	   => el agua toma color azul-morado y resalta. Como el fondo plano desaparece
+	   (blanco), no queda campo/sombra azul alrededor. */
+	mix-blend-mode: multiply;
+	filter: brightness(1.5) contrast(1.35) saturate(1.7) hue-rotate(-12deg);
+	/* Difuminar los bordes para que no se vea el corte del video */
+	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
+	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	opacity: 0;
 	transition: opacity .5s ease;
 }
