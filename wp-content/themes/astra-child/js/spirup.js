@@ -157,36 +157,47 @@
 	var vid = stage.querySelector( 'video' );
 	if ( ! vid ) { return; }
 
-	var MIN_FRAC = 0.22;               // la reversa no baja de aqui (evita el inicio vacio)
-	function minT() { return ( vid.duration && isFinite( vid.duration ) ) ? vid.duration * MIN_FRAC : 0.4; }
+	/* Ping-pong entre MIN y MAX (sin llegar al inicio vacio ni al final quieto):
+	   asi el agua nunca se detiene. */
+	var MIN_FRAC = 0.20, MAX_FRAC = 0.82;
+	function dur() { return ( vid.duration && isFinite( vid.duration ) && vid.duration > 0 ) ? vid.duration : 2; }
+	function minT() { return dur() * MIN_FRAC; }
+	function maxT() { return dur() * MAX_FRAC; }
 
-	var reversing = false, lastTs = 0;
-	function reverseStep( ts ) {
-		if ( ! reversing ) { return; }
+	var mode = 'fwd', lastTs = 0, running = false;
+	function tick( ts ) {
+		if ( ! running ) { return; }
 		if ( ! lastTs ) { lastTs = ts; }
 		var dt = ( ts - lastTs ) / 1000; lastTs = ts;
-		var t = vid.currentTime - dt;   // reversa a 1x
-		if ( t <= minT() ) {
-			vid.currentTime = minT();
-			reversing = false; lastTs = 0;
-			var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); }
-			return;
+		if ( mode === 'fwd' ) {
+			if ( vid.currentTime >= maxT() ) {   // reversa ANTES de que se quede quieto
+				mode = 'rev';
+				try { vid.pause(); } catch ( e ) {}
+			}
+		} else {
+			var t = vid.currentTime - dt;         // reversa a 1x
+			if ( t <= minT() ) {
+				try { vid.currentTime = minT(); } catch ( e ) {}
+				mode = 'fwd';
+				var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); }
+			} else {
+				try { vid.currentTime = t; } catch ( e ) {}
+			}
 		}
-		vid.currentTime = t;
-		requestAnimationFrame( reverseStep );
+		requestAnimationFrame( tick );
 	}
-	vid.addEventListener( 'ended', function () {
-		reversing = true; lastTs = 0;
-		requestAnimationFrame( reverseStep );
-	} );
 
 	function start() {
+		if ( running ) { return; }
+		running = true;
 		stage.classList.add( 'is-playing' );
 		try {
-			vid.currentTime = 0;
+			vid.currentTime = minT();
 			var p = vid.play();
 			if ( p && p.catch ) { p.catch( function () {} ); }
 		} catch ( e ) {}
+		mode = 'fwd'; lastTs = 0;
+		requestAnimationFrame( tick );
 	}
 	if ( ! ( 'IntersectionObserver' in window ) ) { start(); return; }
 	var io = new IntersectionObserver( function ( entries ) {
