@@ -146,8 +146,9 @@
 } )();
 
 /* ==========================================================================
-   Parte 2: el agua (video) se reproduce UNA vez cuando la seccion entra en
-   pantalla y queda estatica en el ultimo frame (el video no hace loop).
+   Parte 2: el agua (video) arranca al entrar en pantalla y hace PING-PONG:
+   adelante -> reversa (sin volver al inicio vacio) -> adelante... asi nunca
+   para y el agua siempre esta presente y en movimiento.
    ========================================================================== */
 ( function () {
 	'use strict';
@@ -155,7 +156,31 @@
 	if ( ! stage ) { return; }
 	var vid = stage.querySelector( 'video' );
 	if ( ! vid ) { return; }
-	function playOnce() {
+
+	var MIN_FRAC = 0.22;               // la reversa no baja de aqui (evita el inicio vacio)
+	function minT() { return ( vid.duration && isFinite( vid.duration ) ) ? vid.duration * MIN_FRAC : 0.4; }
+
+	var reversing = false, lastTs = 0;
+	function reverseStep( ts ) {
+		if ( ! reversing ) { return; }
+		if ( ! lastTs ) { lastTs = ts; }
+		var dt = ( ts - lastTs ) / 1000; lastTs = ts;
+		var t = vid.currentTime - dt;   // reversa a 1x
+		if ( t <= minT() ) {
+			vid.currentTime = minT();
+			reversing = false; lastTs = 0;
+			var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); }
+			return;
+		}
+		vid.currentTime = t;
+		requestAnimationFrame( reverseStep );
+	}
+	vid.addEventListener( 'ended', function () {
+		reversing = true; lastTs = 0;
+		requestAnimationFrame( reverseStep );
+	} );
+
+	function start() {
 		stage.classList.add( 'is-playing' );
 		try {
 			vid.currentTime = 0;
@@ -163,12 +188,12 @@
 			if ( p && p.catch ) { p.catch( function () {} ); }
 		} catch ( e ) {}
 	}
-	if ( ! ( 'IntersectionObserver' in window ) ) { playOnce(); return; }
+	if ( ! ( 'IntersectionObserver' in window ) ) { start(); return; }
 	var io = new IntersectionObserver( function ( entries ) {
 		entries.forEach( function ( en ) {
 			if ( en.isIntersecting ) {
-				playOnce();
-				io.disconnect();   // solo una vez; queda estatica al terminar
+				start();
+				io.disconnect();
 			}
 		} );
 	}, { threshold: 0.35 } );

@@ -478,7 +478,7 @@ html { scroll-behavior: smooth; }
 	   ~#C6E7E6 para que se funda con la seccion; blend normal muestra el agua
 	   tal cual (resalta sobre el fondo ya igualado). */
 	mix-blend-mode: normal;
-	filter: brightness(1.14) saturate(0.78) contrast(1.04);
+	filter: brightness(1.13) saturate(0.92) contrast(1.05) hue-rotate(-18deg);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
