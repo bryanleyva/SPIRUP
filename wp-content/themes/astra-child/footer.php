@@ -48,7 +48,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</footer>
 
 	<?php
-	/* ===================== Franja de respaldo institucional (logos) ===================== */
+	/* ===================== Franja de respaldo institucional (logos) - SOLO en la portada ===================== */
+	if ( is_front_page() ) :
 	$sp_respaldos = array(
 		array( 'produce',     'Ministerio de la Producción del Perú' ),
 		array( 'proinnovate', 'ProInnóvate' ),
@@ -68,6 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endif; endforeach; ?>
 		</div>
 	</section>
+	<?php endif; /* is_front_page */ ?>
 
 </div><!-- .spirup-site -->
 
