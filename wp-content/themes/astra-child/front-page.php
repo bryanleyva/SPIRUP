@@ -83,7 +83,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			(js/spirup.js -> data-splash-video) y queda estatica en el ultimo frame. */ ?>
 		<div class="spirup-parte2__stage" data-splash-video>
 			<video class="spirup-parte2__video" muted playsinline preload="auto" aria-hidden="true">
-				<source src="<?php echo esc_url( $img . '/puede_ser_sin_el_codigo_al_ini.mp4' ); ?>" type="video/mp4">
+				<source src="<?php echo esc_url( $img . '/estupido_solo_quiero_el_agua.mp4' ); ?>" type="video/mp4">
 			</video>
 			<img class="spirup-parte2__can"
 				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
