@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<footer class="spirup-footer">
 		<div class="spirup-footer__inner">
 			<a class="spirup-footer__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Spir Up - Inicio">
-				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imagenes/logo-white.png' ); ?>" alt="Spir Up">
+				<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/imagenes/Recurso 13@4x-8 1.png' ); ?>" alt="Spir Up">
 			</a>
 
 			<?php
