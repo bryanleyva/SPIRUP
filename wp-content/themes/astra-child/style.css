@@ -468,11 +468,14 @@ html { scroll-behavior: smooth; }
 	transform: translate(-50%, -50%);
 	pointer-events: none;
 	/* 'lighten' deja pasar solo lo mas claro que el fondo (el agua brillante) y
-	   descarta el fondo gris/oscuro del video => agua limpia, sin sombra ni caja. */
+	   descarta lo mas oscuro. El brightness(.88) empuja el gris del fondo del
+	   video por debajo del #C6E7E6 para que 'lighten' lo elimine del todo =>
+	   solo queda el agua brillante, sin sombra. */
 	mix-blend-mode: lighten;
+	filter: brightness(0.88) contrast(1.05);
 	/* Difuminar los bordes para que no se vea el corte del video */
-	-webkit-mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 58%, transparent 90%);
-	mask-image: radial-gradient(ellipse 60% 58% at 50% 50%, #000 58%, transparent 90%);
+	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
+	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	opacity: 0;
 	transition: opacity .5s ease;
 }
