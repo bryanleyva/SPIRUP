@@ -461,7 +461,7 @@ html { scroll-behavior: smooth; }
 	z-index: 1;
 	top: 50%;
 	left: 50%;
-	width: min(94vw, 780px);
+	width: min(78vw, 600px);
 	max-width: none;
 	height: auto;
 	transform: translate(-50%, -50%);
@@ -479,9 +479,11 @@ html { scroll-behavior: smooth; }
 	   depender del color crudo del video. */
 	mix-blend-mode: normal;
 	filter: grayscale(1) sepia(1) saturate(2) hue-rotate(160deg) brightness(0.9) contrast(1.05);
-	/* Difuminar los bordes para que no se vea el corte del video */
-	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
-	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
+	/* Mascara MAS cerrada: recorta el campo azul ancho (el fondo plano del video
+	   que se veia como una sombra) y deja solo el agua pegada a la lata, que se
+	   difumina antes de llegar a los bordes. */
+	-webkit-mask-image: radial-gradient(ellipse 48% 52% at 50% 50%, #000 28%, transparent 68%);
+	mask-image: radial-gradient(ellipse 48% 52% at 50% 50%, #000 28%, transparent 68%);
 	opacity: 0;
 	transition: opacity .5s ease;
 }
