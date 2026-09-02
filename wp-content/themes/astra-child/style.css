@@ -475,7 +475,7 @@ html { scroll-behavior: smooth; }
 	   sobre el aqua) y solo el AGUA (mas oscura) se pinta encima. Saturacion baja
 	   => el agua sale GRIS (resalta mejor sobre el aqua sin colores raros). */
 	mix-blend-mode: multiply;
-	filter: brightness(1.32) contrast(1.75) saturate(0.5);
+	filter: brightness(1.12) contrast(2.4) saturate(0.55);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
