@@ -474,11 +474,12 @@ html { scroll-behavior: smooth; }
 	/* multiply + brillo alto: el fondo del video se sube a blanco (=> invisible
 	   sobre el aqua) y solo el AGUA (mas oscura) se pinta encima. Saturacion baja
 	   => el agua sale GRIS (resalta mejor sobre el aqua sin colores raros). */
-	/* El fondo del video es un teal (#a4cfce). Con brightness lo subimos hasta
-	   ~#C6E7E6 para que se funda con la seccion; blend normal muestra el agua
-	   tal cual (resalta sobre el fondo ya igualado). */
+	/* Color EXACTO del agua = #5b9ec8. grayscale(1)+sepia(1) llevan todo el video
+	   a UN solo tono conservando el brillo/movimiento del agua; hue-rotate lo gira
+	   a ese azul y saturate fija su intensidad. Asi el agua queda en #5b9ec8 sin
+	   depender del color crudo del video. */
 	mix-blend-mode: normal;
-	filter: brightness(1.13) saturate(0.92) contrast(1.05) hue-rotate(-18deg);
+	filter: grayscale(1) sepia(1) saturate(2) hue-rotate(160deg) brightness(0.9) contrast(1.05);
 	/* Difuminar los bordes para que no se vea el corte del video */
 	-webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
 	mask-image: radial-gradient(ellipse 58% 56% at 50% 50%, #000 55%, transparent 88%);
