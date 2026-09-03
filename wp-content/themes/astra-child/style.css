@@ -1094,7 +1094,7 @@ html { scroll-behavior: smooth; }
 /* Flechas de cambio de sabor: pegadas a los BORDES de la pagina (como el Figma).
    Son hijas de .spirup-showcase (no del inner) => se posicionan contra la seccion. */
 .spirup-showcase__arrow {
-	position: absolute; top: 56%; transform: translateY(-50%); z-index: 5;
+	position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
 	width: clamp(40px, 3vw, 56px); height: clamp(40px, 3vw, 56px);
 	display: grid; place-items: center;
 	border: 0; border-radius: 50%; cursor: pointer;

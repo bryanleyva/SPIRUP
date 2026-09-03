@@ -26,36 +26,49 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
 
 		<?php
-		/* Carrusel que RECORRE la ola: el texto va JUSTO sobre la linea que separa la
-		   foto del hero del aqua de abajo. Esa separacion real es una sinusoide medida
-		   por coordenadas (cy=564, amp=40.5, 1 periodo en el ancho). El texto va ~20px
-		   por debajo (misma sinusoide, cy=584) para apoyarse en el aqua sin tapar la foto.
-		   Dos copias + traslacion -1443 => loop continuo sin costura. El viewBox es la
-		   imagen COMPLETA (1443x692) => calza 1:1 con la foto. */
+		/* Ola ESTATICA (no se mueve): el texto va JUSTO sobre la linea que separa la
+		   foto del hero del aqua. Esa separacion real es una sinusoide medida por
+		   coordenadas (cy=564, amp=40.5); el texto va ~20px debajo (cy=584). viewBox =
+		   imagen COMPLETA (1443x692) => calza 1:1. El separador es la IMAGEN del rayo
+		   (Capa 1 (1).png), NO un emoji: se coloca como <image> en cada hueco, girado
+		   segun la pendiente local de la curva. */
 		$W = 1443; $cy = 584; $amp = 40; $d = 'M 0 ' . $cy;
-		$arc = 0.0; $px = 0.0; $py = $cy;
 		for ( $x = 3; $x <= $W; $x += 3 ) {
 			$y = $cy + $amp * sin( 2 * M_PI * $x / $W );
-			$arc += sqrt( ( $x - $px ) * ( $x - $px ) + ( $y - $py ) * ( $y - $py ) );
-			$px = $x; $py = $y;
 			if ( $x % 12 === 0 || $x >= $W - 3 ) { $d .= ' L ' . $x . ' ' . round( $y, 1 ); }
 		}
-		$arc = round( $arc ); // longitud de arco de un periodo (para que el texto lo llene exacto)
-		$wave_bolt = '&#160;&#160;<tspan class="spirup-wavebolt" dy="-1">&#9889;&#65038;</tspan>&#160;&#160;';
-		$wave_text = '&#160;&#160;Respaldada por investigación' . $wave_bolt . 'Sin colorantes artificiales' . $wave_bolt . 'Propuesta sostenible' . $wave_bolt;
+		/* Frases y su offset de inicio (px a lo largo de la curva) + ancho aprox (26px). */
+		$wave_phrases = array(
+			array( 'Respaldada por investigación', 70,  355 ),
+			array( 'Sin colorantes artificiales',  487, 301 ),
+			array( 'Propuesta sostenible',         850, 252 ),
+		);
+		/* Rayos (imagen) centrados en el hueco entre frases. Los centros salen del
+		   ancho REAL renderizado en el navegador (getComputedTextLength): P1 70..471,
+		   P2 487..826, P3 850..1136 => huecos en 479, 838 y 1156. */
+		$bolt_h = 30; $bolt_w = round( 30 * 32 / 62, 1 );  // mantiene aspecto 32x62
+		$bolt_centers = array( 479, 838, 1156 );
+		$wave_bolts = array();
+		foreach ( $bolt_centers as $bx ) {
+			$by = $cy + $amp * sin( 2 * M_PI * $bx / $W );
+			$dy = $amp * ( 2 * M_PI / $W ) * cos( 2 * M_PI * $bx / $W );
+			$ba = rad2deg( atan2( $dy, 1 ) );
+			$wave_bolts[] = array( $bx, round( $by, 1 ), round( $ba, 2 ) );
+		}
+		$bolt_src = $img . '/Capa 1 (1).png';
 		?>
 		<div class="spirup-figura__wave" aria-hidden="true">
-			<svg class="spirup-wavesvg" viewBox="0 0 1443 692" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="spirup-wavesvg" viewBox="0 0 1443 692" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				<defs><path id="spirupwavepath" d="<?php echo esc_attr( $d ); ?>" fill="none"></path></defs>
-				<g class="spirup-wavescroll">
-					<animateTransform attributeName="transform" type="translate" from="0 0" to="-1443 0" dur="16s" repeatCount="indefinite"></animateTransform>
-					<text class="spirup-wavetext" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
-						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
-					</text>
-					<text class="spirup-wavetext" transform="translate(1443 0)" textLength="<?php echo esc_attr( $arc ); ?>" lengthAdjust="spacingAndGlyphs">
-						<textPath href="#spirupwavepath"><?php echo $wave_text; // phpcs:ignore ?></textPath>
-					</text>
-				</g>
+				<?php foreach ( $wave_phrases as $p ) : ?>
+					<text class="spirup-wavetext"><textPath href="#spirupwavepath" startOffset="<?php echo esc_attr( $p[1] ); ?>"><?php echo esc_html( $p[0] ); ?></textPath></text>
+				<?php endforeach; ?>
+				<?php foreach ( $wave_bolts as $b ) : ?>
+					<image class="spirup-wavebolt-img" xlink:href="<?php echo esc_url( $bolt_src ); ?>" href="<?php echo esc_url( $bolt_src ); ?>"
+						width="<?php echo esc_attr( $bolt_w ); ?>" height="<?php echo esc_attr( $bolt_h ); ?>"
+						x="<?php echo esc_attr( round( $b[0] - $bolt_w / 2, 1 ) ); ?>" y="<?php echo esc_attr( round( $b[1] - $bolt_h / 2, 1 ) ); ?>"
+						transform="rotate(<?php echo esc_attr( $b[2] ); ?> <?php echo esc_attr( $b[0] ); ?> <?php echo esc_attr( $b[1] ); ?>)"></image>
+				<?php endforeach; ?>
 			</svg>
 		</div>
 	</section>
