@@ -20,82 +20,47 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 <main class="spirup-main">
 
 	<section class="spirup-figura">
+		<?php /* Group 56.png ya trae TODO baked: foto + banda mint-verde con el texto
+			(Respaldada por investigación / Sin colorantes artificiales / Propuesta
+			sostenible) y los rayos. Debajo de la banda la imagen es TRANSPARENTE => se
+			ve el fondo #CCEDEC de la seccion y conecta con el showcase SIN costura. */ ?>
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/hero-carrusel.png' ); ?>"
-			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up!">
+			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
+			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up! Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
-
-		<?php
-		/* Ola ESTATICA (no se mueve): el texto va JUSTO sobre la linea que separa la
-		   foto del hero del aqua. Esa separacion real es una sinusoide medida por
-		   coordenadas (cy=564, amp=40.5); el texto va ~20px debajo (cy=584). viewBox =
-		   imagen COMPLETA (1443x692) => calza 1:1. El separador es la IMAGEN del rayo
-		   (Capa 1 (1).png), NO un emoji: se coloca como <image> en cada hueco, girado
-		   segun la pendiente local de la curva. */
-		$W = 1443; $cy = 584; $amp = 40; $d = 'M 0 ' . $cy;
-		for ( $x = 3; $x <= $W; $x += 3 ) {
-			$y = $cy + $amp * sin( 2 * M_PI * $x / $W );
-			if ( $x % 12 === 0 || $x >= $W - 3 ) { $d .= ' L ' . $x . ' ' . round( $y, 1 ); }
-		}
-		/* Frases y su offset de inicio (px a lo largo de la curva) + ancho aprox (26px). */
-		$wave_phrases = array(
-			array( 'Respaldada por investigación', 70,  355 ),
-			array( 'Sin colorantes artificiales',  487, 301 ),
-			array( 'Propuesta sostenible',         850, 252 ),
-		);
-		/* Rayos (imagen) centrados en el hueco entre frases. Los centros salen del
-		   ancho REAL renderizado en el navegador (getComputedTextLength): P1 70..471,
-		   P2 487..826, P3 850..1136 => huecos en 479, 838 y 1156. */
-		$bolt_h = 30; $bolt_w = round( 30 * 32 / 62, 1 );  // mantiene aspecto 32x62
-		$bolt_centers = array( 479, 838, 1156 );
-		$wave_bolts = array();
-		foreach ( $bolt_centers as $bx ) {
-			$by = $cy + $amp * sin( 2 * M_PI * $bx / $W );
-			$dy = $amp * ( 2 * M_PI / $W ) * cos( 2 * M_PI * $bx / $W );
-			$ba = rad2deg( atan2( $dy, 1 ) );
-			$wave_bolts[] = array( $bx, round( $by, 1 ), round( $ba, 2 ) );
-		}
-		$bolt_src = $img . '/Capa 1 (1).png';
-		?>
-		<div class="spirup-figura__wave" aria-hidden="true">
-			<svg class="spirup-wavesvg" viewBox="0 0 1443 692" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-				<defs><path id="spirupwavepath" d="<?php echo esc_attr( $d ); ?>" fill="none"></path></defs>
-				<?php foreach ( $wave_phrases as $p ) : ?>
-					<text class="spirup-wavetext"><textPath href="#spirupwavepath" startOffset="<?php echo esc_attr( $p[1] ); ?>"><?php echo esc_html( $p[0] ); ?></textPath></text>
-				<?php endforeach; ?>
-				<?php foreach ( $wave_bolts as $b ) : ?>
-					<image class="spirup-wavebolt-img" xlink:href="<?php echo esc_url( $bolt_src ); ?>" href="<?php echo esc_url( $bolt_src ); ?>"
-						width="<?php echo esc_attr( $bolt_w ); ?>" height="<?php echo esc_attr( $bolt_h ); ?>"
-						x="<?php echo esc_attr( round( $b[0] - $bolt_w / 2, 1 ) ); ?>" y="<?php echo esc_attr( round( $b[1] - $bolt_h / 2, 1 ) ); ?>"
-						transform="rotate(<?php echo esc_attr( $b[2] ); ?> <?php echo esc_attr( $b[0] ); ?> <?php echo esc_attr( $b[1] ); ?>)"></image>
-				<?php endforeach; ?>
-			</svg>
-		</div>
 	</section>
 
-	<?php /* ===================== PARTE 2 = SHOWCASE (plantilla + lata + agua + flechas) =====================
-	   Las plantillas (citrus3d.png / rebel3d.png) traen TODO horneado (texto, pills,
-	   palabra CITRUS/REBEL, fondo) con el CENTRO VACIO. Aqui solo encimamos, centrado
-	   en ese hueco: el agua (agua_realzada.mp4) + la lata, y las flechas que cambian
-	   Citrus <-> Rebel. js/spirup.js togglea data-flavor; el CSS muestra/oculta la
-	   plantilla y la lata del sabor activo. */ ?>
+	<?php
+	/* ===================== PARTE 2 = SHOWCASE (carrusel de sabores) =====================
+	   Cada sabor es un SLIDE (plantilla + agua + lata). Al pulsar una flecha, el slide
+	   entrante se desliza desde el lado (segun la flecha) y CUBRE al anterior, que sale
+	   por el lado opuesto (js/spirup.js). Las plantillas (citrus3d / rebelplantilla) ya
+	   traen texto/pills/palabra horneados; debajo va el agua y la lata centradas. */
+	$sc_slides = array(
+		'citrus' => array( 'tpl' => 'citrus3d.png',      'can' => 'lata-spir-up 1 (2).png', 'name' => 'Citrus Blue' ),
+		'rebel'  => array( 'tpl' => 'rebelplantilla.png', 'can' => 'lata-spir-up 1 (3).png', 'name' => 'Rebel Blue' ),
+	);
+	?>
 	<section class="spirup-showcase" id="una-lata" data-flavor="citrus">
-		<div class="spirup-showcase__inner" data-splash-video>
-			<img class="spirup-showcase__tpl is-citrus" src="<?php echo esc_url( $img . '/citrus3d.png' ); ?>" alt="Spir Up Citrus Blue: refrescante, enriquecida y natural">
-			<img class="spirup-showcase__tpl is-rebel" src="<?php echo esc_url( $img . '/rebelplantilla.png' ); ?>" alt="Spir Up Rebel Blue: refrescante, enriquecida y natural">
-
-			<?php /* Agua detras de la lata (se reproduce al entrar en pantalla, ping-pong). */ ?>
-			<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
-				<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
-			</video>
-
-			<img class="spirup-showcase__can is-citrus" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="Lata Spir Up Citrus Blue">
-			<img class="spirup-showcase__can is-rebel" src="<?php echo esc_url( $img . '/lata-spir-up 1 (3).png' ); ?>" alt="Lata Spir Up Rebel Blue">
+		<div class="spirup-showcase__viewport">
+			<?php foreach ( $sc_slides as $key => $s ) : ?>
+				<div class="spirup-showcase__slide is-<?php echo esc_attr( $key ); ?>" data-flavor-slide="<?php echo esc_attr( $key ); ?>" data-splash-video>
+					<img class="spirup-showcase__tpl" src="<?php echo esc_url( $img . '/' . $s['tpl'] ); ?>" alt="Spir Up <?php echo esc_attr( $s['name'] ); ?>: refrescante, enriquecida y natural">
+					<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
+						<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
+					</video>
+					<img class="spirup-showcase__can" src="<?php echo esc_url( $img . '/' . $s['can'] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $s['name'] ); ?>">
+				</div>
+			<?php endforeach; ?>
 		</div>
 
-		<?php /* Flechas a los bordes de la pagina (hijas de la seccion, no del inner). */ ?>
-		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">&#8249;</button>
-		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">&#8250;</button>
+		<?php /* Flechas a los bordes (hijas de la seccion). Chevron en SVG => centrado perfecto. */ ?>
+		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+		</button>
+		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+		</button>
 	</section>
 
 	<?php /* ===================== Franja CTA amarilla ===================== */ ?>

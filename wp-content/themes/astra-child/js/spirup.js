@@ -152,83 +152,109 @@
    ========================================================================== */
 ( function () {
 	'use strict';
-	var stage = document.querySelector( '[data-splash-video]' );
-	if ( ! stage ) { return; }
-	var vid = stage.querySelector( 'video' );
-	if ( ! vid ) { return; }
+	var sc = document.querySelector( '.spirup-showcase' );
+	var stages = document.querySelectorAll( '[data-splash-video]' );
+	if ( ! stages.length ) { return; }
 
-	/* Ping-pong entre MIN y MAX (sin llegar al inicio vacio ni al final quieto):
-	   asi el agua nunca se detiene. */
+	/* Ping-pong por cada video (cada slide tiene el suyo): entre MIN y MAX, sin
+	   llegar al inicio vacio ni al final quieto => el agua nunca se detiene. */
 	var MIN_FRAC = 0.20, MAX_FRAC = 0.82;
-	function dur() { return ( vid.duration && isFinite( vid.duration ) && vid.duration > 0 ) ? vid.duration : 2; }
-	function minT() { return dur() * MIN_FRAC; }
-	function maxT() { return dur() * MAX_FRAC; }
-
-	var mode = 'fwd', lastTs = 0, running = false;
-	function tick( ts ) {
-		if ( ! running ) { return; }
-		if ( ! lastTs ) { lastTs = ts; }
-		var dt = ( ts - lastTs ) / 1000; lastTs = ts;
-		if ( mode === 'fwd' ) {
-			if ( vid.currentTime >= maxT() ) {   // reversa ANTES de que se quede quieto
-				mode = 'rev';
-				try { vid.pause(); } catch ( e ) {}
-			}
-		} else {
-			var t = vid.currentTime - dt;         // reversa a 1x
-			if ( t <= minT() ) {
-				try { vid.currentTime = minT(); } catch ( e ) {}
-				mode = 'fwd';
-				var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); }
+	var starters = [];
+	Array.prototype.forEach.call( stages, function ( stage ) {
+		var vid = stage.querySelector( 'video' );
+		if ( ! vid ) { return; }
+		function dur() { return ( vid.duration && isFinite( vid.duration ) && vid.duration > 0 ) ? vid.duration : 2; }
+		function minT() { return dur() * MIN_FRAC; }
+		function maxT() { return dur() * MAX_FRAC; }
+		var mode = 'fwd', lastTs = 0, running = false;
+		function tick( ts ) {
+			if ( ! running ) { return; }
+			if ( ! lastTs ) { lastTs = ts; }
+			var dt = ( ts - lastTs ) / 1000; lastTs = ts;
+			if ( mode === 'fwd' ) {
+				if ( vid.currentTime >= maxT() ) { mode = 'rev'; try { vid.pause(); } catch ( e ) {} }
 			} else {
-				try { vid.currentTime = t; } catch ( e ) {}
+				var t = vid.currentTime - dt;
+				if ( t <= minT() ) {
+					try { vid.currentTime = minT(); } catch ( e ) {}
+					mode = 'fwd';
+					var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); }
+				} else {
+					try { vid.currentTime = t; } catch ( e ) {}
+				}
 			}
+			requestAnimationFrame( tick );
 		}
-		requestAnimationFrame( tick );
-	}
+		function start() {
+			if ( running ) { return; }
+			running = true;
+			stage.classList.add( 'is-playing' );
+			try { vid.currentTime = minT(); var p = vid.play(); if ( p && p.catch ) { p.catch( function () {} ); } } catch ( e ) {}
+			mode = 'fwd'; lastTs = 0;
+			requestAnimationFrame( tick );
+		}
+		starters.push( start );
+	} );
+	function startAll() { starters.forEach( function ( f ) { f(); } ); }
 
-	function start() {
-		if ( running ) { return; }
-		running = true;
-		stage.classList.add( 'is-playing' );
-		try {
-			vid.currentTime = minT();
-			var p = vid.play();
-			if ( p && p.catch ) { p.catch( function () {} ); }
-		} catch ( e ) {}
-		mode = 'fwd'; lastTs = 0;
-		requestAnimationFrame( tick );
-	}
-	if ( ! ( 'IntersectionObserver' in window ) ) { start(); return; }
+	var target = sc || stages[0];
+	if ( ! ( 'IntersectionObserver' in window ) ) { startAll(); return; }
 	var io = new IntersectionObserver( function ( entries ) {
-		entries.forEach( function ( en ) {
-			if ( en.isIntersecting ) {
-				start();
-				io.disconnect();
-			}
-		} );
-	}, { threshold: 0.35 } );
-	io.observe( stage );
+		entries.forEach( function ( en ) { if ( en.isIntersecting ) { startAll(); io.disconnect(); } } );
+	}, { threshold: 0.2 } );
+	io.observe( target );
 } )();
 
-/* ===== Showcase de sabores: flechas que cambian Citrus <-> Rebel =====
-   Solo togglean el data-flavor de la seccion; el CSS cambia la plantilla (con su
-   texto/pills/palabra horneados) y la lata del sabor activo. El agua queda detras. */
+/* ===== Showcase = carrusel: las flechas DESLIZAN el slide del sabor =====
+   El entrante llega desde la derecha (next) o la izquierda (prev) y cubre al
+   anterior, que sale por el lado opuesto. Actualiza data-flavor (color de flechas). */
 ( function () {
 	'use strict';
 	var sc = document.querySelector( '.spirup-showcase' );
 	if ( ! sc ) { return; }
-	var order = [ 'citrus', 'rebel' ];
-	function current() { return sc.getAttribute( 'data-flavor' ) || 'citrus'; }
-	function step( dir ) {
-		var i = order.indexOf( current() );
+	var slides = sc.querySelectorAll( '.spirup-showcase__slide' );
+	if ( slides.length < 2 ) { return; }
+	var order = [], map = {};
+	Array.prototype.forEach.call( slides, function ( s ) {
+		var k = s.getAttribute( 'data-flavor-slide' );
+		order.push( k ); map[ k ] = s;
+	} );
+	var current = sc.getAttribute( 'data-flavor' ) || order[0];
+	Array.prototype.forEach.call( slides, function ( s ) {
+		s.style.transform = ( s.getAttribute( 'data-flavor-slide' ) === current ) ? 'translateX(0)' : 'translateX(100%)';
+	} );
+
+	var animating = false;
+	function go( dir ) {
+		if ( animating ) { return; }
+		var i = order.indexOf( current );
 		if ( i < 0 ) { i = 0; }
-		sc.setAttribute( 'data-flavor', order[ ( i + dir + order.length ) % order.length ] );
+		var nextKey = order[ ( i + dir + order.length ) % order.length ];
+		if ( nextKey === current ) { return; }
+		animating = true;
+		var incoming = map[ nextKey ], outgoing = map[ current ];
+		var fromX = dir > 0 ? '100%' : '-100%';   // next: desde la derecha; prev: desde la izquierda
+		var outX  = dir > 0 ? '-100%' : '100%';
+		incoming.style.transition = 'none';
+		incoming.style.transform = 'translateX(' + fromX + ')';
+		void incoming.offsetWidth;                // reflow para que arranque desde fromX
+		incoming.style.transition = '';
+		incoming.style.transform = 'translateX(0)';
+		outgoing.style.transform = 'translateX(' + outX + ')';
+		sc.setAttribute( 'data-flavor', nextKey );
+		current = nextKey;
+		window.setTimeout( function () {
+			outgoing.style.transition = 'none';
+			outgoing.style.transform = 'translateX(100%)';  // aparcado a la derecha, listo
+			void outgoing.offsetWidth;
+			outgoing.style.transition = '';
+			animating = false;
+		}, 520 );
 	}
 	Array.prototype.forEach.call( sc.querySelectorAll( '[data-flavor-prev]' ), function ( b ) {
-		b.addEventListener( 'click', function () { step( -1 ); } );
+		b.addEventListener( 'click', function () { go( -1 ); } );
 	} );
 	Array.prototype.forEach.call( sc.querySelectorAll( '[data-flavor-next]' ), function ( b ) {
-		b.addEventListener( 'click', function () { step( 1 ); } );
+		b.addEventListener( 'click', function () { go( 1 ); } );
 	} );
 } )();

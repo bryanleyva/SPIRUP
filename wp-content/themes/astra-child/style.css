@@ -1047,20 +1047,32 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    SHOWCASE de sabores (Citrus Blue / Rebel Blue)
    ========================================================================== */
-/* Plantilla completa (citrus3d/rebel3d) a sangre; encima solo la lata + agua +
-   flechas, centradas en el hueco vacio de la plantilla. */
+/* Carrusel: la plantilla (citrus3d/rebelplantilla) a sangre + la lata y el agua
+   centradas en su hueco. Cada sabor es un SLIDE que se desliza en X. */
 .spirup-showcase {
 	position: relative;
 	background: #ccedec;               /* aqua de la plantilla (respaldo) */
 	overflow: hidden;
 }
-.spirup-showcase__inner {
+/* Ventana del carrusel: fija el encuadre y recorta los slides que entran/salen */
+.spirup-showcase__viewport {
 	position: relative;
 	width: 100%;
 	max-width: 1441px;
 	margin: 0 auto;
 	aspect-ratio: 1441 / 893;          /* mantiene el encuadre de la plantilla */
+	overflow: hidden;
 }
+/* Cada slide ocupa toda la ventana; el JS lo desliza. Estado inicial: citrus dentro,
+   rebel fuera a la derecha (evita parpadeo antes de que corra el JS). */
+.spirup-showcase__slide {
+	position: absolute; inset: 0;
+	transition: transform .5s ease;
+	will-change: transform;
+}
+.spirup-showcase__slide[data-flavor-slide="citrus"] { transform: translateX(0); }
+.spirup-showcase__slide[data-flavor-slide="rebel"]  { transform: translateX(100%); }
+
 .spirup-showcase__tpl {
 	position: absolute; inset: 0;
 	width: 100%; height: 100%;
@@ -1087,30 +1099,28 @@ html { scroll-behavior: smooth; }
 	transform: translate(-50%, -50%);
 	height: 72%; width: auto; z-index: 3;
 	transition: transform .35s ease;
-	animation: sc-fade .45s ease both;
 }
-.spirup-showcase__inner:hover .spirup-showcase__can { transform: translate(-50%, -50%) scale(1.05); }  /* zoom al pasar el mouse */
+.spirup-showcase__slide:hover .spirup-showcase__can { transform: translate(-50%, -50%) scale(1.05); }  /* zoom al pasar el mouse */
 
 /* Flechas de cambio de sabor: pegadas a los BORDES de la pagina (como el Figma).
    Son hijas de .spirup-showcase (no del inner) => se posicionan contra la seccion. */
 .spirup-showcase__arrow {
 	position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
-	width: clamp(40px, 3vw, 56px); height: clamp(40px, 3vw, 56px);
+	width: clamp(44px, 3.2vw, 56px); height: clamp(44px, 3.2vw, 56px);
+	padding: 0; box-sizing: border-box;                 /* sin padding del tema => circulo real */
+	appearance: none; -webkit-appearance: none;
 	display: grid; place-items: center;
 	border: 0; border-radius: 50%; cursor: pointer;
-	background: rgba(255, 255, 255, .82); color: #1f8f97;
-	font-size: clamp(24px, 2vw, 34px); line-height: 0; font-weight: 700;
+	background: rgba(255, 255, 255, .9); color: #1f8f97;
 	box-shadow: 0 6px 16px rgba(20, 50, 60, .14);
 	transition: background .2s, transform .2s;
 }
+.spirup-showcase__arrow svg { width: 44%; height: 44%; display: block; stroke: currentColor; fill: none; }
 .spirup-showcase[data-flavor="rebel"] .spirup-showcase__arrow { color: #21458f; }
 .spirup-showcase__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
 .spirup-showcase__arrow--prev { left: clamp(10px, 2vw, 40px); }
 .spirup-showcase__arrow--next { right: clamp(10px, 2vw, 40px); }
-
-/* Toggle de sabor: se oculta el que NO esta activo */
-.spirup-showcase[data-flavor="citrus"] .is-rebel  { display: none; }
-.spirup-showcase[data-flavor="rebel"]  .is-citrus { display: none; }
+.spirup-showcase__arrow[disabled] { pointer-events: none; opacity: .6; }
 
 @keyframes sc-fade { from { opacity: 0; } to { opacity: 1; } }
 
