@@ -26,11 +26,13 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
 
 		<?php
-		/* Carrusel que RECORRE la ola: el texto va sobre un path sinusoidal de UN
-		   periodo (id=spirupwavepath, x 0..1443) igual a la ola de la imagen.
-		   Se dibujan DOS copias identicas (la 2a corrida +1443) y el grupo entero
-		   se traslada -1443 en loop => el texto fluye siguiendo la curva, sin costura. */
-		$W = 1443; $cy = 102; $amp = 34; $d = 'M 0 ' . $cy;
+		/* Carrusel que RECORRE la ola: el texto va JUSTO sobre la linea que separa la
+		   foto del hero del aqua de abajo. Esa separacion real es una sinusoide medida
+		   por coordenadas (cy=564, amp=40.5, 1 periodo en el ancho). El texto va ~20px
+		   por debajo (misma sinusoide, cy=584) para apoyarse en el aqua sin tapar la foto.
+		   Dos copias + traslacion -1443 => loop continuo sin costura. El viewBox es la
+		   imagen COMPLETA (1443x692) => calza 1:1 con la foto. */
+		$W = 1443; $cy = 584; $amp = 40; $d = 'M 0 ' . $cy;
 		$arc = 0.0; $px = 0.0; $py = $cy;
 		for ( $x = 3; $x <= $W; $x += 3 ) {
 			$y = $cy + $amp * sin( 2 * M_PI * $x / $W );
@@ -43,7 +45,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		$wave_text = '&#160;&#160;Respaldada por investigación' . $wave_bolt . 'Sin colorantes artificiales' . $wave_bolt . 'Propuesta sostenible' . $wave_bolt;
 		?>
 		<div class="spirup-figura__wave" aria-hidden="true">
-			<svg class="spirup-wavesvg" viewBox="0 0 1443 168" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+			<svg class="spirup-wavesvg" viewBox="0 0 1443 692" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
 				<defs><path id="spirupwavepath" d="<?php echo esc_attr( $d ); ?>" fill="none"></path></defs>
 				<g class="spirup-wavescroll">
 					<animateTransform attributeName="transform" type="translate" from="0 0" to="-1443 0" dur="16s" repeatCount="indefinite"></animateTransform>
@@ -76,10 +78,11 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 			<img class="spirup-showcase__can is-citrus" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="Lata Spir Up Citrus Blue">
 			<img class="spirup-showcase__can is-rebel" src="<?php echo esc_url( $img . '/lata-spir-up 1 (3).png' ); ?>" alt="Lata Spir Up Rebel Blue">
-
-			<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">&#8249;</button>
-			<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">&#8250;</button>
 		</div>
+
+		<?php /* Flechas a los bordes de la pagina (hijas de la seccion, no del inner). */ ?>
+		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">&#8249;</button>
+		<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">&#8250;</button>
 	</section>
 
 	<?php /* ===================== Franja CTA amarilla ===================== */ ?>

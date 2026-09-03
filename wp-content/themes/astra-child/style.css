@@ -276,12 +276,12 @@ html { scroll-behavior: smooth; }
    Dos copias identicas del texto + traslacion -1443 => flujo continuo siguiendo la curva. */
 .spirup-figura__wave {
 	position: absolute;
-	left: 0;
-	top: 75.6%;
+	inset: 0;                        /* cubre TODA la imagen: el path usa coords reales de la foto */
 	width: 100%;
-	height: 24.4%;
+	height: 100%;
 	overflow: hidden;
 	pointer-events: none;
+	z-index: 2;
 }
 .spirup-wavesvg { display: block; width: 100%; height: 100%; overflow: hidden; }
 .spirup-wavetext {
@@ -1091,21 +1091,22 @@ html { scroll-behavior: smooth; }
 }
 .spirup-showcase__inner:hover .spirup-showcase__can { transform: translate(-50%, -50%) scale(1.05); }  /* zoom al pasar el mouse */
 
-/* Flechas de cambio de sabor */
+/* Flechas de cambio de sabor: pegadas a los BORDES de la pagina (como el Figma).
+   Son hijas de .spirup-showcase (no del inner) => se posicionan contra la seccion. */
 .spirup-showcase__arrow {
-	position: absolute; top: 56.5%; transform: translateY(-50%); z-index: 4;
+	position: absolute; top: 56%; transform: translateY(-50%); z-index: 5;
 	width: clamp(40px, 3vw, 56px); height: clamp(40px, 3vw, 56px);
 	display: grid; place-items: center;
 	border: 0; border-radius: 50%; cursor: pointer;
-	background: rgba(255, 255, 255, .78); color: #1f8f97;
+	background: rgba(255, 255, 255, .82); color: #1f8f97;
 	font-size: clamp(24px, 2vw, 34px); line-height: 0; font-weight: 700;
 	box-shadow: 0 6px 16px rgba(20, 50, 60, .14);
 	transition: background .2s, transform .2s;
 }
 .spirup-showcase[data-flavor="rebel"] .spirup-showcase__arrow { color: #21458f; }
-.spirup-showcase__arrow:hover { background: #fff; }
-.spirup-showcase__arrow--prev { left: 30%; }
-.spirup-showcase__arrow--next { right: 30%; }
+.spirup-showcase__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+.spirup-showcase__arrow--prev { left: clamp(10px, 2vw, 40px); }
+.spirup-showcase__arrow--next { right: clamp(10px, 2vw, 40px); }
 
 /* Toggle de sabor: se oculta el que NO esta activo */
 .spirup-showcase[data-flavor="citrus"] .is-rebel  { display: none; }
