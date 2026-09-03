@@ -257,9 +257,9 @@ html { scroll-behavior: smooth; }
    para que conecten sin costura (mismo color = #c6e7e6, el top de parte2). */
 .spirup-figura {
 	position: relative;
-	/* Aqua solido: la franja transparente inferior del hero (bajo la ola de
-	   valores) fluye directo hacia la parte 2 -> SIN la banda teal del salto. */
-	background: #c6e7e6;
+	/* Aqua solido = #CCEDEC (mismo aqua de las plantillas citrus3d/rebelplantilla)
+	   para que la franja bajo la ola conecte con el showcase SIN costura. */
+	background: #ccedec;
 }
 .spirup-parte2 {
 	position: relative;
@@ -1051,7 +1051,7 @@ html { scroll-behavior: smooth; }
    flechas, centradas en el hueco vacio de la plantilla. */
 .spirup-showcase {
 	position: relative;
-	background: #cceceb;               /* aqua de la plantilla (respaldo) */
+	background: #ccedec;               /* aqua de la plantilla (respaldo) */
 	overflow: hidden;
 }
 .spirup-showcase__inner {

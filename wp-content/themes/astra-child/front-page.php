@@ -67,7 +67,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<section class="spirup-showcase" id="una-lata" data-flavor="citrus">
 		<div class="spirup-showcase__inner" data-splash-video>
 			<img class="spirup-showcase__tpl is-citrus" src="<?php echo esc_url( $img . '/citrus3d.png' ); ?>" alt="Spir Up Citrus Blue: refrescante, enriquecida y natural">
-			<img class="spirup-showcase__tpl is-rebel" src="<?php echo esc_url( $img . '/rebel3d.png' ); ?>" alt="Spir Up Rebel Blue: refrescante, enriquecida y natural">
+			<img class="spirup-showcase__tpl is-rebel" src="<?php echo esc_url( $img . '/rebelplantilla.png' ); ?>" alt="Spir Up Rebel Blue: refrescante, enriquecida y natural">
 
 			<?php /* Agua detras de la lata (se reproduce al entrar en pantalla, ping-pong). */ ?>
 			<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
