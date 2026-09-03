@@ -478,7 +478,8 @@ html { scroll-behavior: smooth; }
 	opacity: 0;
 	transition: opacity .5s ease;
 }
-.spirup-parte2__stage.is-playing .spirup-parte2__video { opacity: 1; }
+.spirup-parte2__stage.is-playing .spirup-parte2__video,
+[data-splash-video].is-playing .spirup-parte2__video { opacity: 1; }
 
 /* Chorro de agua simulada (lo inyecta js/spirup-splash.js).
    El canvas es WebGL: dentro corre una simulacion de particulas fundidas en
@@ -1049,83 +1050,121 @@ html { scroll-behavior: smooth; }
    ========================================================================== */
 .spirup-showcase {
 	position: relative;
-	background: #fff;
+	background: #d3ebe9;               /* aqua de respaldo bajo la plantilla */
 	overflow: hidden;
-	padding: clamp(56px, 6vw, 130px) clamp(16px, 4vw, 80px) clamp(60px, 7vw, 150px);
-	--accent: #2f9aa6;                 /* citrus por defecto */
+	padding: clamp(40px, 5vw, 96px) clamp(16px, 4vw, 70px) clamp(46px, 6vw, 104px);
+	--accent: #1f8f97;                 /* citrus por defecto */
 }
-.spirup-showcase[data-flavor="rebel"] { --accent: #2743a6; }
+.spirup-showcase[data-flavor="rebel"] { --accent: #21458f; }
+
+/* Fondo plantilla (imagen del usuario) cubriendo toda la seccion */
+.spirup-showcase__bg {
+	position: absolute; inset: 0; width: 100%; height: 100%;
+	object-fit: cover; object-position: center; z-index: 0; pointer-events: none;
+}
+
+/* Palabra gigante CITRUS/REBEL, en contorno, detras de la lata */
 .spirup-showcase__wm {
-	position: absolute;
-	top: clamp(24px, 2.6vw, 54px);
-	left: 50%;
+	position: absolute; top: clamp(8px, 2vw, 40px); left: 50%;
 	transform: translateX(-50%);
-	font-weight: 800;
-	letter-spacing: 0.02em;
-	font-size: clamp(42px, 8vw, 128px);
-	color: var(--accent);
-	opacity: 0.15;
-	white-space: nowrap;
-	pointer-events: none;
-	line-height: 1;
+	z-index: 1; pointer-events: none; white-space: nowrap; line-height: 1;
+	font-weight: 800; letter-spacing: .06em;
+	font-size: clamp(52px, 11vw, 168px);
+	color: transparent;
+	-webkit-text-stroke: 2px var(--accent);
+	text-stroke: 2px var(--accent);
+	opacity: .34;
+	animation: sc-wm .5s ease both;
 }
+
 .spirup-showcase__inner {
-	position: relative;
-	z-index: 1;
-	max-width: 1200px;
-	margin: 0 auto;
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-	align-items: center;
-	gap: clamp(18px, 3vw, 64px);
+	position: relative; z-index: 2;
+	max-width: 1180px; margin: 0 auto;
+	display: grid; grid-template-columns: 1fr auto 1fr;
+	align-items: center; gap: clamp(10px, 2.4vw, 48px);
 }
-.spirup-showcase__side { display: flex; flex-direction: column; gap: clamp(22px, 2.6vw, 46px); }
-.spirup-showcase__side--left { text-align: right; align-items: flex-end; }
+.spirup-showcase__side { display: flex; flex-direction: column; }
+.spirup-showcase__side--left  { text-align: left; align-items: flex-start; }
 .spirup-showcase__side--right { text-align: left; align-items: flex-start; }
+
+/* Descripcion (izquierda) */
+.spirup-showcase__desc { animation: sc-in .5s ease both; }
 .spirup-showcase__desc strong {
 	display: block; color: var(--accent); font-weight: 800;
-	font-size: clamp(16px, 1.4vw, 24px); line-height: 1.22; margin-bottom: 8px; max-width: 14em;
+	font-size: clamp(18px, 1.7vw, 30px); line-height: 1.12;
 }
-.spirup-showcase__desc p { margin: 0; color: #5b6f72; line-height: 1.5; font-size: clamp(13px, 1vw, 17px); max-width: 22em; }
-.spirup-showcase__side--left .spirup-showcase__desc strong,
-.spirup-showcase__side--left .spirup-showcase__desc p { margin-left: auto; }
-.spirup-feat h3 { margin: 0 0 4px; color: var(--accent); font-weight: 800; font-size: clamp(15px, 1.2vw, 22px); }
-.spirup-feat p { margin: 0; color: #5b6f72; line-height: 1.45; font-size: clamp(13px, 1vw, 17px); max-width: 18em; }
-.spirup-showcase__side--left .spirup-feat p { margin-left: auto; }
+.spirup-showcase__descsub {
+	display: block; color: var(--accent); font-weight: 800;
+	font-size: clamp(15px, 1.35vw, 23px); line-height: 1.18; margin-top: 4px; max-width: 12em;
+}
+.spirup-showcase__desc p {
+	margin: 10px 0 0; color: #5b6f72; line-height: 1.5;
+	font-size: clamp(13px, 1vw, 16px); max-width: 16em;
+}
 
-.spirup-showcase__stage { position: relative; display: flex; justify-content: center; align-items: flex-end; }
+/* Escenario central: agua (video) + lata + flechas */
+.spirup-showcase__stage {
+	position: relative; z-index: 2;
+	display: flex; justify-content: center; align-items: center;
+	min-height: clamp(300px, 42vw, 540px);
+}
 .spirup-showcase__can {
-	display: block; height: clamp(300px, 34vw, 520px); width: auto;
-	filter: drop-shadow(0 26px 40px rgba(20, 40, 60, .22));
+	position: relative; z-index: 2; display: block; margin: 0 auto;
+	height: clamp(260px, 38vw, 500px); width: auto;
+	transition: transform .35s ease;
+	animation: sc-fade .5s ease both;
 }
-.spirup-showcase__can.is-rebel { display: none; }
-.spirup-showcase[data-flavor="rebel"] .is-citrus { display: none; }
-.spirup-showcase[data-flavor="rebel"] .is-rebel { display: block; }
+.spirup-showcase__stage:hover .spirup-showcase__can { transform: scale(1.06); }  /* zoom al pasar el mouse */
 
-.spirup-showcase__lbl { margin: 0 0 12px; font-weight: 700; color: #17343d; font-size: clamp(15px, 1.2vw, 20px); }
-.spirup-showcase__tabs { display: inline-flex; flex-direction: column; gap: 8px; }
-.spirup-showcase__tab {
-	appearance: none; -webkit-appearance: none; border: 0; background: none; box-shadow: none;
-	cursor: pointer; font: inherit; font-size: clamp(14px, 1.05vw, 18px); text-align: left; padding: 3px 0;
-	color: #9aa7aa; font-weight: 700; transition: color .2s; border-bottom: 2px solid transparent;
-	text-decoration: none; display: inline-block; width: fit-content;
+/* Pills (derecha) */
+.spirup-showcase__pills {
+	display: flex; flex-direction: column; gap: clamp(8px, .9vw, 14px);
+	align-items: flex-start; animation: sc-in .5s ease both;
 }
-.spirup-showcase__tab:hover { color: var(--accent); }
-.spirup-showcase__tab.is-active { color: var(--accent); border-bottom-color: var(--accent); }
-.spirup-showcase__tab:focus { outline: none; background: none; box-shadow: none; }
-.spirup-showcase__tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.spirup-pill {
+	display: inline-block; padding: .5em 1.35em; border-radius: 999px;
+	font-weight: 700; font-size: clamp(13px, 1vw, 17px); line-height: 1.1; white-space: nowrap;
+}
+.spirup-pill--soft { background: #cdeae8; color: #1f8f97; }
+.spirup-pill--lime { background: #b7d24a; color: #33461a; }
+.spirup-pill--teal { background: #1f8f97; color: #fff; }
+.spirup-pill--blue { background: #2f7fbf; color: #fff; }
+.spirup-pill--navy { background: #173a86; color: #fff; }
+
+/* Flechas de cambio de sabor */
+.spirup-showcase__arrow {
+	position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+	width: clamp(38px, 3.4vw, 52px); height: clamp(38px, 3.4vw, 52px);
+	display: grid; place-items: center;
+	border: 0; border-radius: 50%; cursor: pointer;
+	background: rgba(255, 255, 255, .72); color: var(--accent);
+	font-size: clamp(24px, 2.4vw, 34px); line-height: 0; font-weight: 700;
+	box-shadow: 0 6px 16px rgba(20, 50, 60, .12);
+	transition: background .2s, transform .2s;
+}
+.spirup-showcase__arrow:hover { background: #fff; }
+.spirup-showcase__arrow--prev { left: clamp(-6px, -1vw, 4px); }
+.spirup-showcase__arrow--next { right: clamp(-6px, -1vw, 4px); }
+
+/* Toggle de sabor: se oculta el que NO esta activo (cada elemento conserva su display base) */
+.spirup-showcase[data-flavor="citrus"] .is-rebel  { display: none; }
+.spirup-showcase[data-flavor="rebel"]  .is-citrus { display: none; }
+
+@keyframes sc-in   { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes sc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sc-wm   { from { opacity: 0; } to { opacity: .34; } }
+@media (prefers-reduced-motion: reduce) {
+	.spirup-showcase__desc, .spirup-showcase__pills, .spirup-showcase__can, .spirup-showcase__wm { animation: none; }
+}
 
 @media (max-width: 820px) {
-	.spirup-showcase__inner { grid-template-columns: 1fr; justify-items: center; gap: clamp(26px, 6vw, 44px); }
+	.spirup-showcase__inner { grid-template-columns: 1fr; justify-items: center; gap: clamp(20px, 5vw, 36px); }
 	.spirup-showcase__side { text-align: center; align-items: center; }
-	.spirup-showcase__side--left { order: 2; }
-	.spirup-showcase__stage { order: 1; }
+	.spirup-showcase__side--left  { order: 2; }
+	.spirup-showcase__stage       { order: 1; }
 	.spirup-showcase__side--right { order: 3; }
-	.spirup-showcase__side--left .spirup-showcase__desc strong,
-	.spirup-showcase__side--left .spirup-showcase__desc p,
-	.spirup-showcase__side--left .spirup-feat p { margin-left: auto; margin-right: auto; }
-	.spirup-showcase__tabs { align-items: center; }
-	.spirup-showcase__tab { text-align: center; }
+	.spirup-showcase__pills { align-items: center; }
+	.spirup-showcase__descsub, .spirup-showcase__desc p { max-width: none; }
 }
 
 .spirup-parte8 {

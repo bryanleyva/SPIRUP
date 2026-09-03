@@ -58,36 +58,92 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* ===================== PARTE 2 ===================== */ ?>
-	<section class="spirup-parte2" id="una-lata">
-		<div class="spirup-parte2__head">
-			<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
-			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
-		</div>
+	<?php
+	/* ===================== PARTE 2 = SHOWCASE de sabores =====================
+	   Fondo plantilla (plantilla-showcase.png) + palabra gigante CITRUS/REBEL +
+	   texto izquierda + pills derecha + flechas que cambian la lata (Citrus <->
+	   Rebel). El AGUA (agua_realzada.mp4) se queda detras de la lata en ambos
+	   sabores. Todo el contenido de cada sabor esta en el DOM y se muestra/oculta
+	   con [data-flavor]; al cambiar, el que aparece se anima (paso de display:none
+	   a visible -> re-dispara la animacion CSS). Las flechas solo cambian el
+	   data-flavor (js/spirup.js). */
+	$sc = array(
+		'citrus' => array(
+			'word'  => 'CITRUS',
+			'title' => 'CITRUS BLUE',
+			'sub'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
+			'lead'  => 'energía limpia para potenciar tu día.',
+			'pills' => array(
+				array( 'Fresco', 'soft' ),
+				array( 'Refrescante', 'lime' ),
+				array( 'Ligero', 'soft' ),
+				array( 'Energía natural', 'teal' ),
+			),
+			'can'   => 'lata-citrus.png',
+			'alt'   => 'Lata Spir Up Citrus Blue',
+		),
+		'rebel' => array(
+			'word'  => 'REBEL',
+			'title' => 'REBEL BLUE',
+			'sub'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
+			'lead'  => 'energía limpia para potenciar tu día.',
+			'pills' => array(
+				array( 'Intenso', 'teal' ),
+				array( 'Refrescante', 'blue' ),
+				array( 'Moderno', 'navy' ),
+				array( 'Energía natural', 'lime' ),
+			),
+			'can'   => 'lata-rebel.png',
+			'alt'   => 'Lata Spir Up Rebel Blue',
+		),
+	);
+	?>
+	<section class="spirup-parte2 spirup-showcase" id="una-lata" data-flavor="citrus">
+		<img class="spirup-showcase__bg" src="<?php echo esc_url( $img . '/plantilla-showcase.png' ); ?>" alt="" aria-hidden="true">
 
-		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) + el
-			agua, que BROTA al entrar la seccion en pantalla y despues sigue
-			ondulando, como liquido en movimiento.
-			js/spirup.js agrega .is-in a [data-water-stage] cuando la seccion entra;
-			js/spirup-splash.js dibuja el agua dentro de .spirup-parte2__water.
-			El agua es una foto real con transparencia (splash-agua.png/.webp),
-			extraida del mockup parte2-clean.png y tenida de celeste; el original sin
-			tenir se guarda en splash-agua-neutro.png. Ajustes de aqui abajo:
-			  spread   = ancho del agua, medido en anchos de lata
-			  x / y    = donde cae el centro del agua sobre la lata (0-1)
-			  duration = cuanto tarda en formarse, en ms
-			  flow     = intensidad del oleaje continuo (0 = agua quieta)
-			  shine    = intensidad de los destellos que la recorren
-			  filter   = retoque final (el PNG ya va tenido) */ ?>
-		<?php /* Agua (video) detras de la lata: se reproduce UNA vez al entrar en pantalla
-			(js/spirup.js -> data-splash-video) y queda estatica en el ultimo frame. */ ?>
-		<div class="spirup-parte2__stage" data-splash-video>
-			<video class="spirup-parte2__video" muted playsinline preload="auto" aria-hidden="true">
-				<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
-			</video>
-			<img class="spirup-parte2__can"
-				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
-				alt="Lata Spir Up Citrus Blue">
+		<?php foreach ( $sc as $key => $f ) : ?>
+			<span class="spirup-showcase__wm is-<?php echo esc_attr( $key ); ?>" aria-hidden="true"><?php echo esc_html( $f['word'] ); ?></span>
+		<?php endforeach; ?>
+
+		<div class="spirup-showcase__inner">
+			<?php /* Columna izquierda: descripcion del sabor */ ?>
+			<div class="spirup-showcase__side spirup-showcase__side--left">
+				<?php foreach ( $sc as $key => $f ) : ?>
+					<div class="spirup-showcase__desc is-<?php echo esc_attr( $key ); ?>">
+						<strong><?php echo esc_html( $f['title'] ); ?></strong>
+						<span class="spirup-showcase__descsub"><?php echo esc_html( $f['sub'] ); ?></span>
+						<p><?php echo esc_html( $f['lead'] ); ?></p>
+					</div>
+				<?php endforeach; ?>
+			</div>
+
+			<?php /* Centro: escenario con el agua (video) detras y las 2 latas */ ?>
+			<div class="spirup-showcase__stage" data-splash-video>
+				<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">&#8249;</button>
+
+				<video class="spirup-parte2__video" muted playsinline preload="auto" aria-hidden="true">
+					<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
+				</video>
+
+				<?php foreach ( $sc as $key => $f ) : ?>
+					<img class="spirup-showcase__can is-<?php echo esc_attr( $key ); ?>"
+						src="<?php echo esc_url( $img . '/' . $f['can'] ); ?>"
+						alt="<?php echo esc_attr( $f['alt'] ); ?>">
+				<?php endforeach; ?>
+
+				<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">&#8250;</button>
+			</div>
+
+			<?php /* Columna derecha: pills del sabor */ ?>
+			<div class="spirup-showcase__side spirup-showcase__side--right">
+				<?php foreach ( $sc as $key => $f ) : ?>
+					<div class="spirup-showcase__pills is-<?php echo esc_attr( $key ); ?>">
+						<?php foreach ( $f['pills'] as $p ) : ?>
+							<span class="spirup-pill spirup-pill--<?php echo esc_attr( $p[1] ); ?>"><?php echo esc_html( $p[0] ); ?></span>
+						<?php endforeach; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</section>
 
