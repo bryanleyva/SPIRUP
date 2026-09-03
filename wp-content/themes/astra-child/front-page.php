@@ -58,36 +58,27 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* ===================== PARTE 2 ===================== */ ?>
-	<section class="spirup-parte2" id="una-lata">
-		<div class="spirup-parte2__head">
-			<h2 class="spirup-parte2__title">Una lata con ciencia adentro</h2>
-			<p class="spirup-parte2__sub"><strong>355 ml de bebida gasificada</strong> formulada con un bioactivo reconocido por su potencial antioxidante.</p>
-		</div>
+	<?php /* ===================== PARTE 2 = SHOWCASE (plantilla + lata + agua + flechas) =====================
+	   Las plantillas (citrus3d.png / rebel3d.png) traen TODO horneado (texto, pills,
+	   palabra CITRUS/REBEL, fondo) con el CENTRO VACIO. Aqui solo encimamos, centrado
+	   en ese hueco: el agua (agua_realzada.mp4) + la lata, y las flechas que cambian
+	   Citrus <-> Rebel. js/spirup.js togglea data-flavor; el CSS muestra/oculta la
+	   plantilla y la lata del sabor activo. */ ?>
+	<section class="spirup-showcase" id="una-lata" data-flavor="citrus">
+		<div class="spirup-showcase__inner" data-splash-video>
+			<img class="spirup-showcase__tpl is-citrus" src="<?php echo esc_url( $img . '/citrus3d.png' ); ?>" alt="Spir Up Citrus Blue: refrescante, enriquecida y natural">
+			<img class="spirup-showcase__tpl is-rebel" src="<?php echo esc_url( $img . '/rebel3d.png' ); ?>" alt="Spir Up Rebel Blue: refrescante, enriquecida y natural">
 
-		<?php /* Escenario de la lata: el render nuevo (lata-spir-up 1 (2).png) + el
-			agua, que BROTA al entrar la seccion en pantalla y despues sigue
-			ondulando, como liquido en movimiento.
-			js/spirup.js agrega .is-in a [data-water-stage] cuando la seccion entra;
-			js/spirup-splash.js dibuja el agua dentro de .spirup-parte2__water.
-			El agua es una foto real con transparencia (splash-agua.png/.webp),
-			extraida del mockup parte2-clean.png y tenida de celeste; el original sin
-			tenir se guarda en splash-agua-neutro.png. Ajustes de aqui abajo:
-			  spread   = ancho del agua, medido en anchos de lata
-			  x / y    = donde cae el centro del agua sobre la lata (0-1)
-			  duration = cuanto tarda en formarse, en ms
-			  flow     = intensidad del oleaje continuo (0 = agua quieta)
-			  shine    = intensidad de los destellos que la recorren
-			  filter   = retoque final (el PNG ya va tenido) */ ?>
-		<?php /* Agua (video) detras de la lata: se reproduce UNA vez al entrar en pantalla
-			(js/spirup.js -> data-splash-video) y queda estatica en el ultimo frame. */ ?>
-		<div class="spirup-parte2__stage" data-splash-video>
-			<video class="spirup-parte2__video" muted playsinline preload="auto" aria-hidden="true">
+			<?php /* Agua detras de la lata (se reproduce al entrar en pantalla, ping-pong). */ ?>
+			<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
 				<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
 			</video>
-			<img class="spirup-parte2__can"
-				src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>"
-				alt="Lata Spir Up Citrus Blue">
+
+			<img class="spirup-showcase__can is-citrus" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="Lata Spir Up Citrus Blue">
+			<img class="spirup-showcase__can is-rebel" src="<?php echo esc_url( $img . '/lata-spir-up 1 (3).png' ); ?>" alt="Lata Spir Up Rebel Blue">
+
+			<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--prev" data-flavor-prev aria-label="Sabor anterior">&#8249;</button>
+			<button type="button" class="spirup-showcase__arrow spirup-showcase__arrow--next" data-flavor-next aria-label="Siguiente sabor">&#8250;</button>
 		</div>
 	</section>
 

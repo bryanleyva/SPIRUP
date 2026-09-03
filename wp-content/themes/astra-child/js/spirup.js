@@ -211,29 +211,24 @@
 	io.observe( stage );
 } )();
 
-/* ===== Showcase de sabores: selector Citrus Blue / Rebel Blue ===== */
+/* ===== Showcase de sabores: flechas que cambian Citrus <-> Rebel =====
+   Solo togglean el data-flavor de la seccion; el CSS cambia la plantilla (con su
+   texto/pills/palabra horneados) y la lata del sabor activo. El agua queda detras. */
 ( function () {
+	'use strict';
 	var sc = document.querySelector( '.spirup-showcase' );
 	if ( ! sc ) { return; }
-	var wm  = sc.querySelector( '[data-wm]' );
-	var ext = sc.querySelector( '[data-extractos]' );
-	var tabs = sc.querySelectorAll( '[data-flavor-set]' );
-	var data = {
-		citrus: { wm: 'CITRUS BLUE', ext: 'El poder de la naturaleza en el limón y la hierba luisa' },
-		rebel:  { wm: 'REBEL BLUE',  ext: 'El poder de la naturaleza en el blueberry y el limón' }
-	};
-	Array.prototype.forEach.call( tabs, function ( t ) {
-		t.addEventListener( 'click', function () {
-			var f = t.getAttribute( 'data-flavor-set' );
-			if ( ! data[ f ] ) { return; }
-			sc.setAttribute( 'data-flavor', f );
-			if ( wm )  { wm.textContent  = data[ f ].wm; }
-			if ( ext ) { ext.textContent = data[ f ].ext; }
-			Array.prototype.forEach.call( tabs, function ( x ) {
-				var on = ( x === t );
-				x.classList.toggle( 'is-active', on );
-				x.setAttribute( 'aria-selected', on ? 'true' : 'false' );
-			} );
-		} );
+	var order = [ 'citrus', 'rebel' ];
+	function current() { return sc.getAttribute( 'data-flavor' ) || 'citrus'; }
+	function step( dir ) {
+		var i = order.indexOf( current() );
+		if ( i < 0 ) { i = 0; }
+		sc.setAttribute( 'data-flavor', order[ ( i + dir + order.length ) % order.length ] );
+	}
+	Array.prototype.forEach.call( sc.querySelectorAll( '[data-flavor-prev]' ), function ( b ) {
+		b.addEventListener( 'click', function () { step( -1 ); } );
+	} );
+	Array.prototype.forEach.call( sc.querySelectorAll( '[data-flavor-next]' ), function ( b ) {
+		b.addEventListener( 'click', function () { step( 1 ); } );
 	} );
 } )();
