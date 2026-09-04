@@ -118,7 +118,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<span class="spirup-jump" data-jump="beneficios" style="top:33%;" aria-hidden="true"></span>
 			<span class="spirup-jump" data-jump="conocenos" style="top:51%;" aria-hidden="true"></span>
 			<span class="spirup-jump" data-jump="productos" style="top:79%;" aria-hidden="true"></span>
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group 75.png' ); ?>" alt="">
+			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group75-top.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
 				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
 				<ul class="spirup-bloque__list">
