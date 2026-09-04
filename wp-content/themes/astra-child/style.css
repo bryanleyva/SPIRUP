@@ -10,6 +10,26 @@ Text Domain:  astra-child
 */
 
 /* ==========================================================================
+   PP Neue Montreal (fuente de titulos) - version "Free for Personal Use"
+   Archivos locales convertidos a woff2 en /fonts. Pesos: 400, 600 y 800.
+   ========================================================================== */
+@font-face {
+	font-family: 'PP Neue Montreal';
+	src: url('fonts/PPNeueMontreal-Regular.woff2') format('woff2');
+	font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: 'PP Neue Montreal';
+	src: url('fonts/PPNeueMontreal-Semibold.woff2') format('woff2');
+	font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: 'PP Neue Montreal';
+	src: url('fonts/PPNeueMontreal-Extrabold.woff2') format('woff2');
+	font-weight: 800; font-style: normal; font-display: swap;
+}
+
+/* ==========================================================================
    Variables de marca SPIRUP
    ========================================================================== */
 :root {
@@ -20,10 +40,10 @@ Text Domain:  astra-child
 	--spirup-white:  #ffffff;
 	--spirup-max:    1240px;
 
-	/* Tipografia: cuerpo Montserrat, titulos Manrope (~PP Neue Montreal),
-	   banner de inicio Kaushan Script (~Northwell). */
+	/* Tipografia: cuerpo Montserrat, titulos PP Neue Montreal (con Manrope de
+	   respaldo por si la fuente no carga), banner de inicio Kaushan Script. */
 	--font-body:   'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--font-title:  'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-title:  'PP Neue Montreal', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	--font-script: 'Kaushan Script', 'Segoe Script', cursive;
 }
 
