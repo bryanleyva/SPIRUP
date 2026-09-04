@@ -60,6 +60,7 @@ get_header();
 		<?php /* 2. CITRUS BLUE */ ?>
 		<section class="prodx-sec s-flavor" data-sec="citrus-front">
 			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/citrusblueproducto.png' ); ?>" alt="Citrus Blue">
+			<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="" aria-hidden="true">
 			<div class="prodx-desc">
 				<p class="prodx-desc__h">Bebida carbonatada sin&nbsp;azúcar con ficocianina</p>
 				<p class="prodx-desc__p">un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias.</p>
@@ -74,6 +75,7 @@ get_header();
 		<?php /* 3. INGREDIENTES (Citrus) */ ?>
 		<section class="prodx-sec s-ing" data-sec="citrus-back">
 			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/ingredientesproductos.png' ); ?>" alt="Ingredientes">
+			<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="" aria-hidden="true">
 			<div class="prodx-ing prodx-ing--tl"><h3>Agua gasificada</h3><p>Frescura que se siente.</p></div>
 			<div class="prodx-ing prodx-ing--bl"><h3>Ficocianina</h3><p>Antioxidantes de origen natural.</p></div>
 			<div class="prodx-ing prodx-ing--tr is-blue"><h3>Extractos naturales</h3><p>El poder de la naturaleza en el limón y la hierba luisa.</p></div>
@@ -83,6 +85,7 @@ get_header();
 		<?php /* 4. REBEL BLUE */ ?>
 		<section class="prodx-sec s-flavor" data-sec="rebel-front">
 			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/rebelblueproductos.png' ); ?>" alt="Rebel Blue">
+			<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="" aria-hidden="true">
 			<div class="prodx-desc">
 				<p class="prodx-desc__h">Bebida carbonatada sin&nbsp;azúcar con ficocianina</p>
 				<p class="prodx-desc__p">un potente compuesto bioactivo con propiedades antioxidantes y antiinflamatorias.</p>
@@ -97,6 +100,7 @@ get_header();
 		<?php /* 5. INGREDIENTES (Rebel) */ ?>
 		<section class="prodx-sec s-ing" data-sec="rebel-back">
 			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/ingredientesproductos.png' ); ?>" alt="Ingredientes">
+			<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="" aria-hidden="true">
 			<div class="prodx-ing prodx-ing--tl"><h3>Agua gasificada</h3><p>Frescura que se siente.</p></div>
 			<div class="prodx-ing prodx-ing--bl"><h3>Ficocianina</h3><p>Antioxidantes de origen natural.</p></div>
 			<div class="prodx-ing prodx-ing--tr is-blue"><h3>Extractos naturales</h3><p>El poder de la naturaleza en el blueberry y el limón.</p></div>
