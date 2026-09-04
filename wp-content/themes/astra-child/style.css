@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* Scroll suave al navegar a secciones por ancla (#por-que, #beneficios...) */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fija no tapa el anclaje */
 [id] { scroll-margin-top: 24px; }
 
 .spirup-container {
@@ -642,6 +642,10 @@ html { scroll-behavior: smooth; }
 .spirup-bloque { display: block; background: #fff; }
 .spirup-bloque__inner { position: relative; width: 100%; }
 .spirup-bloque__img { display: block; width: 100%; height: auto; }
+/* Anclas invisibles del menu (Beneficios/Conocenos/Productos) sobre la imagen
+   horneada del desktop: el contenido movil con esos id esta oculto en desktop,
+   asi que el JS de navegacion salta a la ancla VISIBLE segun el breakpoint. */
+.spirup-jump { position: absolute; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 /* Texto de parte4 encimado sobre la zona transparente (arriba-derecha).
    La zona transparente va de 0% a 33.7% de la imagen (misma altura que la foto
    de la playa a la izquierda); centramos el texto verticalmente ahi para que

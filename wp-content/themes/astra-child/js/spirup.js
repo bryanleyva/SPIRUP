@@ -258,3 +258,60 @@
 		b.addEventListener( 'click', function () { go( 1 ); } );
 	} );
 } )();
+
+/* ==========================================================================
+   Navegacion por anclas (menu: Beneficios / Conocenos / Productos ...)
+   En desktop el contenido con esos id vive en .spirup-mobileflow (oculto), y el
+   real esta horneado en .spirup-bloque con anclas [data-jump]. Este modulo salta
+   a la ancla VISIBLE (segun breakpoint) y descuenta la altura de la cabecera fija.
+   ========================================================================== */
+( function () {
+	'use strict';
+	function headerOffset() {
+		var s = document.querySelector( '.spirup-sticky' );
+		return ( s ? s.getBoundingClientRect().height : 100 ) + 14;
+	}
+	function isVisible( el ) {
+		return !! ( el && ( el.offsetParent !== null || el.getClientRects().length ) );
+	}
+	function findTarget( hash ) {
+		if ( ! hash ) { return null; }
+		var list = [];
+		try { list = document.querySelectorAll( '#' + ( window.CSS && CSS.escape ? CSS.escape( hash ) : hash ) + ', [data-jump="' + hash + '"]' ); } catch ( e ) {}
+		for ( var i = 0; i < list.length; i++ ) { if ( isVisible( list[ i ] ) ) { return list[ i ]; } }
+		return document.getElementById( hash );
+	}
+	function scrollToHash( hash, smooth ) {
+		var el = findTarget( hash );
+		if ( ! el ) { return false; }
+		var y = el.getBoundingClientRect().top + ( window.pageYOffset || 0 ) - headerOffset();
+		window.scrollTo( { top: Math.max( 0, Math.round( y ) ), behavior: smooth ? 'smooth' : 'auto' } );
+		return true;
+	}
+
+	// Click en un enlace de esta misma pagina que apunte a una ancla.
+	document.addEventListener( 'click', function ( e ) {
+		var a = e.target.closest ? e.target.closest( 'a[href*="#"]' ) : null;
+		if ( ! a ) { return; }
+		var href = a.getAttribute( 'href' ) || '';
+		var hash = href.split( '#' )[ 1 ];
+		if ( ! hash ) { return; }
+		// Solo si el enlace es de ESTA pagina (mismo path) o una ancla suelta.
+		var samePage = ( href.charAt( 0 ) === '#' ) || ( a.pathname === window.location.pathname );
+		if ( ! samePage ) { return; }
+		if ( document.getElementById( hash ) || document.querySelector( '[data-jump="' + hash + '"]' ) ) {
+			if ( scrollToHash( hash, true ) ) {
+				e.preventDefault();
+				if ( window.history && history.pushState ) { history.pushState( null, '', '#' + hash ); }
+			}
+		}
+	} );
+
+	// Al cargar con #hash (llegando desde otra pagina): corrige el salto nativo.
+	if ( window.location.hash && window.location.hash.length > 1 ) {
+		var h = window.location.hash.slice( 1 );
+		window.addEventListener( 'load', function () {
+			window.setTimeout( function () { scrollToHash( h, false ); }, 80 );
+		} );
+	}
+} )();
