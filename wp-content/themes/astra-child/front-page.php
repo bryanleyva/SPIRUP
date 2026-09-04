@@ -19,28 +19,16 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 <main class="spirup-main">
 
-	<?php /* HERO reconstruido con TEXTO REAL (ya no una imagen con todo horneado, que
-		pixelaba): foto limpia (fondo1) + titulo manuscrito + banda mint con features.
-		La foto tiene la ola inferior TRANSPARENTE => deja ver la banda mint de atras. */ ?>
+	<?php /* HERO = imagen Group 56 (foto + titulo + banda + features, todo igual al
+		figma). Se sirve tambien @2x via srcset => nitido en pantallas grandes. Debajo
+		de la ola es transparente => conecta con el showcase (#ccedec) SIN costura. */ ?>
 	<section class="spirup-figura">
-		<div class="spirup-figura__band" aria-hidden="true"></div>
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/fondo1.png' ); ?>"
-			alt="Lata Spir Up sostenida bajo un chorro de agua y cielo azul">
-		<div class="spirup-figura__lead">
-			<h1 class="spirup-figura__title">¡Un sorbo de vitalidad,<br>un sorbo de <span>Spir&nbsp;Up!</span></h1>
-			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
-		</div>
-		<?php
-		$fig_feats = array( 'Respaldada por investigación', 'Sin colorantes artificiales', 'Propuesta sostenible' );
-		$fig_bolt  = '<svg class="spirup-figura__bolt" viewBox="0 0 24 40" aria-hidden="true"><path d="M14 2 4 22h7l-3 16 12-22h-7z" fill="#6cbf3f"/></svg>';
-		?>
-		<ul class="spirup-figura__features">
-			<?php foreach ( $fig_feats as $ffi => $feat ) : ?>
-				<?php if ( $ffi > 0 ) { echo $fig_bolt; /* phpcs:ignore */ } ?>
-				<li><?php echo esc_html( $feat ); ?></li>
-			<?php endforeach; ?>
-		</ul>
+			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
+			srcset="<?php echo esc_url( $img . '/Group 56.png' ); ?> 1443w, <?php echo esc_url( $img . '/Group56@2x.png' ); ?> 2886w"
+			sizes="100vw"
+			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up! Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
+		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
 	</section>
 
 	<?php
