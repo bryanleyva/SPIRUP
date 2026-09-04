@@ -311,3 +311,101 @@ add_filter( 'the_content', function ( $content ) {
  * A partir de aqui: hooks, custom post types, integracion WooCommerce,
  * shortcodes y demas logica del ecommerce SPIRUP.
  */
+
+/* ==========================================================================
+   PANEL ADMINISTRATIVO DE TEXTOS
+   Apariencia -> Personalizar -> "SPIR UP · Textos"
+   Permite editar los textos reales de la portada (con vista previa en vivo).
+   Los textos que van dentro de imagenes (hero, palabras CITRUS/REBEL, banda
+   de features, "Ingredientes con proposito", "Del cultivo") NO son editables
+   como texto porque estan horneados en la imagen del diseño.
+   ========================================================================== */
+
+/**
+ * Devuelve un texto editable por su clave (o su valor por defecto).
+ */
+function spirup_txt( $key, $default = null ) {
+	if ( null === $default ) {
+		$fields  = spirup_text_fields();
+		$default = isset( $fields[ $key ] ) ? $fields[ $key ][2] : '';
+	}
+	return get_theme_mod( 'spirup_txt_' . $key, $default );
+}
+
+/**
+ * Definicion de los campos editables.
+ * clave => array( seccion, etiqueta, valor por defecto, 'text'|'textarea' )
+ */
+function spirup_text_fields() {
+	return array(
+		// Portada / general
+		'hero_cta'        => array( 'general', 'Botón de la portada', 'Pruébala ahora', 'text' ),
+		'elige_title'     => array( 'general', 'Título "Elige cómo quieres"', 'Elige cómo quieres tu SPIR UP', 'text' ),
+		// Slider Citrus
+		'sl_citrus_name'  => array( 'slider', 'Citrus · Nombre', 'Citrus Blue', 'text' ),
+		'sl_citrus_tag'   => array( 'slider', 'Citrus · Subtítulo (naranja)', 'REFRESCANTE, ENRIQUECIDA Y NATURAL:', 'text' ),
+		'sl_citrus_desc'  => array( 'slider', 'Citrus · Descripción', 'energía limpia para potenciar tu día.', 'textarea' ),
+		'sl_citrus_pills' => array( 'slider', 'Citrus · Pastillas (separadas por coma)', 'Fresco, Refrescante, Ligero, Energía natural', 'text' ),
+		// Slider Rebel
+		'sl_rebel_name'   => array( 'slider', 'Rebel · Nombre', 'Rebel Blue', 'text' ),
+		'sl_rebel_tag'    => array( 'slider', 'Rebel · Subtítulo (naranja)', 'REFRESCANTE, ENRIQUECIDA Y NATURAL:', 'text' ),
+		'sl_rebel_desc'   => array( 'slider', 'Rebel · Descripción', 'energía limpia para potenciar tu día.', 'textarea' ),
+		'sl_rebel_pills'  => array( 'slider', 'Rebel · Pastillas (separadas por coma)', 'Intenso, Refrescante, Moderno, Energía natural', 'text' ),
+		// Franja CTA
+		'cta_title'       => array( 'cta', 'Título', '¿Listo para probarlo?', 'text' ),
+		'cta_btn1'        => array( 'cta', 'Botón 1', 'Pedir ahora', 'text' ),
+		'cta_btn2'        => array( 'cta', 'Botón 2', 'Más detalles', 'text' ),
+		// Microalgas
+		'micro_title'     => array( 'micro', 'Título', 'El potencial de las microalgas, en una bebida que sí disfrutarás', 'textarea' ),
+		'micro_item1'     => array( 'micro', 'Ítem 1', 'No es una gaseosa común', 'text' ),
+		'micro_item2'     => array( 'micro', 'Ítem 2', 'No es una bebida energizante', 'text' ),
+		'micro_item3'     => array( 'micro', 'Ítem 3 (con check)', 'Es una nueva forma de nutrirte y disfrutar', 'text' ),
+		'micro_claim1'    => array( 'micro', 'Frase final (línea 1)', 'SPIR UP no compiten contra otras gaseosas,', 'text' ),
+		'micro_claim2'    => array( 'micro', 'Frase final (línea 2, negrita)', 'SPIR UP crea una nueva categoría', 'text' ),
+		// Reserva
+		'res_title'       => array( 'reserva', 'Título', 'Únete al lanzamiento exclusivo de SPIR UP', 'textarea' ),
+		'res_lead1'       => array( 'reserva', 'Párrafo 1', 'La primera producción de Spir Up estará disponible para un grupo selecto de personas antes de su lanzamiento oficial.', 'textarea' ),
+		'res_lead2'       => array( 'reserva', 'Párrafo 2', 'Déjanos tu correo y recibe acceso prioritario, novedades exclusivas y la oportunidad de conseguir las primeras unidades.', 'textarea' ),
+		'res_note'        => array( 'reserva', 'Nota', 'Sin spam. Solo te escribimos cuando llegue tu turno.', 'text' ),
+	);
+}
+
+/**
+ * Registra el panel, las secciones y los controles en el Customizer.
+ */
+function spirup_customize_register( $wp_customize ) {
+	$wp_customize->add_panel( 'spirup_textos', array(
+		'title'       => 'SPIR UP · Textos',
+		'description' => 'Edita los textos de la portada. Los textos dentro de imágenes del diseño no aparecen aquí.',
+		'priority'    => 22,
+	) );
+
+	$sections = array(
+		'general' => 'Portada / General',
+		'slider'  => 'Slider de sabores',
+		'cta'     => 'Franja "¿Listo para probarlo?"',
+		'micro'   => 'El potencial de las microalgas',
+		'reserva' => 'Reserva tu lugar',
+	);
+	foreach ( $sections as $sid => $stitle ) {
+		$wp_customize->add_section( 'spirup_sec_' . $sid, array(
+			'title' => $stitle,
+			'panel' => 'spirup_textos',
+		) );
+	}
+
+	foreach ( spirup_text_fields() as $key => $f ) {
+		$is_ta = ( isset( $f[3] ) && 'textarea' === $f[3] );
+		$wp_customize->add_setting( 'spirup_txt_' . $key, array(
+			'default'           => $f[2],
+			'sanitize_callback' => $is_ta ? 'sanitize_textarea_field' : 'sanitize_text_field',
+			'transport'         => 'refresh',
+		) );
+		$wp_customize->add_control( 'spirup_txt_' . $key, array(
+			'label'   => $f[1],
+			'section' => 'spirup_sec_' . $f[0],
+			'type'    => $is_ta ? 'textarea' : 'text',
+		) );
+	}
+}
+add_action( 'customize_register', 'spirup_customize_register' );

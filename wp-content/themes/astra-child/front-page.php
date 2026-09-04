@@ -28,7 +28,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			srcset="<?php echo esc_url( $img . '/Group 56.png' ); ?> 1443w, <?php echo esc_url( $img . '/Group56@2x.png' ); ?> 2886w"
 			sizes="100vw"
 			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up! Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
-		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar">Pruébala ahora</a>
+		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
 	</section>
 
 	<?php
@@ -39,19 +39,19 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	$sc_slides = array(
 		'citrus' => array(
 			'can'   => 'lata-spir-up 1 (2).png',
-			'name'  => 'Citrus Blue',
+			'name'  => spirup_txt( 'sl_citrus_name' ),
 			'word'  => 'CITRUS',
-			'tag'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
-			'desc'  => 'energía limpia para potenciar tu día.',
-			'pills' => array( 'Fresco', 'Refrescante', 'Ligero', 'Energía natural' ),
+			'tag'   => spirup_txt( 'sl_citrus_tag' ),
+			'desc'  => spirup_txt( 'sl_citrus_desc' ),
+			'pills' => array_filter( array_map( 'trim', explode( ',', spirup_txt( 'sl_citrus_pills' ) ) ) ),
 		),
 		'rebel'  => array(
 			'can'   => 'lata-spir-up 1 (3).png',
-			'name'  => 'Rebel Blue',
+			'name'  => spirup_txt( 'sl_rebel_name' ),
 			'word'  => 'REBEL',
-			'tag'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
-			'desc'  => 'energía limpia para potenciar tu día.',
-			'pills' => array( 'Intenso', 'Refrescante', 'Moderno', 'Energía natural' ),
+			'tag'   => spirup_txt( 'sl_rebel_tag' ),
+			'desc'  => spirup_txt( 'sl_rebel_desc' ),
+			'pills' => array_filter( array_map( 'trim', explode( ',', spirup_txt( 'sl_rebel_pills' ) ) ) ),
 		),
 	);
 	?>
@@ -91,10 +91,10 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== Franja CTA amarilla ===================== */ ?>
 	<section class="spirup-cta">
 		<div class="spirup-cta__inner">
-			<h3 class="spirup-cta__title">¿Listo para probarlo?</h3>
+			<h3 class="spirup-cta__title"><?php echo esc_html( spirup_txt( 'cta_title' ) ); ?></h3>
 			<div class="spirup-cta__actions">
-				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#productos">Pedir ahora</a>
-				<a class="spirup-cta__btn spirup-cta__btn--ghost" href="#por-que">Más detalles</a>
+				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#productos"><?php echo esc_html( spirup_txt( 'cta_btn1' ) ); ?></a>
+				<a class="spirup-cta__btn spirup-cta__btn--ghost" href="#por-que"><?php echo esc_html( spirup_txt( 'cta_btn2' ) ); ?></a>
 			</div>
 		</div>
 	</section>
@@ -120,13 +120,13 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<span class="spirup-jump" data-jump="productos" style="top:79%;" aria-hidden="true"></span>
 			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group75-top.png' ); ?>" alt="">
 			<div class="spirup-bloque__p4">
-				<h2 class="spirup-bloque__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
+				<h2 class="spirup-bloque__title"><?php echo esc_html( spirup_txt( 'micro_title' ) ); ?></h2>
 				<ul class="spirup-bloque__list">
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una gaseosa común</li>
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
-					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item1' ) ); ?></li>
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item2' ) ); ?></li>
+					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item3' ) ); ?></li>
 				</ul>
-				<p class="spirup-bloque__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
+				<p class="spirup-bloque__claim"><?php echo esc_html( spirup_txt( 'micro_claim1' ) ); ?><br><strong><?php echo esc_html( spirup_txt( 'micro_claim2' ) ); ?></strong></p>
 			</div>
 			<?php /* Diagrama de "Del cultivo": 3 circulos VACIOS (sin iconos) + flechas, alineados sobre las etiquetas horneadas (centros 16.8 / 46 / 74.9%) */ ?>
 			<div class="spirup-bloque__diagram" aria-hidden="true">
@@ -178,13 +178,13 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					alt="Lata Spir Up Citrus Blue con gafas de sol junto a una piscina">
 			</div>
 			<div class="spirup-parte4__text">
-				<h2 class="spirup-parte4__title">El potencial de las microalgas, en una bebida que sí disfrutarás</h2>
+				<h2 class="spirup-parte4__title"><?php echo esc_html( spirup_txt( 'micro_title' ) ); ?></h2>
 				<ul class="spirup-parte4__list">
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una gaseosa común</li>
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span>No es una bebida energizante</li>
-					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span>Es una nueva forma de nutrirte y disfrutar</li>
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item1' ) ); ?></li>
+					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item2' ) ); ?></li>
+					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item3' ) ); ?></li>
 				</ul>
-				<p class="spirup-parte4__claim">SPIR UP no compiten contra otras gaseosas,<br><strong>SPIR UP crea una nueva categoría</strong></p>
+				<p class="spirup-parte4__claim"><?php echo esc_html( spirup_txt( 'micro_claim1' ) ); ?><br><strong><?php echo esc_html( spirup_txt( 'micro_claim2' ) ); ?></strong></p>
 			</div>
 		</div>
 	</section>
@@ -254,7 +254,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	?>
 	<section class="spirup-parte8" id="productos">
 		<div class="spirup-parte8__inner">
-			<h2 class="spirup-parte8__title">Elige cómo quieres tu SPIR UP</h2>
+			<h2 class="spirup-parte8__title"><?php echo esc_html( spirup_txt( 'elige_title' ) ); ?></h2>
 			<div class="spirup-parte8__grid">
 				<?php foreach ( $sp8_products as $product ) :
 					$pid  = $product->get_id();
@@ -290,16 +290,16 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<?php /* ===================== PARTE 9: Reserva tu lugar (registro de correo) ===================== */ ?>
 	<section class="spirup-parte9" id="reservar">
 		<div class="spirup-parte9__inner">
-			<h2 class="spirup-parte9__title">Únete al lanzamiento exclusivo de SPIR UP</h2>
-			<p class="spirup-parte9__lead">La primera producción de Spir Up estará disponible para un grupo selecto de personas antes de su lanzamiento oficial.</p>
-			<p class="spirup-parte9__lead">Déjanos tu correo y recibe acceso prioritario, novedades exclusivas y la oportunidad de conseguir las primeras unidades.</p>
+			<h2 class="spirup-parte9__title"><?php echo esc_html( spirup_txt( 'res_title' ) ); ?></h2>
+			<p class="spirup-parte9__lead"><?php echo esc_html( spirup_txt( 'res_lead1' ) ); ?></p>
+			<p class="spirup-parte9__lead"><?php echo esc_html( spirup_txt( 'res_lead2' ) ); ?></p>
 			<form class="spirup-parte9__form" action="#" method="post" onsubmit="return false;">
 				<input type="email" name="email" placeholder="Tu correo electrónico" aria-label="Tu correo electrónico" required>
 				<button type="submit" aria-label="Reservar">
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 15 12 9 18"/></svg>
 				</button>
 			</form>
-			<p class="spirup-parte9__note">Sin spam. Solo te escribimos cuando llegue tu turno.</p>
+			<p class="spirup-parte9__note"><?php echo esc_html( spirup_txt( 'res_note' ) ); ?></p>
 		</div>
 	</section>
 
