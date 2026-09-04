@@ -992,25 +992,26 @@ html { scroll-behavior: smooth; }
 .prodx-hero__title {
 	position: absolute; left: 50%; top: 30%; transform: translate(-50%, -50%);
 	width: 84%; text-align: center; margin: 0;
-	color: #1a7a86; font-weight: 700; line-height: 1.22; font-size: 2.7cqw;
+	color: #186F70; font-weight: 700; line-height: 1.22; font-size: 2.7cqw;
 }
-.prodx-hero__title strong { color: #14515b; font-weight: 800; }
+.prodx-hero__title strong { color: #186F70; font-weight: 800; }
 .prodx-hero__title .c-orange { color: #EC7A04; }
 
 .prodx-lbl {
-	position: absolute; color: #1c4b54; font-weight: 800; line-height: 1.14;
+	position: absolute; color: #186F70; font-weight: 800; line-height: 1.14;
 	font-size: 1.22cqw; text-transform: uppercase; letter-spacing: .01em;
 }
+.prodx-lbl small { font-weight: 400; font-size: 0.9em; }   /* POR LATA / AÑADIDA sin negrita */
 .prodx-lbl--l1 { left: 18%;   top: 47%;   text-align: left; }
 .prodx-lbl--l2 { left: 15%;   top: 59.2%; text-align: left; }
 .prodx-lbl--l3 { left: 18.5%; top: 72%;   text-align: left; }
-.prodx-lbl--r1 { right: 18%;  top: 46.5%; text-align: right; }
-.prodx-lbl--r2 { right: 14.5%; top: 59.2%; text-align: right; }
-.prodx-lbl--r3 { right: 15.5%; top: 72%;   text-align: right; }
+.prodx-lbl--r1 { right: 21%;   top: 46.5%; text-align: right; }
+.prodx-lbl--r2 { right: 18%;   top: 59.2%; text-align: right; }
+.prodx-lbl--r3 { right: 18.5%; top: 72%;   text-align: right; }
 
 .prodx-hero__can {
 	position: absolute; left: 50%; top: 58.5%; transform: translate(-50%, -50%);
-	height: 33%; width: auto; z-index: 3; cursor: pointer;
+	height: 38%; width: auto; z-index: 3; cursor: pointer;
 	filter: drop-shadow(0 14px 26px rgba(20, 40, 60, .25));
 	transition: transform .4s cubic-bezier(.2, .7, .3, 1);
 }
@@ -1028,33 +1029,37 @@ html { scroll-behavior: smooth; }
 .prodx-can {
 	display: grid; place-items: center;
 	transform-style: preserve-3d;
+	transform: translateY(5vh) rotateY(0deg);      /* un poco mas abajo => no tapa el titulo */
 	transition: transform .7s cubic-bezier(.45, .05, .25, 1);
 }
 .prodx-can__img {
 	grid-area: 1 / 1;
-	height: min(58vh, 520px); width: auto; max-width: none;
+	height: min(64vh, 600px); width: auto; max-width: none;
 	filter: drop-shadow(0 22px 34px rgba(20, 40, 60, .28));
 	opacity: 0; transition: opacity .55s ease;
 }
 .prodx-stage[data-flavor="citrus"] .prodx-can__img.is-citrus { opacity: 1; }
 .prodx-stage[data-flavor="rebel"]  .prodx-can__img.is-rebel  { opacity: 1; }
-.prodx-stage[data-face="back"] .prodx-can { transform: rotateY(180deg); }   /* espejo = reverso */
+.prodx-stage[data-face="back"] .prodx-can { transform: translateY(5vh) rotateY(180deg); }   /* espejo = reverso */
 
 /* ---- Secciones (fondo con la marca de agua) ---- */
-.prodx-sec { position: relative; z-index: 1; container-type: inline-size; }
+/* Se limita al tamano NATIVO de cada fondo (no se estira) => no se pixela. */
+.prodx-sec { position: relative; z-index: 1; container-type: inline-size; margin-inline: auto; }
+.s-flavor { max-width: 946px; }
+.s-ing    { max-width: 1012px; }
 .prodx-sec__bg { display: block; width: 100%; height: auto; }
 
 /* Sabor: descripcion (izq) + explora (der) */
 .prodx-desc {
-	position: absolute; left: 7%; top: 53%; transform: translateY(-50%);
-	width: 30%; z-index: 3;
+	position: absolute; left: 6%; top: 53%; transform: translateY(-50%);
+	width: 25%; z-index: 3;
 }
 .prodx-desc__h { margin: 0 0 .7cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.5cqw; }
 .prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 600; line-height: 1.5; font-size: 1.7cqw; }
 
 .prodx-explora {
-	position: absolute; right: 7%; top: 53%; transform: translateY(-50%);
-	width: 26%; text-align: center; z-index: 3;
+	position: absolute; right: 6%; top: 53%; transform: translateY(-50%);
+	width: 24%; text-align: center; z-index: 3;
 }
 .prodx-explora__h { margin: 0 0 1.1cqw; color: #1F797A; font-weight: 800; line-height: 1.2; font-size: 2.2cqw; }
 .prodx-explora__opt { margin: .4cqw 0; color: #A9A9A9; font-weight: 800; line-height: 1.25; font-size: 1.95cqw; }
@@ -1062,15 +1067,15 @@ html { scroll-behavior: smooth; }
 .s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
 
 /* Ingredientes: 4 bloques (2 izq, 2 der) */
-.prodx-ing { position: absolute; width: 30%; z-index: 3; }
+.prodx-ing { position: absolute; width: 26%; z-index: 3; }
 .prodx-ing h3 { margin: 0 0 .5cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.1cqw; }
 .prodx-ing p  { margin: 0; color: #A9A9A9; font-weight: 600; line-height: 1.45; font-size: 1.55cqw; }
 .prodx-ing.is-blue h3   { color: #087FBD; }
 .prodx-ing.is-orange h3 { color: #EC7A04; }
-.prodx-ing--tl { left: 7%;  top: 41%; transform: translateY(-50%); }
-.prodx-ing--bl { left: 7%;  top: 63%; transform: translateY(-50%); }
-.prodx-ing--tr { right: 7%; top: 41%; transform: translateY(-50%); text-align: right; }
-.prodx-ing--br { right: 7%; top: 63%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--tl { left: 6%;  top: 41%; transform: translateY(-50%); }
+.prodx-ing--bl { left: 6%;  top: 63%; transform: translateY(-50%); }
+.prodx-ing--tr { right: 6%; top: 41%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--br { right: 6%; top: 63%; transform: translateY(-50%); text-align: right; }
 
 @media (prefers-reduced-motion: reduce) {
 	.prodx-can, .prodx-can__img, .prodx-hero__can { transition: none; }

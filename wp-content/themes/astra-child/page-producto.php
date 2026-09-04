@@ -39,7 +39,7 @@ get_header();
 		<span class="prodx-lbl prodx-lbl--l1">Ficocianina pura<br>garantizada<br>por lata</span>
 		<span class="prodx-lbl prodx-lbl--l2">Antinflamatorio</span>
 		<span class="prodx-lbl prodx-lbl--l3">Antioxidantes</span>
-		<span class="prodx-lbl prodx-lbl--r1">Sin azúcar<br>añadida</span>
+		<span class="prodx-lbl prodx-lbl--r1">Sin azúcar<br><small>añadida</small></span>
 		<span class="prodx-lbl prodx-lbl--r2">Equilibrio<br>celular</span>
 		<span class="prodx-lbl prodx-lbl--r3">Apoyo<br>inmunológico</span>
 
