@@ -1135,13 +1135,48 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-showcase__slide[data-flavor-slide="citrus"] { transform: translateX(0); }
 .spirup-showcase__slide[data-flavor-slide="rebel"]  { transform: translateX(100%); }
 
-.spirup-showcase__tpl {
-	position: absolute; inset: 0;
-	width: 100%; height: 100%;
-	object-fit: cover; object-position: center 69%;   /* recorta ~110px arriba y ~50px abajo (vacio) */
-	z-index: 1;
-	-webkit-user-drag: none;
+/* Fondo aqua de cada slide (cubre al deslizar) */
+.spirup-showcase__slide { background: #ccedec; }
+.spirup-showcase__slide.is-rebel { background: #d0e6ee; }
+
+/* Palabra grande en CONTORNO (texto real, ya no imagen => no pixela) */
+.spirup-showcase__word {
+	position: absolute; left: 50%; top: 3%; transform: translateX(-50%);
+	z-index: 1; margin: 0; white-space: nowrap; pointer-events: none;
+	font-family: var(--font-title); font-weight: 800; letter-spacing: .01em;
+	font-size: clamp(54px, 10.5vw, 150px); line-height: 1;
+	color: transparent;
+	-webkit-text-stroke: 2px #8cc4c0;      /* contorno teal (citrus) */
+	text-stroke: 2px #8cc4c0;
 }
+.spirup-showcase__slide.is-rebel .spirup-showcase__word {
+	-webkit-text-stroke: 2px #9fd0cb;
+	text-stroke: 2px #9fd0cb;
+}
+
+/* Copy de la izquierda */
+.spirup-showcase__copy { position: absolute; left: 6%; top: 52%; transform: translateY(-50%); width: 27%; z-index: 4; }
+.spirup-showcase__flavor { margin: 0 0 .3em; color: #1a7a86; font-family: var(--font-title); font-weight: 800; text-transform: uppercase; line-height: 1.05; font-size: clamp(20px, 2.35vw, 36px); }
+.spirup-showcase__tag { margin: 0 0 .5em; color: #f5a623; font-family: var(--font-title); font-weight: 800; line-height: 1.12; font-size: clamp(15px, 1.5vw, 24px); }
+.spirup-showcase__desc { margin: 0; color: #5b6d70; line-height: 1.45; font-size: clamp(13px, 1.05vw, 18px); }
+
+/* Pills de la derecha (escalonadas) */
+.spirup-showcase__pills { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: flex-end; gap: clamp(8px, 1vw, 16px); }
+.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; padding: clamp(8px, .85vw, 15px) clamp(16px, 1.5vw, 28px); font-size: clamp(13px, 1.15vw, 20px); box-shadow: 0 6px 16px rgba(20,60,60,.12); }
+.spirup-showcase__pills .pill--1 { margin-right: 0; }
+.spirup-showcase__pills .pill--2 { margin-right: clamp(18px, 2.2vw, 42px); }
+.spirup-showcase__pills .pill--3 { margin-right: clamp(4px, .6vw, 12px); }
+.spirup-showcase__pills .pill--4 { margin-right: clamp(26px, 3vw, 58px); }
+/* Colores Citrus */
+.is-citrus .pill--1 { background: #86ccd3; color: #164e57; }
+.is-citrus .pill--2 { background: #c2e14f; color: #164e57; }
+.is-citrus .pill--3 { background: #9fd3b0; color: #164e57; }
+.is-citrus .pill--4 { background: #1f7a78; color: #fff; }
+/* Colores Rebel */
+.is-rebel .pill--1 { background: #2f918f; color: #fff; }
+.is-rebel .pill--2 { background: #3f9bd4; color: #fff; }
+.is-rebel .pill--3 { background: #21458f; color: #fff; }
+.is-rebel .pill--4 { background: #c2e14f; color: #164e57; }
 
 /* Agua detras de la lata, centrada en el hueco */
 .spirup-showcase__video {

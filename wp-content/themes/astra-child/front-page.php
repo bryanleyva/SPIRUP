@@ -32,20 +32,43 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php
 	/* ===================== PARTE 2 = SHOWCASE (carrusel de sabores) =====================
-	   Cada sabor es un SLIDE (plantilla + agua + lata). Al pulsar una flecha, el slide
-	   entrante se desliza desde el lado (segun la flecha) y CUBRE al anterior, que sale
-	   por el lado opuesto (js/spirup.js). Las plantillas (citrus3d / rebelplantilla) ya
-	   traen texto/pills/palabra horneados; debajo va el agua y la lata centradas. */
+	   Cada sabor es un SLIDE construido con TEXTO REAL (ya NO una imagen/plantilla, que
+	   pixelaba): palabra grande en contorno, copy, pills de color, y encima la lata + agua.
+	   Al pulsar una flecha el slide entrante se desliza y cubre al anterior (js/spirup.js). */
 	$sc_slides = array(
-		'citrus' => array( 'tpl' => 'Group 77.png',      'can' => 'lata-spir-up 1 (2).png', 'name' => 'Citrus Blue' ),
-		'rebel'  => array( 'tpl' => 'rebelplantilla.png', 'can' => 'lata-spir-up 1 (3).png', 'name' => 'Rebel Blue' ),
+		'citrus' => array(
+			'can'   => 'lata-spir-up 1 (2).png',
+			'name'  => 'Citrus Blue',
+			'word'  => 'CITRUS',
+			'tag'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
+			'desc'  => 'energía limpia para potenciar tu día.',
+			'pills' => array( 'Fresco', 'Refrescante', 'Ligero', 'Energía natural' ),
+		),
+		'rebel'  => array(
+			'can'   => 'lata-spir-up 1 (3).png',
+			'name'  => 'Rebel Blue',
+			'word'  => 'REBEL',
+			'tag'   => 'REFRESCANTE, ENRIQUECIDA Y NATURAL:',
+			'desc'  => 'energía limpia para potenciar tu día.',
+			'pills' => array( 'Intenso', 'Refrescante', 'Moderno', 'Energía natural' ),
+		),
 	);
 	?>
 	<section class="spirup-showcase" id="una-lata" data-flavor="citrus">
 		<div class="spirup-showcase__viewport">
 			<?php foreach ( $sc_slides as $key => $s ) : ?>
 				<div class="spirup-showcase__slide is-<?php echo esc_attr( $key ); ?>" data-flavor-slide="<?php echo esc_attr( $key ); ?>" data-splash-video>
-					<img class="spirup-showcase__tpl" src="<?php echo esc_url( $img . '/' . $s['tpl'] ); ?>" alt="Spir Up <?php echo esc_attr( $s['name'] ); ?>: refrescante, enriquecida y natural">
+					<span class="spirup-showcase__word" aria-hidden="true"><?php echo esc_html( $s['word'] ); ?></span>
+					<div class="spirup-showcase__copy">
+						<p class="spirup-showcase__flavor"><?php echo esc_html( $s['name'] ); ?></p>
+						<p class="spirup-showcase__tag"><?php echo esc_html( $s['tag'] ); ?></p>
+						<p class="spirup-showcase__desc"><?php echo esc_html( $s['desc'] ); ?></p>
+					</div>
+					<ul class="spirup-showcase__pills">
+						<?php foreach ( $s['pills'] as $pi => $pill ) : ?>
+							<li class="pill pill--<?php echo (int) ( $pi + 1 ); ?>"><?php echo esc_html( $pill ); ?></li>
+						<?php endforeach; ?>
+					</ul>
 					<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
 						<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
 					</video>
