@@ -1058,14 +1058,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	position: absolute; left: 6%; top: 53%; transform: translateY(-50%);
 	width: 25%; z-index: 3;
 }
-.prodx-desc__h { margin: 0 0 .7cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.5cqw; }
+.prodx-desc__h { margin: 0 0 .7cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.18; font-size: 2.5cqw; }
 .prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 600; line-height: 1.5; font-size: 1.7cqw; }
 
 .prodx-explora {
 	position: absolute; right: 6%; top: 53%; transform: translateY(-50%);
 	width: 24%; text-align: center; z-index: 3;
 }
-.prodx-explora__h { margin: 0 0 1.1cqw; color: #1F797A; font-weight: 800; line-height: 1.2; font-size: 2.2cqw; }
+.prodx-explora__h { margin: 0 0 1.1cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.2cqw; }
 .prodx-explora__opt { margin: .4cqw 0; color: #A9A9A9; font-weight: 800; line-height: 1.25; font-size: 1.95cqw; }
 .s-flavor[data-sec="citrus-front"] .prodx-explora__opt.is-on { color: #1F797A; }
 .s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
