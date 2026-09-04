@@ -1202,10 +1202,29 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 
 @keyframes sc-fade { from { opacity: 0; } to { opacity: 1; } }
 
-@media (max-width: 700px) {
-	/* En movil las flechas se acercan a la lata para no montarse en los textos */
-	.spirup-showcase__arrow--prev { left: 6%; }
-	.spirup-showcase__arrow--next { right: 6%; }
+@media (max-width: 820px) {
+	/* Slider en movil/tablet: APILAR (palabra, lata, texto, pills) en vertical.
+	   En desktop van en posicion absoluta; aqui pasan a flujo (flex column). */
+	.spirup-showcase__viewport { aspect-ratio: 40 / 73; }
+	.spirup-showcase__slide {
+		display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+		text-align: center; padding: 5vw 5vw 7vw;
+	}
+	.spirup-showcase__wm,
+	.spirup-showcase__video { display: none; }   /* marca de agua y agua: se complican apiladas */
+	.spirup-showcase__word { position: static; transform: none; order: 1; font-size: min(15vw, 110px); }
+	.spirup-showcase__can { position: static; transform: none; order: 2; height: auto; width: min(46vw, 300px); margin: -3vw 0 2vw; }
+	.spirup-showcase__slide:hover .spirup-showcase__can { transform: none; }
+	.spirup-showcase__copy { position: static; transform: none; order: 3; width: 100%; max-width: 88vw; }
+	.spirup-showcase__flavor { font-size: min(6.6vw, 34px); }
+	.spirup-showcase__tag { font-size: min(4.3vw, 22px); }
+	.spirup-showcase__desc { font-size: min(3.9vw, 19px); }
+	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 2.2vw; margin-top: 3.5vw; }
+	.spirup-showcase__pills .pill { margin: 0 !important; font-size: min(4vw, 20px); padding: min(2.6vw, 13px) min(6.5vw, 30px); }
+	/* flechas a los bordes, a la altura de la lata */
+	.spirup-showcase__arrow { top: 30%; }
+	.spirup-showcase__arrow--prev { left: 3%; }
+	.spirup-showcase__arrow--next { right: 3%; }
 }
 
 .spirup-parte8 {
