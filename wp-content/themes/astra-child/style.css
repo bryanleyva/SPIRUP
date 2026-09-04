@@ -768,9 +768,10 @@ html { scroll-behavior: smooth; }
 	align-items: center;
 	gap: clamp(10px, 0.8vw, 20px);
 	color: var(--spirup-dark);
-	font-weight: 600;
+	font-weight: 500;
 	font-size: clamp(14px, 1.1vw, 30px);
 }
+.spirup-parte4__list .is-yes { font-weight: 800; }   /* solo el item con check en negrita */
 .spirup-parte4__list .ico {
 	flex: 0 0 auto;
 	display: inline-flex;
