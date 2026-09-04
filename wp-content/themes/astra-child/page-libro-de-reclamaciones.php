@@ -37,7 +37,7 @@ $opts = function ( $arr ) {
 			</span>
 			Libro de reclamaciones
 		</h1>
-		<p class="spirup-lr__intro">CIBUS CORP S.A.C.<br>RUC: 20615736024<br>Av. Marco Puente Llanos, Asoc. Florida 1 de California Mz C Lt 11. Lima - Lima - Ate<br>Tienda Online: La tienda virtual no está dirigida a menores de edad.</p>
+		<p class="spirup-lr__intro">Conforme al Código de Protección y Defensa del Consumidor (Ley N.°&nbsp;29571), ponemos a tu disposición este Libro de Reclamaciones virtual. Nos comprometemos a darte una respuesta en un plazo máximo de 15&nbsp;días hábiles.</p>
 
 		<form class="spirup-lr__form" id="spirup-lr-form" novalidate>
 
@@ -95,7 +95,7 @@ $opts = function ( $arr ) {
 				<p class="spirup-lr__note">El proveedor deberá dar respuesta al reclamo en un plazo no mayor de quince (15) días hábiles.</p>
 
 				<div class="spirup-lr__submit">
-					<button type="submit" class="spirup-lr__btn">Enviar ↗</button>
+					<button type="submit" class="spirup-lr__btn">Enviar</button>
 				</div>
 			</section>
 		</form>
