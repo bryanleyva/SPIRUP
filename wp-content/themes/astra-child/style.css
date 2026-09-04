@@ -641,7 +641,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	top: 0;
 	left: 55.5%;                      /* mas a la derecha: separado de la foto */
 	width: 39%;
-	height: 35.47%;                   /* imagen recortada (Group75-top) => %escalado x1.3496 */
+	height: 34.23%;                   /* imagen recortada (Group75-top, 2060px) => %escalado x1.30243 */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -665,7 +665,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-bloque__claim strong { font-weight: 800; }
 /* Diagrama "Del cultivo": 3 circulos alineados sobre las etiquetas horneadas
    (centros 16.8 / 46 / 74.9%) en el hueco vacio (y 55-64% de la imagen full). Flechas en CSS. */
-.spirup-bloque__diagram { position: absolute; top: 74.23%; left: 0; width: 100%; height: 12.15%; }  /* reposicionado para Group75-top */
+.spirup-bloque__diagram { position: absolute; top: 71.63%; left: 0; width: 100%; height: 11.72%; }  /* reposicionado para Group75-top (2060px) */
 .spirup-bloque__diagram .c { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 6.5%; aspect-ratio: 1 / 1; border: 2px solid #1f86c4; border-radius: 50%; box-sizing: border-box; background: transparent; }
 .spirup-bloque__diagram .c1 { left: 18.4%; }
 .spirup-bloque__diagram .c2 { left: 50.3%; }
@@ -1209,8 +1209,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 
 .spirup-parte8 {
-	/* Arranca en el mismo teal donde corta bloque68.png (#2a7e7d) para empalmar sin costura */
-	background: linear-gradient(180deg, #2a7e7d 0%, #2d807f 25%, #529f94 70%, #80c4ac 100%);
+	/* Arranca en el MISMO teal donde termina la imagen recortada (#24797a) => sin corte */
+	background: linear-gradient(180deg, #24797a 0%, #2a7e7d 18%, #529f94 70%, #80c4ac 100%);
 }
 .spirup-parte8__inner {
 	max-width: min(90vw, 1600px);
