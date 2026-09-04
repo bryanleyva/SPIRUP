@@ -47,6 +47,40 @@ get_header();
 		<img class="prodx-hero__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="Lata Spir Up Rebel Blue">
 	</section>
 
+	<?php /* ============ 1b. INICIAL en MOVIL (columna + card, como el figma) ============
+		En vez de la imagen aplanada con las etiquetas alrededor de la lata (que en
+		celular se ve como el desktop), aqui se arma con TEXTO: foto de latas, titulo,
+		lata, beneficios en COLUMNA (icono + texto) y "Momentos" en una CARD. */ ?>
+	<section class="prodx-herom">
+		<img class="prodx-herom__cans" src="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?>" alt="Latas Spir Up">
+		<h1 class="prodx-herom__title">
+			Refrescante por <strong>naturaleza.</strong><br>
+			Respaldada por la <strong class="c-orange">ciencia.</strong>
+		</h1>
+		<div class="prodx-herom__canwrap">
+			<img class="prodx-herom__rings" src="<?php echo esc_url( $img . '/prod-hero-rings.png' ); ?>" alt="" aria-hidden="true">
+			<img class="prodx-herom__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="Lata Spir Up Rebel Blue">
+		</div>
+		<ul class="prodx-herom__benefits">
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-1.png' ); ?>" alt="" aria-hidden="true"><span>Ficocianina pura garantizada <small>por lata</small></span></li>
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-2.png' ); ?>" alt="" aria-hidden="true"><span>Antinflamatorio</span></li>
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-3.png' ); ?>" alt="" aria-hidden="true"><span>Antioxidantes</span></li>
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-4.png' ); ?>" alt="" aria-hidden="true"><span>Sin azúcar <small>añadida</small></span></li>
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-5.png' ); ?>" alt="" aria-hidden="true"><span>Equilibrio celular</span></li>
+			<li><img src="<?php echo esc_url( $img . '/prod-ben-6.png' ); ?>" alt="" aria-hidden="true"><span>Apoyo inmunológico</span></li>
+		</ul>
+		<div class="prodx-herom__moments">
+			<h3 class="prodx-herom__mtitle">Momentos que te acompañan</h3>
+			<div class="prodx-herom__mgrid">
+				<div class="prodx-herom__mitem"><img src="<?php echo esc_url( $img . '/prod-mom-1.png' ); ?>" alt="" aria-hidden="true"><span>Durante la mañana</span></div>
+				<div class="prodx-herom__mitem"><img src="<?php echo esc_url( $img . '/prod-mom-2.png' ); ?>" alt="" aria-hidden="true"><span>Durante el trabajo</span></div>
+				<div class="prodx-herom__mitem"><img src="<?php echo esc_url( $img . '/prod-mom-3.png' ); ?>" alt="" aria-hidden="true"><span>En reuniones</span></div>
+				<div class="prodx-herom__mitem"><img src="<?php echo esc_url( $img . '/prod-mom-4.png' ); ?>" alt="" aria-hidden="true"><span>Al aire libre</span></div>
+				<div class="prodx-herom__mitem"><img src="<?php echo esc_url( $img . '/prod-mom-5.png' ); ?>" alt="" aria-hidden="true"><span>Antes/durante el entrenamiento</span></div>
+			</div>
+		</div>
+	</section>
+
 	<?php
 	/* ============ 2-5. ESCENARIO con la lata fija que se transforma ============ */
 	/* Agua (video) que va DETRAS de la lata en movil (el efecto se reusa en cada seccion). */
