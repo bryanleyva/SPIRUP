@@ -1397,9 +1397,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	color: #4d6266;
 }
 .spirup-legal__title {
-	display: flex;
-	align-items: center;
-	gap: clamp(10px, 1vw, 18px);
+	position: relative;              /* ancla del rayo colgante */
+	display: block;
 	color: var(--spirup-dark);
 	font-weight: 800;
 	line-height: 1.3;
@@ -1408,12 +1407,21 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 /* Rayo EN LÍNEA junto al texto (siempre visible), tamaño acorde al título
    (1.2em => sigue al font-size del título y NO sobresale del cuerpo de texto). */
+/* Rayo COLGANTE fuera del texto, en el margen izquierdo (como el figma):
+   se ancla al borde izq del titulo y se traslada a la izquierda + un gap. */
 .spirup-legal__bolt {
-	flex: 0 0 auto;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translate(calc(-100% - clamp(8px, 0.8vw, 16px)), -50%);
+	height: 2.7em;                   /* mas grande */
 	display: inline-flex;
 	align-items: center;
 	width: auto;
-	height: 1.7em;   /* mas grande y centrado con el titulo (segun figma) */
+}
+@media (max-width: 700px) {
+	/* en movil hay poco margen: rayo mas chico y menos separado */
+	.spirup-legal__bolt { height: 2em; transform: translate(calc(-100% - 5px), -50%); }
 }
 .spirup-legal__bolt svg,
 .spirup-legal__bolt img { width: auto; height: 100%; display: block; }
