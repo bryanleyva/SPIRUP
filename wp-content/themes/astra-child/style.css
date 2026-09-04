@@ -585,13 +585,13 @@ html { scroll-behavior: smooth; }
    Franja CTA amarilla
    ========================================================================== */
 .spirup-cta {
-	background: #f4c44e;
+	background: #FDD377;
 }
 /* Mismo contenedor que las tarjetas -> alineada con ellas */
 .spirup-cta__inner {
 	max-width: min(90vw, 1600px);
 	margin: 0 auto;
-	padding: clamp(16px, 1.7vw, 38px) clamp(16px, 1.4vw, 30px);
+	padding: clamp(9px, 0.95vw, 18px) clamp(16px, 1.4vw, 30px);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -615,8 +615,8 @@ html { scroll-behavior: smooth; }
 	font-weight: 600;
 	text-decoration: none;
 	white-space: nowrap;
-	padding: clamp(12px, 1vw, 20px) clamp(24px, 2vw, 40px);
-	font-size: clamp(16px, 1.15vw, 20px);
+	padding: clamp(7px, 0.6vw, 11px) clamp(22px, 1.8vw, 34px);
+	font-size: clamp(15px, 1.1vw, 19px);
 	transition: transform .12s ease, box-shadow .15s ease, background .15s ease;
 }
 .spirup-cta__btn--solid {
@@ -649,8 +649,8 @@ html { scroll-behavior: smooth; }
 .spirup-bloque__p4 {
 	position: absolute;
 	top: 0;
-	left: 51%;
-	width: 43%;
+	left: 55.5%;                      /* mas a la derecha: separado de la foto */
+	width: 39%;
 	height: 26.28%;
 	display: flex;
 	flex-direction: column;
@@ -665,7 +665,8 @@ html { scroll-behavior: smooth; }
 	margin: 0 0 2.6vw;
 }
 .spirup-bloque__list { list-style: none; margin: 0 0 3.8vw; padding: 0; display: grid; gap: 1.5vw; }
-.spirup-bloque__list li { display: flex; align-items: center; gap: 1.05vw; color: var(--spirup-dark); font-weight: 600; font-size: 1.3vw; }
+.spirup-bloque__list li { display: flex; align-items: center; gap: 1.05vw; color: var(--spirup-dark); font-weight: 500; font-size: 1.3vw; }
+.spirup-bloque__list .is-yes { font-weight: 800; }   /* solo el item con check en negrita */
 .spirup-bloque__list .ico { width: 1.7vw; height: 1.7vw; flex: none; display: inline-flex; }
 .spirup-bloque__list .ico svg { width: 100%; height: 100%; }
 .spirup-bloque__list .is-no .ico { color: #E97000; }
@@ -1060,7 +1061,7 @@ html { scroll-behavior: smooth; }
 	width: 100%;
 	max-width: 1441px;
 	margin: 0 auto;
-	aspect-ratio: 1441 / 893;          /* mantiene el encuadre de la plantilla */
+	aspect-ratio: 1441 / 733;          /* mas bajo: recorta el vacio de arriba/abajo del figma */
 	overflow: hidden;
 }
 /* Cada slide ocupa toda la ventana; el JS lo desliza. Estado inicial: citrus dentro,
@@ -1076,14 +1077,14 @@ html { scroll-behavior: smooth; }
 .spirup-showcase__tpl {
 	position: absolute; inset: 0;
 	width: 100%; height: 100%;
-	object-fit: fill;
+	object-fit: cover; object-position: center 69%;   /* recorta ~110px arriba y ~50px abajo (vacio) */
 	z-index: 1;
 	-webkit-user-drag: none;
 }
 
 /* Agua detras de la lata, centrada en el hueco */
 .spirup-showcase__video {
-	position: absolute; left: 50%; top: 56.5%;
+	position: absolute; left: 50%; top: 54%;
 	transform: translate(-50%, -50%);
 	width: 40%; height: auto; z-index: 2;
 	pointer-events: none; mix-blend-mode: normal;
@@ -1095,7 +1096,7 @@ html { scroll-behavior: smooth; }
 
 /* Lata centrada en el hueco (misma altura para ambos sabores => switch parejo) */
 .spirup-showcase__can {
-	position: absolute; left: 50%; top: 56.5%;
+	position: absolute; left: 50%; top: 54%;
 	transform: translate(-50%, -50%);
 	height: 72%; width: auto; z-index: 3;
 	transition: transform .35s ease;
@@ -1104,23 +1105,28 @@ html { scroll-behavior: smooth; }
 
 /* Flechas de cambio de sabor: pegadas a los BORDES de la pagina (como el Figma).
    Son hijas de .spirup-showcase (no del inner) => se posicionan contra la seccion. */
+/* Flechas SIN fondo redondo (como el figma): solo el chevron en color de marca. */
 .spirup-showcase__arrow {
-	position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
-	width: clamp(44px, 3.2vw, 56px); height: clamp(44px, 3.2vw, 56px);
-	padding: 0; box-sizing: border-box;                 /* sin padding del tema => circulo real */
+	position: absolute; top: 54%; transform: translateY(-50%); z-index: 5;
+	width: clamp(30px, 2.6vw, 46px); height: clamp(44px, 4vw, 66px);
+	padding: 0; box-sizing: border-box;
 	appearance: none; -webkit-appearance: none;
 	display: grid; place-items: center;
-	border: 0; border-radius: 50%; cursor: pointer;
-	background: rgba(255, 255, 255, .9); color: #1f8f97;
-	box-shadow: 0 6px 16px rgba(20, 50, 60, .14);
-	transition: background .2s, transform .2s;
+	border: 0; background: none; box-shadow: none; cursor: pointer;
+	color: #2f918f;                                     /* teal de marca (citrus) */
+	transition: transform .2s ease, color .2s ease, opacity .2s ease;
 }
-.spirup-showcase__arrow svg { width: 44%; height: 44%; display: block; stroke: currentColor; fill: none; }
-.spirup-showcase[data-flavor="rebel"] .spirup-showcase__arrow { color: #21458f; }
-.spirup-showcase__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
-.spirup-showcase__arrow--prev { left: clamp(10px, 2vw, 40px); }
-.spirup-showcase__arrow--next { right: clamp(10px, 2vw, 40px); }
-.spirup-showcase__arrow[disabled] { pointer-events: none; opacity: .6; }
+.spirup-showcase__arrow svg { width: 100%; height: 100%; display: block; stroke: currentColor; fill: none; }
+.spirup-showcase[data-flavor="rebel"] .spirup-showcase__arrow { color: #21458f; }   /* navy de marca (rebel) */
+.spirup-showcase__arrow:hover,
+.spirup-showcase__arrow:focus,
+.spirup-showcase__arrow:active { background: none; box-shadow: none; outline: none; }
+.spirup-showcase__arrow:hover { transform: translateY(-50%) scale(1.14); color: #17696f; }
+.spirup-showcase[data-flavor="rebel"] .spirup-showcase__arrow:hover { color: #16357a; }
+.spirup-showcase__arrow:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+.spirup-showcase__arrow--prev { left: clamp(8px, 1.6vw, 34px); }
+.spirup-showcase__arrow--next { right: clamp(8px, 1.6vw, 34px); }
+.spirup-showcase__arrow[disabled] { pointer-events: none; opacity: .5; }
 
 @keyframes sc-fade { from { opacity: 0; } to { opacity: 1; } }
 

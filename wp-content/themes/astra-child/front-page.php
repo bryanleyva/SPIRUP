@@ -37,7 +37,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	   por el lado opuesto (js/spirup.js). Las plantillas (citrus3d / rebelplantilla) ya
 	   traen texto/pills/palabra horneados; debajo va el agua y la lata centradas. */
 	$sc_slides = array(
-		'citrus' => array( 'tpl' => 'citrus3d.png',      'can' => 'lata-spir-up 1 (2).png', 'name' => 'Citrus Blue' ),
+		'citrus' => array( 'tpl' => 'Group 77.png',      'can' => 'lata-spir-up 1 (2).png', 'name' => 'Citrus Blue' ),
 		'rebel'  => array( 'tpl' => 'rebelplantilla.png', 'can' => 'lata-spir-up 1 (3).png', 'name' => 'Rebel Blue' ),
 	);
 	?>
@@ -68,7 +68,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-cta__inner">
 			<h3 class="spirup-cta__title">¿Listo para probarlo?</h3>
 			<div class="spirup-cta__actions">
-				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#productos">Pedir ahora ↗</a>
+				<a class="spirup-cta__btn spirup-cta__btn--solid" href="#productos">Pedir ahora</a>
 				<a class="spirup-cta__btn spirup-cta__btn--ghost" href="#por-que">Más detalles</a>
 			</div>
 		</div>

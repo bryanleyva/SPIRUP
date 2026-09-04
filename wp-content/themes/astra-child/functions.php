@@ -116,7 +116,7 @@ add_action( 'wp_enqueue_scripts', 'spirup_enqueue_styles' );
  * (en vez del icono por defecto de WordPress).
  */
 function spirup_favicon() {
-	$icon = get_stylesheet_directory_uri() . '/imagenes/favicon.png';
+	$icon = get_stylesheet_directory_uri() . '/imagenes/Recurso 13@4x-8 1.png';
 	echo "\n<link rel=\"icon\" type=\"image/png\" href=\"" . esc_url( $icon ) . "\">\n";
 	echo "<link rel=\"shortcut icon\" type=\"image/png\" href=\"" . esc_url( $icon ) . "\">\n";
 	echo "<link rel=\"apple-touch-icon\" href=\"" . esc_url( $icon ) . "\">\n";
