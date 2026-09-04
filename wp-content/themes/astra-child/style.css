@@ -525,9 +525,15 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* MOVIL: version HTML con texto legible (la imagen ancha no calza) */
 @media (max-width: 820px) {
 	.spirup-parte3 {
+		position: relative;
 		background: linear-gradient(180deg, #2f7f7a 0%, #4f9a8c 55%, #74b6a4 100%);
 		padding: clamp(40px, 8vw, 90px) 0 clamp(50px, 9vw, 100px);
-		overflow: hidden;
+	}
+	/* Corte superior en OLA (teal que sube sobre el blanco de arriba), como el figma */
+	.spirup-parte3::before {
+		content: ""; position: absolute; left: 0; right: 0; top: 1px;
+		height: clamp(26px, 7vw, 56px); transform: translateY(-100%);
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%232f7f7a' d='M0,50 C240,90 480,10 720,35 C960,60 1200,88 1440,42 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center top / 100% 100%;
 	}
 	.spirup-parte3__img { display: none; }
 	.spirup-parte3__inner {
@@ -563,9 +569,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-p3card strong { display: block; color: var(--spirup-dark); font-weight: 700; line-height: 1.2; font-size: 15.5px; margin-bottom: 0.35em; }
 	.spirup-p3card span { display: block; color: #4b6468; line-height: 1.4; font-size: 13.5px; max-width: 22ch; margin: 0 auto; }
 }
-@media (max-width: 440px) {
-	.spirup-parte3__grid { grid-template-columns: 1fr; }
-}
+/* Ingredientes: SIEMPRE 2x2 en movil (antes colapsaba a 1 columna) */
 
 /* ==========================================================================
    Franja CTA amarilla
@@ -937,6 +941,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 /* diagrama + descripciones comparten el mismo ancho para que alineen bajo cada label */
 .spirup-cultivo__flow { max-width: 760px; }
+.spirup-cultivo__timeline { display: none; }   /* solo movil (columna vertical) */
 .spirup-cultivo__diagram {
 	display: block;
 	width: 100%;
@@ -1211,6 +1216,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 [data-splash-video].is-playing .spirup-showcase__video { opacity: 1; }
 
+/* En desktop el contenedor lata+agua es transparente al layout (cada uno sigue
+   con su posicion absoluta original). En movil pasa a ser el marco de la lata. */
+.spirup-showcase__canbox { display: contents; }
+
 /* Lata centrada en el hueco (misma altura para ambos sabores => switch parejo) */
 .spirup-showcase__can {
 	position: absolute; left: 50%; top: 54%;
@@ -1255,17 +1264,20 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
 		text-align: center; padding: 5vw 5vw 7vw;
 	}
-	.spirup-showcase__wm,
-	.spirup-showcase__video { display: none; }   /* marca de agua y agua: se complican apiladas */
+	.spirup-showcase__wm { display: none; }   /* marca de agua: se complica apilada */
 	.spirup-showcase__word { position: static; transform: none; order: 1; font-size: min(15vw, 110px); }
-	.spirup-showcase__can { position: static; transform: none; order: 2; height: auto; width: min(46vw, 300px); margin: -3vw 0 2vw; }
+	/* Lata + agua: el contenedor es el marco; el agua (video) va DETRAS, centrada. */
+	.spirup-showcase__canbox { display: block; order: 2; position: relative; width: min(46vw, 300px); margin: -2vw auto 2vw; }
+	.spirup-showcase__can { display: block; position: relative; left: auto; top: auto; transform: none; height: auto; width: 100%; z-index: 3; margin: 0 auto; }
 	.spirup-showcase__slide:hover .spirup-showcase__can { transform: none; }
+	.spirup-showcase__video { display: block; position: absolute; left: 50%; top: 48%; transform: translate(-50%, -50%); width: 150%; max-width: none; height: auto; z-index: 2; }
 	.spirup-showcase__copy { position: static; transform: none; order: 3; width: 100%; max-width: 88vw; }
 	.spirup-showcase__flavor { font-size: min(6.6vw, 34px); }
 	.spirup-showcase__tag { font-size: min(4.3vw, 22px); }
 	.spirup-showcase__desc { font-size: min(3.9vw, 19px); }
-	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 2.2vw; margin-top: 3.5vw; }
-	.spirup-showcase__pills .pill { margin: 0 !important; font-size: min(4vw, 20px); padding: min(2.6vw, 13px) min(6.5vw, 30px); }
+	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 2.6vw; margin-top: 4vw; }
+	/* todas las pastillas del MISMO ancho y centradas => stack limpio (no "dobladas") */
+	.spirup-showcase__pills .pill { margin: 0 !important; width: min(62vw, 250px); text-align: center; font-size: min(4vw, 20px); padding: min(2.9vw, 14px) 0; }
 	/* flechas a los bordes, a la altura de la lata */
 	.spirup-showcase__arrow { top: 30%; }
 	.spirup-showcase__arrow--prev { left: 3%; }
@@ -1273,8 +1285,17 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 
 .spirup-parte8 {
+	position: relative;
 	/* Arranca en el MISMO teal donde termina la imagen recortada (#24797a) => sin corte */
 	background: linear-gradient(180deg, #24797a 0%, #2a7e7d 18%, #529f94 70%, #80c4ac 100%);
+}
+/* Movil: corte superior en OLA (teal subiendo sobre el mint de "Del cultivo") */
+@media (max-width: 820px) {
+	.spirup-parte8::before {
+		content: ""; position: absolute; left: 0; right: 0; top: 1px;
+		height: clamp(26px, 7vw, 56px); transform: translateY(-100%);
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%2324797a' d='M0,50 C240,90 480,10 720,35 C960,60 1200,88 1440,42 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center top / 100% 100%;
+	}
 }
 .spirup-parte8__inner {
 	max-width: min(90vw, 1600px);
@@ -1382,8 +1403,48 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-cultivo__media { min-height: 0; }
 	.spirup-cultivo__media img { height: auto; max-height: 60vh; }
 }
-@media (max-width: 560px) {
-	.spirup-parte8__grid { grid-template-columns: 1fr; }
+@media (max-width: 820px) {
+	/* Del cultivo a la Lata en COLUMNA (timeline vertical), como el figma */
+	.spirup-cultivo__flow { display: none; }
+	.spirup-cultivo__timeline {
+		display: block; list-style: none; padding: 0;
+		margin: clamp(24px, 6vw, 44px) auto 0; max-width: 420px; text-align: left;
+	}
+	.ct-step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 16px; padding-bottom: clamp(22px, 6vw, 40px); }
+	.ct-step:last-child { padding-bottom: 0; }
+	/* linea que conecta los circulos */
+	.ct-step::before { content: ""; position: absolute; left: 26px; top: 58px; bottom: -2px; width: 2px; background: #2f918f; opacity: .45; }
+	.ct-step:last-child::before { display: none; }
+	.ct-dot {
+		position: relative; z-index: 1; width: 54px; height: 54px; border-radius: 50%;
+		border: 2px solid #2f918f; background: #eaf4ef; color: #1a7f8c;
+		display: inline-flex; align-items: center; justify-content: center;
+	}
+	.ct-dot svg { width: 54%; height: 54%; }
+	.ct-txt { padding-top: 7px; }
+	.ct-txt h3 { margin: 0 0 4px; color: #EC7A04; font-weight: 800; line-height: 1.15; font-size: 17px; }
+	.ct-txt p { margin: 0; color: #4d6266; line-height: 1.5; font-size: 14.5px; }
+}
+@media (max-width: 620px) {
+	/* Productos en CARRUSEL horizontal (deslizable) en vez de apilados hacia abajo */
+	.spirup-parte8__grid {
+		display: flex;
+		grid-template-columns: none;
+		gap: 4vw;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 14px;               /* aire para el scrollbar/sombra */
+		margin-inline: -4vw;                /* que el carrusel llegue a los bordes */
+		padding-inline: 4vw;
+		scrollbar-width: none;
+	}
+	.spirup-parte8__grid::-webkit-scrollbar { display: none; }
+	.spirup-product {
+		flex: 0 0 72vw;
+		max-width: 300px;
+		scroll-snap-align: center;
+	}
 }
 
 /* ==========================================================================
@@ -1889,6 +1950,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-parte4__list { align-items: center; }
 	.spirup-parte4__list li { justify-content: center; }
 	.spirup-cta__inner { justify-content: center; text-align: center; }
+	/* Los dos botones SIEMPRE en fila (Pedir ahora | Mas detalles), sin apilarse */
+	.spirup-cta__actions { flex-wrap: nowrap; gap: 10px; width: 100%; justify-content: center; }
+	.spirup-cta__btn { padding: 9px 16px; font-size: 14px; }
 }
 
 /* ==========================================================================

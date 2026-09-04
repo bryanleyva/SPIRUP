@@ -71,10 +71,12 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 							<li class="pill pill--<?php echo (int) ( $pi + 1 ); ?>"><?php echo esc_html( $pill ); ?></li>
 						<?php endforeach; ?>
 					</ul>
-					<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
-						<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
-					</video>
-					<img class="spirup-showcase__can" src="<?php echo esc_url( $img . '/' . $s['can'] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $s['name'] ); ?>">
+					<div class="spirup-showcase__canbox">
+						<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
+							<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
+						</video>
+						<img class="spirup-showcase__can" src="<?php echo esc_url( $img . '/' . $s['can'] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $s['name'] ); ?>">
+					</div>
 				</div>
 			<?php endforeach; ?>
 		</div>
@@ -230,6 +232,21 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				<h2 class="spirup-cultivo__title">Del cultivo a la Lata</h2>
 				<p class="spirup-cultivo__sub">Cada etapa agrega valor</p>
 				<?php /* Diagrama (circulos + flechas + labels El origen/desarrollo/resultado). Labels en los tercios. */ ?>
+				<?php /* MOVIL: timeline VERTICAL (columna), como el figma. Desktop usa la imagen de abajo. */ ?>
+				<ul class="spirup-cultivo__timeline">
+					<li class="ct-step">
+						<span class="ct-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c-2.2-4 1.6-6.5-.2-11"/><path d="M12 21c-1-6 2.4-8.5.2-14"/><path d="M17 21c2-4-1.4-6.6.4-11"/></svg></span>
+						<div class="ct-txt"><h3>El origen</h3><p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p></div>
+					</li>
+					<li class="ct-step">
+						<span class="ct-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-4.6 8.6A1.8 1.8 0 0 0 7 21h10a1.8 1.8 0 0 0 1.6-2.4L14 9V3"/><path d="M8.4 14.5h7.2"/></svg></span>
+						<div class="ct-txt"><h3>El desarrollo</h3><p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p></div>
+					</li>
+					<li class="ct-step">
+						<span class="ct-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="4" width="10" height="17" rx="3"/><path d="M9 4c0-1 .8-1.6 1.6-1.6h2.8c.8 0 1.6.6 1.6 1.6"/><path d="M8 9h8"/></svg></span>
+						<div class="ct-txt"><h3>El resultado</h3><p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p></div>
+					</li>
+				</ul>
 				<div class="spirup-cultivo__flow">
 					<img class="spirup-cultivo__diagram" src="<?php echo esc_url( $img . '/cultivo-diagrama.png' ); ?>"
 						alt="El origen, el desarrollo y el resultado de Spir Up">
