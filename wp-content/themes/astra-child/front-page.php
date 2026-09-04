@@ -152,7 +152,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 						</div>
 						<div class="bp__meta">
 							<div class="bp__info">
-								<h3><?php echo esc_html( $product->get_name() ); ?></h3>
+								<h3><?php echo esc_html( ucwords( mb_strtolower( $product->get_name(), 'UTF-8' ) ) ); ?></h3>
 								<span class="bp__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 							</div>
 							<a href="?add-to-cart=<?php echo esc_attr( $pid ); ?>"
@@ -270,7 +270,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 						</div>
 						<div class="spirup-product__row">
 							<div class="spirup-product__info">
-								<h3><?php echo esc_html( $product->get_name() ); ?></h3>
+								<h3><?php echo esc_html( ucwords( mb_strtolower( $product->get_name(), 'UTF-8' ) ) ); ?></h3>
 								<?php if ( $meta ) : ?><span class="spirup-product__meta"><?php echo esc_html( $meta ); ?></span><?php endif; ?>
 								<span class="spirup-product__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 							</div>
