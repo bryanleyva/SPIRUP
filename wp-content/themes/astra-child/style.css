@@ -1047,7 +1047,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .s-flavor { max-width: 946px; }
 .s-ing    { max-width: 1012px; }
 .prodx-sec__bg { display: block; width: 100%; height: auto; }
-.prodx-sec__can { display: none; }   /* solo movil: lata por seccion (en desktop manda la lata sticky) */
+/* En desktop manda la lata sticky; lo de abajo es SOLO movil */
+.prodx-sec__canbox { display: contents; }
+.prodx-sec__can { display: none; }
+.prodx-sec__video { display: none; }
+.prodx-ingm { display: none; }
 
 /* Sabor: descripcion (izq) + explora (der) */
 .prodx-desc {
@@ -1062,7 +1066,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	width: 24%; text-align: center; z-index: 3;
 }
 .prodx-explora__h { margin: 0 0 1.1cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.2cqw; }
-.prodx-explora__opt { margin: .4cqw 0; color: #A9A9A9; font-weight: 800; line-height: 1.25; font-size: 1.95cqw; }
+.prodx-explora__opt { display: block; margin: .4cqw 0; color: #A9A9A9; font-weight: 800; line-height: 1.25; font-size: 1.95cqw; text-decoration: none; cursor: pointer; transition: color .15s ease; }
 .s-flavor[data-sec="citrus-front"] .prodx-explora__opt.is-on { color: #1F797A; }
 .s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
 
@@ -1095,14 +1099,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	}
 	.prodx-sec__bg { position: relative; z-index: 1; }
 
-	/* Lata: en flujo pero subida con margen negativo => queda sobre la marca de agua */
+	/* Lata + agua: el contenedor se sube (margen negativo) sobre la marca de agua;
+	   el agua (video) va DETRAS de la lata, centrada. */
+	.prodx-sec__canbox {
+		display: block; position: relative; z-index: 2;
+		width: 50%; margin: -70% auto 0;
+	}
+	.s-ing .prodx-sec__canbox { margin-top: -64%; }   /* la imagen de ingredientes es mas ancha */
 	.prodx-sec__can {
 		display: block; position: relative; z-index: 2;
-		width: 50%; height: auto;
-		margin: -70% auto 0;         /* la sube sobre el centro de la imagen */
+		width: 100%; height: auto; margin: 0;
 		filter: drop-shadow(0 14px 26px rgba(20, 40, 60, .28));
 	}
-	.s-ing .prodx-sec__can { margin-top: -64%; }   /* la imagen de ingredientes es mas ancha */
+	.prodx-sec__video {
+		display: block; position: absolute; left: 50%; top: 48%;
+		transform: translate(-50%, -50%);
+		width: 150%; max-width: none; height: auto; z-index: 1;
+		pointer-events: none;
+		-webkit-mask-image: radial-gradient(ellipse 58% 58% at 50% 50%, #000 52%, transparent 88%);
+		mask-image: radial-gradient(ellipse 58% 58% at 50% 50%, #000 52%, transparent 88%);
+	}
 
 	/* Sabor: descripcion + explora apiladas debajo, centradas */
 	.prodx-desc, .prodx-explora {
@@ -1116,13 +1132,32 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.prodx-explora__h { font-size: 20px; margin-bottom: 11px; }
 	.prodx-explora__opt { font-size: 18px; margin: 7px 0; }
 
-	/* Ingredientes: los 4 bloques apilados debajo, centrados */
-	.prodx-ing {
-		position: static; transform: none; width: 100%;
-		text-align: center; margin-top: 7vw;
+	/* Ingredientes: CARRUSEL (uno a la vez con flechas ‹ ›), como el figma */
+	.prodx-sec .prodx-ing { display: none; }   /* fuera los 4 bloques de escritorio */
+	.prodx-ingm {
+		display: flex; align-items: center; justify-content: center;
+		gap: 6px; margin-top: 7vw;
 	}
-	.prodx-ing h3 { font-size: 18px; margin-bottom: 5px; }
-	.prodx-ing p  { font-size: 14px; line-height: 1.5; }
+	.prodx-ingm__view { flex: 1 1 auto; min-width: 0; text-align: center; min-height: 5.4em; }
+	.prodx-ingm__item { display: none; }
+	.prodx-ingm__item.is-on { display: block; }
+	.prodx-ingm__item h3 { margin: 0 0 6px; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 19px; }
+	.prodx-ingm__item p  { margin: 0 auto; max-width: 22ch; color: #A9A9A9; font-weight: 600; line-height: 1.5; font-size: 14.5px; }
+	.prodx-ingm__item.is-blue h3   { color: #087FBD; }
+	.prodx-ingm__item.is-orange h3 { color: #EC7A04; }
+	.prodx-ingm__nav {
+		flex: 0 0 auto; width: 40px; height: 40px; padding: 0;
+		border: 0; background: none; box-shadow: none;
+		-webkit-appearance: none; appearance: none;
+		cursor: pointer; color: #1F797A;
+		display: inline-flex; align-items: center; justify-content: center;
+	}
+	.prodx-ingm__nav:hover,
+	.prodx-ingm__nav:focus,
+	.prodx-ingm__nav:active { background: none; box-shadow: none; outline: none; color: #186F70; }
+	.prodx-ingm__nav:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 6px; }
+	.prodx-ingm__nav svg { width: 22px; height: 22px; display: block; }
+	.prodx-ingm__nav:active { transform: scale(.9); }
 }
 
 
