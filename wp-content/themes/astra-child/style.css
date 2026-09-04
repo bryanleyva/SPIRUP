@@ -980,71 +980,102 @@ html { scroll-behavior: smooth; }
 /* ==========================================================================
    Pagina Producto (plantilla Group 76 + lata con zoom al hover)
    ========================================================================== */
-.spirup-prod76 { background: #fff; }
-.spirup-prod76__wrap { position: relative; width: 100%; }
-.spirup-prod76__bg { display: block; width: 100%; height: auto; }
-.spirup-prod76__can {
-	position: absolute;
-	left: 50%;
-	top: 19.3%;
-	transform: translate(-50%, -50%);
-	width: 14%;
-	height: auto;
-	cursor: pointer;
-	transition: transform 0.4s cubic-bezier(.2, .7, .3, 1);
-	filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.22));
-}
-.spirup-prod76__can:hover { transform: translate(-50%, -50%) scale(1.14); }
+/* ==========================================================================
+   PRODUCTO: secciones con TEXTO real + una lata fija que se transforma al scroll
+   (cqw = 1% del ancho de cada seccion => el texto escala con el fondo)
+   ========================================================================== */
+.spirup-prodx { background: #fff; overflow-x: clip; }
 
-.spirup-prodimg { background: #fff; }
-.spirup-prodimg__wrap {
-	position: relative;
-	width: 100%;                    /* a sangre completa (toda la pantalla) */
-	margin: 0;
-	container-type: inline-size;    /* cqw = 1% del ancho de la imagen */
+/* ---- 1. Inicial (fondo con foto + iconos + barra; encima el texto y la lata) ---- */
+.prodx-hero { position: relative; container-type: inline-size; }
+.prodx-hero__bg { display: block; width: 100%; height: auto; }
+.prodx-hero__title {
+	position: absolute; left: 50%; top: 30%; transform: translate(-50%, -50%);
+	width: 84%; text-align: center; margin: 0;
+	color: #1a7a86; font-weight: 700; line-height: 1.22; font-size: 2.7cqw;
 }
-.spirup-prodimg__bg { display: block; width: 100%; height: auto; }
-.ov { position: absolute; margin: 0; }                 /* anclaje por esquina sup-izq */
-.ov-anchor { width: 1px; height: 1px; left: 0; scroll-margin-top: 130px; }
-/* cabecera y descripciones de beneficios van centradas en su punto */
-.ov-cabecera, .ov-benefdesc { transform: translate(-50%, -50%); }
-.ov-cabecera { width: 64%; text-align: center; }
-.ov-title { color: var(--spirup-teal); font-weight: 800; line-height: 1.15; font-size: 2.15cqw; margin: 0 0 0.9cqw; }
-.ov-sub { color: #5b6d70; line-height: 1.5; font-size: 1.05cqw; margin: 0 auto; max-width: 34em; }
-.ov-benefdesc { width: 22%; text-align: center; color: #5b6d70; font-size: 0.95cqw; line-height: 1.4; }
+.prodx-hero__title strong { color: #14515b; font-weight: 800; }
+.prodx-hero__title .c-orange { color: #EC7A04; }
 
-/* bloques de producto: alineados a la izquierda, ancho segun contenido (los <br> fijan las lineas) */
-.ov-block { display: flex; flex-direction: column; gap: 0; text-align: left; align-items: flex-start; width: fit-content; max-width: 34%; }
-.ov-h { font-weight: 800; font-size: 2.5cqw; line-height: 1.16; margin: 0; }
-.ov-p { color: #6b7c7f; font-size: 1.7cqw; line-height: 1.5; margin: 0.9cqw 0 0; }
-.ov-lbl { font-weight: 800; font-size: 2.5cqw; line-height: 1.16; margin-bottom: 0.7cqw; }
-.ov-tab { font-weight: 700; font-size: 1.9cqw; text-decoration: none; color: #b3bdbf; padding: 0.25cqw 0; line-height: 1.3; }
-.ov-block.is-citrus .ov-h,
-.ov-block.is-citrus .ov-lbl { color: #2f9aa6; }
-.ov-block.is-citrus .ov-tab.is-on { color: #2f9aa6; }
-.ov-block.is-rebel .ov-h,
-.ov-block.is-rebel .ov-lbl { color: #2743a6; }
-.ov-block.is-rebel .ov-tab.is-on { color: #2743a6; }
-/* Vitamina C siempre en naranja */
-.ov-block.ov-vitc .ov-h { color: #E97000; }
-
-/* --- Version movil apilada --- */
-.spirup-prodmobile { display: none; }
-@media (max-width: 820px) {
-	.spirup-prodimg { display: none; }
-	.spirup-prodmobile { display: block; }
+.prodx-lbl {
+	position: absolute; color: #1c4b54; font-weight: 800; line-height: 1.14;
+	font-size: 1.22cqw; text-transform: uppercase; letter-spacing: .01em;
 }
-.spirup-prodmobile__latas { display: block; width: 100%; height: auto; }
-.spirup-mflavor { position: relative; text-align: center; padding: clamp(28px, 7vw, 56px) 20px clamp(36px, 8vw, 64px); overflow: hidden; background: #fff; --acc: #2f9aa6; }
-.spirup-mflavor.is-rebel { --acc: #2743a6; }
-.spirup-mflavor__wm { display: block; font-weight: 800; letter-spacing: .01em; font-size: clamp(30px, 10vw, 58px); color: var(--acc); opacity: .14; line-height: 1; }
-.spirup-mflavor__can { position: relative; display: block; height: clamp(230px, 56vw, 340px); width: auto; margin: -6% auto clamp(16px, 4vw, 28px); filter: drop-shadow(0 18px 30px rgba(20, 40, 60, .2)); }
-.spirup-mflavor__desc { max-width: 30em; margin: 0 auto clamp(22px, 5vw, 36px); line-height: 1.5; color: #6b7c7f; font-size: clamp(14px, 3.6vw, 17px); }
-.spirup-mflavor__desc strong { display: block; color: var(--acc); font-weight: 800; font-size: clamp(17px, 4.6vw, 22px); margin-bottom: .35em; }
-.spirup-mflavor__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(18px, 5vw, 30px); max-width: 460px; margin: 0 auto; text-align: left; }
-.spirup-mflavor__grid .mfeat h3 { margin: 0 0 4px; color: var(--acc); font-weight: 800; font-size: clamp(15px, 4vw, 18px); }
-.spirup-mflavor__grid .mfeat p { margin: 0; color: #6b7c7f; line-height: 1.4; font-size: clamp(13px, 3.4vw, 15px); }
-.spirup-mflavor__grid .mfeat--vitc h3 { color: #E97000; }
+.prodx-lbl--l1 { left: 18%;   top: 47%;   text-align: left; }
+.prodx-lbl--l2 { left: 15%;   top: 59.2%; text-align: left; }
+.prodx-lbl--l3 { left: 18.5%; top: 72%;   text-align: left; }
+.prodx-lbl--r1 { right: 18%;  top: 46.5%; text-align: right; }
+.prodx-lbl--r2 { right: 14.5%; top: 59.2%; text-align: right; }
+.prodx-lbl--r3 { right: 15.5%; top: 72%;   text-align: right; }
+
+.prodx-hero__can {
+	position: absolute; left: 50%; top: 58.5%; transform: translate(-50%, -50%);
+	height: 33%; width: auto; z-index: 3; cursor: pointer;
+	filter: drop-shadow(0 14px 26px rgba(20, 40, 60, .25));
+	transition: transform .4s cubic-bezier(.2, .7, .3, 1);
+}
+.prodx-hero__can:hover { transform: translate(-50%, -50%) scale(1.07); }
+
+/* ---- 2-5. Escenario: la lata fija (sticky) que cambia de sabor y gira ---- */
+.prodx-stage { position: relative; }
+.prodx-stage__canwrap {
+	position: sticky; top: 0; height: 100vh;
+	margin-bottom: -100vh;               /* las secciones se solapan bajo la lata */
+	display: flex; align-items: center; justify-content: center;
+	z-index: 4; pointer-events: none;
+	perspective: 1400px;
+}
+.prodx-can {
+	display: grid; place-items: center;
+	transform-style: preserve-3d;
+	transition: transform .7s cubic-bezier(.45, .05, .25, 1);
+}
+.prodx-can__img {
+	grid-area: 1 / 1;
+	height: min(58vh, 520px); width: auto; max-width: none;
+	filter: drop-shadow(0 22px 34px rgba(20, 40, 60, .28));
+	opacity: 0; transition: opacity .55s ease;
+}
+.prodx-stage[data-flavor="citrus"] .prodx-can__img.is-citrus { opacity: 1; }
+.prodx-stage[data-flavor="rebel"]  .prodx-can__img.is-rebel  { opacity: 1; }
+.prodx-stage[data-face="back"] .prodx-can { transform: rotateY(180deg); }   /* espejo = reverso */
+
+/* ---- Secciones (fondo con la marca de agua) ---- */
+.prodx-sec { position: relative; z-index: 1; container-type: inline-size; }
+.prodx-sec__bg { display: block; width: 100%; height: auto; }
+
+/* Sabor: descripcion (izq) + explora (der) */
+.prodx-desc {
+	position: absolute; left: 7%; top: 53%; transform: translateY(-50%);
+	width: 30%; z-index: 3;
+}
+.prodx-desc__h { margin: 0 0 .7cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.5cqw; }
+.prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 600; line-height: 1.5; font-size: 1.7cqw; }
+
+.prodx-explora {
+	position: absolute; right: 7%; top: 53%; transform: translateY(-50%);
+	width: 26%; text-align: center; z-index: 3;
+}
+.prodx-explora__h { margin: 0 0 1.1cqw; color: #1F797A; font-weight: 800; line-height: 1.2; font-size: 2.2cqw; }
+.prodx-explora__opt { margin: .4cqw 0; color: #A9A9A9; font-weight: 800; line-height: 1.25; font-size: 1.95cqw; }
+.s-flavor[data-sec="citrus-front"] .prodx-explora__opt.is-on { color: #1F797A; }
+.s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
+
+/* Ingredientes: 4 bloques (2 izq, 2 der) */
+.prodx-ing { position: absolute; width: 30%; z-index: 3; }
+.prodx-ing h3 { margin: 0 0 .5cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.1cqw; }
+.prodx-ing p  { margin: 0; color: #A9A9A9; font-weight: 600; line-height: 1.45; font-size: 1.55cqw; }
+.prodx-ing.is-blue h3   { color: #087FBD; }
+.prodx-ing.is-orange h3 { color: #EC7A04; }
+.prodx-ing--tl { left: 7%;  top: 41%; transform: translateY(-50%); }
+.prodx-ing--bl { left: 7%;  top: 63%; transform: translateY(-50%); }
+.prodx-ing--tr { right: 7%; top: 41%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--br { right: 7%; top: 63%; transform: translateY(-50%); text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+	.prodx-can, .prodx-can__img, .prodx-hero__can { transition: none; }
+}
+
 
 /* ==========================================================================
    SHOWCASE de sabores (Citrus Blue / Rebel Blue)
