@@ -58,6 +58,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-showcase__viewport">
 			<?php foreach ( $sc_slides as $key => $s ) : ?>
 				<div class="spirup-showcase__slide is-<?php echo esc_attr( $key ); ?>" data-flavor-slide="<?php echo esc_attr( $key ); ?>" data-splash-video>
+					<img class="spirup-showcase__wm" src="<?php echo esc_url( $img . '/marca-agua.png' ); ?>" alt="" aria-hidden="true">
 					<span class="spirup-showcase__word" aria-hidden="true"><?php echo esc_html( $s['word'] ); ?></span>
 					<div class="spirup-showcase__copy">
 						<p class="spirup-showcase__flavor"><?php echo esc_html( $s['name'] ); ?></p>

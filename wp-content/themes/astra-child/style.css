@@ -1135,9 +1135,15 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-showcase__slide[data-flavor-slide="citrus"] { transform: translateX(0); }
 .spirup-showcase__slide[data-flavor-slide="rebel"]  { transform: translateX(100%); }
 
-/* Fondo aqua de cada slide (cubre al deslizar) */
+/* Fondo aqua de cada slide (cubre al deslizar) - mismo color que el figma (#ccedec) */
 .spirup-showcase__slide { background: #ccedec; }
-.spirup-showcase__slide.is-rebel { background: #d0e6ee; }
+
+/* Marca de agua (rayo/swoosh difuminado) detras de la lata, como el figma */
+.spirup-showcase__wm {
+	position: absolute; left: 50%; top: 51%; transform: translate(-50%, -50%);
+	height: 80%; width: auto; z-index: 0; pointer-events: none;
+	-webkit-user-drag: none;
+}
 
 /* Palabra grande en CONTORNO (texto real, ya no imagen => no pixela) */
 .spirup-showcase__word {
@@ -1161,7 +1167,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-showcase__desc { margin: 0; color: #5b6d70; line-height: 1.45; font-size: clamp(13px, 1.05vw, 18px); }
 
 /* Pills de la derecha (escalonadas) */
-.spirup-showcase__pills { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: flex-end; gap: clamp(8px, 1vw, 16px); }
+.spirup-showcase__pills { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: flex-end; gap: clamp(5px, .6vw, 11px); }
 .spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; padding: clamp(8px, .85vw, 15px) clamp(16px, 1.5vw, 28px); font-size: clamp(13px, 1.15vw, 20px); box-shadow: 0 6px 16px rgba(20,60,60,.12); }
 .spirup-showcase__pills .pill--1 { margin-right: 0; }
 .spirup-showcase__pills .pill--2 { margin-right: clamp(18px, 2.2vw, 42px); }
