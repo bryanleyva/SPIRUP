@@ -1126,11 +1126,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		text-align: center; margin-left: auto; margin-right: auto;
 	}
 	.prodx-desc    { margin-top: 5vw; }
-	.prodx-explora { margin-top: 8vw; }
+	/* Explora: titulo arriba y, debajo, Rebel Blue (izq) + Citrus Blue (der) en FILA */
+	.prodx-explora {
+		margin-top: 8vw;
+		display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+		column-gap: 36px; row-gap: 0;
+	}
 	.prodx-desc__h    { font-size: 21px; margin-bottom: 7px; }
 	.prodx-desc__p    { font-size: 15px; }
-	.prodx-explora__h { font-size: 20px; margin-bottom: 11px; }
-	.prodx-explora__opt { font-size: 18px; margin: 7px 0; }
+	.prodx-explora__h { flex: 0 0 100%; font-size: 20px; margin: 0 0 12px; }
+	.prodx-explora__opt { font-size: 18px; margin: 0; }
 
 	/* Ingredientes: CARRUSEL (uno a la vez con flechas ‹ ›), como el figma */
 	.prodx-sec .prodx-ing { display: none; }   /* fuera los 4 bloques de escritorio */
