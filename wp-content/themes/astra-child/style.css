@@ -1406,7 +1406,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	display: inline-flex;
 	align-items: center;
 	width: auto;
-	height: 1.2em;
+	height: 1.7em;   /* mas grande y centrado con el titulo (segun figma) */
 }
 .spirup-legal__bolt svg,
 .spirup-legal__bolt img { width: auto; height: 100%; display: block; }
