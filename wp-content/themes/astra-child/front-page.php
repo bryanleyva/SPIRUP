@@ -202,22 +202,22 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
 			<div class="spirup-parte3__grid">
 				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21c-2.2-4 1.6-6.5-.2-11"/><path d="M12 21c-1-6 2.4-8.5.2-14"/><path d="M17 21c2-4-1.4-6.6.4-11"/></svg></span>
+					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-microalgas.png' ); ?>" alt="" aria-hidden="true"></span>
 					<strong>Microalgas</strong>
 					<span>Bioactivos funcionales de origen natural</span>
 				</div>
 				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="14" r="3.4"/><circle cx="15.5" cy="9.5" r="2.2"/><circle cx="16.5" cy="16.5" r="1.4"/></svg></span>
+					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-agua.png' ); ?>" alt="" aria-hidden="true"></span>
 					<strong>Agua gasificada</strong>
 					<span>Contenido controlado de sodio</span>
 				</div>
 				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 11 11 6 19 6c0 8-6 13-14 13z"/><path d="M8.5 15.5c2.2-3.2 5-5.2 8.2-6.2"/></svg></span>
+					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-extractos.png' ); ?>" alt="" aria-hidden="true"></span>
 					<strong>Extractos naturales</strong>
 					<span>Sin saborizantes artificiales</span>
 				</div>
 				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/><path d="M3 21 21 3"/></svg></span>
+					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-sinazucar.png' ); ?>" alt="" aria-hidden="true"></span>
 					<strong>Sin azúcar añadida</strong>
 					<span>Dulzor equilibrado sin culpa</span>
 				</div>
@@ -275,7 +275,14 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<div class="spirup-parte8__grid">
 				<?php foreach ( $sp8_products as $product ) :
 					$pid  = $product->get_id();
-					$meta = wp_strip_all_tags( $product->get_short_description() );
+					$meta = trim( wp_strip_all_tags( $product->get_short_description() ) );
+					if ( '' === $meta ) {
+						// Sin descripcion corta: deducir del nombre (packs) o "355 ml" por defecto.
+						$nm = $product->get_name();
+						if ( preg_match( '/x\s*12/i', $nm ) ) { $meta = '12 latas'; }
+						elseif ( preg_match( '/x\s*6/i', $nm ) ) { $meta = '6 latas'; }
+						else { $meta = '355 ml'; }
+					}
 					?>
 					<article class="spirup-product">
 						<div class="spirup-product__img">
