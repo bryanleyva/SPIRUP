@@ -289,9 +289,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 /* Hero = foto Vector 9 a sangre. Debajo de la ola es transparente => conecta con
    la franja mint / el showcase. */
-/* Recortamos (cover) la ola transparente de Vector 9 => la unica ola es la CINTA */
-.spirup-figura { overflow: hidden; aspect-ratio: 1440 / 560; }
-.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+/* Vector 9 a sangre (foto completa). Debajo de la ola es transparente => conecta
+   con el showcase (#ccedec) SIN costura, como antes. */
+.spirup-figura__img { display: block; width: 100%; height: auto; }
 
 /* Fuente del titulo del hero: NORTHWELL si esta disponible (pon el archivo en
    fonts/Northwell.woff2), si no cae en la tipografia gruesa de la marca. */
@@ -336,8 +336,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 @media (max-width: 820px) {
 	/* Vector 9 es ancha/baja: en movil recortamos (cover) en un hero MAS ALTO para
 	   que el titulo grande y el boton tengan espacio, como en la referencia. */
-	.spirup-figura { aspect-ratio: auto; height: clamp(440px, 122vw, 580px); }
-	.spirup-figura__img { object-position: 44% center; }
+	.spirup-figura { height: clamp(440px, 122vw, 580px); }
+	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% center; }
 	.spirup-figura__overlay { width: 100%; padding: 0 6vw 14%; gap: 5vw; }
 	.spirup-figura__title { font-size: min(9.5vw, 52px); line-height: 1.08; text-shadow: 0 2px 14px rgba(10,30,50,.5); }
 	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); }

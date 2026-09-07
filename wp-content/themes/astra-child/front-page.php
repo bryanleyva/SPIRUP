@@ -33,30 +33,6 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php /* Franja de valores = la CINTA en ola del figma (imagen con fondo transparente,
-		texto siguiendo la curva). En movil se apila para que se lea. */ ?>
-	<div class="spirup-heroband">
-		<?php $bolt_url = esc_url( $img . '/prod-bolt.png' ); ?>
-		<svg class="spirup-heroband__ribbon" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Respaldada por investigación · Sin colorantes artificiales · Propuesta sostenible">
-			<defs><path id="hbPath" d="M-30,150 C250,180 470,126 730,142 C990,158 1210,106 1500,122"/></defs>
-			<use href="#hbPath" fill="none" stroke="#9ad4bb" stroke-width="80"/>
-			<g fill="#1c6a6c" font-family="Manrope, Montserrat, sans-serif" font-weight="600" font-size="27" dominant-baseline="middle">
-				<text><textPath href="#hbPath" startOffset="3%">Respaldada por investigación</textPath></text>
-				<text><textPath href="#hbPath" startOffset="42%">Sin colorantes artificiales</textPath></text>
-				<text><textPath href="#hbPath" startOffset="74%">Propuesta sostenible</textPath></text>
-			</g>
-			<image href="<?php echo $bolt_url; // phpcs:ignore ?>" x="510" y="120" width="27" height="54" transform="rotate(-13 523 147)"/>
-			<image href="<?php echo $bolt_url; // phpcs:ignore ?>" x="1038" y="112" width="27" height="54" transform="rotate(-15 1051 139)"/>
-		</svg>
-		<div class="spirup-heroband__stack" aria-hidden="true">
-			<span class="spirup-heroband__item">Respaldada por investigación</span>
-			<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="">
-			<span class="spirup-heroband__item">Sin colorantes artificiales</span>
-			<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="">
-			<span class="spirup-heroband__item">Propuesta sostenible</span>
-		</div>
-	</div>
-
 	<?php
 	/* ===================== PARTE 2 = SHOWCASE (carrusel de sabores) =====================
 	   Cada sabor es un SLIDE construido con TEXTO REAL (ya NO una imagen/plantilla, que
