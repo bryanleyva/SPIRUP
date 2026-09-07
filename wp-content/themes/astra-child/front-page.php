@@ -23,9 +23,8 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		conecta con el showcase #ccedec). Encima, el titulo como TEXTO real (nitido) y
 		el boton centrado debajo. "SPIR UP" va en verde de marca (#C1CF3C). */ ?>
 	<section class="spirup-figura">
-		<?php /* Foto solida (sin la ola transparente): la ola la pone la cinta de abajo */ ?>
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/Vector9-mob.png' ); ?>"
+			src="<?php echo esc_url( $img . '/Vector 9.png' ); ?>"
 			sizes="100vw"
 			alt="Mano sosteniendo una lata de Spir Up bajo el sol con un chorro de agua">
 		<div class="spirup-figura__overlay">
