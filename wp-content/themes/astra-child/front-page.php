@@ -23,27 +23,28 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		conecta con el showcase #ccedec). Encima, el titulo como TEXTO real (nitido) y
 		el boton centrado debajo. "SPIR UP" va en verde de marca (#C1CF3C). */ ?>
 	<section class="spirup-figura">
-		<picture>
-			<?php /* Movil: version recortada (sin la ola transparente) => llena el hero sin hueco */ ?>
-			<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/Vector9-mob.png' ); ?>">
-			<img class="spirup-figura__img"
-				src="<?php echo esc_url( $img . '/Vector 9.png' ); ?>"
-				sizes="100vw"
-				alt="Mano sosteniendo una lata de Spir Up bajo el sol con un chorro de agua">
-		</picture>
+		<?php /* Foto solida (sin la ola transparente): la ola la pone la cinta de abajo */ ?>
+		<img class="spirup-figura__img"
+			src="<?php echo esc_url( $img . '/Vector9-mob.png' ); ?>"
+			sizes="100vw"
+			alt="Mano sosteniendo una lata de Spir Up bajo el sol con un chorro de agua">
 		<div class="spirup-figura__overlay">
 			<h2 class="spirup-figura__title">Un sorbo de<br>vitalidad, un<br>sorbo de<br><span class="spirup-figura__brand">SPIR&nbsp;UP</span></h2>
 			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
 		</div>
 	</section>
 
-	<?php /* Franja de valores (ola mint) reconstruida como TEXTO real => nitida. */ ?>
+	<?php /* Franja de valores = la CINTA en ola del figma (imagen con fondo transparente,
+		texto siguiendo la curva). En movil se apila para que se lea. */ ?>
 	<div class="spirup-heroband">
-		<span class="spirup-heroband__item">Respaldada por investigación</span>
-		<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="" aria-hidden="true">
-		<span class="spirup-heroband__item">Sin colorantes artificiales</span>
-		<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="" aria-hidden="true">
-		<span class="spirup-heroband__item">Propuesta sostenible</span>
+		<img class="spirup-heroband__ribbon" src="<?php echo esc_url( $img . '/ribbon.png' ); ?>" alt="Respaldada por investigación · Sin colorantes artificiales · Propuesta sostenible">
+		<div class="spirup-heroband__stack" aria-hidden="true">
+			<span class="spirup-heroband__item">Respaldada por investigación</span>
+			<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="">
+			<span class="spirup-heroband__item">Sin colorantes artificiales</span>
+			<img class="spirup-heroband__bolt" src="<?php echo esc_url( $img . '/prod-bolt.png' ); ?>" alt="">
+			<span class="spirup-heroband__item">Propuesta sostenible</span>
+		</div>
 	</div>
 
 	<?php

@@ -343,33 +343,23 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); }
 }
 
-/* ---- Franja de valores (ola mint) reconstruida como TEXTO real (nitida) ---- */
+/* ---- Franja de valores = CINTA en ola del figma (imagen, fondo transparente).
+   Va sobre la foto (arriba) y deja ver el aqua del slider (abajo). ---- */
 .spirup-heroband {
-	position: relative; z-index: 2;
-	margin-top: -2.6vw;                 /* sube sobre la ola de la foto */
-	background: #92d0b9;
-	padding: clamp(16px, 2vw, 36px) 5vw;
-	display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-	gap: clamp(10px, 1vw, 20px) clamp(20px, 4vw, 80px);
+	position: relative; z-index: 5;
+	margin-top: -4.6vw;      /* la cinta sube y su ola corta la foto */
+	margin-bottom: -3.6vw;   /* el aqua del slider sube por debajo de la cinta (sin hilo blanco) */
 }
-/* Ola superior: el mint sube en curva sobre la foto */
-.spirup-heroband::before {
-	content: ""; position: absolute; left: 0; right: 0; top: 1px;
-	height: clamp(22px, 3vw, 48px); transform: translateY(-99%);
-	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%2392d0b9' d='M0,48 C240,92 520,6 760,36 C1000,66 1200,90 1440,44 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center bottom / 100% 100%;
-}
-/* Ola inferior: el aqua del slider sube en curva sobre el mint */
-.spirup-heroband::after {
-	content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
-	height: clamp(18px, 2.6vw, 42px);
-	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%23ccedec' d='M0,46 C240,2 520,86 760,54 C1000,24 1200,2 1440,48 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center top / 100% 100%;
-}
-.spirup-heroband__item { color: #1c6a6c; font-weight: 600; font-style: italic; line-height: 1.2; white-space: nowrap; font-size: clamp(12px, 1.15vw, 21px); }
-.spirup-heroband__bolt { height: clamp(20px, 2vw, 36px); width: auto; flex: 0 0 auto; }
+.spirup-heroband__ribbon { display: block; width: 100%; height: auto; }
+.spirup-heroband__stack { display: none; }   /* solo movil */
+
 @media (max-width: 640px) {
-	.spirup-heroband { flex-direction: column; gap: 10px; padding: 26px 5vw 30px; }
-	.spirup-heroband__bolt { height: 22px; }
-	.spirup-heroband__item { font-size: 14px; }
+	/* En movil la cinta diagonal quedaria diminuta => banda mint apilada y legible */
+	.spirup-heroband { margin: 0; z-index: auto; background: #92d0b9; padding: 30px 6vw 34px; }
+	.spirup-heroband__ribbon { display: none; }
+	.spirup-heroband__stack { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+	.spirup-heroband__item { color: #1c6a6c; font-weight: 600; font-style: italic; font-size: 15px; line-height: 1.2; text-align: center; }
+	.spirup-heroband__bolt { height: 22px; width: auto; }
 }
 
 /* --------------------------------------------------------------------------
