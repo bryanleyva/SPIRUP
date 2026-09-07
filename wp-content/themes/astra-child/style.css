@@ -311,7 +311,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	width: 40%;
 	transform: translateY(-50%);
 	display: flex; flex-direction: column; align-items: center;
-	gap: clamp(14px, 2.2vw, 36px);
+	gap: clamp(8px, 1.2vw, 20px);   /* boton mas arriba, pegado al titulo */
 	text-align: center;
 }
 .spirup-figura__title {
@@ -338,9 +338,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	   titulo de 4 lineas y el boton tengan espacio. */
 	.spirup-figura { height: clamp(440px, 122vw, 580px); }
 	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% center; }
-	.spirup-figura__overlay { left: 0; width: 100%; top: 50%; padding: 0 6vw; box-sizing: border-box; gap: 5vw; }
-	.spirup-figura__title { font-size: min(calc(9.5vw + 5px), 57px); line-height: 1.08; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
-	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); }
+	.spirup-figura__overlay { left: 0; width: 100%; top: 46%; padding: 0 7vw; box-sizing: border-box; gap: 6vw; align-items: flex-start; text-align: left; }
+	.spirup-figura__title { font-size: min(calc(8.2vw + 4px), 52px); line-height: 1.1; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
+	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); margin-left: 2vw; }
 }
 
 /* --------------------------------------------------------------------------
@@ -595,9 +595,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	}
 	.spirup-parte3__grid { position: static; width: auto; grid-template-columns: repeat(2, 1fr); gap: 3.4vw; }
 	.spirup-p3card { border-radius: 14px; }
-	.spirup-p3card__top { height: 74px; }
+	.spirup-p3card__top { height: auto; background: transparent; padding-top: 18px; }
 	.spirup-p3card__ico { height: 42px; }
-	.spirup-p3card__body { padding: 16px 10px 20px; }
+	.spirup-p3card__body { padding: 10px 10px 20px; }
 	.spirup-p3card strong { font-size: 16px; }
 	.spirup-p3card span { font-size: 14px; }
 }
@@ -989,7 +989,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 .prodx-can__img {
 	grid-area: 1 / 1;
-	height: min(64vh, 600px); width: auto; max-width: none;
+	height: min(70vh, 660px); width: auto; max-width: none;
 	filter: drop-shadow(0 22px 34px rgba(20, 40, 60, .28));
 	opacity: 0; transition: opacity .55s ease;
 }
@@ -997,12 +997,24 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .prodx-stage[data-flavor="rebel"]  .prodx-can__img.is-rebel  { opacity: 1; }
 .prodx-stage[data-face="back"] .prodx-can { transform: translateY(5vh) rotateY(180deg); }   /* espejo = reverso */
 
-/* ---- Secciones (fondo con la marca de agua) ---- */
-/* Se limita al tamano NATIVO de cada fondo (no se estira) => no se pixela. */
-.prodx-sec { position: relative; z-index: 1; container-type: inline-size; margin-inline: auto; }
-.s-flavor { max-width: 946px; }
-.s-ing    { max-width: 1012px; }
-.prodx-sec__bg { display: block; width: 100%; height: auto; }
+/* ---- Secciones: TODO texto real (palabra en contorno + marca de agua PNG). Ancho
+   igual al hero (1443) => los textos se alinean con el cuadro "Momentos" del hero
+   (empieza al 5.7% y termina al 94.5% del ancho). Proporcion 1443 x 824. ---- */
+.prodx-sec { position: relative; z-index: 1; container-type: inline-size; aspect-ratio: 1443 / 824; }   /* mismo ancho que el hero => alineado con Momentos a cualquier ancho */
+.prodx-sec__wm {
+	position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%);
+	height: 88%; width: auto; z-index: 0; pointer-events: none; -webkit-user-drag: none;
+}
+.prodx-sec__word {
+	position: absolute; left: 50%; top: 10%; transform: translateX(-50%);
+	z-index: 1; margin: 0; white-space: nowrap; pointer-events: none;
+	font-family: var(--font-title); font-weight: 800; letter-spacing: .01em;
+	font-size: 8.4cqw; line-height: 1;
+	color: transparent;
+	-webkit-text-stroke: 2px #2c8c88;
+	text-stroke: 2px #2c8c88;
+}
+.s-ing .prodx-sec__word { font-size: 8cqw; }
 /* En desktop manda la lata sticky; lo de abajo es SOLO movil */
 .prodx-sec__canbox { display: contents; }
 .prodx-sec__can { display: none; }
@@ -1011,31 +1023,31 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 
 /* Sabor: descripcion (izq) + explora (der) */
 .prodx-desc {
-	position: absolute; left: 9%; top: 58%; transform: translateY(-50%);
-	width: 26%; z-index: 3;
+	position: absolute; left: 5.7%; top: 60%; transform: translateY(-50%);   /* empieza donde empieza el cuadro Momentos */
+	width: 25%; z-index: 3;
 }
-.prodx-desc__h { margin: 0 0 .5cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.85cqw; }
-.prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 500; line-height: 1.42; font-size: 2.1cqw; }
+.prodx-desc__h { margin: 0 0 .4cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.15cqw; }   /* 31px */
+.prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 500; line-height: 1.42; font-size: 1.66cqw; }   /* 24px */
 
 .prodx-explora {
-	position: absolute; right: 7%; top: 56%; transform: translateY(-50%);
-	width: 27%; text-align: right; z-index: 3;   /* alineado a la DERECHA (figma) */
+	position: absolute; right: 5.5%; top: 58%; transform: translateY(-50%);   /* termina donde termina el cuadro Momentos */
+	width: 27%; text-align: right; z-index: 3;
 }
-.prodx-explora__h { margin: 0 0 1.2cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.55cqw; }
-.prodx-explora__opt { display: block; margin: .5cqw 0; color: #A9A9A9; font-weight: 700; line-height: 1.25; font-size: 2.15cqw; text-decoration: none; cursor: pointer; transition: color .15s ease; }
+.prodx-explora__h { margin: 0 0 .9cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 1.94cqw; }   /* 28px */
+.prodx-explora__opt { display: block; margin: .35cqw 0; color: #A9A9A9; font-weight: 700; line-height: 1.25; font-size: 1.66cqw; text-decoration: none; cursor: pointer; transition: color .15s ease; }   /* 24px */
 .s-flavor[data-sec="citrus-front"] .prodx-explora__opt.is-on { color: #087FBD; }
 .s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
 
 /* Ingredientes: 4 bloques (2 izq, 2 der) */
-.prodx-ing { position: absolute; width: 26%; z-index: 3; }
-.prodx-ing h3 { margin: 0 0 .5cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 2.1cqw; }
-.prodx-ing p  { margin: 0; color: #A9A9A9; font-weight: 600; line-height: 1.45; font-size: 1.55cqw; }
+.prodx-ing { position: absolute; width: 25%; z-index: 3; }
+.prodx-ing h3 { margin: 0 0 .35cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 1.73cqw; }   /* 25px */
+.prodx-ing p  { margin: 0; color: #A9A9A9; font-weight: 600; line-height: 1.45; font-size: 1.39cqw; }   /* 20px */
 .prodx-ing.is-blue h3   { color: #087FBD; }
 .prodx-ing.is-orange h3 { color: #EC7A04; }
-.prodx-ing--tl { left: 6%;  top: 41%; transform: translateY(-50%); }
-.prodx-ing--bl { left: 6%;  top: 63%; transform: translateY(-50%); }
-.prodx-ing--tr { right: 6%; top: 41%; transform: translateY(-50%); text-align: right; }
-.prodx-ing--br { right: 6%; top: 63%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--tl { left: 5.7%;  top: 43%; transform: translateY(-50%); }
+.prodx-ing--bl { left: 5.7%;  top: 66%; transform: translateY(-50%); }
+.prodx-ing--tr { right: 5.5%; top: 43%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--br { right: 5.5%; top: 66%; transform: translateY(-50%); text-align: right; }
 
 @media (prefers-reduced-motion: reduce) {
 	.prodx-can, .prodx-can__img, .prodx-hero__can { transition: none; }
@@ -1052,11 +1064,17 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	   version en COLUMNA + CARD, como el figma. */
 	.prodx-hero { display: none; }
 	.prodx-herom { display: block; background: #e6f2ed; padding-bottom: 9vw; }
-	.prodx-herom__cans { display: block; width: 100%; height: auto; }
+	/* Foto de latas mas cerrada (zoom) con corte en ola hacia el mint, como el figma */
+	.prodx-herom__photo { position: relative; overflow: hidden; height: 62vw; }
+	.prodx-herom__cans { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 25% center; }
+	.prodx-herom__photo::after {
+		content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 9vw;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 40' preserveAspectRatio='none'%3E%3Cpath fill='%23e6f2ed' d='M0,26 C90,4 200,2 300,14 C340,19 370,24 390,26 L390,40 L0,40 Z'/%3E%3C/svg%3E") no-repeat center bottom / 100% 100%;
+	}
 	.prodx-herom__title {
-		text-align: center; margin: 6vw auto 0; width: 88%;
-		color: #186F70; font-weight: 700; line-height: 1.28;
-		font-size: min(6.6vw, 30px);
+		text-align: center; margin: 5vw auto 0; width: 90%;
+		color: #186F70; font-weight: 400; line-height: 1.22;
+		font-size: min(7.6vw, 34px);
 	}
 	.prodx-herom__title strong { font-weight: 800; color: #186F70; }
 	.prodx-herom__title .c-orange { color: #EC7A04; }
@@ -1091,19 +1109,21 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.prodx-herom__mitem span { color: #186F70; font-weight: 600; line-height: 1.2; font-size: 13.5px; }
 
 	.prodx-sec {
-		max-width: 560px;
+		max-width: 560px; aspect-ratio: auto;
 		container-type: normal;      /* apagamos cqw: pasamos a tamanos fijos legibles */
-		padding: 2vw 5vw 9vw;
+		padding: 5vw 5vw 9vw;
+		display: flex; flex-direction: column; align-items: center;
 	}
-	.prodx-sec__bg { position: relative; z-index: 1; }
+	/* Palabra en contorno arriba; la lata se le encima (como el figma movil) */
+	.prodx-sec__word { position: static; transform: none; order: 1; font-size: min(12.4vw, 68px); -webkit-text-stroke: 1.5px #2c8c88; text-stroke: 1.5px #2c8c88; }
+	.prodx-sec__wm { top: 12vw; transform: translateX(-50%); height: 72vw; opacity: .9; }
 
 	/* Lata + agua: el contenedor se sube (margen negativo) sobre la marca de agua;
 	   el agua (video) va DETRAS de la lata, centrada. */
 	.prodx-sec__canbox {
-		display: block; position: relative; z-index: 2;
-		width: 50%; margin: -70% auto 0;
+		display: block; position: relative; z-index: 2; order: 2;
+		width: 50%; margin: -11vw auto 0;   /* la lata arranca en el tope de la palabra */
 	}
-	.s-ing .prodx-sec__canbox { margin-top: -64%; }   /* la imagen de ingredientes es mas ancha */
 	.prodx-sec__can {
 		display: block; position: relative; z-index: 2;
 		width: 100%; height: auto; margin: 0 auto;
@@ -1126,10 +1146,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		position: static; transform: none; width: 100%;
 		text-align: center; margin-left: auto; margin-right: auto;
 	}
-	.prodx-desc    { margin-top: 5vw; }
+	.prodx-desc    { order: 3; margin-top: 4vw; }
+	.prodx-explora { order: 4; }
+	.prodx-ingm    { order: 3; width: 100%; }
 	/* Explora: card gris con el titulo arriba y, debajo, Rebel Blue (izq) + Citrus Blue (der) */
 	.prodx-explora {
-		margin: 8vw 3vw 0; width: auto; box-sizing: border-box;
+		margin: 8vw 0 0; width: 100%; box-sizing: border-box;
 		background: #f1f3f4; border-radius: 18px; padding: 7vw 5vw;
 		display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
 		column-gap: 36px; row-gap: 0;
@@ -1327,7 +1349,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-showcase__desc { font-size: min(4.4vw, 22px); max-width: none; }
 	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 2.6vw; margin-top: 4vw; }
 	/* todas las pastillas del MISMO ancho y centradas => stack limpio (no "dobladas") */
-	.spirup-showcase__pills .pill { margin: 0 !important; transform: none; min-width: 0; width: min(62vw, 250px); text-align: center; font-size: min(4vw, 20px); padding: min(2.9vw, 14px) 0; }
+	.spirup-showcase__pills .pill { margin: 0 !important; min-width: 0; width: auto; height: auto; text-align: center; font-size: min(4.2vw, 20px); padding: min(2.9vw, 14px) 1.6em; }
+	.spirup-showcase__pills .pill--1, .spirup-showcase__pills .pill--3 { transform: rotate(4.47deg); }
+	.spirup-showcase__pills .pill--2, .spirup-showcase__pills .pill--4 { transform: rotate(-4.2deg); }
 	/* flechas a los bordes, a la altura de la lata */
 	.spirup-showcase__arrow { top: 30%; }
 	.spirup-showcase__arrow--prev { left: 3%; }
@@ -1463,19 +1487,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		display: block; list-style: none; padding: 0;
 		margin: clamp(24px, 6vw, 44px) auto 0; max-width: 420px; text-align: left;
 	}
-	.ct-step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 16px; padding-bottom: clamp(22px, 6vw, 40px); }
+	.ct-step { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; padding-bottom: clamp(22px, 6vw, 40px); }
 	.ct-step:last-child { padding-bottom: 0; }
 	/* linea que conecta los circulos */
-	.ct-step::before { content: ""; position: absolute; left: 26px; top: 58px; bottom: -2px; width: 2px; background: #2f918f; opacity: .45; }
+	.ct-step::before { display: none; }   /* sin linea entre circulos (figma) */
 	.ct-step:last-child::before { display: none; }
 	.ct-dot {
-		position: relative; z-index: 1; width: 54px; height: 54px; border-radius: 50%;
-		border: 2px solid #2f918f; background: #eaf4ef; color: #1a7f8c;
+		position: relative; z-index: 1; width: 66px; height: 66px; border-radius: 50%;
+		border: 2px solid #1f86c4; background: transparent; color: #1a7f8c;
 		display: inline-flex; align-items: center; justify-content: center;
 	}
-	.ct-dot svg { width: 54%; height: 54%; }
-	.ct-txt { padding-top: 7px; }
-	.ct-txt h3 { margin: 0 0 4px; color: #EC7A04; font-weight: 800; line-height: 1.15; font-size: 17px; }
+	.ct-dot svg { display: none; }   /* circulos vacios, como el figma */
+	.ct-txt { padding-top: 0; }
+	.ct-txt h3 { margin: 0 0 4px; color: #EC7A04; font-weight: 800; line-height: 1.15; font-size: 15.5px; text-transform: uppercase; letter-spacing: .02em; }
 	.ct-txt p { margin: 0; color: #4d6266; line-height: 1.5; font-size: 14.5px; }
 }
 @media (max-width: 620px) {

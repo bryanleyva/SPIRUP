@@ -54,12 +54,14 @@ get_header();
 		celular se ve como el desktop), aqui se arma con TEXTO: foto de latas, titulo,
 		lata, beneficios en COLUMNA (icono + texto) y "Momentos" en una CARD. */ ?>
 	<section class="prodx-herom">
-		<img class="prodx-herom__cans" src="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?>"
-			srcset="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?> 1443w, <?php echo esc_url( $img . '/prod-hero-cans@2x.webp' ); ?> 2886w"
-			sizes="100vw" alt="Latas Spir Up">
+		<div class="prodx-herom__photo">
+			<img class="prodx-herom__cans" src="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?>"
+				srcset="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?> 1443w, <?php echo esc_url( $img . '/prod-hero-cans@2x.webp' ); ?> 2886w"
+				sizes="100vw" alt="Latas Spir Up">
+		</div>
 		<h1 class="prodx-herom__title">
-			Refrescante por <strong>naturaleza.</strong><br>
-			Respaldada por la <strong class="c-orange">ciencia.</strong>
+			Refrescante por<br><strong>naturaleza.</strong><br>
+			Respaldada por la<br><strong class="c-orange">ciencia.</strong>
 		</h1>
 		<div class="prodx-herom__canwrap">
 			<img class="prodx-herom__rings" src="<?php echo esc_url( $img . '/prod-hero-rings.png' ); ?>" alt="" aria-hidden="true">
@@ -105,7 +107,8 @@ get_header();
 
 		<?php /* 2. CITRUS BLUE */ ?>
 		<section class="prodx-sec s-flavor" data-sec="citrus-front" id="prod-citrus">
-			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/citrusblueproducto.png' ); ?>" alt="Citrus Blue">
+			<img class="prodx-sec__wm" src="<?php echo esc_url( $img . '/marca-agua.png' ); ?>" alt="" aria-hidden="true">
+			<span class="prodx-sec__word" aria-hidden="true">CITRUS BLUE</span>
 			<div class="prodx-sec__canbox">
 				<?php echo $prodx_water; // phpcs:ignore ?>
 				<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="" aria-hidden="true">
@@ -131,7 +134,8 @@ get_header();
 		);
 		?>
 		<section class="prodx-sec s-ing" data-sec="citrus-back">
-			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/ingredientesproductos.png' ); ?>" alt="Ingredientes">
+			<img class="prodx-sec__wm" src="<?php echo esc_url( $img . '/marca-agua.png' ); ?>" alt="" aria-hidden="true">
+			<span class="prodx-sec__word" aria-hidden="true">INGREDIENTES</span>
 			<div class="prodx-sec__canbox">
 				<?php echo $prodx_water; // phpcs:ignore ?>
 				<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="" aria-hidden="true">
@@ -154,7 +158,8 @@ get_header();
 
 		<?php /* 4. REBEL BLUE */ ?>
 		<section class="prodx-sec s-flavor" data-sec="rebel-front" id="prod-rebel">
-			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/rebelblueproductos.png' ); ?>" alt="Rebel Blue">
+			<img class="prodx-sec__wm" src="<?php echo esc_url( $img . '/marca-agua.png' ); ?>" alt="" aria-hidden="true">
+			<span class="prodx-sec__word" aria-hidden="true">REBEL BLUE</span>
 			<div class="prodx-sec__canbox">
 				<?php echo $prodx_water; // phpcs:ignore ?>
 				<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="" aria-hidden="true">
@@ -180,7 +185,8 @@ get_header();
 		);
 		?>
 		<section class="prodx-sec s-ing" data-sec="rebel-back">
-			<img class="prodx-sec__bg" src="<?php echo esc_url( $img . '/ingredientesproductos.png' ); ?>" alt="Ingredientes">
+			<img class="prodx-sec__wm" src="<?php echo esc_url( $img . '/marca-agua.png' ); ?>" alt="" aria-hidden="true">
+			<span class="prodx-sec__word" aria-hidden="true">INGREDIENTES</span>
 			<div class="prodx-sec__canbox">
 				<?php echo $prodx_water; // phpcs:ignore ?>
 				<img class="prodx-sec__can" src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="" aria-hidden="true">
