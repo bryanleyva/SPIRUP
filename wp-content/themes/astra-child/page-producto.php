@@ -28,7 +28,9 @@ get_header();
 
 	<?php /* ============ 1. INICIAL ============ */ ?>
 	<section class="prodx-hero">
-		<img class="prodx-hero__bg" src="<?php echo esc_url( $img . '/inicial_productos.png' ); ?>" alt="Spir Up" fetchpriority="high">
+		<img class="prodx-hero__bg" src="<?php echo esc_url( $img . '/inicial_productos.png' ); ?>"
+			srcset="<?php echo esc_url( $img . '/inicial_productos.png' ); ?> 1443w, <?php echo esc_url( $img . '/inicial_productos@2x.webp' ); ?> 2886w"
+			sizes="100vw" alt="Spir Up" fetchpriority="high">
 
 		<h1 class="prodx-hero__title">
 			Refrescante por <strong>naturaleza.</strong><br>
@@ -52,7 +54,9 @@ get_header();
 		celular se ve como el desktop), aqui se arma con TEXTO: foto de latas, titulo,
 		lata, beneficios en COLUMNA (icono + texto) y "Momentos" en una CARD. */ ?>
 	<section class="prodx-herom">
-		<img class="prodx-herom__cans" src="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?>" alt="Latas Spir Up">
+		<img class="prodx-herom__cans" src="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?>"
+			srcset="<?php echo esc_url( $img . '/prod-hero-cans.png' ); ?> 1443w, <?php echo esc_url( $img . '/prod-hero-cans@2x.webp' ); ?> 2886w"
+			sizes="100vw" alt="Latas Spir Up">
 		<h1 class="prodx-herom__title">
 			Refrescante por <strong>naturaleza.</strong><br>
 			Respaldada por la <strong class="c-orange">ciencia.</strong>
@@ -88,10 +92,14 @@ get_header();
 	?>
 	<div class="prodx-stage" id="prodxStage" data-flavor="citrus" data-face="front">
 
+		<?php /* Capa que cubre TODO el escenario; dentro, el sticky: la lata se queda en la
+			ultima seccion (Ingredientes de Rebel) y no baja hasta el footer. */ ?>
 		<div class="prodx-stage__canwrap" aria-hidden="true">
-			<div class="prodx-can" id="prodxCan">
-				<img class="prodx-can__img is-citrus" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="">
-				<img class="prodx-can__img is-rebel"  src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="">
+			<div class="prodx-stage__sticky">
+				<div class="prodx-can" id="prodxCan">
+					<img class="prodx-can__img is-citrus" src="<?php echo esc_url( $img . '/lata-spir-up 1 (2).png' ); ?>" alt="">
+					<img class="prodx-can__img is-rebel"  src="<?php echo esc_url( $img . '/lata-spir-up 5.png' ); ?>" alt="">
+				</div>
 			</div>
 		</div>
 

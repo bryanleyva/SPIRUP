@@ -108,82 +108,16 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</div>
 	</section>
 
-	<?php
-	/* ===================== BLOQUE CONECTADO (desktop >820px): parte4 + Ingredientes + Del cultivo + Elige EN UNA SOLA IMAGEN (Group 68) =====================
-	   Se usa la imagen COMPLETA (seccion68.png) tal cual; encima solo va lo dinamico:
-	   texto de parte4, el diagrama de "Del cultivo" y las tarjetas de producto reales
-	   sobre los 4 marcos horneados de "Elige". */
-	$bp_cart_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21.5 7H6"/></svg>';
-	$bp_can_svg  = '<svg viewBox="0 0 48 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><rect x="10" y="6" width="28" height="84" rx="8"/><path d="M14 6c0-2 2-3 4-3h12c2 0 4 1 4 3"/><path d="M12 26h24"/></svg>';
-	$bp_products = function_exists( 'wc_get_products' )
-		? wc_get_products( array( 'status' => 'publish', 'limit' => 4, 'orderby' => 'menu_order date', 'order' => 'ASC' ) )
-		: array();
-	$bp_centers = array( 15.35, 38.45, 61.55, 84.58 ); // centros de los 4 marcos horneados (Group 75)
-	?>
-	<section class="spirup-bloque" id="por-que">
-		<div class="spirup-bloque__inner">
-			<?php /* Anclas del menu para DESKTOP (el contenido con id="beneficios/conocenos/productos"
-				esta en .spirup-mobileflow, oculto en desktop). El JS salta a la ancla visible. */ ?>
-			<span class="spirup-jump" data-jump="beneficios" style="top:33%;" aria-hidden="true"></span>
-			<span class="spirup-jump" data-jump="conocenos" style="top:51%;" aria-hidden="true"></span>
-			<span class="spirup-jump" data-jump="productos" style="top:79%;" aria-hidden="true"></span>
-			<img class="spirup-bloque__img" src="<?php echo esc_url( $img . '/Group75-top.png' ); ?>" alt="">
-			<div class="spirup-bloque__p4">
-				<h2 class="spirup-bloque__title"><?php echo esc_html( spirup_txt( 'micro_title' ) ); ?></h2>
-				<ul class="spirup-bloque__list">
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item1' ) ); ?></li>
-					<li class="is-no"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item2' ) ); ?></li>
-					<li class="is-yes"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6"/></svg></span><?php echo esc_html( spirup_txt( 'micro_item3' ) ); ?></li>
-				</ul>
-				<p class="spirup-bloque__claim"><?php echo esc_html( spirup_txt( 'micro_claim1' ) ); ?><br><strong><?php echo esc_html( spirup_txt( 'micro_claim2' ) ); ?></strong></p>
-			</div>
-			<?php /* Diagrama de "Del cultivo": 3 circulos VACIOS (sin iconos) + flechas, alineados sobre las etiquetas horneadas (centros 16.8 / 46 / 74.9%) */ ?>
-			<div class="spirup-bloque__diagram" aria-hidden="true">
-				<span class="c c1"></span>
-				<span class="ar ar1"></span>
-				<span class="c c2"></span>
-				<span class="ar ar2"></span>
-				<span class="c c3"></span>
-			</div>
-			<?php /* Tarjetas de producto reales encimadas sobre los 4 marcos de "Elige" */ ?>
-			<div class="spirup-bloque__products">
-				<?php $bp_i = 0; foreach ( $bp_products as $product ) :
-					if ( ! isset( $bp_centers[ $bp_i ] ) ) { break; }
-					$pid = $product->get_id();
-					?>
-					<article class="bp" style="left:<?php echo esc_attr( $bp_centers[ $bp_i ] ); ?>%;">
-						<div class="bp__img">
-							<?php if ( $product->get_image_id() ) : ?>
-								<?php echo $product->get_image( 'large' ); // phpcs:ignore ?>
-							<?php else : ?>
-								<span class="bp__ph"><?php echo $bp_can_svg; // phpcs:ignore ?></span>
-							<?php endif; ?>
-						</div>
-						<div class="bp__meta">
-							<div class="bp__info">
-								<h3><?php echo esc_html( ucwords( mb_strtolower( $product->get_name(), 'UTF-8' ) ) ); ?></h3>
-								<span class="bp__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-							</div>
-							<a href="?add-to-cart=<?php echo esc_attr( $pid ); ?>"
-								data-product_id="<?php echo esc_attr( $pid ); ?>" data-quantity="1"
-								class="bp__cart add_to_cart_button ajax_add_to_cart" rel="nofollow"
-								aria-label="Añadir <?php echo esc_attr( $product->get_name() ); ?> al carrito">
-								<?php echo $bp_cart_svg; // phpcs:ignore ?>
-							</a>
-						</div>
-					</article>
-				<?php $bp_i++; endforeach; ?>
-			</div>
-		</div>
-	</section>
-
-	<?php /* ===================== MOVIL (<=820px): flujo HTML de las 3 secciones ===================== */ ?>
+	<?php /* ===================== PARTE 4 + INGREDIENTES + DEL CULTIVO: HTML real en TODOS los tamanos
+	   (antes en desktop era una sola imagen horneada -Group75-top- que se veia pixelada). ===================== */ ?>
 	<div class="spirup-mobileflow">
 	<?php /* ===================== PARTE 4: Potencial de las microalgas ===================== */ ?>
 	<section class="spirup-parte4">
 		<div class="spirup-parte4__inner">
 			<div class="spirup-parte4__media">
 				<img src="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?>"
+					srcset="<?php echo esc_url( $img . '/sesion4-beach.png' ); ?> 690w, <?php echo esc_url( $img . '/sesion4-beach@2x.webp' ); ?> 1380w"
+					sizes="(max-width: 860px) 100vw, 50vw"
 					alt="Lata Spir Up Citrus Blue con gafas de sol junto a una piscina">
 			</div>
 			<div class="spirup-parte4__text">
@@ -200,34 +134,31 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 	<?php /* ===================== PARTE 3: Ingredientes (va despues de parte4) ===================== */ ?>
 	<section class="spirup-parte3" id="beneficios">
-		<?php /* Escritorio: imagen con la CURVA superior que corta la figura de arriba
-			(parte4), el swirl y las tarjetas. Transparente arriba/abajo. */ ?>
-		<img class="spirup-parte3__img" src="<?php echo esc_url( $img . '/parte3-ingredientes.png' ); ?>"
-			alt="Ingredientes con propósito, nada de relleno">
-		<?php /* Movil: version HTML con texto legible (la imagen ancha no calza). */ ?>
+		<?php /* Fondo: ola superior + degradado (SVG, nitido a cualquier tamano) y el swoosh
+			(capa translucida recortada del diseno). Todo el texto es real. */ ?>
+		<div class="spirup-parte3__bg" aria-hidden="true">
+			<img class="spirup-parte3__wave" src="<?php echo esc_url( $img . '/parte3-fondo.svg' ); ?>" alt="">
+			<img class="spirup-parte3__swoosh" src="<?php echo esc_url( $img . '/parte3-swoosh.png' ); ?>" alt="">
+		</div>
 		<div class="spirup-parte3__inner">
 			<h2 class="spirup-parte3__title">Ingredientes con propósito,<br>nada de relleno</h2>
 			<div class="spirup-parte3__grid">
+				<?php
+				$p3_cards = array(
+					array( 'ing-microalgas.png', 'Microalgas', 'Bioactivos funcionales de origen natural' ),
+					array( 'ing-agua.png', 'Agua gasificada', 'Contenido controlado de sodio' ),
+					array( 'ing-extractos.png', 'Extractos naturales', 'Sin saborizantes artificiales' ),
+					array( 'ing-sinazucar.png', 'Sin azúcar añadida', 'Dulzor equilibrado sin culpa' ),
+				);
+				foreach ( $p3_cards as $c ) : ?>
 				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-microalgas.png' ); ?>" alt="" aria-hidden="true"></span>
-					<strong>Microalgas</strong>
-					<span>Bioactivos funcionales de origen natural</span>
+					<div class="spirup-p3card__top"><img class="spirup-p3card__ico" src="<?php echo esc_url( $img . '/' . $c[0] ); ?>" alt="" aria-hidden="true"></div>
+					<div class="spirup-p3card__body">
+						<strong><?php echo esc_html( $c[1] ); ?></strong>
+						<span><?php echo esc_html( $c[2] ); ?></span>
+					</div>
 				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-agua.png' ); ?>" alt="" aria-hidden="true"></span>
-					<strong>Agua gasificada</strong>
-					<span>Contenido controlado de sodio</span>
-				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-extractos.png' ); ?>" alt="" aria-hidden="true"></span>
-					<strong>Extractos naturales</strong>
-					<span>Sin saborizantes artificiales</span>
-				</div>
-				<div class="spirup-p3card">
-					<span class="spirup-p3card__ico"><img src="<?php echo esc_url( $img . '/ing-sinazucar.png' ); ?>" alt="" aria-hidden="true"></span>
-					<strong>Sin azúcar añadida</strong>
-					<span>Dulzor equilibrado sin culpa</span>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
@@ -254,15 +185,12 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 						<div class="ct-txt"><h3>El resultado</h3><p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p></div>
 					</li>
 				</ul>
-				<div class="spirup-cultivo__flow">
-					<img class="spirup-cultivo__diagram" src="<?php echo esc_url( $img . '/cultivo-diagrama.png' ); ?>"
-						alt="El origen, el desarrollo y el resultado de Spir Up">
-					<div class="spirup-cultivo__steps">
-						<p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p>
-						<p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p>
-						<p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p>
-					</div>
-				</div>
+				<?php /* DESKTOP: diagrama en HTML (circulos + flechas + labels), sin imagen => nitido */ ?>
+				<ol class="spirup-cultivo__flow">
+					<li class="cs"><span class="cs__circle"><img src="<?php echo esc_url( $img . '/cultivo-ico-1.png' ); ?>" alt="" aria-hidden="true"></span><h3>El origen</h3><p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p></li>
+					<li class="cs"><span class="cs__circle"><img src="<?php echo esc_url( $img . '/cultivo-ico-2.png' ); ?>" alt="" aria-hidden="true"></span><h3>El desarrollo</h3><p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p></li>
+					<li class="cs"><span class="cs__circle"><img src="<?php echo esc_url( $img . '/cultivo-ico-3.png' ); ?>" alt="" aria-hidden="true"></span><h3>El resultado</h3><p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p></li>
+				</ol>
 			</div>
 		</div>
 	</section>
