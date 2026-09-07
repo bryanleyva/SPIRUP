@@ -309,11 +309,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    (donde iba el titulo horneado): columna centrada en el 26.5% del ancho. */
 .spirup-figura__overlay {
 	position: absolute;
-	left: 5%; top: 50%;
-	width: 44%;
-	transform: translateY(-50%);
+	/* Grupo del figma: X 84 / Y 265 / W 612 / rotacion 2.74 (en CSS el signo va al reves) */
+	left: 5.8%; top: 38.3%;
+	width: 42.5%;
+	transform: rotate(-2.74deg);
+	transform-origin: 50% 50%;
 	display: flex; flex-direction: column; align-items: center;
-	gap: clamp(14px, 2.4vw, 40px);
+	gap: 0;   /* el boton justo debajo de la "p" de Up */
 	text-align: center;
 }
 .spirup-figura__title {
@@ -321,7 +323,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	color: #fff;
 	font-family: 'Northwell', var(--font-title);
 	font-weight: 400; line-height: .95; letter-spacing: 0;   /* Northwell: script de un solo peso (sin negrita falsa) */
-	font-size: clamp(32px, 5.5vw, 88px);   /* desktop: 2 lineas (figma) */
+	margin: 0 0 -.16em !important; padding: 0 !important;   /* Northwell deja mucho aire bajo la linea base: el boton sube hasta la "p" (el !important gana a los margenes de h2 del tema) */
+	font-size: clamp(36px, 6.3vw, 100px);   /* desktop: 2 lineas, 612px de ancho a 1440 (figma) */
 	white-space: nowrap;
 	text-shadow: 0 2px 14px rgba(10, 30, 50, .25);
 }
@@ -340,12 +343,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 @media (max-width: 820px) {
 	/* Movil: foto sola (Vector9-mob) recortada en un hero mas alto para que el
 	   titulo de 4 lineas y el boton tengan espacio. */
-	.spirup-figura { height: clamp(440px, 122vw, 580px); }
-	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% center; }
-	.spirup-figura__overlay { left: 0; width: 100%; top: 46%; padding: 0 7vw; box-sizing: border-box; gap: 6vw; align-items: flex-start; text-align: left; }
-	.spirup-figura__title { font-size: min(13.5vw, 70px); line-height: .95; white-space: normal; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
+	.spirup-figura { height: clamp(430px, 120vw, 560px); background: #a8dcc9; }   /* la foto completa (Vector 9) entra entera; su ola transparente deja ver el mint => corte en ola hacia el slider */
+	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% center; }   /* foto completa (Vector 9): agua/cielo a la izquierda, la lata a la derecha */
+	.spirup-figura__overlay { left: 5%; width: 64%; top: 10%; padding: 0; box-sizing: border-box; gap: 2vw; align-items: center; text-align: center; transform: rotate(-2.74deg); }
+	.spirup-figura__title { font-size: min(11.5vw, 60px); line-height: .95; margin-bottom: -.3em !important; white-space: normal; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
 	.spirup-figura__title .br-m { display: inline; }
-	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); margin-left: 2vw; }
+	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); margin-left: 0; }
 }
 
 /* --------------------------------------------------------------------------

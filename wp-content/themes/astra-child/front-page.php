@@ -25,7 +25,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		centrado debajo. Se sirve @2x via srcset. En movil: foto sola (Vector9-mob). */ ?>
 	<section class="spirup-figura">
 		<picture>
-			<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/Vector9-mob.png' ); ?>">
+			<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/Vector 9.png' ); ?>">
 			<img class="spirup-figura__img"
 				src="<?php echo esc_url( $img . '/hero-inicio.png' ); ?>"
 				srcset="<?php echo esc_url( $img . '/hero-inicio.png' ); ?> 1443w, <?php echo esc_url( $img . '/hero-inicio@2x.png' ); ?> 2886w"
