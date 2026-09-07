@@ -33,7 +33,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				alt="Mano sosteniendo una lata de Spir Up bajo el sol. Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
 		</picture>
 		<div class="spirup-figura__overlay">
-			<h2 class="spirup-figura__title">Un sorbo de<br>vitalidad, un<br>sorbo de<br><span class="spirup-figura__brand">SPIR&nbsp;UP</span></h2>
+			<h2 class="spirup-figura__title">¡Un sorbo de<br>vitalidad,<br>un sorbo de<br><span class="spirup-figura__brand">Spir&nbsp;Up!</span></h2>
 			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?> <span class="spirup-figura__arrow" aria-hidden="true">&#8599;</span></a>
 		</div>
 	</section>
