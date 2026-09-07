@@ -19,16 +19,23 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 <main class="spirup-main">
 
-	<?php /* HERO = imagen Group 56 (foto + titulo + banda + features, todo igual al
-		figma). Se sirve tambien @2x via srcset => nitido en pantallas grandes. Debajo
-		de la ola es transparente => conecta con el showcase (#ccedec) SIN costura. */ ?>
+	<?php /* HERO = hero-inicio.png: la misma imagen Group 56 (foto + banda de valores +
+		ola) pero con el titulo manuscrito horneado BORRADO (parchado con la foto sin
+		texto). Encima va el titulo real en 4 lineas ("SPIR UP" en #C1CF3C) y el boton
+		centrado debajo. Se sirve @2x via srcset. En movil: foto sola (Vector9-mob). */ ?>
 	<section class="spirup-figura">
-		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
-			srcset="<?php echo esc_url( $img . '/Group 56.png' ); ?> 1443w, <?php echo esc_url( $img . '/Group56@2x.png' ); ?> 2886w"
-			sizes="100vw"
-			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up! Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
-		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
+		<picture>
+			<source media="(max-width: 820px)" srcset="<?php echo esc_url( $img . '/Vector9-mob.png' ); ?>">
+			<img class="spirup-figura__img"
+				src="<?php echo esc_url( $img . '/hero-inicio.png' ); ?>"
+				srcset="<?php echo esc_url( $img . '/hero-inicio.png' ); ?> 1443w, <?php echo esc_url( $img . '/hero-inicio@2x.png' ); ?> 2886w"
+				sizes="100vw"
+				alt="Mano sosteniendo una lata de Spir Up bajo el sol. Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
+		</picture>
+		<div class="spirup-figura__overlay">
+			<h2 class="spirup-figura__title">Un sorbo de<br>vitalidad, un<br>sorbo de<br><span class="spirup-figura__brand">SPIR&nbsp;UP</span></h2>
+			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?> <span class="spirup-figura__arrow" aria-hidden="true">&#8599;</span></a>
+		</div>
 	</section>
 
 	<?php

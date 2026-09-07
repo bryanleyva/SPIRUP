@@ -287,28 +287,60 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	   el corte teal lo hace la imagen de la parte 3 que solapa encima. */
 	background: #c6e7e6;
 }
-/* Hero = imagen (Group 56) a sangre. Se sirve tambien @2x (srcset) => nitido en
-   pantallas grandes. Debajo de la ola la imagen es transparente => conecta con el
-   showcase (#ccedec) SIN costura. */
+/* Hero = hero-inicio.png a sangre (Group 56 sin el titulo horneado). Se sirve @2x
+   (srcset) => nitido. Debajo de la ola es transparente => conecta con el showcase. */
+.spirup-figura { overflow: hidden; }
+.spirup-figura picture { display: contents; }
 .spirup-figura__img { display: block; width: 100%; height: auto; }
-/* Boton superpuesto, centrado bajo el titulo horneado. % => sigue el mismo punto
-   de la imagen a cualquier tamaño; el tamaño escala con el ancho. */
-.spirup-figura__cta {
-	position: absolute;
-	left: 27.4%;
-	top: 52%;
-	transform: translateX(-50%);
-	font-size: clamp(15px, 1.75vw, 60px);
-	padding: clamp(11px, 1.35vw, 46px) clamp(22px, 2.8vw, 98px);
+
+/* Fuente del titulo: NORTHWELL cuando exista el archivo en fonts/ (Northwell.woff2
+   u .otf); mientras tanto cae en la negrita de marca. */
+@font-face {
+	font-family: 'Northwell';
+	src: url('fonts/Northwell.woff2') format('woff2'),
+		 url('fonts/Northwell.otf') format('opentype');
+	font-weight: 400;
+	font-display: swap;
 }
-.spirup-figura__cta:hover { transform: translateX(-50%); }
+
+/* Titulo (4 lineas, SPIR UP en verde) + boton, centrados en la zona del cielo
+   (donde iba el titulo horneado): columna centrada en el 26.5% del ancho. */
+.spirup-figura__overlay {
+	position: absolute;
+	left: 6.5%; top: 47%;
+	width: 40%;
+	transform: translateY(-50%);
+	display: flex; flex-direction: column; align-items: center;
+	gap: clamp(14px, 2.2vw, 36px);
+	text-align: center;
+}
+.spirup-figura__title {
+	margin: 0;
+	color: #fff;
+	font-family: 'Northwell', var(--font-title);
+	font-weight: 800; line-height: 1.04; letter-spacing: -0.01em;
+	font-size: clamp(24px, 3.9vw, 62px);
+	text-shadow: 0 2px 14px rgba(10, 30, 50, .25);
+}
+.spirup-figura__brand { color: #C1CF3C; }
+.spirup-figura__cta {
+	position: static;
+	transform: none;
+	display: inline-flex; align-items: center; gap: .35em;
+	font-size: clamp(14px, 1.35vw, 24px);
+	padding: clamp(10px, .95vw, 18px) clamp(22px, 2.2vw, 44px);
+}
+.spirup-figura__cta:hover { transform: translateY(-2px); }
+.spirup-figura__arrow { font-size: 1.05em; line-height: 1; }
+
 @media (max-width: 820px) {
-	.spirup-figura__cta {
-		left: 27.4%;
-		top: 52%;
-		font-size: clamp(11px, 2.9vw, 15px);
-		padding: clamp(7px, 1.7vw, 11px) clamp(14px, 3.6vw, 22px);
-	}
+	/* Movil: foto sola (Vector9-mob) recortada en un hero mas alto para que el
+	   titulo de 4 lineas y el boton tengan espacio. */
+	.spirup-figura { height: clamp(440px, 122vw, 580px); }
+	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% center; }
+	.spirup-figura__overlay { left: 0; width: 100%; top: 50%; padding: 0 6vw; box-sizing: border-box; gap: 5vw; }
+	.spirup-figura__title { font-size: min(9.5vw, 52px); line-height: 1.08; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
+	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1276,19 +1308,22 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* Copy (figma): CITRUS BLUE en 1 linea, subtitulo en 3 lineas, descripcion en 2.
    Los max-width en em fijan los saltos de linea a cualquier tamaño de pantalla. */
 .spirup-showcase__copy { position: absolute; left: 7.3%; top: 53%; transform: translateY(-50%); width: 23%; z-index: 4; }
-.spirup-showcase__flavor { margin: 0 0 .32em; color: #1a7a86; font-family: var(--font-title); font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1.05; font-size: clamp(22px, 2.65vw, 40px); }
-.spirup-showcase__tag { margin: 0 0 .38em; max-width: 9.2em; color: #EC7A04; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: clamp(18px, 2.3vw, 35px); }
-.spirup-showcase__desc { margin: 0; max-width: 11em; color: #17323B; line-height: 1.55; font-weight: 500; font-size: clamp(15px, 1.4vw, 22px); }
+.spirup-showcase__flavor { margin: 0 0 .32em; color: #1a7a86; font-family: var(--font-title); font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1.05; font-size: clamp(24px, calc(2.65vw + 2px), 42px); }
+.spirup-showcase__tag { margin: 0 0 .38em; max-width: 9.2em; color: #EC7A04; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: clamp(20px, calc(2.3vw + 2px), 37px); }
+.spirup-showcase__desc { margin: 0; max-width: 11em; color: #17323B; line-height: 1.55; font-weight: 500; font-size: clamp(17px, calc(1.4vw + 2px), 24px); }
 
 /* Pills de la derecha (escalonadas) */
 /* Pastillas (figma): columna CENTRADA (todas alineadas por su centro) a la derecha
    de la lata; lo que cambia entre una y otra es la INCLINACION. */
-.spirup-showcase__pills { position: absolute; left: 86%; top: 50%; transform: translate(-50%, -50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: center; gap: clamp(5px, .55vw, 9px); }
-.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; text-align: center; min-width: clamp(110px, 12.6vw, 190px); box-sizing: border-box; padding: clamp(11px, 1.15vw, 19px) clamp(18px, 2.2vw, 34px); font-size: clamp(14px, 1.5vw, 23px); box-shadow: 0 6px 16px rgba(20,60,60,.12); }
-.spirup-showcase__pills .pill--1 { transform: rotate(-1.5deg); }
-.spirup-showcase__pills .pill--2 { transform: rotate(-2.5deg); }
-.spirup-showcase__pills .pill--3 { transform: rotate(-2deg); }
-.spirup-showcase__pills .pill--4 { transform: rotate(-3.5deg); }
+/* Medidas del figma (frame 1441px): centro de la columna x=1175 (81.6%), pastillas
+   171.8 / 210.5 / 171.8 / 235.5 x ~51px, separacion ~14px, rotacion alternada
+   -4.47 / +4.2 (figma gira antihorario => en CSS el signo va al reves). */
+.spirup-showcase__pills { position: absolute; left: 81.6%; top: 50%; transform: translate(-50%, -50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1vw, 15px); }
+.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: clamp(40px, 3.55vw, 52px); padding: 0 1em; font-size: clamp(14px, 1.45vw, 22px); box-shadow: 0 6px 16px rgba(20,60,60,.12); }
+.spirup-showcase__pills .pill--1 { width: clamp(124px, 11.92vw, 172px); transform: rotate(4.47deg); }
+.spirup-showcase__pills .pill--2 { width: clamp(152px, 14.6vw, 211px);  transform: rotate(-4.2deg); }
+.spirup-showcase__pills .pill--3 { width: clamp(124px, 11.92vw, 172px); transform: rotate(4.47deg); }
+.spirup-showcase__pills .pill--4 { width: clamp(170px, 16.35vw, 236px); transform: rotate(-4.2deg); }
 /* Colores Citrus */
 .is-citrus .pill--1 { background: #86ccd3; color: #164e57; }
 .is-citrus .pill--2 { background: #c2e14f; color: #164e57; }
