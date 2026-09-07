@@ -19,16 +19,18 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 <main class="spirup-main">
 
-	<?php /* HERO = imagen Group 56 (foto + titulo + banda + features, todo igual al
-		figma). Se sirve tambien @2x via srcset => nitido en pantallas grandes. Debajo
-		de la ola es transparente => conecta con el showcase (#ccedec) SIN costura. */ ?>
+	<?php /* HERO = foto Vector 9 (lata + cielo + agua, con ola transparente abajo que
+		conecta con el showcase #ccedec). Encima, el titulo como TEXTO real (nitido) y
+		el boton centrado debajo. "SPIR UP" va en verde de marca (#C1CF3C). */ ?>
 	<section class="spirup-figura">
 		<img class="spirup-figura__img"
-			src="<?php echo esc_url( $img . '/Group 56.png' ); ?>"
-			srcset="<?php echo esc_url( $img . '/Group 56.png' ); ?> 1443w, <?php echo esc_url( $img . '/Group56@2x.png' ); ?> 2886w"
+			src="<?php echo esc_url( $img . '/Vector 9.png' ); ?>"
 			sizes="100vw"
-			alt="¡Un sorbo de vitalidad, un sorbo de Spir Up! Respaldada por investigación, sin colorantes artificiales, propuesta sostenible">
-		<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
+			alt="Mano sosteniendo una lata de Spir Up bajo el sol con un chorro de agua">
+		<div class="spirup-figura__overlay">
+			<h2 class="spirup-figura__title">Un sorbo de vitalidad,<br>un sorbo de <span class="spirup-figura__brand">SPIR&nbsp;UP</span></h2>
+			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
+		</div>
 	</section>
 
 	<?php
