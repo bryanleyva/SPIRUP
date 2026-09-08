@@ -310,7 +310,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-figura__overlay {
 	position: absolute;
 	/* Grupo del figma: X 84 / Y 265 / W 612 / rotacion 2.74 (en CSS el signo va al reves) */
-	left: 5.8%; top: 38.3%;
+	left: 5.8%; top: 25%;   /* mas arriba (figma) */
 	width: 42.5%;
 	transform: rotate(-2.74deg);
 	transform-origin: 50% 50%;
@@ -324,7 +324,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	font-family: 'Northwell', var(--font-title);
 	font-weight: 400; line-height: .95; letter-spacing: 0;   /* Northwell: script de un solo peso (sin negrita falsa) */
 	margin: 0 0 -.16em !important; padding: 0 !important;   /* Northwell deja mucho aire bajo la linea base: el boton sube hasta la "p" (el !important gana a los margenes de h2 del tema) */
-	font-size: clamp(36px, 6.3vw, 100px);   /* desktop: 2 lineas, 612px de ancho a 1440 (figma) */
+	font-size: clamp(38px, calc(6.3vw + 2px), 102px);   /* desktop: 2 lineas, ~612px de ancho a 1440 (figma) +2px */
 	white-space: nowrap;
 	text-shadow: 0 2px 14px rgba(10, 30, 50, .25);
 }
@@ -1255,10 +1255,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* Copy de la izquierda */
 /* Copy (figma): CITRUS BLUE en 1 linea, subtitulo en 3 lineas, descripcion en 2.
    Los max-width en em fijan los saltos de linea a cualquier tamaño de pantalla. */
-.spirup-showcase__copy { position: absolute; left: 7.3%; top: 53%; transform: translateY(-50%); width: 23%; z-index: 4; }
-.spirup-showcase__flavor { margin: 0 0 .32em; color: #1a7a86; font-family: var(--font-title); font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1.05; font-size: clamp(24px, calc(2.65vw + 2px), 42px); }
-.spirup-showcase__tag { margin: 0 0 .38em; max-width: 9.2em; color: #EC7A04; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: clamp(20px, calc(2.3vw + 2px), 37px); }
-.spirup-showcase__desc { margin: 0; max-width: 11em; color: #17323B; line-height: 1.55; font-weight: 500; font-size: clamp(17px, calc(1.4vw + 2px), 24px); }
+.spirup-showcase__copy { position: absolute; left: 7.3%; top: 49%; transform: translateY(-50%); width: 23%; z-index: 4; }
+.spirup-showcase__flavor { margin: 0 0 .1em; color: #1a7a86; font-family: var(--font-title); font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1.05; font-size: clamp(24px, calc(2.65vw + 2px), 42px); }
+.spirup-showcase__tag { margin: 0 0 .22em; max-width: 9.2em; color: #EC7A04; font-family: var(--font-title); font-weight: 800; line-height: 1.06; font-size: clamp(20px, calc(2.3vw + 2px), 37px); }
+.spirup-showcase__desc { margin: 0; max-width: 11em; color: #17323B; line-height: 1.35; font-weight: 500; font-size: clamp(17px, calc(1.4vw + 2px), 24px); }
 
 /* Pills de la derecha (escalonadas) */
 /* Pastillas (figma): columna CENTRADA (todas alineadas por su centro) a la derecha
