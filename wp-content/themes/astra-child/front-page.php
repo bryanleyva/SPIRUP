@@ -34,7 +34,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		</picture>
 		<div class="spirup-figura__overlay">
 			<h2 class="spirup-figura__title">¡Un sorbo de <br class="br-m">vitalidad,<br> un sorbo de <br class="br-m"><span class="spirup-figura__brand">Spir&nbsp;Up!</span></h2>
-			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?> <span class="spirup-figura__arrow" aria-hidden="true">&#8599;</span></a>
+			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
 		</div>
 	</section>
 
