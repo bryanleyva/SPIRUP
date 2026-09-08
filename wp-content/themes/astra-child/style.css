@@ -611,7 +611,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-parte3__bg { display: block; overflow: hidden; }   /* recorta la marca de agua (no la ola ::before) */
 	.spirup-parte3__wave, .spirup-parte3__swoosh { display: none; }
 	/* marca de agua grande cruzando la seccion (figma movil) */
-	.spirup-parte3__swoosh-m { display: block; position: absolute; left: -10%; top: -14%; width: 120%; height: auto; opacity: .95; }
+	/* Marca de agua (Capa 2 del figma): el rayo cruza desde arriba a la izquierda hasta abajo, detras del titulo y las tarjetas */
+	.spirup-parte3__swoosh-m { display: block; position: absolute; left: -16%; top: -125px; width: 130%; max-width: none !important; height: auto; }
 	.spirup-parte3__inner { position: relative; z-index: 2; max-width: 92vw; margin: 0 auto; padding: 0 3vw; }
 	.spirup-parte3__title .br-m { display: inline; }
 	.spirup-parte3__title .p3-desk { display: none; }   /* movil: solo "Ingredientes con / proposito" */
@@ -1400,7 +1401,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-parte8::before {
 		content: ""; position: absolute; left: 0; right: 0; top: 1px;
 		height: clamp(26px, 7vw, 56px); transform: translateY(-100%);
-		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%2324797a' d='M0,50 C240,90 480,10 720,35 C960,60 1200,88 1440,42 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center top / 100% 100%;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath fill='%2324797a' d='M0,0 C380,88 1060,88 1440,0 L1440,90 L0,90 Z'/%3E%3C/svg%3E") no-repeat center top / 100% 100%;
 	}
 }
 .spirup-parte8__inner {
@@ -1530,6 +1531,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.ct-txt p { margin: 0; color: #4d6266; line-height: 1.5; font-size: 14.5px; }
 }
 @media (max-width: 620px) {
+	/* Titulo en 2 lineas como el figma: "Elige como quieres / tu SPIR UP" */
+	.spirup-parte8__title { max-width: 10.5em; margin-left: auto; margin-right: auto; }
 	/* Productos en CARRUSEL horizontal (deslizable) en vez de apilados hacia abajo */
 	.spirup-parte8__grid {
 		display: flex;

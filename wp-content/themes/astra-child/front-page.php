@@ -139,7 +139,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-parte3__bg" aria-hidden="true">
 			<img class="spirup-parte3__wave" src="<?php echo esc_url( $img . '/parte3-fondo.svg' ); ?>" alt="">
 			<img class="spirup-parte3__swoosh" src="<?php echo esc_url( $img . '/parte3-swoosh.png' ); ?>" alt="">
-			<img class="spirup-parte3__swoosh-m" src="<?php echo esc_url( $img . '/parte3-swoosh-m.png' ); ?>" alt="">
+			<img class="spirup-parte3__swoosh-m" src="<?php echo esc_url( $img . '/marca-agua-rayo.png' ); ?>" alt="">
 		</div>
 		<div class="spirup-parte3__inner">
 			<h2 class="spirup-parte3__title">Ingredientes con<br class="br-m"> propósito<span class="p3-desk">,<br>nada de relleno</span></h2>
