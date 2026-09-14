@@ -307,6 +307,63 @@ add_filter( 'the_content', function ( $content ) {
 	return $content;
 }, 20 );
 
+/* ==========================================================================
+   Acceso (login)
+   - La pagina "Mi cuenta" usa la plantilla propia woocommerce/myaccount/form-login.php.
+   - wp-login.php (el de WordPress) se viste con los colores y el logo de la marca.
+   ========================================================================== */
+
+// Logo de SPIR UP arriba del formulario de wp-login.php + colores de marca.
+// (login_head con prioridad alta => sale DESPUES del css de WordPress y manda).
+add_action( 'login_head', function () {
+	$logo = get_stylesheet_directory_uri() . '/imagenes/logo-spirup@2x.png';   // alta resolucion: no pixela
+	?>
+	<style>
+		body.login { background: #faf6ea; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+		.login h1 a {
+			background-image: url('<?php echo esc_url( $logo ); ?>') !important;
+			background-size: contain; width: 92px; height: 112px; margin-bottom: 10px;
+		}
+		.login form {
+			background: #fff; border: 1px solid #ece2c9; border-radius: 22px;
+			box-shadow: 0 18px 40px rgba(40, 60, 40, .08); padding: 28px 26px;
+		}
+		.login form .input, .login input[type="text"], .login input[type="password"] {
+			border: 1.5px solid #d9cca8; border-radius: 12px; background: #fff;
+			padding: 11px 14px; font-size: 15px; color: #17323B;
+		}
+		.login form .input:focus, .login input[type="text"]:focus, .login input[type="password"]:focus {
+			border-color: #2f918f; box-shadow: 0 0 0 3px rgba(47, 145, 143, .15); outline: 0;
+		}
+		.login label { color: #17323B; font-weight: 600; }
+		.wp-core-ui .button-primary {
+			background: #1e7477; border-color: #1e7477; border-radius: 999px;
+			padding: 4px 26px; height: auto; min-height: 44px; font-weight: 700; box-shadow: none; text-shadow: none;
+		}
+		.wp-core-ui .button-primary:hover, .wp-core-ui .button-primary:focus { background: #17595c; border-color: #17595c; box-shadow: none; }
+		.login #nav a, .login #backtoblog a { color: #2f918f !important; }
+		.login #nav a:hover, .login #backtoblog a:hover { color: #17595c !important; }
+		.login .message, .login .notice, .login #login_error { border-left-color: #2f918f; border-radius: 10px; }
+	</style>
+	<?php
+}, 100 );
+
+// El logo del login lleva al inicio de la tienda (no a wordpress.org).
+add_filter( 'login_headerurl', function () {
+	return home_url( '/' );
+} );
+add_filter( 'login_headertext', function () {
+	return get_bloginfo( 'name' );
+} );
+
+// Tras iniciar sesion, los clientes van a "Mi cuenta" (los administradores, al escritorio).
+add_filter( 'login_redirect', function ( $redirect_to, $requested, $user ) {
+	if ( $user instanceof WP_User && ! user_can( $user, 'edit_posts' ) && function_exists( 'wc_get_page_permalink' ) ) {
+		return wc_get_page_permalink( 'myaccount' );
+	}
+	return $redirect_to;
+}, 10, 3 );
+
 /**
  * A partir de aqui: hooks, custom post types, integracion WooCommerce,
  * shortcodes y demas logica del ecommerce SPIRUP.

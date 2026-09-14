@@ -207,8 +207,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 
 /* Reservar acorde al header compacto */
 .spirup-header .spirup-btn--orange {
-	padding: clamp(10px, 0.75vw, 15px) clamp(22px, 1.7vw, 38px);
-	font-size: clamp(14px, 1vw, 18px);
+	/* boton compacto (como el figma): menos relleno, no mas alto que el texto del menu + aire */
+	padding: clamp(8px, 0.62vw, 12px) clamp(18px, 1.25vw, 26px);
+	font-size: clamp(13px, 0.92vw, 16px);
+	line-height: 1.25;
 	background: #E97000;
 }
 .spirup-header .spirup-btn--orange:hover {
@@ -293,7 +295,26 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    (srcset) => nitido. Debajo de la ola es transparente => conecta con el showcase. */
 .spirup-figura { overflow: hidden; }
 .spirup-figura picture { display: contents; }
-.spirup-figura__img { display: block; width: 100%; height: auto; }
+/* Foto de portada completa (sin recortes: se ve la lata entera, como en el figma).
+   Debajo de la foto queda una franja de aqua donde apoya la cinta, para que la
+   cinta no tape la etiqueta de la lata. */
+.spirup-figura { padding-bottom: 6.2%; }
+.spirup-figura__img {
+	display: block; width: 100%; height: auto;
+	/* tope en pantallas muy grandes: que la portada no ocupe mas que la pantalla */
+	max-height: 86vh; object-fit: cover; object-position: center 26%;
+}
+/* Sombra del figma sobre la foto: relleno negro al 28% (va debajo de la cinta y del titulo) */
+.spirup-figura__shade {
+	position: absolute; inset: 0; z-index: 1;
+	background: #000; opacity: .28; pointer-events: none;
+}
+/* Cinta de valores: capa propia pegada al borde inferior (trae el aqua del fondo) */
+.spirup-figura__cintabox { display: contents; }
+.spirup-figura__cinta {
+	position: absolute; left: 0; right: 0; bottom: -1px;
+	width: 100%; height: auto; z-index: 2; pointer-events: none;
+}
 
 /* Fuente del titulo: NORTHWELL cuando exista el archivo en fonts/ (Northwell.woff2
    u .otf); mientras tanto cae en la negrita de marca. */
@@ -312,6 +333,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	/* Grupo del figma: X 84 / Y 265 / W 612 / rotacion 2.74 (en CSS el signo va al reves) */
 	left: 5.8%; top: 25%;   /* mas arriba (figma) */
 	width: 42.5%;
+	z-index: 3;   /* por encima de la sombra y de la cinta */
 	transform: rotate(-2.74deg);
 	transform-origin: 50% 50%;
 	display: flex; flex-direction: column; align-items: center;
@@ -355,11 +377,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 16vw; z-index: 3;
 		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 62' preserveAspectRatio='none'%3E%3Cpath fill='%23ccedec' d='M0,14 C120,22 260,50 390,44 L390,62 L0,62 Z'/%3E%3C/svg%3E") no-repeat center bottom / 100% 100%;
 	}
-	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }   /* foto completa (Vector 9): agua/cielo a la izquierda, la lata entera a la derecha */
-	.spirup-figura__overlay { left: 7%; width: 66%; top: 12%; padding: 0; box-sizing: border-box; gap: 7vw; align-items: center; text-align: center; transform: rotate(-2.74deg); }
-	.spirup-figura__title { font-size: min(14.5vw, 76px); line-height: .95; margin-bottom: 0 !important; white-space: normal; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
+	.spirup-figura__cinta { display: none; }   /* en movil la cinta la dibuja el CSS (ondas SVG) */
+	.spirup-figura__img { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: cover; object-position: 78% center; }   /* foto de portada: la lata entera, con su etiqueta */
+	/* Titulo CENTRADO en la foto y mas grande (figma movil) */
+	.spirup-figura__overlay { left: 50%; width: 88%; top: 12%; padding: 0; box-sizing: border-box; gap: 9vw; align-items: center; text-align: center; transform: translateX(-50%) rotate(-2.74deg); }
+	.spirup-figura__title { font-size: min(16.7vw, 88px); line-height: .95; margin-bottom: 0 !important; white-space: normal; text-shadow: 0 2px 14px rgba(10, 30, 50, .5); }
 	.spirup-figura__title .br-m { display: inline; }
-	.spirup-figura__cta { font-size: min(4.2vw, 18px); padding: min(3vw, 14px) min(7vw, 30px); margin-left: 0; }
+	.spirup-figura__cta { font-size: min(5.4vw, 23px); padding: min(3.6vw, 16px) min(8vw, 34px); margin-left: 0; }
 }
 
 /* --------------------------------------------------------------------------
@@ -574,14 +598,15 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-parte3__swoosh-m { display: none; }
 .spirup-parte3__title .br-m { display: none; }
 .spirup-parte3__inner { position: absolute; inset: 0; }
+/* Titulo en UNA linea ("Ingredientes con proposito"), medidas del figma */
 .spirup-parte3__title {
-	position: absolute; left: 0; width: 100%; top: 23%;
+	position: absolute; left: 0; width: 100%; top: 31%;
 	margin: 0; text-align: center;
 	color: #d4f1e6; font-weight: 800; line-height: 1.16; letter-spacing: -0.01em;
-	font-size: 3.05cqw;
+	font-size: 3.25cqw;
 }
 .spirup-parte3__grid {
-	position: absolute; left: 7%; width: 88.7%; top: 51.5%;
+	position: absolute; left: 7%; width: 88.7%; top: 49%;
 	display: grid; grid-template-columns: repeat(4, 1fr); gap: 3.95cqw;
 }
 .spirup-p3card {
@@ -590,7 +615,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	background: #d4f1e6;
 }
 .spirup-p3card__top { background: #92d0b9; height: 6.2cqw; display: flex; align-items: center; justify-content: center; }
-.spirup-p3card__ico { display: block; width: auto; height: 3.6cqw; }
+.spirup-p3card__ico { display: block; width: auto; height: 5.6cqw; }   /* icono visible ~3.7cqw (el png trae margen) */
 .spirup-p3card__body { padding: 1.7cqw 1cqw 2cqw; }
 .spirup-p3card strong { display: block; color: #17323B; font-weight: 700; line-height: 1.25; font-size: 1.32cqw; margin-bottom: .1em; }
 .spirup-p3card span { display: block; color: #3d5a5f; line-height: 1.4; font-size: 1.25cqw; max-width: 20ch; margin: 0 auto; }
@@ -615,7 +640,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-parte3__swoosh-m { display: block; position: absolute; left: -16%; top: -125px; width: 130%; max-width: none !important; height: auto; }
 	.spirup-parte3__inner { position: relative; z-index: 2; max-width: 92vw; margin: 0 auto; padding: 0 3vw; }
 	.spirup-parte3__title .br-m { display: inline; }
-	.spirup-parte3__title .p3-desk { display: none; }   /* movil: solo "Ingredientes con / proposito" */
 	.spirup-parte3__title {
 		position: static; width: auto; color: #d4f1e6;
 		font-size: clamp(26px, 7.4vw, 40px); line-height: 1.15;
@@ -695,6 +719,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    ========================================================================== */
 .spirup-parte4 {
 	background: #fff;
+	container-type: inline-size;   /* para medir la foto cuadrada en cqw */
 }
 .spirup-parte4__inner {
 	display: grid;
@@ -706,8 +731,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	align-self: stretch;
 	display: flex;
 	overflow: hidden;
-	background: #74c4d1;
+	background: #2a7fa8;
+	min-height: 50cqw;   /* la foto es cuadrada (figma): media columna = alto de la seccion */
 }
+.spirup-parte4__media picture { display: contents; }
 .spirup-parte4__media img {
 	display: block;
 	width: 100%;
@@ -901,7 +928,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-cultivo__inner { display: block; }
 .spirup-cultivo__body {
 	text-align: center;
-	max-width: 1280px; margin: 0 auto;
+	max-width: 1440px; margin: 0 auto;
 	padding: clamp(36px, 4.6vw, 100px) clamp(24px, 3.2vw, 80px) clamp(70px, 10vw, 170px);   /* abajo: sitio para la ola teal de "Elige" */
 }
 .spirup-cultivo__title {
@@ -922,7 +949,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	--cs-d: clamp(96px, 10.5vw, 160px);   /* diametro del circulo */
 	--cs-g: clamp(16px, 3vw, 60px);       /* separacion entre columnas */
 	--cs-m: 1.1vw;                        /* aire entre circulo y flecha */
-	list-style: none; margin: 0 auto; padding: 0; max-width: 1100px;
+	list-style: none; margin: 0 auto; padding: 0; max-width: 1320px;   /* columnas anchas: las lineas del figma entran sin cortarse */
 	display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--cs-g);
 }
 .cs { position: relative; text-align: center; }
@@ -933,8 +960,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	margin: 0 auto clamp(14px, 1.8vw, 30px);
 }
 .cs__circle img { width: 66%; height: auto; display: block; }
-.cs h3 { margin: 0 0 .45em; color: #EC7A04; font-weight: 800; line-height: 1.2; font-size: clamp(17px, 1.55vw, 27px); }
-.cs p { margin: 0 auto; max-width: 21em; color: #4d6266; line-height: 1.5; font-size: clamp(13px, 1.1vw, 20px); }
+/* Circulo con foto: la foto llena el circulo (recorte redondo) */
+.cs__circle--foto { overflow: hidden; padding: 0; }
+.cs__circle--foto picture { display: contents; }
+.cs__circle--foto img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+/* Titulos en MAYUSCULA (Montserrat bold, como el figma) y descripciones mas grandes */
+.cs h3 { margin: 0 0 .5em; color: #EC7A04; font-family: var(--font-body) !important; font-weight: 700; text-transform: uppercase; letter-spacing: .01em; line-height: 1.2; font-size: clamp(16px, 1.65vw, 30px); }
+.cs p { margin: 0 auto; color: #4d6266; line-height: 1.4; font-size: clamp(12px, 1.35vw, 24px); white-space: nowrap; }   /* nowrap: solo cortan los <br> => 3 lineas en las tres */
 /* flecha (linea + punta) desde el borde de un circulo hasta el siguiente */
 .cs:not(:last-child)::after {
 	content: ""; position: absolute; height: 2px; background: #1f86c4;
@@ -966,27 +998,41 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-prodx { background: #fff; overflow-x: clip; }
 
 /* ---- 1. Inicial (fondo con foto + iconos + barra; encima el texto y la lata) ---- */
-.prodx-hero { position: relative; container-type: inline-size; }
-.prodx-hero__bg { display: block; width: 100%; height: auto; }
+.prodx-hero { position: relative; container-type: inline-size; aspect-ratio: 1443 / 1504; }
+/* Capas: foto arriba + panel vectorial (Group 75.svg del figma) desde y=312.5 del frame */
+.prodx-hero__foto  { position: absolute; left: 0; top: 0; display: block; width: 100%; height: auto; }
+.prodx-hero__panel { position: absolute; left: .185%; top: 20.765%; display: block; width: 99.69%; height: auto; }   /* escala/offset medidos contra el diseno anterior (+-0.5px) */
+/* Titulo como el figma (PP Neue Montreal): "Refrescante por" / "Respaldada por la" en
+   regular azul oscuro; "naturaleza." (teal) y "ciencia." (naranja) en extrabold. */
 .prodx-hero__title {
-	position: absolute; left: 50%; top: 34%; transform: translate(-50%, -50%);   /* mas abajo: + aire con el tope y - espacio con la lata */
+	position: absolute; left: 50%; top: 34.6%; transform: translate(-50%, -50%);
 	width: 84%; text-align: center; margin: 0;
-	color: #186F70; font-weight: 700; line-height: 1.22; font-size: 2.7cqw;
+	font-family: var(--font-title) !important;
+	color: #17323B; font-weight: 400; line-height: 1.2; letter-spacing: -0.005em; font-size: 3.35cqw;
 }
-.prodx-hero__title strong { color: #186F70; font-weight: 800; }
-.prodx-hero__title .c-orange { color: #EC7A04; }
+.prodx-hero__title strong { color: #1F797A; font-weight: 800; }
+.prodx-hero__title .c-orange { color: #E97000; }
 
+/* Etiquetas: mas grandes (figma: mayuscula de 15px en el frame de 1443 => ~21px) */
 .prodx-lbl {
-	position: absolute; color: #186F70; font-weight: 800; line-height: 1.14;
-	font-size: 1.22cqw; text-transform: uppercase; letter-spacing: .01em;
+	position: absolute; color: #186F70; font-weight: 800; line-height: 1.26;
+	font-size: 1.48cqw; text-transform: uppercase; letter-spacing: .01em;
 }
-.prodx-lbl small { font-weight: 400; font-size: 0.9em; }   /* POR LATA / AÑADIDA sin negrita */
-.prodx-lbl--l1 { left: 18%;   top: 47%;   text-align: left; }
-.prodx-lbl--l2 { left: 15%;   top: 59.2%; text-align: left; }
-.prodx-lbl--l3 { left: 18.5%; top: 72%;   text-align: left; }
-.prodx-lbl--r1 { right: 21%;   top: 46.5%; text-align: right; }
-.prodx-lbl--r2 { right: 18%;   top: 59.2%; text-align: right; }
-.prodx-lbl--r3 { right: 18.5%; top: 72%;   text-align: right; }
+.prodx-lbl small { font-weight: 400; font-size: 0.95em; }   /* POR LATA / AÑADIDA sin negrita */
+.prodx-lbl--l1 { left: 17.8%; top: 45.8%; text-align: left; }
+.prodx-lbl--l2 { left: 15.1%; top: 59.3%; text-align: left; }
+.prodx-lbl--l3 { left: 18.7%; top: 72.3%; text-align: left; }
+.prodx-lbl--r1 { right: 21.1%; top: 45.2%; text-align: right; }
+.prodx-lbl--r2 { right: 16.4%; top: 57.3%; text-align: right; }
+.prodx-lbl--r3 { right: 18.1%; top: 70.2%; text-align: right; }
+
+/* Textos de "Momentos que te acompañan" encima de la tarjeta del fondo (x 82-1363 / y 1225-1331 del frame 1443x1504) */
+.prodx-mom { position: absolute; left: 5.683%; top: 81.45%; width: 88.77%; height: 7.346cqw; z-index: 2; }
+.prodx-mom__bg { position: absolute; left: -.156%; top: -1.887%; width: 100.31%; max-width: none; height: auto; display: block; }   /* recorte con 2px de margen */
+.prodx-mom__title,
+.prodx-mom__lbl { position: absolute; top: 50%; margin: 0; white-space: nowrap; }
+.prodx-mom__title { left: 3.12%; transform: translateY(-50%); color: #17323B; font-family: var(--font-body) !important; font-weight: 700; line-height: 1.2; font-size: 1.75cqw; }
+.prodx-mom__lbl { transform: translate(-50%, -54%); text-align: center; color: #1F797A; font-weight: 600; line-height: 1.27; font-size: 1.12cqw; }
 
 .prodx-hero__can {
 	position: absolute; left: 50%; top: 58.5%; transform: translate(-50%, -50%);
@@ -1037,45 +1083,50 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	position: absolute; left: 50%; top: 10%; transform: translateX(-50%);
 	z-index: 1; margin: 0; white-space: nowrap; pointer-events: none;
 	font-family: var(--font-title); font-weight: 800; letter-spacing: .01em;
-	font-size: 8.4cqw; line-height: 1;
+	font-size: 8.7cqw; line-height: 1;   /* figma: CITRUS BLUE e INGREDIENTES del mismo tamano */
 	color: transparent;
 	-webkit-text-stroke: 2px #2c8c88;
 	text-stroke: 2px #2c8c88;
 }
-.s-ing .prodx-sec__word { font-size: 8cqw; }
 /* En desktop manda la lata sticky; lo de abajo es SOLO movil */
 .prodx-sec__canbox { display: contents; }
 .prodx-sec__can { display: none; }
 .prodx-sec__video { display: none; }
 .prodx-ingm { display: none; }
 
-/* Sabor: descripcion (izq) + explora (der) */
-.prodx-desc {
-	position: absolute; left: 5.7%; top: 60%; transform: translateY(-50%);   /* empieza donde empieza el cuadro Momentos */
-	width: 25%; z-index: 3;
-}
-.prodx-desc__h { margin: 0 0 .4cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 2.15cqw; }   /* 31px */
-.prodx-desc__p { margin: 0; color: #5CAF8C; font-weight: 500; line-height: 1.42; font-size: 1.66cqw; }   /* 24px */
+/* Textos de las secciones = medidas del figma (Group 76, frame 1443): titulos PP Neue
+   ~40px, parrafos Montserrat ~32px, y los MISMOS saltos de linea (<br> en el HTML;
+   nowrap => nunca se corta distinto). Bloques anclados por arriba. */
+.prodx-desc,
+.prodx-explora,
+.prodx-ing { position: absolute; z-index: 3; white-space: nowrap; }
 
-.prodx-explora {
-	position: absolute; right: 5.5%; top: 58%; transform: translateY(-50%);   /* termina donde termina el cuadro Momentos */
-	width: 27%; text-align: right; z-index: 3;
-}
-.prodx-explora__h { margin: 0 0 .9cqw; color: #1F797A; font-family: var(--font-title); font-weight: 800; line-height: 1.2; font-size: 1.94cqw; }   /* 28px */
-.prodx-explora__opt { display: block; margin: .35cqw 0; color: #A9A9A9; font-weight: 700; line-height: 1.25; font-size: 1.66cqw; text-decoration: none; cursor: pointer; transition: color .15s ease; }   /* 24px */
+/* Sabor: descripcion (izq) + explora (der) */
+.prodx-desc    { left: 8.8%;  top: 28.9%; }
+.prodx-explora { right: 8.8%; top: 39.6%; text-align: right; }
+.prodx-desc__h,
+.prodx-explora__h,
+.prodx-ing h3 { margin: 0; color: #1F797A; font-family: var(--font-title) !important; font-weight: 800; line-height: 1.19; letter-spacing: -0.005em; font-size: 2.8cqw; }   /* 40px */
+.prodx-desc__h    { margin-bottom: 0; }
+.prodx-explora__h { margin-bottom: .55cqw; }
+.prodx-desc__p,
+.prodx-explora__opt,
+.prodx-ing p { margin: 0; font-weight: 400; line-height: 1.375; letter-spacing: .01em; font-size: 2.2cqw; }   /* 32px */
+.prodx-desc__p { color: #5CAF8C; }
+.prodx-explora__opt { display: block; color: #A9A9A9; text-decoration: none; cursor: pointer; transition: color .15s ease; }
 .s-flavor[data-sec="citrus-front"] .prodx-explora__opt.is-on { color: #087FBD; }
 .s-flavor[data-sec="rebel-front"]  .prodx-explora__opt.is-on { color: #087FBD; }
 
-/* Ingredientes: 4 bloques (2 izq, 2 der) */
-.prodx-ing { position: absolute; width: 25%; z-index: 3; }
-.prodx-ing h3 { margin: 0 0 .35cqw; color: #1F797A; font-weight: 800; line-height: 1.18; font-size: 1.73cqw; }   /* 25px */
-.prodx-ing p  { margin: 0; color: #A9A9A9; font-weight: 600; line-height: 1.45; font-size: 1.39cqw; }   /* 20px */
+/* Ingredientes: 4 bloques (2 izq en verde, 2 der en gris) */
+.prodx-ing h3 { margin-bottom: .05cqw; }
+.prodx-ing p  { color: #A9A9A9; }
+.prodx-ing--tl p, .prodx-ing--bl p { color: #5CAF8C; }
 .prodx-ing.is-blue h3   { color: #087FBD; }
 .prodx-ing.is-orange h3 { color: #EC7A04; }
-.prodx-ing--tl { left: 5.7%;  top: 43%; transform: translateY(-50%); }
-.prodx-ing--bl { left: 5.7%;  top: 66%; transform: translateY(-50%); }
-.prodx-ing--tr { right: 5.5%; top: 43%; transform: translateY(-50%); text-align: right; }
-.prodx-ing--br { right: 5.5%; top: 66%; transform: translateY(-50%); text-align: right; }
+.prodx-ing--tl { left: 8.8%;  top: 32.5%; }
+.prodx-ing--bl { left: 8.8%;  top: 59.3%; }
+.prodx-ing--tr { right: 8.8%; top: 32.5%; text-align: right; }
+.prodx-ing--br { right: 8.8%; top: 59.3%; text-align: right; }
 
 @media (prefers-reduced-motion: reduce) {
 	.prodx-can, .prodx-can__img, .prodx-hero__can { transition: none; }
@@ -1184,10 +1235,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
 		column-gap: 36px; row-gap: 0;
 	}
+	.prodx-desc, .prodx-explora { white-space: normal; }
+	.prodx-sec br { display: none; }   /* los saltos del figma son solo de escritorio */
 	.prodx-desc__h    { font-size: 22px; margin-bottom: 7px; }
-	.prodx-desc__p    { font-size: 16.5px; }
+	.prodx-desc__p    { font-size: 16.5px; font-weight: 500; letter-spacing: 0; }
 	.prodx-explora__h { flex: 0 0 100%; font-size: 21px; margin: 0 0 12px; }
-	.prodx-explora__opt { font-size: 19px; margin: 0; }
+	.prodx-explora__opt { font-size: 19px; margin: 0; font-weight: 700; letter-spacing: 0; }
 
 	/* Ingredientes: CARRUSEL (uno a la vez con flechas ‹ ›), como el figma */
 	.prodx-sec .prodx-ing { display: none; }   /* fuera los 4 bloques de escritorio */
@@ -1250,10 +1303,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* Fondo aqua de cada slide (cubre al deslizar) - mismo color que el figma (#ccedec) */
 .spirup-showcase__slide { background: #ccedec; }
 
-/* Marca de agua (rayo/swoosh difuminado) detras de la lata, como el figma */
+/* Marca de agua (rayo/swoosh) detras de la lata: SVG trazado del figma (Group 77),
+   mismo tamano y lugar: x 514-1075 / y 109-790 del frame 1441x893 (recortado 80px arriba). */
 .spirup-showcase__wm {
-	position: absolute; left: 50%; top: 51%; transform: translate(-50%, -50%);
-	height: 80%; width: auto; z-index: 0; pointer-events: none;
+	position: absolute; left: 35.7%; top: 3.8%;
+	width: 38.9%; height: auto; z-index: 0; pointer-events: none;
 	-webkit-user-drag: none;
 }
 
@@ -1287,7 +1341,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    171.8 / 210.5 / 171.8 / 235.5 x ~51px, separacion ~14px, rotacion alternada
    -4.47 / +4.2 (figma gira antihorario => en CSS el signo va al reves). */
 .spirup-showcase__pills { position: absolute; left: 81.6%; top: 50%; transform: translate(-50%, -50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: center; gap: clamp(12px, 1.5vw, 24px); }
-.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: clamp(48px, 4.5vw, 68px); padding: 0 1.1em; font-size: clamp(15px, 1.6vw, 24px); box-shadow: 0 6px 16px rgba(20,60,60,.12); }
+.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: clamp(48px, 4.5vw, 68px); padding: 0 1.1em; font-size: clamp(15px, 1.6vw, 24px); box-shadow: none; }
 .spirup-showcase__pills .pill--1 { width: clamp(124px, 11.92vw, 172px); transform: rotate(4.47deg); }
 .spirup-showcase__pills .pill--2 { width: clamp(152px, 14.6vw, 211px);  transform: rotate(-4.2deg); }
 .spirup-showcase__pills .pill--3 { width: clamp(124px, 11.92vw, 172px); transform: rotate(4.47deg); }
@@ -1333,7 +1387,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* Flechas SIN fondo redondo (como el figma): solo el chevron en color de marca. */
 .spirup-showcase__arrow {
 	position: absolute; top: 54%; transform: translateY(-50%); z-index: 5;
-	width: clamp(30px, 2.6vw, 46px); height: clamp(44px, 4vw, 66px);
+	width: clamp(22px, 1.9vw, 34px); height: clamp(54px, 5vw, 90px);   /* chevron alargado y mas grande */
 	padding: 0; box-sizing: border-box;
 	appearance: none; -webkit-appearance: none;
 	display: grid; place-items: center;
@@ -1373,11 +1427,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-showcase__video { display: block; position: absolute; left: 50%; top: 48%; transform: translate(-50%, -50%); width: 150%; max-width: none; height: auto; z-index: 2; }
 	.spirup-showcase__copy { position: static; transform: none; order: 3; width: 100%; max-width: 88vw; }
 	.spirup-showcase__flavor { font-size: min(6.6vw, 34px); white-space: normal; margin: 0; }
-	.spirup-showcase__tag { font-size: min(4.6vw, 23px); max-width: none; margin: 0; line-height: 1.12; }
-	.spirup-showcase__desc { font-size: min(4.4vw, 22px); max-width: none; margin: 0; line-height: 1.3; }
-	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 3.4vw; margin-top: 4vw; }
-	/* todas las pastillas del MISMO ancho y centradas => stack limpio (no "dobladas") */
-	.spirup-showcase__pills .pill { margin: 0 !important; min-width: 0; width: auto; height: auto; text-align: center; font-size: min(4.2vw, 20px); padding: min(3.8vw, 18px) 1.7em; }
+	/* Subtitulo en 3 lineas y descripcion en 2 (figma movil) */
+	.spirup-showcase__tag { font-size: min(5.5vw, 27px); max-width: 13ch; margin: 0 auto; line-height: 1.1; }
+	.spirup-showcase__desc { font-size: min(4.6vw, 23px); max-width: 19ch; margin: 0 auto; line-height: 1.25; }
+	.spirup-showcase__pills { position: static; transform: none; order: 4; flex-direction: column; align-items: center; gap: 1.6vw; margin-top: 5vw; }   /* pastillas mas juntas (figma) */
+	/* Anchos del figma movil (390): 113 / 183 / 117 / 211 px; mas bajas y mas juntas */
+	.spirup-showcase__pills .pill { margin: 0 !important; min-width: 0; height: auto; text-align: center; font-size: min(4.2vw, 20px); padding: min(2.4vw, 12px) 0; }
+	.spirup-showcase__pills .pill--1 { width: min(29vw, 145px); }
+	.spirup-showcase__pills .pill--2 { width: min(47vw, 235px); }
+	.spirup-showcase__pills .pill--3 { width: min(30vw, 150px); }
+	.spirup-showcase__pills .pill--4 { width: min(54vw, 270px); }
 	.spirup-showcase__pills .pill--1, .spirup-showcase__pills .pill--3 { transform: rotate(4.47deg); }
 	.spirup-showcase__pills .pill--2, .spirup-showcase__pills .pill--4 { transform: rotate(-4.2deg); }
 	/* flechas a los bordes, a la altura de la lata */
@@ -1413,13 +1472,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	color: #fff;
 	text-align: center;
 	font-weight: 800;
-	font-size: clamp(22px, 2.4vw, 36px);
-	margin: 0 0 clamp(30px, 3vw, 84px);
+	font-size: clamp(22px, 2.9vw, 52px);
+	margin: 0 0 clamp(30px, 3.2vw, 84px);
 }
+/* Tarjetas mas chicas y mas separadas (figma) */
 .spirup-parte8__grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: clamp(16px, 1.5vw, 40px);
+	gap: clamp(16px, 3.6vw, 72px);
 }
 .spirup-product {
 	background: #fff;
@@ -1454,7 +1514,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	align-items: flex-end;
 	justify-content: space-between;
 	gap: 10px;
-	padding: clamp(14px, 1.2vw, 30px) clamp(14px, 1.1vw, 28px) clamp(16px, 1.3vw, 32px);
+	padding: clamp(12px, 1vw, 26px) clamp(14px, 1.1vw, 28px) clamp(12px, 1vw, 26px);
 	background: #a9d9c6;   /* verde menta en el area de descripcion (como el mockup) */
 	/* misma altura aunque el nombre tenga 1 o 2 lineas -> todas las tarjetas iguales */
 	min-height: clamp(96px, 7vw, 128px);
@@ -1465,22 +1525,25 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-product__info h3,
 .spirup-product__meta,
 .spirup-product__price { font-family: var(--font-body); }
+/* Nombre grande (semibold), medida pegada debajo y el precio abajo, a la altura del carrito */
 .spirup-product__info h3 {
 	color: var(--spirup-dark);
-	font-weight: 700;
+	font-weight: 600;
+	line-height: 1.15;
 	margin: 0;
-	font-size: clamp(15px, 1.15vw, 30px);
+	font-size: clamp(16px, 1.45vw, 30px);
 }
 .spirup-product__meta {
 	color: #17323B;   /* mismo color que el nombre y el precio (figma) */
 	font-weight: 500;
-	font-size: clamp(12px, 0.9vw, 22px);
-	margin: 2px 0 6px;
+	line-height: 1.3;
+	font-size: clamp(12px, 0.95vw, 20px);
+	margin: .15em 0 clamp(14px, 1.5vw, 30px);
 }
 .spirup-product__price {
 	color: var(--spirup-dark);
-	font-weight: 700;
-	font-size: clamp(14px, 1.05vw, 28px);
+	font-weight: 500;
+	font-size: clamp(13px, 1vw, 22px);
 }
 .spirup-product__cart {
 	flex: 0 0 auto;
@@ -1568,11 +1631,11 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	color: #1585a3;
 	font-weight: 800;
 	line-height: 1.15;
-	font-size: clamp(22px, 2.3vw, 36px);
+	font-size: clamp(24px, 2.8vw, 50px);
 	margin: 0 0 clamp(18px, 1.6vw, 44px);
 }
 .spirup-parte9__lead {
-	color: #566a6d;
+	color: #2b3f43;   /* mas oscuro (antes #566a6d, se veia lavado) */
 	line-height: 1.55;
 	font-size: clamp(14px, 1.05vw, 28px);
 	margin: 0 auto clamp(14px, 1.1vw, 28px);
@@ -1581,12 +1644,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .spirup-parte9__form {
 	display: flex;
 	align-items: center;
-	max-width: 820px;
+	max-width: min(560px, 100%);   /* campo mas chico (antes 820px) */
 	margin: clamp(22px, 2vw, 50px) auto clamp(12px, 1vw, 26px);
 	border: 2px solid #248784;
 	border-radius: 999px;
 	background: #fff;
-	padding: clamp(4px, 0.4vw, 10px) clamp(6px, 0.5vw, 12px) clamp(4px, 0.4vw, 10px) clamp(20px, 1.6vw, 44px);
+	padding: 2px clamp(4px, 0.4vw, 8px) 2px clamp(18px, 1.4vw, 32px);
 }
 .spirup-parte9__form input {
 	flex: 1;
@@ -1596,14 +1659,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	background: transparent;
 	color: var(--spirup-dark);
 	font-family: inherit;
-	font-size: clamp(15px, 1.05vw, 26px);
-	padding: clamp(12px, 1vw, 26px) 0;
+	font-size: clamp(14px, 1vw, 20px);
+	padding: clamp(9px, 0.75vw, 16px) 0;
 }
 .spirup-parte9__form input::placeholder { color: #9aabad; }
 .spirup-parte9__form button {
 	flex: 0 0 auto;
-	width: clamp(40px, 3vw, 70px);
-	height: clamp(40px, 3vw, 70px);
+	width: clamp(34px, 2.4vw, 50px);
+	height: clamp(34px, 2.4vw, 50px);
 	border: 0;
 	border-radius: 50%;
 	background: transparent;
@@ -2054,8 +2117,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	/* Centrar las secciones que estaban alineadas a la izquierda */
 	.spirup-parte4__text { text-align: center; }
 	.spirup-parte4__desc { margin-left: auto; margin-right: auto; }
-	.spirup-parte4__list { align-items: center; }
-	.spirup-parte4__list li { justify-content: center; }
+	/* "El potencial de las microalgas": todo mas grande, como el figma movil.
+	   El titulo cae en 4 lineas; la lista va como bloque (icono arriba a la izq,
+	   el texto largo parte en 2 lineas) y el claim naranja en 4 lineas. */
+	.spirup-parte4__title { font-size: min(7.8vw, 34px); line-height: 1.16; }
+	.spirup-parte4__list { align-items: center; gap: min(3.6vw, 16px); }
+	.spirup-parte4__list li { justify-content: flex-start; align-items: flex-start; text-align: left; max-width: 18.3em; font-size: min(4.6vw, 20px); line-height: 1.25; gap: min(2.6vw, 12px); }
+	.spirup-parte4__list .ico { width: min(4.6vw, 20px); height: min(4.6vw, 20px); margin-top: .1em; }
+	.spirup-parte4__claim { font-size: min(4.6vw, 20px); max-width: 13em; margin-left: auto; margin-right: auto; line-height: 1.35; }
 	.spirup-cta__inner { justify-content: center; text-align: center; }
 	/* Los dos botones SIEMPRE en fila (Pedir ahora | Mas detalles), sin apilarse */
 	.spirup-cta__actions { flex-wrap: nowrap; gap: 10px; width: 100%; justify-content: center; }
@@ -2094,14 +2163,18 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 
 @media (max-width: 640px) {
-	/* En movil dejamos solo carrito + hamburguesa. */
-	.spirup-header__actions .spirup-iconbtn:not(.spirup-iconbtn--cart) { display: none; }
+	/* Figma movil: SOLO logo + hamburguesa (sin lupa, sin cuenta, sin carrito y sin "Reservar") */
+	.spirup-header__actions .spirup-iconbtn { display: none; }
+	.spirup-header .spirup-btn--orange { display: none; }
 	.spirup-header__inner { padding: 14px 16px; gap: 8px; }
 	.spirup-header__actions { gap: 8px; }
 	.spirup-logo img { height: 52px; }
-	.spirup-header .spirup-btn--orange { padding: 9px 16px; font-size: 14px; }
-	.spirup-iconbtn svg { width: 24px; height: 24px; }
 	.spirup-burger { width: 34px; height: 34px; padding: 6px; }
+}
+/* "Reservar" y "Carrito" solo dentro del menu hamburguesa */
+.spirup-nav__only-mobile { display: none; }
+@media (max-width: 640px) {
+	.spirup-nav .spirup-nav__only-mobile { display: block; }
 }
 
 /* ==========================================================================
@@ -2230,6 +2303,117 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .woocommerce-order-received .woocommerce-customer-details,
 .woocommerce-order-received ul.woocommerce-order-overview { display: none; }
 
+/* WooCommerce mete ".woocommerce img { height: auto }" y deformaba el rayo de la
+   barra superior en carrito/cuenta: le devolvemos su altura con mas especificidad. */
+.spirup-topbar .spirup-topbar__ico { height: clamp(13px, 1vw, 18px); width: auto; }
+@media (max-width: 900px) {
+	.spirup-topbar .spirup-topbar__ico { height: 12px; }
+}
+
+/* ==========================================================================
+   Mi cuenta: acceso / registro (tarjeta centrada con el logo)
+   ========================================================================== */
+.woocommerce-account { background: #faf6ea; }
+/* Header minimo, igual que en el flujo de compra */
+.woocommerce-account .spirup-topbar,
+.woocommerce-account .spirup-nav,
+.woocommerce-account .spirup-burger,
+.woocommerce-account .spirup-header__actions .spirup-btn--orange,
+.woocommerce-account .spirup-header__actions .spirup-iconbtn:not(.spirup-iconbtn--cart) { display: none !important; }
+.woocommerce-account .spirup-header { background: #faf6ea; border-bottom: 1px solid #ece2c9; }
+.woocommerce-account .spirup-header__inner { position: relative; justify-content: center; }
+.woocommerce-account .spirup-logo { margin: 0 auto; }
+.woocommerce-account .spirup-header__actions { position: absolute; right: clamp(28px, 3vw, 90px); top: 50%; transform: translateY(-50%); }
+/* Fuera el titulo "Mi cuenta" y el "Acceder" por defecto cuando no hay sesion */
+.woocommerce-account:not(.logged-in) .entry-title,
+.woocommerce-account:not(.logged-in) .entry-header,
+.woocommerce-account:not(.logged-in) h2.woocommerce-Address-title,
+.woocommerce-account:not(.logged-in) .u-columns > .col-1 > h2,
+.woocommerce-account:not(.logged-in) .u-columns > .col-2 > h2 { display: none; }
+
+.spirup-auth { display: flex; justify-content: center; padding: clamp(24px, 4vw, 70px) 16px clamp(40px, 6vw, 110px); }
+.spirup-auth__card {
+	width: 100%; max-width: 440px; box-sizing: border-box;
+	background: #fff; border: 1px solid #ece2c9; border-radius: 22px;
+	padding: clamp(26px, 3.4vw, 44px) clamp(20px, 3vw, 40px) clamp(22px, 2.6vw, 34px);
+	box-shadow: 0 18px 40px rgba(40, 60, 40, .08);
+	text-align: center;
+}
+.spirup-auth__logo { display: inline-block; margin-bottom: clamp(14px, 1.6vw, 22px); }
+.spirup-auth__logo img { height: clamp(58px, 5vw, 74px); width: auto; display: block; }
+.spirup-auth__title { margin: 0 0 6px; color: var(--spirup-dark); font-weight: 800; font-size: clamp(22px, 2vw, 28px); }
+.spirup-auth__sub { margin: 0 0 clamp(18px, 2vw, 26px); color: #6c7f82; font-size: clamp(14px, 1vw, 16px); }
+/* WooCommerce enmarca el formulario: aqui la tarjeta ya es el marco */
+.spirup-auth form.woocommerce-form-login,
+.spirup-auth form.woocommerce-form-register { border: 0 !important; padding: 0 !important; margin: 0 !important; }
+.spirup-auth .woocommerce-form-row,
+.spirup-auth .form-row { display: block; text-align: left; margin: 0 0 14px; padding: 0; }
+.spirup-auth label { display: block; margin: 0 0 6px; color: var(--spirup-dark); font-weight: 600; font-size: 14px; }
+.spirup-auth input[type="text"],
+.spirup-auth input[type="email"],
+.spirup-auth input[type="password"] {
+	width: 100%; box-sizing: border-box;
+	border: 1.5px solid #d9cca8 !important; border-radius: 12px !important; background: #fff !important;
+	padding: 13px 15px !important; min-height: 48px; font-family: inherit; font-size: 15px; color: var(--spirup-dark);
+}
+.spirup-auth input:focus { outline: 0; border-color: var(--spirup-teal) !important; box-shadow: 0 0 0 3px rgba(47, 145, 143, .15); }
+.spirup-auth__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 2px 0 18px; }
+.spirup-auth__remember { display: inline-flex !important; align-items: center; gap: 7px; margin: 0 !important; font-weight: 500 !important; color: #4d6266; font-size: 14px; cursor: pointer; }
+.spirup-auth__remember input { margin: 0; accent-color: var(--spirup-teal); }
+.spirup-auth__lost { color: var(--spirup-teal); font-size: 14px; text-decoration: none; }
+.spirup-auth__lost:hover { text-decoration: underline; }
+.spirup-auth__btn {
+	display: block; width: 100%; box-sizing: border-box;
+	background: #1e7477 !important; color: #fff !important; border: 0 !important;
+	border-radius: 999px !important; padding: 15px 24px !important; margin: 0 !important;
+	font-family: inherit; font-weight: 700 !important; font-size: 16px; cursor: pointer;
+	transition: background .15s ease;
+}
+.spirup-auth__btn:hover { background: #17595c !important; }
+.spirup-auth__btn--ghost { background: transparent !important; color: var(--spirup-teal) !important; border: 2px solid #bcd4d1 !important; }
+.spirup-auth__btn--ghost:hover { background: rgba(47, 145, 143, .08) !important; }
+.spirup-auth__sep { position: relative; margin: clamp(20px, 2.4vw, 30px) 0; color: #9aabad; font-size: 14px; }
+.spirup-auth__sep::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid #ece2c9; }
+.spirup-auth__sep span { position: relative; background: #fff; padding: 0 12px; }
+.spirup-auth__register { text-align: left; }
+.spirup-auth__note { margin: 0 0 14px; color: #6c7f82; font-size: 13.5px; text-align: left; }
+.spirup-auth__back { margin: 18px 0 0; font-size: 14px; }
+.spirup-auth__back a { color: #6c7f82; text-decoration: none; }
+.spirup-auth__back a:hover { color: var(--spirup-teal); }
+/* Panel de "Mi cuenta" con sesion iniciada */
+.woocommerce-account.logged-in .entry-title,
+.woocommerce-account.logged-in .entry-header .entry-title {
+	color: var(--spirup-dark); font-family: var(--font-title); font-weight: 800;
+	font-size: clamp(24px, 2.2vw, 34px); text-align: center; margin: clamp(24px, 3vw, 46px) 0 clamp(18px, 2vw, 30px);
+}
+.woocommerce-account.logged-in .woocommerce { max-width: min(94vw, 1000px); margin: 0 auto; padding-bottom: clamp(30px, 4vw, 70px); }
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+	list-style: none; margin: 0; padding: 10px; background: #fff;
+	border: 1px solid #ece2c9; border-radius: 18px;
+}
+.woocommerce-account .woocommerce-MyAccount-navigation li { border: 0; margin: 0; }
+.woocommerce-account .woocommerce-MyAccount-navigation li a {
+	display: block; padding: 12px 16px; border-radius: 12px;
+	color: var(--spirup-dark); font-weight: 600; text-decoration: none; transition: background .15s ease, color .15s ease;
+}
+.woocommerce-account .woocommerce-MyAccount-navigation li a:hover { background: #f3efe2; }
+.woocommerce-account .woocommerce-MyAccount-navigation li.is-active a { background: var(--spirup-teal); color: #fff; }
+.woocommerce-account .woocommerce-MyAccount-content {
+	background: #fff; border: 1px solid #ece2c9; border-radius: 18px;
+	padding: clamp(18px, 2.2vw, 32px); color: #4d6266; line-height: 1.6;
+}
+.woocommerce-account .woocommerce-MyAccount-content a { color: var(--spirup-teal); }
+.woocommerce-account .woocommerce-MyAccount-content .button,
+.woocommerce-account .woocommerce-MyAccount-content button[type="submit"] {
+	background: #1e7477 !important; color: #fff !important; border: 0 !important;
+	border-radius: 999px !important; padding: 13px 28px !important; font-weight: 700 !important;
+}
+
+/* Avisos (error de acceso) dentro del ancho de la tarjeta */
+.woocommerce-account .woocommerce-error,
+.woocommerce-account .woocommerce-message,
+.woocommerce-account .woocommerce-info { max-width: 440px; margin: 0 auto clamp(14px, 1.6vw, 22px); border-radius: 12px; border-top-color: var(--spirup-teal); }
+
 /* ============================================================
    LIBRO DE RECLAMACIONES — ajustes de encabezado e inputs
    ============================================================ */
@@ -2265,4 +2449,115 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 .spirup-lr__form .spirup-field select {
 	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231F797A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+}
+
+/* ==========================================================================
+   MOVIL - correcciones del figma (14-sep-2026)
+   Hero mas grande y centrado, cinta mas arriba, slider mas legible, tarjetas
+   de ingredientes mas grandes, "Del cultivo" centrado, footer ordenado.
+   ========================================================================== */
+@media (max-width: 820px) {
+
+	/* --- 1/2. Portada: titulo y boton mas grandes y bien centrados --------- */
+	.spirup-figura__overlay {
+		left: 50%; width: 94%; top: 6%;
+		gap: min(9vw, 40px);   /* aire suficiente: el boton no pisa la etiqueta de la lata */
+		transform: translateX(-50%) rotate(-2.74deg);
+	}
+	.spirup-figura__title { font-size: min(17.5vw, 94px); }
+	.spirup-figura__cta {
+		font-size: min(5.9vw, 25px);
+		padding: min(3.9vw, 18px) min(8.4vw, 36px);
+	}
+
+	/* --- 3. Cinta mint mas baja y fina: deja ver la lata entera (figma movil) */
+	.spirup-figura::before { height: 14vw; }
+	.spirup-figura::after  { height: 8vw; }
+
+	/* --- 4. Palabra CITRUS/REBEL: contorno mas marcado (se veia muy tenue) - */
+	.spirup-showcase__word {
+		-webkit-text-stroke: 2.6px #4fa8a4; text-stroke: 2.6px #4fa8a4;
+		font-size: min(16.5vw, 120px);
+	}
+	.spirup-showcase__slide.is-rebel .spirup-showcase__word {
+		-webkit-text-stroke: 2.6px #5aa9c9; text-stroke: 2.6px #5aa9c9;
+	}
+
+	/* --- 5. Flechas del slider mas grandes --------------------------------- */
+	.spirup-showcase__arrow { width: min(9vw, 40px); height: min(21vw, 92px); }
+	.spirup-showcase__arrow svg { stroke-width: 2.4; }
+
+	/* --- 6. Textos del slider: mas grandes y mejor jerarquia --------------- */
+	.spirup-showcase__flavor { font-size: min(8.2vw, 40px); font-weight: 800; line-height: 1.05; margin: 0 0 .12em; }
+	.spirup-showcase__tag    { font-size: min(6.1vw, 30px); font-weight: 800; max-width: 11ch; line-height: 1.08; margin: 0 auto .3em; }
+	.spirup-showcase__desc   { font-size: min(5vw, 25px); font-weight: 500; max-width: 17ch; line-height: 1.3; margin: 0 auto; }
+
+	/* --- 7. Pastillas: mismos colores del figma y mas grandes -------------- */
+	.spirup-showcase__pills { gap: min(1.1vw, 5px); margin-top: 6vw; }   /* pastillas casi pegadas (figma) */
+	.spirup-showcase__pills .pill {
+		font-size: min(4.9vw, 23px);
+		padding: min(3.2vw, 15px) 0;
+		box-shadow: none;   /* sin sombra */
+	}
+	.spirup-showcase__pills .pill--1 { width: min(34vw, 170px); }
+	.spirup-showcase__pills .pill--2 { width: min(54vw, 270px); }
+	.spirup-showcase__pills .pill--3 { width: min(35vw, 175px); }
+	.spirup-showcase__pills .pill--4 { width: min(62vw, 310px); }
+
+	/* --- 10. Ingredientes: fuera el logo del fondo ------------------------- */
+	.spirup-parte3__swoosh-m { display: none !important; }
+
+	/* --- 11. Ingredientes: iconos y tarjetas mas grandes ------------------- */
+	.spirup-parte3__grid { gap: min(5.6vw, 28px) min(4.4vw, 22px); }
+	.spirup-p3card__top { height: min(20vw, 96px); }
+	.spirup-p3card__ico { height: min(11vw, 54px); }
+	.spirup-p3card__body { padding: min(3.6vw, 17px) min(2.6vw, 13px) min(4.6vw, 22px); }
+	.spirup-p3card strong { font-size: min(4.7vw, 22px); }
+	.spirup-p3card span { font-size: min(4.1vw, 19px); max-width: 16ch; }
+
+	/* --- 12/13. Del cultivo a la Lata: texto mas grande y todo centrado ---- */
+	.spirup-cultivo__title { font-size: min(7.8vw, 34px); }
+	.spirup-cultivo__sub { font-size: min(4.8vw, 21px); }
+	.spirup-cultivo__timeline { max-width: min(86vw, 440px); text-align: center; }
+	.ct-step {
+		display: flex; flex-direction: column; align-items: center;
+		gap: min(3.4vw, 16px); padding-bottom: min(9vw, 44px);
+	}
+	.ct-dot { width: min(26vw, 124px); height: min(26vw, 124px); }
+	.ct-dot--foto { overflow: hidden; border-width: 3px; }
+	.ct-dot--foto picture { display: contents; }
+	.ct-dot--foto img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+	.ct-txt { text-align: center; }
+	.ct-txt h3 { font-size: min(4.9vw, 22px); margin-bottom: min(1.4vw, 7px); }
+	.ct-txt p { font-size: min(4.3vw, 19px); line-height: 1.4; max-width: 22ch; margin: 0 auto; }
+
+	/* --- 9. Microalgas: tamanos y cortes parejos --------------------------- */
+	.spirup-parte4__media { min-height: 0; }
+}
+
+@media (max-width: 620px) {
+	/* --- 14. "Elige como quieres tu SPIR UP": tarjetas mas grandes --------- */
+	.spirup-parte8__grid { gap: 5vw; }
+	.spirup-product { flex: 0 0 80vw; max-width: 340px; }
+}
+
+@media (max-width: 600px) {
+	/* --- 9. Microalgas: mismo orden y alineacion que en escritorio (figma) -- */
+	.spirup-parte4__text { text-align: left; }
+	.spirup-parte4__title { font-size: min(7.4vw, 32px); line-height: 1.18; max-width: 15ch; margin-left: 0; margin-right: 0; }
+	.spirup-parte4__list { align-items: flex-start; }
+	.spirup-parte4__list li { max-width: 100%; width: 100%; font-size: min(4.35vw, 19px); }
+	.spirup-parte4__claim { font-size: min(4.5vw, 20px); max-width: 21ch; margin-left: 0; margin-right: 0; }
+
+	/* --- 15. "Unete al lanzamiento": parrafos ordenados -------------------- */
+	.spirup-parte9__title { font-size: min(7vw, 30px); line-height: 1.2; max-width: 18ch; margin-left: auto; margin-right: auto; }
+	.spirup-parte9__lead { font-size: min(4.3vw, 19px); line-height: 1.45; max-width: 26ch; margin-left: auto; margin-right: auto; }
+
+	/* --- 16. Footer: logo mas grande y enlaces ordenados ------------------- */
+	.spirup-footer__inner { gap: min(5.6vw, 28px); }
+	.spirup-footer__logo img { height: min(24vw, 112px); }
+	.spirup-footer__links { gap: min(2.8vw, 14px) min(4.6vw, 22px); max-width: 21em; }
+	.spirup-footer__links a { font-size: min(4vw, 17px); }
+	.spirup-footer__social { gap: min(7vw, 34px); }
+	.spirup-footer__social a { width: min(6.6vw, 30px); height: min(6.6vw, 30px); }
 }

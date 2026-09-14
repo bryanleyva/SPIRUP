@@ -25,8 +25,7 @@ get_header();
 			Políticas de privacidad
 		</h1>
 
-		<p class="spirup-legal__intro">CIBUS CORP S.A.C., con RUC 20615736024 y domicilio en Av. Marco Puente Llanos, Asoc. Florida 1 de Califronia Mz C Lt 11. LIMA - LIMA - ATE, es el responsable del tratamiento de los datos personales que recopila a través de spirup.com (en adelante, "el Sitio").</p>
-		<p class="spirup-legal__intro">Para cualquier consulta sobre esta política o el tratamiento de tus datos, puedes escribirnos a <a href="mailto:info@spirup.com">info@spirup.com</a></p>
+		<p class="spirup-legal__intro">Esta Política de privacidad describe cómo Spir Up (en adelante, el &ldquo;Sitio&rdquo;) recopila, utiliza y divulga su información personal al visitar o utilizar nuestros servicios, al realizar una compra en spirup.com (en adelante, el &ldquo;Sitio&rdquo;).</p>
 
 		<h2 class="spirup-legal__h2">1. ¿Qué datos recopilamos?</h2>
 		<div class="spirup-legal__tablewrap">
@@ -140,29 +139,6 @@ get_header();
 
 		<p class="spirup-legal__contact">Si tiene alguna pregunta sobre nuestras prácticas de privacidad o sobre la presente Política de privacidad, o bien si desea ejercer cualquiera de sus derechos, puede llamarnos por teléfono, enviar un correo electrónico a <a href="mailto:info@spirup.com">info@spirup.com</a> o ponerse en contacto con nosotros a través de la dirección CIBUS CORP S.A.C.,&nbsp; Av. Marco Puente Llanos,&nbsp; Asoc. Florida 1 de Califronia Mz C Lt 11. LIMA - LIMA - ATE</p>
 
-		<?php
-		/* Con el respaldo de: logos en orden (ministerio, proinnovate, startup, cayetano, bioincuba).
-		   Sube los PNG a /imagenes/ con estos nombres; solo se muestran los que existan. */
-		$sp_respaldos = array(
-			array( 'produce',     'Ministerio de la Producción del Perú' ),
-			array( 'proinnovate', 'ProInnóvate' ),
-			array( 'startup',     'StartUp Perú' ),
-			array( 'cayetano',    'Universidad Peruana Cayetano Heredia' ),
-			array( 'bioincuba',   'Bioincuba' ),
-		);
-		$sp_dir = get_stylesheet_directory();
-		$sp_url = get_stylesheet_directory_uri();
-		?>
-		<div class="spirup-respaldo">
-			<p class="spirup-respaldo__label">Con el respaldo de:</p>
-			<div class="spirup-respaldo__logos">
-				<?php foreach ( $sp_respaldos as $sp_r ) :
-					$sp_file = '/imagenes/respaldo-' . $sp_r[0] . '.png';
-					if ( file_exists( $sp_dir . $sp_file ) ) : ?>
-						<img src="<?php echo esc_url( $sp_url . $sp_file ); ?>" alt="<?php echo esc_attr( $sp_r[1] ); ?>">
-					<?php endif; endforeach; ?>
-			</div>
-		</div>
 	</div>
 
 	<div class="spirup-legal__law">

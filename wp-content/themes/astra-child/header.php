@@ -37,7 +37,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				'FICOCIANINA DE MICROALGAS + FRESCURA',
 				'¡DESCUBRE SPIR UP!',
 			);
-			$tb_ico = $img . '/Capa 1.png';
+			$tb_ico = $img . '/topbar-rayo.svg';   // rayo en vector (nitido)
 			/* Se repite el grupo 2 veces: la animacion desplaza -50% => loop continuo y sin cortes */
 			for ( $tb_rep = 0; $tb_rep < 2; $tb_rep++ ) :
 				foreach ( $tb_items as $tb_t ) : ?>
@@ -53,7 +53,10 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<div class="spirup-header__inner">
 
 			<a class="spirup-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Spir Up - Inicio">
-				<img src="<?php echo esc_url( $img . '/logo.png' ); ?>" alt="Spir Up">
+				<?php /* Logo en alta (del SVG del figma): nitido en movil, escritorio y pantallas retina */ ?>
+				<img src="<?php echo esc_url( $img . '/logo-spirup.png' ); ?>"
+				     srcset="<?php echo esc_url( $img . '/logo-spirup.png' ); ?> 1x, <?php echo esc_url( $img . '/logo-spirup@2x.png' ); ?> 2x"
+				     width="154" height="186" alt="Spir Up">
 			</a>
 
 			<?php $home = esc_url( home_url( '/' ) ); ?>
@@ -62,6 +65,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				<a href="<?php echo $home; ?>#beneficios">Beneficios</a>
 				<a href="<?php echo $home; ?>#conocenos">Conócenos</a>
 				<a href="<?php echo esc_url( home_url( '/producto/' ) ); ?>">Producto</a>
+				<?php /* En movil el boton naranja y el carrito no se muestran (figma): sus enlaces viven aqui dentro */ ?>
+				<a class="spirup-nav__only-mobile" href="<?php echo $home; ?>#reservar">Reservar</a>
+				<a class="spirup-nav__only-mobile" href="<?php echo esc_url( function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : $home . '#productos' ); ?>">Carrito</a>
 			</nav>
 
 			<div class="spirup-header__actions">
@@ -75,7 +81,8 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
 				</a>
 
-				<a href="<?php echo esc_url( wp_login_url() ); ?>" class="spirup-iconbtn" aria-label="Mi cuenta">
+				<?php /* Cuenta: la pagina "Mi cuenta" de WooCommerce (acceso con la imagen de la marca) */ ?>
+				<a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : wp_login_url() ); ?>" class="spirup-iconbtn" aria-label="Mi cuenta">
 					<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"></path></svg>
 				</a>
 

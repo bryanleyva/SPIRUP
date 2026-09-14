@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SPIR UP · ola de agua simulada detras de la lata</title>
+<title>SPIR UP · agua detras de la lata</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  /* Banco de pruebas del chorro. Usa EXACTAMENTE el mismo marcado, el mismo
-     CSS y el mismo js/spirup-splash.js que la portada, asi que lo que calibres
-     aqui se traslada tal cual a los data-splash-* de front-page.php. */
+  /* Banco de pruebas del agua. Usa EXACTAMENTE el mismo marcado, el mismo CSS
+     y el mismo js/spirup-splash.js que la portada, asi que lo que calibres aqui
+     se traslada tal cual a los data-splash-* de front-page.php.
+     Para verlo limpio, sin controles, esta lata-agua.html. */
   *{ box-sizing:border-box; }
   body{
     margin:0; padding:24px 16px 60px;
@@ -24,13 +25,12 @@
   .lab{
     display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; justify-content:center;
     background:rgba(255,255,255,.7); border:1px solid rgba(23,52,61,.1);
-    border-radius:18px; padding:12px 16px; margin-bottom:8px; max-width:860px;
+    border-radius:18px; padding:12px 16px; margin-bottom:8px; max-width:880px;
   }
   .lab label{ font-family:'Manrope',sans-serif; font-weight:700; font-size:12.5px; color:#0c2f38;
     display:inline-flex; align-items:center; gap:7px; }
   .lab input[type=range]{ width:100px; accent-color:#37b6dd; }
-  .lab input[type=color]{ width:26px; height:26px; padding:0; border:0; background:none; cursor:pointer; }
-  .lab output{ font-weight:600; font-variant-numeric:tabular-nums; min-width:38px; color:#3d6b73; }
+  .lab output{ font-weight:600; font-variant-numeric:tabular-nums; min-width:42px; color:#3d6b73; }
 
   .replay{
     margin-top:14px; font-family:'Manrope',sans-serif; font-weight:700; font-size:15px;
@@ -40,17 +40,11 @@
   .replay:hover{ background:#a5e4f4; transform:translateY(-1px); }
   .replay:active{ transform:scale(.97); }
 
-  .warn{
-    margin-top:12px; font-size:13px; color:#8a6d1f; background:#fff5d6;
-    border:1px solid #ecd98a; padding:8px 14px; border-radius:10px; display:none;
-  }
-  .warn.show{ display:block; }
-
   /* El escenario es el de la portada; solo se le da sitio en la pagina. */
   .spirup-parte2{ width:100%; }
 
   .snippet{
-    margin-top:22px; width:min(92vw,860px);
+    margin-top:22px; width:min(92vw,880px);
     font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; line-height:1.6;
     background:#0e2b33; color:#cfeaf2; border-radius:12px; padding:14px 16px;
     overflow-x:auto; white-space:pre;
@@ -60,38 +54,37 @@
 </head>
 <body>
 
-  <h1>SPIR UP · ola de agua simulada detras de la lata</h1>
+  <h1>SPIR UP · agua detras de la lata</h1>
   <p class="sub">
-    El agua no es una imagen: son particulas con fisica, fundidas en liquido con
-    <em>metaballs</em> y sombreadas en WebGL. La ola rompe por detras de la lata y se
-    repite en ciclo. Calibra aqui y copia los valores a los
-    <code>data-splash-*</code> de <code>front-page.php</code>.
+    Agua fotografica real (<code>imagenes/splash-agua.png</code>, extraida de <code>parte2-clean.png</code>
+    y tenida de celeste). Brota con una mascara que crece desde la base de la lata y despues sigue
+    ondulando. Calibra aqui y copia los valores a <code>front-page.php</code>.
   </p>
 
   <div class="lab">
-    <label>Ola <input type="range" id="jet" min="0.3" max="2.2" step="0.05" value="1"><output id="oJet">1.00</output></label>
-    <label>Fondo <input type="range" id="flow" min="0" max="2.5" step="0.05" value="1"><output id="oFlow">1.00</output></label>
-    <label>Reflejos <input type="range" id="shine" min="0" max="2.5" step="0.05" value="1"><output id="oShine">1.00</output></label>
-    <label>Ancho <input type="range" id="spread" min="1.6" max="4.6" step="0.05" value="3.3"><output id="oSpread">3.30</output></label>
+    <label>Duracion <input type="range" id="duration" min="600" max="3000" step="50" value="1500"><output id="oDuration">1500</output></label>
+    <label>Oleaje <input type="range" id="flow" min="0" max="3" step="0.05" value="1"><output id="oFlow">1.00</output></label>
+    <label>Destellos <input type="range" id="shine" min="0" max="3" step="0.05" value="1"><output id="oShine">1.00</output></label>
+    <label>Ancho <input type="range" id="spread" min="1.6" max="4.2" step="0.05" value="2.9"><output id="oSpread">2.90</output></label>
     <label>Alto <input type="range" id="y" min="0.30" max="0.90" step="0.01" value="0.60"><output id="oY">0.60</output></label>
-    <label>Color <input type="color" id="tint" value="#62d3d6"></label>
+    <label>Tono <input type="range" id="hue" min="-40" max="40" step="1" value="0"><output id="oHue">0</output></label>
+    <label>Color <input type="range" id="sat" min="0.7" max="1.8" step="0.02" value="1.06"><output id="oSat">1.06</output></label>
   </div>
 
-  <button class="replay" id="replay" type="button">Romper la ola &#8635;</button>
-  <div class="warn" id="warn">Este navegador no da WebGL: se muestra la foto de respaldo (<b>splash-agua.png</b>) en lugar de la simulacion.</div>
+  <button class="replay" id="replay" type="button">Repetir efecto &#8635;</button>
 
   <!-- Mismo marcado que front-page.php -->
   <section class="spirup-parte2">
     <div class="spirup-parte2__stage" data-water-stage>
       <div class="spirup-parte2__water" aria-hidden="true" data-splash-manual
         data-splash-src="imagenes/splash-agua"
-        data-splash-spread="3.3"
+        data-splash-spread="2.9"
         data-splash-x="0.50"
         data-splash-y="0.60"
-        data-splash-jet="1"
+        data-splash-duration="1500"
         data-splash-flow="1"
         data-splash-shine="1"
-        data-splash-tint="#62d3d6"></div>
+        data-splash-filter="saturate(1.06)"></div>
       <img class="spirup-parte2__can" src="imagenes/lata-spir-up%201%20(2).png" alt="Lata Spir Up Citrus Blue">
     </div>
   </section>
@@ -105,15 +98,13 @@
 
   // El marcado lleva data-splash-manual, asi que el auto-montaje de
   // spirup-splash.js no toca este stage: se monta aqui para poder recalibrarlo
-  // y relanzar el chorro desde los controles.
+  // y repetirlo desde los controles.
   var stage  = document.querySelector('[data-water-stage]');
   var splash = window.SpirupSplash.create(stage, {
     mount: stage.querySelector('.spirup-parte2__water')
   });
 
-  if (!splash.webgl) { document.getElementById('warn').classList.add('show'); }
-
-  var ids = ['jet','flow','shine','spread','y','tint'];
+  var ids = ['duration','flow','shine','spread','y','hue','sat'];
   var ctl = {}, out = {};
   ids.forEach(function(k){
     ctl[k] = document.getElementById(k);
@@ -121,39 +112,46 @@
   });
   var snippet = document.getElementById('snippet');
 
-  function n2(k){ return (+ctl[k].value).toFixed(2); }
+  // El PNG ya va tenido de celeste; esto es solo el retoque final
+  function filterValue(){
+    var f = 'saturate(' + (+ctl.sat.value).toFixed(2) + ')';
+    if (+ctl.hue.value !== 0) { f += ' hue-rotate(' + ctl.hue.value + 'deg)'; }
+    return f;
+  }
 
   function apply(){
-    ['jet','flow','shine','spread','y'].forEach(function(k){
-      if (out[k]) { out[k].textContent = n2(k); }
+    out.duration.textContent = ctl.duration.value;
+    out.hue.textContent      = ctl.hue.value;
+    ['flow','shine','spread','y','sat'].forEach(function(k){
+      out[k].textContent = (+ctl[k].value).toFixed(2);
     });
 
     splash.setConfig({
-      jet:    +ctl.jet.value,
-      flow:   +ctl.flow.value,
-      shine:  +ctl.shine.value,
-      spread: +ctl.spread.value,
-      y:      +ctl.y.value,
-      tint:   ctl.tint.value
+      duration: +ctl.duration.value,
+      flow:     +ctl.flow.value,
+      shine:    +ctl.shine.value,
+      spread:   +ctl.spread.value,
+      y:        +ctl.y.value,
+      filter:   filterValue()
     });
 
     snippet.innerHTML =
       '&lt;div class="spirup-parte2__water" aria-hidden="true"\n' +
       '  data-splash-src="&lt;?php echo esc_url( $img . \'/splash-agua\' ); ?&gt;"\n' +
-      '  <b>data-splash-spread</b>="' + n2('spread') + '"\n' +
+      '  <b>data-splash-spread</b>="'   + (+ctl.spread.value).toFixed(2) + '"\n' +
       '  data-splash-x="0.50"\n' +
-      '  <b>data-splash-y</b>="'      + n2('y')      + '"\n' +
-      '  <b>data-splash-jet</b>="'    + n2('jet')    + '"\n' +
-      '  <b>data-splash-flow</b>="'   + n2('flow')   + '"\n' +
-      '  <b>data-splash-shine</b>="'  + n2('shine')  + '"\n' +
-      '  <b>data-splash-tint</b>="'   + ctl.tint.value + '"&gt;&lt;/div&gt;';
+      '  <b>data-splash-y</b>="'        + (+ctl.y.value).toFixed(2) + '"\n' +
+      '  <b>data-splash-duration</b>="' + ctl.duration.value + '"\n' +
+      '  <b>data-splash-flow</b>="'     + (+ctl.flow.value).toFixed(2) + '"\n' +
+      '  <b>data-splash-shine</b>="'    + (+ctl.shine.value).toFixed(2) + '"\n' +
+      '  <b>data-splash-filter</b>="'   + filterValue() + '"&gt;&lt;/div&gt;';
   }
 
   function replay(){ apply(); splash.play(true); }
 
-  // fondo, reflejos y color se aprecian sobre el agua que ya corre; la fuerza
-  // de la ola y el encuadre necesitan relanzarla para verse en contexto
-  var live = { flow: 1, shine: 1, tint: 1 };
+  // oleaje, destellos y color se aprecian en vivo sobre el agua que ya fluye;
+  // el resto necesita repetir la formacion para verse en contexto
+  var live = { flow: 1, shine: 1, hue: 1, sat: 1 };
   ids.forEach(function(k){
     ctl[k].addEventListener('input', apply);
     if (!live[k]) { ctl[k].addEventListener('change', replay); }
