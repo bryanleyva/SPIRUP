@@ -426,12 +426,13 @@ function spirup_text_fields() {
 		'micro_item1'     => array( 'micro', 'Ítem 1', 'No es una gaseosa común', 'text' ),
 		'micro_item2'     => array( 'micro', 'Ítem 2', 'No es una bebida energizante', 'text' ),
 		'micro_item3'     => array( 'micro', 'Ítem 3 (con check)', 'Es una nueva forma de nutrirte y disfrutar', 'text' ),
-		'micro_claim1'    => array( 'micro', 'Frase final (línea 1)', 'SPIR UP no compiten contra otras gaseosas,', 'text' ),
+		'micro_claim1'    => array( 'micro', 'Frase final (línea 1)', 'SPIR UP no compite contra otras gaseosas,', 'text' ),
 		'micro_claim2'    => array( 'micro', 'Frase final (línea 2, negrita)', 'SPIR UP crea una nueva categoría', 'text' ),
 		// Reserva
 		'res_title'       => array( 'reserva', 'Título', 'Únete al lanzamiento exclusivo de SPIR UP', 'textarea' ),
-		'res_lead1'       => array( 'reserva', 'Párrafo 1', 'La primera producción de Spir Up estará disponible para un grupo selecto de personas antes de su lanzamiento oficial.', 'textarea' ),
-		'res_lead2'       => array( 'reserva', 'Párrafo 2', 'Déjanos tu correo y recibe acceso prioritario, novedades exclusivas y la oportunidad de conseguir las primeras unidades.', 'textarea' ),
+		/* Un salto de linea en el texto = salto fijo en escritorio (mismos cortes que el figma) */
+		'res_lead1'       => array( 'reserva', 'Párrafo 1', "La primera producción de Spir Up estará disponible para un grupo selecto de personas\nantes de su lanzamiento oficial.", 'textarea' ),
+		'res_lead2'       => array( 'reserva', 'Párrafo 2', "Déjanos tu correo y recibe acceso prioritario, novedades exclusivas y la oportunidad de\nconseguir las primeras unidades.", 'textarea' ),
 		'res_note'        => array( 'reserva', 'Nota', 'Sin spam. Solo te escribimos cuando llegue tu turno.', 'text' ),
 	);
 }

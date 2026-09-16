@@ -289,8 +289,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	<section class="spirup-parte9" id="reservar">
 		<div class="spirup-parte9__inner">
 			<h2 class="spirup-parte9__title"><?php echo esc_html( spirup_txt( 'res_title' ) ); ?></h2>
-			<p class="spirup-parte9__lead"><?php echo esc_html( spirup_txt( 'res_lead1' ) ); ?></p>
-			<p class="spirup-parte9__lead"><?php echo esc_html( spirup_txt( 'res_lead2' ) ); ?></p>
+			<?php /* Cortes de linea fijos del figma (solo escritorio): un salto en el texto => <br class="br-d"> */ ?>
+			<p class="spirup-parte9__lead"><?php echo str_replace( "\n", "<br class=\"br-d\">\n", esc_html( trim( spirup_txt( 'res_lead1' ) ) ) ); ?></p>
+			<p class="spirup-parte9__lead"><?php echo str_replace( "\n", "<br class=\"br-d\">\n", esc_html( trim( spirup_txt( 'res_lead2' ) ) ) ); ?></p>
 			<form class="spirup-parte9__form" action="#" method="post" onsubmit="return false;">
 				<input type="email" name="email" placeholder="Tu correo electrónico" aria-label="Tu correo electrónico" required>
 				<button type="submit" aria-label="Reservar">
