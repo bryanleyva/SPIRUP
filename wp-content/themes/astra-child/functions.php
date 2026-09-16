@@ -390,6 +390,15 @@ function spirup_txt( $key, $default = null ) {
 }
 
 /**
+ * Primera letra en mayuscula (con acentos), p. ej. "energía limpia" => "Energía limpia".
+ * Asi el texto sale bien aunque en el personalizador se haya guardado en minuscula.
+ */
+function spirup_ucfirst( $s ) {
+	$s = trim( (string) $s );
+	return '' === $s ? '' : mb_strtoupper( mb_substr( $s, 0, 1 ) ) . mb_substr( $s, 1 );
+}
+
+/**
  * Definicion de los campos editables.
  * clave => array( seccion, etiqueta, valor por defecto, 'text'|'textarea' )
  */
@@ -401,12 +410,12 @@ function spirup_text_fields() {
 		// Slider Citrus
 		'sl_citrus_name'  => array( 'slider', 'Citrus · Nombre', 'Citrus Blue', 'text' ),
 		'sl_citrus_tag'   => array( 'slider', 'Citrus · Subtítulo (naranja)', 'REFRESCANTE, ENRIQUECIDA Y NATURAL:', 'text' ),
-		'sl_citrus_desc'  => array( 'slider', 'Citrus · Descripción', 'energía limpia para potenciar tu día.', 'textarea' ),
+		'sl_citrus_desc'  => array( 'slider', 'Citrus · Descripción', 'Energía limpia para potenciar tu día.', 'textarea' ),
 		'sl_citrus_pills' => array( 'slider', 'Citrus · Pastillas (separadas por coma)', 'Fresco, Refrescante, Ligero, Energía natural', 'text' ),
 		// Slider Rebel
 		'sl_rebel_name'   => array( 'slider', 'Rebel · Nombre', 'Rebel Blue', 'text' ),
 		'sl_rebel_tag'    => array( 'slider', 'Rebel · Subtítulo (naranja)', 'REFRESCANTE, ENRIQUECIDA Y NATURAL:', 'text' ),
-		'sl_rebel_desc'   => array( 'slider', 'Rebel · Descripción', 'energía limpia para potenciar tu día.', 'textarea' ),
+		'sl_rebel_desc'   => array( 'slider', 'Rebel · Descripción', 'Energía limpia para potenciar tu día.', 'textarea' ),
 		'sl_rebel_pills'  => array( 'slider', 'Rebel · Pastillas (separadas por coma)', 'Intenso, Refrescante, Moderno, Energía natural', 'text' ),
 		// Franja CTA
 		'cta_title'       => array( 'cta', 'Título', '¿Listo para probarlo?', 'text' ),
@@ -466,3 +475,327 @@ function spirup_customize_register( $wp_customize ) {
 	}
 }
 add_action( 'customize_register', 'spirup_customize_register' );
+
+/* ==========================================================================
+   Checkout: PRIMERO se llena el formulario como invitado y, al pulsar
+   "Realizar el pedido", recien se pide entrar o crear cuenta (ventana
+   emergente). Tras entrar, el pedido se envia solo con los datos ya escritos.
+   - Servidor: si el formulario esta completo pero no hay sesion => error
+     especial "spirup_login_required" (el JS lo convierte en la ventana).
+   - AJAX spirup_auth_login / spirup_auth_register: inician sesion o crean
+     la cuenta y devuelven un nonce nuevo de checkout para reenviar el pedido.
+   ========================================================================== */
+
+// 1) Exigir sesion SOLO cuando el resto del formulario ya esta bien.
+add_action( 'woocommerce_after_checkout_validation', function ( $data, $errors ) {
+	if ( is_user_logged_in() || $errors->has_errors() ) {
+		return;
+	}
+	$errors->add(
+		'spirup_login_required',
+		'<span data-spirup-auth="1">Para terminar tu pedido, inicia sesión o crea tu cuenta.</span>'
+	);
+}, 10, 2 );
+
+/**
+ * Respuesta comun tras entrar/crear cuenta.
+ *
+ * El nonce nuevo del checkout NO se puede generar aqui: va ligado al token de
+ * sesion, que el navegador recibe recien con la respuesta de este request. El
+ * JS lo pide en una segunda llamada (spirup_auth_nonce), ya con la cookie.
+ */
+function spirup_auth_success( $user_id, $guest_cart = null ) {
+	wp_set_current_user( $user_id );
+
+	if ( function_exists( 'WC' ) && WC()->session ) {
+		// La sesion pasa a estar a nombre del cliente: sin esto el carrito del
+		// invitado se queda en la sesion vieja y el checkout se ve vacio.
+		WC()->session->init_session_cookie();
+		if ( ! empty( $guest_cart ) ) {
+			WC()->session->set( 'cart', $guest_cart );
+			WC()->cart->get_cart_from_session();
+			WC()->cart->calculate_totals();
+			WC()->cart->set_session();
+		}
+	}
+	wp_send_json_success( array( 'ok' => true ) );
+}
+
+/**
+ * Carrito del invitado tal cual esta guardado en la sesion (para restaurarlo
+ * despues de iniciar sesion).
+ */
+function spirup_auth_guest_cart() {
+	return ( function_exists( 'WC' ) && WC()->session ) ? WC()->session->get( 'cart' ) : null;
+}
+
+// 2) Nonce fresco del checkout, ya con la sesion iniciada en el navegador.
+//    NO usa el nonce "spirup_auth": ese se genero como invitado y, al cambiar
+//    el usuario, deja de ser valido. Basta con exigir sesion y mismo origen:
+//    no cambia nada y la respuesta no se puede leer desde otro dominio.
+add_action( 'wp_ajax_spirup_auth_nonce', function () {
+	$ref  = isset( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : '';
+	$home = wp_parse_url( home_url(), PHP_URL_HOST );
+	if ( ! $ref || wp_parse_url( $ref, PHP_URL_HOST ) !== $home ) {
+		wp_send_json_error( array( 'message' => 'Origen no válido.' ), 403 );
+	}
+	wp_send_json_success( array(
+		'nonce' => wp_create_nonce( 'woocommerce-process_checkout' ),
+	) );
+} );
+
+// 3a) Entrar.
+function spirup_auth_login() {
+	check_ajax_referer( 'spirup_auth', 'nonce' );
+	$login = isset( $_POST['username'] ) ? sanitize_text_field( wp_unslash( $_POST['username'] ) ) : '';
+	$pass  = isset( $_POST['password'] ) ? (string) wp_unslash( $_POST['password'] ) : '';   // phpcs:ignore
+	if ( '' === $login || '' === $pass ) {
+		wp_send_json_error( array( 'message' => 'Escribe tu correo y tu contraseña.' ) );
+	}
+	$guest_cart = spirup_auth_guest_cart();
+	$user = wp_signon( array(
+		'user_login'    => $login,
+		'user_password' => $pass,
+		'remember'      => true,
+	), is_ssl() );
+	if ( is_wp_error( $user ) ) {
+		wp_send_json_error( array( 'message' => 'Correo o contraseña incorrectos.' ) );
+	}
+	spirup_auth_success( $user->ID, $guest_cart );
+}
+add_action( 'wp_ajax_nopriv_spirup_auth_login', 'spirup_auth_login' );
+add_action( 'wp_ajax_spirup_auth_login', 'spirup_auth_login' );
+
+// 3b) Crear cuenta: nombre completo, correo, celular, contrasena y terminos.
+function spirup_auth_register() {
+	check_ajax_referer( 'spirup_auth', 'nonce' );
+	$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$pass  = isset( $_POST['password'] ) ? (string) wp_unslash( $_POST['password'] ) : '';   // phpcs:ignore
+	$pass2 = isset( $_POST['password2'] ) ? (string) wp_unslash( $_POST['password2'] ) : '';  // phpcs:ignore
+	$name  = isset( $_POST['full_name'] ) ? sanitize_text_field( wp_unslash( $_POST['full_name'] ) ) : '';
+	$phone = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+	$terms = ! empty( $_POST['terms'] );
+
+	// El nombre completo se parte en nombre + apellidos (lo que pide WooCommerce).
+	$name  = trim( preg_replace( '/\s+/', ' ', $name ) );
+	$parts = $name ? explode( ' ', $name ) : array();
+	$first = array_shift( $parts );
+	$last  = implode( ' ', $parts );
+
+	if ( '' === $name ) {
+		wp_send_json_error( array( 'message' => 'Escribe tu nombre completo.', 'field' => 'full_name' ) );
+	}
+	if ( ! is_email( $email ) ) {
+		wp_send_json_error( array( 'message' => 'Escribe un correo válido.', 'field' => 'email' ) );
+	}
+	if ( email_exists( $email ) ) {
+		wp_send_json_error( array( 'message' => 'Ese correo ya tiene cuenta. Entra con tu contraseña.', 'switch' => 'login' ) );
+	}
+	if ( strlen( preg_replace( '/\D/', '', $phone ) ) < 6 ) {
+		wp_send_json_error( array( 'message' => 'Escribe tu número de celular.', 'field' => 'phone' ) );
+	}
+	if ( strlen( $pass ) < 6 ) {
+		wp_send_json_error( array( 'message' => 'La contraseña debe tener al menos 6 caracteres.', 'field' => 'password' ) );
+	}
+	if ( $pass !== $pass2 ) {
+		wp_send_json_error( array( 'message' => 'Las contraseñas no coinciden.', 'field' => 'password2' ) );
+	}
+	if ( ! $terms ) {
+		wp_send_json_error( array( 'message' => 'Debes aceptar los términos y condiciones.', 'field' => 'terms' ) );
+	}
+
+	$guest_cart = spirup_auth_guest_cart();
+	$user_id = wc_create_new_customer( $email, wc_create_new_customer_username( $email ), $pass, array(
+		'first_name' => $first,
+		'last_name'  => $last,
+	) );
+	if ( is_wp_error( $user_id ) ) {
+		wp_send_json_error( array( 'message' => wp_strip_all_tags( $user_id->get_error_message() ) ) );
+	}
+	// Datos que ya nos dio: quedan guardados en su cuenta y salen prellenados
+	// la proxima vez que compre.
+	update_user_meta( $user_id, 'billing_first_name', $first );
+	update_user_meta( $user_id, 'billing_last_name', $last );
+	update_user_meta( $user_id, 'billing_email', $email );
+	update_user_meta( $user_id, 'billing_phone', $phone );
+
+	wc_set_customer_auth_cookie( $user_id );
+	spirup_auth_success( $user_id, $guest_cart );
+}
+add_action( 'wp_ajax_nopriv_spirup_auth_register', 'spirup_auth_register' );
+add_action( 'wp_ajax_spirup_auth_register', 'spirup_auth_register' );
+
+// 4) Datos para el JS + la ventana (solo en el checkout y sin sesion).
+add_action( 'wp_enqueue_scripts', function () {
+	if ( is_user_logged_in() || ! function_exists( 'is_checkout' ) ) {
+		return;
+	}
+	$en_checkout = is_checkout() && ! is_wc_endpoint_url();
+	if ( ! $en_checkout && ! is_account_page() ) {
+		return;
+	}
+	wp_localize_script( 'spirup-js', 'SPIRUP_AUTH', array(
+		'ajax'  => admin_url( 'admin-ajax.php' ),
+		'nonce' => wp_create_nonce( 'spirup_auth' ),
+	) );
+}, 20 );
+
+add_action( 'wp_footer', function () {
+	if ( ! function_exists( 'is_checkout' ) || ! is_checkout() || is_wc_endpoint_url() || is_user_logged_in() ) {
+		return;
+	}
+	$img = get_stylesheet_directory_uri() . '/imagenes';
+	?>
+	<div class="spirup-authmodal" id="spirup-authmodal" hidden>
+		<div class="spirup-authmodal__bg" data-spirup-auth-close></div>
+		<div class="spirup-auth__card spirup-authmodal__card" role="dialog" aria-modal="true" aria-labelledby="spirup-authmodal-title">
+			<button type="button" class="spirup-authmodal__close" data-spirup-auth-close aria-label="Cerrar">&times;</button>
+			<img class="spirup-authmodal__logo" src="<?php echo esc_url( $img . '/logo-spirup.png' ); ?>" srcset="<?php echo esc_url( $img . '/logo-spirup.png' ); ?> 1x, <?php echo esc_url( $img . '/logo-spirup@2x.png' ); ?> 2x" width="154" height="186" alt="Spir Up">
+			<h2 class="spirup-auth__title" id="spirup-authmodal-title">Ya casi está</h2>
+			<p class="spirup-auth__sub">Entra o crea tu cuenta para confirmar el pedido. Tus datos ya quedaron guardados.</p>
+
+			<div class="spirup-auth__tabs" role="tablist">
+				<button type="button" class="spirup-auth__tab is-active" data-spirup-tab="login" role="tab">Iniciar sesión</button>
+				<button type="button" class="spirup-auth__tab" data-spirup-tab="register" role="tab">Crear cuenta</button>
+			</div>
+
+			<p class="spirup-auth__error" data-spirup-auth-error hidden></p>
+
+			<form class="spirup-auth__panel is-active" data-spirup-panel="login" data-spirup-auth-form="login" novalidate>
+				<p class="form-row">
+					<label for="sa-username">Correo electrónico o usuario</label>
+					<input type="text" id="sa-username" name="username" autocomplete="username" placeholder="tucorreo@ejemplo.com">
+				</p>
+				<p class="form-row">
+					<label for="sa-password">Contraseña</label>
+					<input type="password" id="sa-password" name="password" autocomplete="current-password" placeholder="••••••••">
+				</p>
+				<div class="spirup-auth__row">
+					<span></span>
+					<a class="spirup-auth__lost" href="<?php echo esc_url( wp_lostpassword_url() ); ?>" target="_blank" rel="noopener">¿Olvidaste tu contraseña?</a>
+				</div>
+				<button type="submit" class="spirup-auth__btn">Entrar y confirmar pedido</button>
+			</form>
+
+			<form class="spirup-auth__panel" data-spirup-panel="register" data-spirup-auth-form="register" novalidate>
+				<?php spirup_register_fields( 'sa' ); ?>
+				<button type="submit" class="spirup-auth__btn">Registrarme y confirmar pedido</button>
+				<p class="spirup-auth__swap">¿Ya tienes una cuenta? <button type="button" data-spirup-tab="login">Inicia sesión</button></p>
+			</form>
+		</div>
+	</div>
+	<?php
+} );
+
+/**
+ * Campos del formulario "Crear cuenta" (figma): nombre completo, correo,
+ * celular, contrasena + confirmacion y aceptacion de terminos.
+ *
+ * Se usa igual en la pagina "Mi cuenta" y en la ventana del checkout, para que
+ * los dos formularios sean identicos.
+ *
+ * @param string $p Prefijo de los id (evita ids repetidos si salen los dos).
+ */
+function spirup_register_fields( $p = 'reg' ) {
+	$priv  = get_page_by_path( 'politica-de-privacidad' );
+	$terms = get_page_by_path( 'terminos-y-condiciones' );
+	?>
+	<p class="form-row">
+		<label for="<?php echo esc_attr( $p ); ?>_name">Nombre completo</label>
+		<input type="text" name="full_name" id="<?php echo esc_attr( $p ); ?>_name" autocomplete="name" placeholder="Ingresa tu nombre y apellido">
+	</p>
+	<p class="form-row">
+		<label for="<?php echo esc_attr( $p ); ?>_email">Correo electrónico</label>
+		<input type="email" name="email" id="<?php echo esc_attr( $p ); ?>_email" autocomplete="email" placeholder="ejemplo@correo.com">
+	</p>
+	<p class="form-row">
+		<label for="<?php echo esc_attr( $p ); ?>_phone">Número de celular</label>
+		<input type="tel" name="phone" id="<?php echo esc_attr( $p ); ?>_phone" autocomplete="tel" placeholder="+51 987 654 321">
+	</p>
+	<p class="form-row">
+		<label for="<?php echo esc_attr( $p ); ?>_pass1">Contraseña</label>
+		<input type="password" name="password" id="<?php echo esc_attr( $p ); ?>_pass1" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+	</p>
+	<p class="form-row">
+		<label for="<?php echo esc_attr( $p ); ?>_pass2">Confirmar contraseña</label>
+		<input type="password" name="password2" id="<?php echo esc_attr( $p ); ?>_pass2" autocomplete="new-password" placeholder="Repite tu contraseña">
+	</p>
+	<label class="spirup-auth__terms">
+		<input type="checkbox" name="terms" value="1">
+		<span>Acepto los
+			<a href="<?php echo esc_url( $terms ? get_permalink( $terms ) : '#' ); ?>" target="_blank" rel="noopener">Términos y condiciones</a>
+			y la
+			<a href="<?php echo esc_url( $priv ? get_permalink( $priv ) : '#' ); ?>" target="_blank" rel="noopener">política de Privacidad</a>
+		</span>
+	</label>
+	<?php
+}
+
+/* ==========================================================================
+   Tienda SIEMPRE visible: apaga el modo "Proximamente" de WooCommerce.
+
+   Con "Proximamente" + "Restringir solo a las paginas de la tienda", el inicio
+   se ve normal pero el CARRITO, el PAGO y MI CUENTA muestran la pantalla
+   "Tenemos grandes proyectos por anunciar". Por eso el aviso aparecia justo al
+   ir a pagar. Se apaga aqui para que no dependa de un ajuste del servidor.
+
+   Si algun dia quieres volver a cerrar la tienda, borra este bloque y usa
+   WooCommerce > Ajustes > Visibilidad del sitio.
+   ========================================================================== */
+// Gancho oficial de WooCommerce (desde la 9.1): excluye la peticion de la
+// pantalla "Proximamente". No toca el ajuste guardado, asi que el panel de
+// WooCommerce > Ajustes > Visibilidad del sitio se sigue pudiendo usar.
+add_filter( 'woocommerce_coming_soon_exclude', '__return_true' );
+
+// Checkout sin la barra de cupon (el figma no la lleva).
+add_action( 'wp', function () {
+	remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+} );
+
+/* ==========================================================================
+   Diagnostico de metodos de pago (SOLO lo ve el administrador).
+
+   Sirve para saber por que el checkout dice "no hay metodos de pago
+   disponibles": lista las pasarelas instaladas, si estan activadas y si
+   WooCommerce las considera disponibles, junto con moneda, pais y HTTPS.
+   Cuando Culqi ya funcione, se puede borrar este bloque.
+   ========================================================================== */
+add_action( 'woocommerce_review_order_before_payment', function () {
+	if ( ! current_user_can( 'manage_woocommerce' ) || ! function_exists( 'WC' ) ) {
+		return;
+	}
+	$todas  = WC()->payment_gateways()->payment_gateways();
+	$dispo  = WC()->payment_gateways()->get_available_payment_gateways();
+	$activo = get_option( 'woocommerce_default_country' );
+	?>
+	<div class="spirup-diag">
+		<strong>Diagnóstico de pagos (solo lo ves tú como administrador)</strong>
+		<p>
+			Moneda: <b><?php echo esc_html( get_woocommerce_currency() ); ?></b> ·
+			País de la tienda: <b><?php echo esc_html( $activo ); ?></b> ·
+			HTTPS: <b><?php echo is_ssl() ? 'sí' : 'NO'; ?></b> ·
+			Total: <b><?php echo wp_kses_post( wc_price( WC()->cart ? WC()->cart->get_total( 'edit' ) : 0 ) ); ?></b>
+		</p>
+		<?php if ( ! $todas ) : ?>
+			<p>No hay <b>ninguna</b> pasarela instalada. Falta instalar y activar el plugin de Culqi.</p>
+		<?php else : ?>
+			<ul>
+				<?php foreach ( $todas as $id => $g ) :
+					$encendida = ( 'yes' === $g->enabled );
+					$usable    = isset( $dispo[ $id ] );
+					?>
+					<li>
+						<b><?php echo esc_html( $g->get_method_title() ? $g->get_method_title() : $id ); ?></b>
+						<code><?php echo esc_html( $id ); ?></code> —
+						activada: <b><?php echo $encendida ? 'sí' : 'NO'; ?></b>,
+						disponible en este pedido: <b><?php echo $usable ? 'sí' : 'NO'; ?></b>
+						<?php if ( $encendida && ! $usable ) : ?>
+							<em>(está activada pero se oculta: suele ser por la moneda, el país o que falta HTTPS)</em>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	</div>
+	<?php
+} );

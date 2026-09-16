@@ -19,21 +19,29 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 
 <main class="spirup-main">
 
-	<?php /* HERO = foto de portada nueva (Foto portada SpirUp.png) + la cinta mint de valores
+	<?php /* HERO = foto de portada del cliente ("SpirUp Portada Web.png", 8033px: se sirve en
+		1440 / 2160 / 2880 => nitida incluso en pantallas 2x) + la cinta mint de valores
 		como CAPA aparte (hero-cinta.png, recortada del diseno con su fondo aqua debajo) +
 		el titulo manuscrito y el boton en HTML. Asi la foto se puede cambiar sin rehacer
 		la cinta y nada queda pixelado. */ ?>
 	<section class="spirup-figura">
 		<picture>
 			<source type="image/webp"
-				srcset="<?php echo esc_url( $img . '/portada-hero-sm.webp' ); ?> 836w, <?php echo esc_url( $img . '/portada-hero.webp' ); ?> 1672w"
+				srcset="<?php echo esc_url( $img . '/portada-hero-1440.webp' ); ?> 1440w, <?php echo esc_url( $img . '/portada-hero-2160.webp' ); ?> 2160w, <?php echo esc_url( $img . '/portada-hero-2880.webp' ); ?> 2880w"
 				sizes="100vw">
 			<img class="spirup-figura__img"
-				src="<?php echo esc_url( $img . '/portada-hero.jpg' ); ?>"
-				srcset="<?php echo esc_url( $img . '/portada-hero-sm.jpg' ); ?> 836w, <?php echo esc_url( $img . '/portada-hero.jpg' ); ?> 1672w"
-				sizes="100vw"
-				alt="Mano sosteniendo una lata de Spir Up Rebel Blue frente al mar">
+				src="<?php echo esc_url( $img . '/portada-hero-1440.jpg' ); ?>"
+				srcset="<?php echo esc_url( $img . '/portada-hero-1440.jpg' ); ?> 1440w, <?php echo esc_url( $img . '/portada-hero-2160.jpg' ); ?> 2160w, <?php echo esc_url( $img . '/portada-hero-2880.jpg' ); ?> 2880w"
+				sizes="100vw" width="1440" height="702"
+				alt="Latas de Spir Up Rebel Blue y Citrus Blue entre cubos de hielo bajo el cielo azul">
 		</picture>
+		<?php /* MOVIL: la foto solo pone el cielo (recorte a la izquierda) y las dos latas van
+			como capa aparte (los mismos png/webp del slider) debajo del titulo, para que el
+			texto no pise las latas. En escritorio esta capa se oculta (las latas ya van en la foto). */ ?>
+		<div class="spirup-figura__latas" aria-hidden="true">
+			<picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/lata-rebel.webp' ); ?> 1x, <?php echo esc_url( $img . '/lata-rebel@2x.webp' ); ?> 2x"><img class="spirup-figura__lata spirup-figura__lata--rebel" src="<?php echo esc_url( $img . '/lata-rebel.png' ); ?>" srcset="<?php echo esc_url( $img . '/lata-rebel.png' ); ?> 1x, <?php echo esc_url( $img . '/lata-rebel@2x.png' ); ?> 2x" alt="" loading="lazy"></picture>
+			<picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/lata-citrus.webp' ); ?> 1x, <?php echo esc_url( $img . '/lata-citrus@2x.webp' ); ?> 2x"><img class="spirup-figura__lata spirup-figura__lata--citrus" src="<?php echo esc_url( $img . '/lata-citrus.png' ); ?>" srcset="<?php echo esc_url( $img . '/lata-citrus.png' ); ?> 1x, <?php echo esc_url( $img . '/lata-citrus@2x.png' ); ?> 2x" alt="" loading="lazy"></picture>
+		</div>
 		<?php /* Sombra del figma: relleno negro al 28% por encima de la foto */ ?>
 		<span class="spirup-figura__shade" aria-hidden="true"></span>
 		<?php /* Cinta de valores (solo escritorio/tablet: en movil la hace el CSS con ondas SVG) */ ?>
@@ -55,7 +63,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 	   Al pulsar una flecha el slide entrante se desliza y cubre al anterior (js/spirup.js). */
 	$sc_slides = array(
 		'citrus' => array(
-			'can'   => 'lata-spir-up 1 (2).png',
+			'can'   => 'lata-citrus',   /* latas nuevas del cliente (Lata ... Spir Up 1.svg => png/webp 1x y 2x) */
 			'name'  => spirup_txt( 'sl_citrus_name' ),
 			'word'  => 'CITRUS',
 			'tag'   => spirup_txt( 'sl_citrus_tag' ),
@@ -63,7 +71,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			'pills' => array_filter( array_map( 'trim', explode( ',', spirup_txt( 'sl_citrus_pills' ) ) ) ),
 		),
 		'rebel'  => array(
-			'can'   => 'lata-spir-up 1 (3).png',
+			'can'   => 'lata-rebel',
 			'name'  => spirup_txt( 'sl_rebel_name' ),
 			'word'  => 'REBEL',
 			'tag'   => spirup_txt( 'sl_rebel_tag' ),
@@ -81,7 +89,7 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 					<div class="spirup-showcase__copy">
 						<p class="spirup-showcase__flavor"><?php echo esc_html( $s['name'] ); ?></p>
 						<p class="spirup-showcase__tag"><?php echo esc_html( $s['tag'] ); ?></p>
-						<p class="spirup-showcase__desc"><?php echo esc_html( $s['desc'] ); ?></p>
+						<p class="spirup-showcase__desc"><?php echo esc_html( spirup_ucfirst( $s['desc'] ) ); ?></p>
 					</div>
 					<ul class="spirup-showcase__pills">
 						<?php foreach ( $s['pills'] as $pi => $pill ) : ?>
@@ -92,7 +100,10 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 						<video class="spirup-showcase__video" muted playsinline preload="auto" aria-hidden="true">
 							<source src="<?php echo esc_url( $img . '/agua_realzada.mp4' ); ?>" type="video/mp4">
 						</video>
-						<img class="spirup-showcase__can" src="<?php echo esc_url( $img . '/' . $s['can'] ); ?>" alt="Lata Spir Up <?php echo esc_attr( $s['name'] ); ?>">
+						<picture>
+							<source type="image/webp" srcset="<?php echo esc_url( $img . '/' . $s['can'] . '.webp' ); ?> 1x, <?php echo esc_url( $img . '/' . $s['can'] . '@2x.webp' ); ?> 2x">
+							<img class="spirup-showcase__can" src="<?php echo esc_url( $img . '/' . $s['can'] . '.png' ); ?>" srcset="<?php echo esc_url( $img . '/' . $s['can'] . '.png' ); ?> 1x, <?php echo esc_url( $img . '/' . $s['can'] . '@2x.png' ); ?> 2x" alt="Lata Spir Up <?php echo esc_attr( $s['name'] ); ?>">
+						</picture>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -189,25 +200,32 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 				<?php /* Diagrama (circulos + flechas + labels El origen/desarrollo/resultado). Labels en los tercios. */ ?>
 				<?php /* MOVIL: timeline VERTICAL (columna), como el figma. Desktop usa la imagen de abajo. */ ?>
 				<ul class="spirup-cultivo__timeline">
+					<?php
+					/* Las 3 fotos del cliente ("Del cultivo a la lata - ORIGEN/DESARROLLO/RESULTADO.png"),
+					   recortadas en circulo; se sirven a 380 y 760px (2x) => nitidas. */
+					$cultivo = array(
+						array( 'origen', 'El origen', 'Exploramos el potencial de las<br> microalgas y sus compuestos<br> bioactivos.', 'Microalgas vistas al microscopio' ),
+						array( 'desarrollo', 'El desarrollo', 'Trabajamos en la formulación para<br> equilibrar funcionalidad, sabor y<br> una experiencia refrescante.', 'Laboratorio Spir Up: investigación con microalgas' ),
+						array( 'resultado', 'El resultado', 'Una propuesta peruana que<br> acerca la ciencia a la vida<br> cotidiana.', 'Mano sosteniendo una lata de Spir Up Rebel Blue entre agua' ),
+					);
+					$cultivo_pic = function ( $k, $alt, $sizes ) use ( $img ) {
+						$b = $img . '/cultivo-foto-' . $k;
+						echo '<picture><source type="image/webp" srcset="' . esc_url( $b . '-sm.webp' ) . ' 380w, ' . esc_url( $b . '.webp' ) . ' 760w" sizes="' . esc_attr( $sizes ) . '">'
+							. '<img src="' . esc_url( $b . '.jpg' ) . '" srcset="' . esc_url( $b . '-sm.jpg' ) . ' 380w, ' . esc_url( $b . '.jpg' ) . ' 760w" sizes="' . esc_attr( $sizes ) . '" width="760" height="760" alt="' . esc_attr( $alt ) . '"></picture>';
+					};
+					foreach ( $cultivo as $c ) : ?>
 					<li class="ct-step">
-						<span class="ct-dot ct-dot--foto"><picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/cultivo-foto-1-sm.webp' ); ?>"><img src="<?php echo esc_url( $img . '/cultivo-foto-1-sm.jpg' ); ?>" alt="Laboratorio Spir Up: investigación con microalgas"></picture></span>
-						<div class="ct-txt"><h3>El origen</h3><p>Exploramos el potencial de las microalgas y sus compuestos bioactivos.</p></div>
+						<span class="ct-dot ct-dot--foto"><?php $cultivo_pic( $c[0], $c[3], '26vw' ); ?></span>
+						<div class="ct-txt"><h3><?php echo esc_html( $c[1] ); ?></h3><p><?php echo wp_kses( str_replace( '<br> ', ' ', $c[2] ), array() ); ?></p></div>
 					</li>
-					<li class="ct-step">
-						<span class="ct-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6l-4.6 8.6A1.8 1.8 0 0 0 7 21h10a1.8 1.8 0 0 0 1.6-2.4L14 9V3"/><path d="M8.4 14.5h7.2"/></svg></span>
-						<div class="ct-txt"><h3>El desarrollo</h3><p>Trabajamos en la formulación para equilibrar funcionalidad, sabor y una experiencia refrescante.</p></div>
-					</li>
-					<li class="ct-step">
-						<span class="ct-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="4" width="10" height="17" rx="3"/><path d="M9 4c0-1 .8-1.6 1.6-1.6h2.8c.8 0 1.6.6 1.6 1.6"/><path d="M8 9h8"/></svg></span>
-						<div class="ct-txt"><h3>El resultado</h3><p>Una propuesta peruana que acerca la ciencia a la vida cotidiana.</p></div>
-					</li>
+					<?php endforeach; ?>
 				</ul>
-				<?php /* DESKTOP: diagrama en HTML (circulos + flechas + labels), sin imagen => nitido.
+				<?php /* DESKTOP: diagrama en HTML (circulos con foto + flechas + labels), sin imagen compuesta => nitido.
 					Descripciones con los MISMOS cortes del figma: las tres en 3 lineas. */ ?>
 				<ol class="spirup-cultivo__flow">
-					<li class="cs"><span class="cs__circle cs__circle--foto"><picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/cultivo-foto-1-sm.webp' ); ?> 380w, <?php echo esc_url( $img . '/cultivo-foto-1.webp' ); ?> 760w" sizes="(max-width: 860px) 96px, 160px"><img src="<?php echo esc_url( $img . '/cultivo-foto-1.jpg' ); ?>" srcset="<?php echo esc_url( $img . '/cultivo-foto-1-sm.jpg' ); ?> 380w, <?php echo esc_url( $img . '/cultivo-foto-1.jpg' ); ?> 760w" sizes="(max-width: 860px) 96px, 160px" alt="Laboratorio Spir Up: investigación con microalgas"></picture></span><h3>El origen</h3><p>Exploramos el potencial de las<br> microalgas y sus compuestos<br> bioactivos.</p></li>
-					<li class="cs"><span class="cs__circle"><img src="<?php echo esc_url( $img . '/cultivo-ico-2.svg' ); ?>" alt="" aria-hidden="true"></span><h3>El desarrollo</h3><p>Trabajamos en la formulación para<br> equilibrar funcionalidad, sabor y<br> una experiencia refrescante.</p></li>
-					<li class="cs"><span class="cs__circle"><img src="<?php echo esc_url( $img . '/cultivo-ico-3.png' ); ?>" alt="" aria-hidden="true"></span><h3>El resultado</h3><p>Una propuesta peruana que<br> acerca la ciencia a la vida<br> cotidiana.</p></li>
+					<?php foreach ( $cultivo as $c ) : ?>
+					<li class="cs"><span class="cs__circle cs__circle--foto"><?php $cultivo_pic( $c[0], $c[3], '(max-width: 860px) 96px, 160px' ); ?></span><h3><?php echo esc_html( $c[1] ); ?></h3><p><?php echo wp_kses( $c[2], array( 'br' => array() ) ); ?></p></li>
+					<?php endforeach; ?>
 				</ol>
 			</div>
 		</div>
