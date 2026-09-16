@@ -45,8 +45,9 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 		<?php /* La sombra de la izquierda (Group 83 (2).png del figma) ya va horneada en la foto
 			de 8033px, asi que no hace falta la capa negra al 28%. */ ?>
 		<?php /* Cinta de valores (solo escritorio/tablet: en movil la hace el CSS con ondas SVG).
-			Es un SVG: olas vectoriales (bordes nitidos a cualquier zoom) + textos/iconos dentro. */ ?>
-		<img class="spirup-figura__cinta" src="<?php echo esc_url( $img . '/hero-cinta.svg' ); ?>" width="2886" height="336"
+			hero-cinta.svg = "Group 84.svg" del cliente (100% vectorial: olas, textos en trazos e
+			iconos) + el relleno aqua bajo la ola inferior. Nitido a cualquier zoom. */ ?>
+		<img class="spirup-figura__cinta" src="<?php echo esc_url( $img . '/hero-cinta.svg' ); ?>" width="1440" height="168"
 			alt="Respaldada por investigación · Sin colorantes artificiales · Propuesta sostenible">
 		<div class="spirup-figura__overlay">
 			<h2 class="spirup-figura__title">¡Un sorbo de <br class="br-m">vitalidad,<br> un sorbo de <br class="br-m"><span class="spirup-figura__brand">Spir&nbsp;Up!</span></h2>
