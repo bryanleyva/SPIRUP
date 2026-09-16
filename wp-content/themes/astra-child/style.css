@@ -954,7 +954,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 }
 .spirup-cultivo__timeline { display: none; }   /* solo movil (columna vertical) */
 .spirup-cultivo__flow {
-	--cs-d: clamp(104px, 12.6vw, 184px);  /* diametro del circulo (figma ~182px a 1441) */
+	--cs-d: clamp(112px, 13.6vw, 200px);  /* diametro del circulo (un poco mas grande que el figma, pedido del cliente) */
 	--cs-g: clamp(16px, 3vw, 60px);       /* separacion entre columnas */
 	--cs-a: clamp(44px, 6.2vw, 90px);     /* largo de la flecha (figma ~89px), centrada entre circulos */
 	list-style: none; margin: 0 auto; padding: 0; max-width: 1320px;   /* columnas anchas: las lineas del figma entran sin cortarse */
@@ -964,7 +964,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 .cs__circle {
 	display: flex; align-items: center; justify-content: center;
 	width: var(--cs-d); height: var(--cs-d); border-radius: 50%;
-	border: 3px solid #1f86c4; box-sizing: border-box;
+	border: 0; box-sizing: border-box;   /* sin borde (pedido del cliente): la foto llena el circulo */
 	margin: 0 auto clamp(16px, 2.6vw, 42px);   /* figma: ~40px entre circulo y "EL ORIGEN" */
 }
 .cs__circle img { width: 66%; height: auto; display: block; }
@@ -975,20 +975,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 /* Titulos en MAYUSCULA (Montserrat bold, como el figma) y descripciones mas grandes */
 .cs h3 { margin: 0 0 .5em; color: #EC7A04; font-family: var(--font-body) !important; font-weight: 700; text-transform: uppercase; letter-spacing: .01em; line-height: 1.2; font-size: clamp(16px, 1.65vw, 30px); }
 .cs p { margin: 0 auto; color: #4d6266; line-height: 1.4; font-size: clamp(12px, 1.45vw, 25px); white-space: nowrap; }   /* nowrap: solo cortan los <br> => 3 lineas en las tres */
-/* flecha CORTA (linea + punta) centrada entre un circulo y el siguiente (figma) */
+/* flecha CORTA centrada entre un circulo y el siguiente (figma): un solo SVG (linea + punta
+   en proporcion fija), asi nunca se deforma ni se desalinea la punta. */
 .cs:not(:last-child)::after {
-	content: ""; position: absolute; height: 2px; background: #1f86c4;
-	top: calc(var(--cs-d) / 2 - 1px);
+	content: ""; position: absolute;
+	width: var(--cs-a); height: calc(var(--cs-a) * 14 / 90);
+	top: calc(var(--cs-d) / 2 - var(--cs-a) * 7 / 90);
 	left: calc(100% + var(--cs-g) / 2 - var(--cs-a) / 2);
-	width: var(--cs-a);
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 14' fill='none' stroke='%231f86c4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 7h86'/%3E%3Cpath d='M79 1.5 87 7l-8 5.5'/%3E%3C/svg%3E") no-repeat center / contain;
 }
-.cs:not(:last-child)::before {
-	content: ""; position: absolute; width: 9px; height: 9px;
-	border-top: 2px solid #1f86c4; border-right: 2px solid #1f86c4;
-	top: calc(var(--cs-d) / 2 - 5.5px);
-	left: calc(100% + var(--cs-g) / 2 + var(--cs-a) / 2 - 11px);
-	transform: rotate(45deg);
-}
+.cs:not(:last-child)::before { content: none; }
 
 /* ==========================================================================
    PARTE 8: Productos "Elige como quieres tu SPIR UP"
@@ -1359,12 +1355,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    171.8 / 210.5 / 171.8 / 235.5 x ~51px, separacion ~14px, rotacion alternada
    -4.47 / +4.2 (figma gira antihorario => en CSS el signo va al reves). */
 .spirup-showcase__pills { position: absolute; left: 81.6%; top: 50%; transform: translate(-50%, -50%); z-index: 4; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; align-items: center; gap: clamp(3px, .35vw, 5px); }   /* pastillas casi pegadas, igual que en movil (figma) */
-.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: clamp(48px, 4.5vw, 68px); padding: 0 1.1em; font-size: clamp(15px, 1.6vw, 24px); box-shadow: none; }
-/* un 10% mas largas (pedido del cliente) */
-.spirup-showcase__pills .pill--1 { width: clamp(136px, 13.1vw, 190px); transform: rotate(4.47deg); }
-.spirup-showcase__pills .pill--2 { width: clamp(167px, 16.1vw, 232px); transform: rotate(-4.2deg); }
-.spirup-showcase__pills .pill--3 { width: clamp(136px, 13.1vw, 190px); transform: rotate(4.47deg); }
-.spirup-showcase__pills .pill--4 { width: clamp(187px, 18vw, 260px);   transform: rotate(-4.2deg); }
+.spirup-showcase__pills .pill { font-family: var(--font-title); font-weight: 800; border-radius: 999px; line-height: 1; white-space: nowrap; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: clamp(40px, 3.6vw, 54px); padding: 0 1.1em; font-size: clamp(15px, 1.6vw, 24px); box-shadow: none; }   /* alto del figma (~51px a 1441): menos "gordas" */
+/* un 5% mas largas que el figma (punto medio pedido por el cliente) */
+.spirup-showcase__pills .pill--1 { width: clamp(130px, 12.5vw, 181px); transform: rotate(4.47deg); }
+.spirup-showcase__pills .pill--2 { width: clamp(160px, 15.3vw, 222px); transform: rotate(-4.2deg); }
+.spirup-showcase__pills .pill--3 { width: clamp(130px, 12.5vw, 181px); transform: rotate(4.47deg); }
+.spirup-showcase__pills .pill--4 { width: clamp(178px, 17.2vw, 248px); transform: rotate(-4.2deg); }
 /* Colores Citrus */
 .is-citrus .pill--1 { background: #86ccd3; color: #164e57; }
 .is-citrus .pill--2 { background: #c2e14f; color: #164e57; }
@@ -1644,7 +1640,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
    ========================================================================== */
 .spirup-parte9 { background: #fff; }
 .spirup-parte9__inner {
-	max-width: min(1080px, 94vw);
+	max-width: min(1240px, 94vw);   /* ancho para que el titulo quepa en UNA linea */
 	margin: 0 auto;
 	padding: clamp(44px, 4.5vw, 130px) clamp(16px, 1.5vw, 40px) clamp(48px, 5vw, 140px);
 	text-align: center;
@@ -1653,7 +1649,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	color: #0281AE;   /* azul del figma */
 	font-weight: 800;
 	line-height: 1.15;
-	font-size: clamp(24px, 3.2vw, 54px);
+	white-space: nowrap;   /* siempre en UNA linea ("SPIR UP" junto) */
+	font-size: clamp(22px, 3.1vw, 50px);
 	margin: 0 0 clamp(18px, 1.6vw, 44px);
 }
 .spirup-parte9__lead {
@@ -2559,7 +2556,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 		gap: min(3.4vw, 16px); padding-bottom: min(9vw, 44px);
 	}
 	.ct-dot { width: min(26vw, 124px); height: min(26vw, 124px); }
-	.ct-dot--foto { overflow: hidden; border-width: 3px; }
+	.ct-dot--foto { overflow: hidden; border: 0; }   /* sin borde, como en escritorio */
 	.ct-dot--foto picture { display: contents; }
 	.ct-dot--foto img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 	.ct-txt { text-align: center; }
@@ -2589,7 +2586,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 118px; }  /* la cabecera fij
 	.spirup-parte4__claim { font-size: min(4.5vw, 20px); max-width: 21ch; margin-left: auto; margin-right: auto; line-height: 1.4; }
 
 	/* --- 15. "Unete al lanzamiento": parrafos ordenados -------------------- */
-	.spirup-parte9__title { font-size: min(7vw, 30px); line-height: 1.2; max-width: 18ch; margin-left: auto; margin-right: auto; }
+	.spirup-parte9__title { font-size: min(7vw, 30px); line-height: 1.2; max-width: 18ch; margin-left: auto; margin-right: auto; white-space: normal; }
 	.spirup-parte9__lead { font-size: min(4.3vw, 19px); line-height: 1.45; max-width: 26ch; margin-left: auto; margin-right: auto; white-space: normal; }
 	.spirup-parte9__lead .br-d { display: none; }   /* en movil el texto corre normal */
 

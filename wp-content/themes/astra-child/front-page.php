@@ -42,14 +42,12 @@ $img = get_stylesheet_directory_uri() . '/imagenes';
 			<picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/lata-rebel.webp' ); ?> 1x, <?php echo esc_url( $img . '/lata-rebel@2x.webp' ); ?> 2x"><img class="spirup-figura__lata spirup-figura__lata--rebel" src="<?php echo esc_url( $img . '/lata-rebel.png' ); ?>" srcset="<?php echo esc_url( $img . '/lata-rebel.png' ); ?> 1x, <?php echo esc_url( $img . '/lata-rebel@2x.png' ); ?> 2x" alt="" loading="lazy"></picture>
 			<picture><source type="image/webp" srcset="<?php echo esc_url( $img . '/lata-citrus.webp' ); ?> 1x, <?php echo esc_url( $img . '/lata-citrus@2x.webp' ); ?> 2x"><img class="spirup-figura__lata spirup-figura__lata--citrus" src="<?php echo esc_url( $img . '/lata-citrus.png' ); ?>" srcset="<?php echo esc_url( $img . '/lata-citrus.png' ); ?> 1x, <?php echo esc_url( $img . '/lata-citrus@2x.png' ); ?> 2x" alt="" loading="lazy"></picture>
 		</div>
-		<?php /* Sombra del figma: relleno negro al 28% por encima de la foto */ ?>
-		<span class="spirup-figura__shade" aria-hidden="true"></span>
-		<?php /* Cinta de valores (solo escritorio/tablet: en movil la hace el CSS con ondas SVG) */ ?>
-		<picture class="spirup-figura__cintabox">
-			<source type="image/webp" srcset="<?php echo esc_url( $img . '/hero-cinta.webp' ); ?>">
-			<img class="spirup-figura__cinta" src="<?php echo esc_url( $img . '/hero-cinta.png' ); ?>"
-				alt="Respaldada por investigación · Sin colorantes artificiales · Propuesta sostenible">
-		</picture>
+		<?php /* La sombra de la izquierda (Group 83 (2).png del figma) ya va horneada en la foto
+			de 8033px, asi que no hace falta la capa negra al 28%. */ ?>
+		<?php /* Cinta de valores (solo escritorio/tablet: en movil la hace el CSS con ondas SVG).
+			Es un SVG: olas vectoriales (bordes nitidos a cualquier zoom) + textos/iconos dentro. */ ?>
+		<img class="spirup-figura__cinta" src="<?php echo esc_url( $img . '/hero-cinta.svg' ); ?>" width="2886" height="336"
+			alt="Respaldada por investigación · Sin colorantes artificiales · Propuesta sostenible">
 		<div class="spirup-figura__overlay">
 			<h2 class="spirup-figura__title">¡Un sorbo de <br class="br-m">vitalidad,<br> un sorbo de <br class="br-m"><span class="spirup-figura__brand">Spir&nbsp;Up!</span></h2>
 			<a class="spirup-figura__cta spirup-btn spirup-btn--orange" href="#reservar"><?php echo esc_html( spirup_txt( 'hero_cta' ) ); ?></a>
