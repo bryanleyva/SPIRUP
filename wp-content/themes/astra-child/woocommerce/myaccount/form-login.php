@@ -3,7 +3,8 @@
  * Acceso / registro de "Mi cuenta" con la imagen de SPIR UP.
  *
  * Sustituye a woocommerce/templates/myaccount/form-login.php: mismos campos y
- * hooks (nonce incluido), pero maquetado como una tarjeta centrada con el logo.
+ * hooks (nonce incluido), maquetado como una tarjeta centrada con el logo y
+ * dos pestanas: "Iniciar sesion" y "Crear cuenta" (misma tarjeta, mismo estilo).
  *
  * @package SPIRUP
  */
@@ -12,20 +13,30 @@ defined( 'ABSPATH' ) || exit;
 
 do_action( 'woocommerce_before_customer_login_form' );
 
-$spirup_reg = 'yes' === get_option( 'woocommerce_enable_myaccount_registration' );
 $spirup_img = get_stylesheet_directory_uri() . '/imagenes';
+// Si venimos de un intento de registro con error, abrimos esa pestana.
+$spirup_tab = ( ! empty( $_POST['register'] ) ) ? 'register' : 'login';   // phpcs:ignore WordPress.Security.NonceVerification
 ?>
 
-<div class="spirup-auth<?php echo $spirup_reg ? ' has-register' : ''; ?>">
+<div class="spirup-auth has-register">
 
-	<div class="spirup-auth__card">
+	<div class="spirup-auth__card"
+		data-title-login="Tu cuenta" data-sub-login="Entra o crea tu cuenta para ver y seguir tus pedidos."
+		data-title-register="Crear cuenta" data-sub-register="Regístrate para disfrutar de todos los beneficios de Spir Up.">
 		<a class="spirup-auth__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Spir Up - Inicio">
 			<img src="<?php echo esc_url( $spirup_img . '/logo-spirup.png' ); ?>" srcset="<?php echo esc_url( $spirup_img . '/logo-spirup.png' ); ?> 1x, <?php echo esc_url( $spirup_img . '/logo-spirup@2x.png' ); ?> 2x" width="154" height="186" alt="Spir Up">
 		</a>
-		<h1 class="spirup-auth__title"><?php esc_html_e( 'Iniciar sesión', 'astra-child' ); ?></h1>
-		<p class="spirup-auth__sub"><?php esc_html_e( 'Entra a tu cuenta para ver tus pedidos.', 'astra-child' ); ?></p>
+		<h1 class="spirup-auth__title" data-spirup-auth-title><?php esc_html_e( 'Tu cuenta', 'astra-child' ); ?></h1>
+		<p class="spirup-auth__sub" data-spirup-auth-sub><?php esc_html_e( 'Entra o crea tu cuenta para ver y seguir tus pedidos.', 'astra-child' ); ?></p>
 
-		<form class="woocommerce-form woocommerce-form-login login" method="post">
+		<p class="spirup-auth__error" data-spirup-auth-error hidden></p>
+
+		<div class="spirup-auth__tabs" role="tablist">
+			<button type="button" class="spirup-auth__tab<?php echo 'login' === $spirup_tab ? ' is-active' : ''; ?>" data-spirup-tab="login" role="tab"><?php esc_html_e( 'Iniciar sesión', 'astra-child' ); ?></button>
+			<button type="button" class="spirup-auth__tab<?php echo 'register' === $spirup_tab ? ' is-active' : ''; ?>" data-spirup-tab="register" role="tab"><?php esc_html_e( 'Crear cuenta', 'astra-child' ); ?></button>
+		</div>
+
+		<form class="woocommerce-form woocommerce-form-login login spirup-auth__panel<?php echo 'login' === $spirup_tab ? ' is-active' : ''; ?>" data-spirup-panel="login" method="post">
 
 			<?php do_action( 'woocommerce_login_form_start' ); ?>
 
@@ -58,43 +69,13 @@ $spirup_img = get_stylesheet_directory_uri() . '/imagenes';
 
 		</form>
 
-		<?php if ( $spirup_reg ) : ?>
-			<div class="spirup-auth__sep"><span><?php esc_html_e( 'o', 'astra-child' ); ?></span></div>
-
-			<form method="post" class="woocommerce-form woocommerce-form-register register spirup-auth__register" <?php do_action( 'woocommerce_register_form_tag' ); ?>>
-
-				<?php do_action( 'woocommerce_register_form_start' ); ?>
-
-				<?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
-					<p class="woocommerce-form-row form-row">
-						<label for="reg_username"><?php esc_html_e( 'Usuario', 'astra-child' ); ?></label>
-						<input type="text" class="woocommerce-Input input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification ?>" /><?php // @codingStandardsIgnoreLine ?>
-					</p>
-				<?php endif; ?>
-
-				<p class="woocommerce-form-row form-row">
-					<label for="reg_email"><?php esc_html_e( 'Crear cuenta con tu correo', 'astra-child' ); ?></label>
-					<input type="email" class="woocommerce-Input input-text" name="email" id="reg_email" autocomplete="email" placeholder="tucorreo@ejemplo.com" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification ?>" /><?php // @codingStandardsIgnoreLine ?>
-				</p>
-
-				<?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
-					<p class="woocommerce-form-row form-row">
-						<label for="reg_password"><?php esc_html_e( 'Contraseña', 'astra-child' ); ?></label>
-						<input type="password" class="woocommerce-Input input-text" name="password" id="reg_password" autocomplete="new-password" placeholder="••••••••" />
-					</p>
-				<?php else : ?>
-					<p class="spirup-auth__note"><?php esc_html_e( 'Te enviaremos un enlace por correo para crear tu contraseña.', 'astra-child' ); ?></p>
-				<?php endif; ?>
-
-				<?php do_action( 'woocommerce_register_form' ); ?>
-
-				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit spirup-auth__btn spirup-auth__btn--ghost" name="register" value="<?php esc_attr_e( 'Crear cuenta', 'astra-child' ); ?>"><?php esc_html_e( 'Crear cuenta', 'astra-child' ); ?></button>
-
-				<?php do_action( 'woocommerce_register_form_end' ); ?>
-
-			</form>
-		<?php endif; ?>
+		<?php /* El registro usa el MISMO formulario que la ventana del checkout (AJAX
+			propio): asi los dos piden y guardan exactamente los mismos datos. */ ?>
+		<form class="spirup-auth__panel<?php echo 'register' === $spirup_tab ? ' is-active' : ''; ?>" data-spirup-panel="register" data-spirup-auth-form="register" data-spirup-auth-redirect="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" novalidate>
+			<?php spirup_register_fields( 'reg' ); ?>
+			<button type="submit" class="spirup-auth__btn">Registrarme</button>
+			<p class="spirup-auth__swap">¿Ya tienes una cuenta? <button type="button" data-spirup-tab="login">Inicia sesión</button></p>
+		</form>
 
 		<p class="spirup-auth__back"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Volver a la tienda', 'astra-child' ); ?></a></p>
 	</div>

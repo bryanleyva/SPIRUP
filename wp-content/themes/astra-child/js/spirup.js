@@ -315,3 +315,153 @@
 		} );
 	}
 } )();
+
+/* ==========================================================================
+   Acceso: pestanas "Iniciar sesion / Crear cuenta" (Mi cuenta y ventana del
+   checkout) + ventana emergente del checkout: el cliente llena el formulario
+   como invitado y, al pulsar "Realizar el pedido", entra o crea su cuenta;
+   despues el pedido se reenvia solo con lo que ya escribio.
+   ========================================================================== */
+( function () {
+	// Pestanas (sirven para cualquier .spirup-auth__tabs de la pagina)
+	document.addEventListener( 'click', function ( e ) {
+		var tab = e.target.closest( '[data-spirup-tab]' );
+		if ( ! tab ) { return; }
+		var root = tab.closest( '.spirup-auth__card' ) || document;
+		var name = tab.getAttribute( 'data-spirup-tab' );
+		root.querySelectorAll( '[data-spirup-tab]' ).forEach( function ( t ) { t.classList.toggle( 'is-active', t === tab ); } );
+		root.querySelectorAll( '[data-spirup-panel]' ).forEach( function ( p ) { p.classList.toggle( 'is-active', p.getAttribute( 'data-spirup-panel' ) === name ); } );
+		// Titulo y subtitulo propios de cada pestana (si la tarjeta los trae)
+		var card = tab.closest( '.spirup-auth__card' );
+		if ( card && card.getAttribute( 'data-title-' + name ) ) {
+			var h = card.querySelector( '[data-spirup-auth-title]' );
+			var sb = card.querySelector( '[data-spirup-auth-sub]' );
+			if ( h ) { h.textContent = card.getAttribute( 'data-title-' + name ); }
+			if ( sb ) { sb.textContent = card.getAttribute( 'data-sub-' + name ); }
+		}
+		var err = root.querySelector( '[data-spirup-auth-error]' );
+		if ( err ) { err.hidden = true; }
+	} );
+
+	var modal = document.getElementById( 'spirup-authmodal' );
+	if ( typeof window.SPIRUP_AUTH === 'undefined' ) { return; }
+
+	var $ = window.jQuery;
+	function errorBox( form ) {
+		var root = form.closest( '.spirup-auth__card' ) || document;
+		return root.querySelector( '[data-spirup-auth-error]' );
+	}
+	function showError( form, msg, field ) {
+		var box = errorBox( form );
+		if ( box ) { box.textContent = msg; box.hidden = false; box.scrollIntoView( { block: 'nearest' } ); }
+		if ( field ) {
+			var el = form.querySelector( '[name="' + field + '"]' );
+			if ( el ) { el.focus(); }
+		}
+	}
+	function switchTab( form, name ) {
+		var root = form.closest( '.spirup-auth__card' ) || document;
+		var t = root.querySelector( '.spirup-auth__tab[data-spirup-tab="' + name + '"]' );
+		if ( t ) { t.click(); }
+	}
+	function field( name ) {
+		var el = document.querySelector( 'form.checkout [name="' + name + '"]' );
+		return el ? el.value : '';
+	}
+
+	// --- Ventana del checkout ------------------------------------------------
+	if ( modal && typeof $ !== 'undefined' ) {
+		var openModal = function () {
+			var box = modal.querySelector( '[data-spirup-auth-error]' );
+			if ( box ) { box.hidden = true; }
+			var email = field( 'billing_email' );
+			if ( email ) {
+				[ '#sa-username', '#sa_email' ].forEach( function ( sel ) {
+					var el = modal.querySelector( sel );
+					if ( el && ! el.value ) { el.value = email; }
+				} );
+			}
+			var nombre = ( field( 'billing_first_name' ) + ' ' + field( 'billing_last_name' ) ).trim();
+			var elN = modal.querySelector( '#sa_name' );
+			if ( elN && ! elN.value && nombre ) { elN.value = nombre; }
+			var elT = modal.querySelector( '#sa_phone' );
+			if ( elT && ! elT.value ) { elT.value = field( 'billing_phone' ); }
+			modal.hidden = false;
+			document.body.classList.add( 'spirup-authmodal-open' );
+			var first = modal.querySelector( '.spirup-auth__panel.is-active input' );
+			if ( first ) { window.setTimeout( function () { first.focus(); }, 50 ); }
+		};
+		var closeModal = function () {
+			modal.hidden = true;
+			document.body.classList.remove( 'spirup-authmodal-open' );
+		};
+		modal.querySelectorAll( '[data-spirup-auth-close]' ).forEach( function ( b ) { b.addEventListener( 'click', closeModal ); } );
+		document.addEventListener( 'keydown', function ( e ) { if ( 'Escape' === e.key && ! modal.hidden ) { closeModal(); } } );
+
+		// WooCommerce devuelve el error especial => abrimos la ventana en su lugar
+		$( document.body ).on( 'checkout_error', function ( ev, message ) {
+			var html = String( message || '' );
+			var notice = document.querySelector( '.woocommerce-NoticeGroup-checkout, form.checkout .woocommerce-error' );
+			var flagged = html.indexOf( 'data-spirup-auth' ) !== -1 || ( notice && notice.querySelector( '[data-spirup-auth]' ) );
+			if ( ! flagged ) { return; }
+			if ( notice ) { notice.remove(); }
+			$( 'form.checkout' ).removeClass( 'processing' );
+			openModal();
+		} );
+		modal.spirupClose = closeModal;
+	}
+
+	// --- Entrar / crear cuenta (ventana del checkout y pagina "Mi cuenta") ----
+	document.querySelectorAll( '[data-spirup-auth-form]' ).forEach( function ( form ) {
+		form.addEventListener( 'submit', function ( e ) {
+			e.preventDefault();
+			var kind = form.getAttribute( 'data-spirup-auth-form' );
+			var redirect = form.getAttribute( 'data-spirup-auth-redirect' );
+			var btn  = form.querySelector( 'button[type="submit"]' );
+			var data = new FormData( form );
+			data.append( 'action', 'spirup_auth_' + kind );
+			data.append( 'nonce', SPIRUP_AUTH.nonce );
+			var box = errorBox( form );
+			if ( box ) { box.hidden = true; }
+			btn.disabled = true; btn.classList.add( 'is-loading' );
+
+			fetch( SPIRUP_AUTH.ajax, { method: 'POST', credentials: 'same-origin', body: data } )
+				.then( function ( r ) { return r.json(); } )
+				.then( function ( res ) {
+					if ( ! res || ! res.success ) {
+						var d = ( res && res.data ) || {};
+						if ( d.switch ) { switchTab( form, d.switch ); }
+						showError( form, d.message || 'No se pudo completar. Inténtalo de nuevo.', d.field );
+						btn.disabled = false; btn.classList.remove( 'is-loading' );
+						return;
+					}
+					// Fuera del checkout (Mi cuenta): recargar ya con la sesion abierta
+					if ( redirect || ! modal || typeof $ === 'undefined' ) {
+						window.location.href = redirect || window.location.href;
+						return;
+					}
+					// En el checkout: nonce fresco (el navegador ya tiene la cookie)
+					// y se reenvia el pedido con los datos que ya escribio.
+					var nd = new FormData();
+					nd.append( 'action', 'spirup_auth_nonce' );
+					nd.append( 'nonce', SPIRUP_AUTH.nonce );
+					return fetch( SPIRUP_AUTH.ajax, { method: 'POST', credentials: 'same-origin', body: nd } )
+						.then( function ( r ) { return r.json(); } )
+						.then( function ( n ) {
+							if ( ! n || ! n.success ) { window.location.reload(); return; }
+							var $form = $( 'form.checkout' );
+							$form.find( 'input[name="woocommerce-process-checkout-nonce"], input[name="_wpnonce"]' ).val( n.data.nonce );
+							document.body.classList.add( 'logged-in' );
+							if ( modal.spirupClose ) { modal.spirupClose(); }
+							var old = document.querySelector( '.woocommerce-NoticeGroup-checkout, form.checkout .woocommerce-error' );
+							if ( old ) { old.remove(); }
+							$form.trigger( 'submit' );
+						} );
+				} )
+				.catch( function () {
+					showError( form, 'Hubo un problema de conexión. Inténtalo de nuevo.' );
+					btn.disabled = false; btn.classList.remove( 'is-loading' );
+				} );
+		} );
+	} );
+} )();

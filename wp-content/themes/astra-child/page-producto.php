@@ -50,6 +50,8 @@ get_header();
 		<span class="prodx-lbl prodx-lbl--r1">Sin azúcar<br><small>añadida</small></span>
 		<span class="prodx-lbl prodx-lbl--r2">Equilibrio<br>celular</span>
 		<span class="prodx-lbl prodx-lbl--r3">Apoyo<br>inmunológico</span>
+		<?php /* El vector del figma no trae el circulito de "Apoyo inmunologico": se dibuja aqui */ ?>
+		<span class="prodx-dot prodx-dot--r3" aria-hidden="true"></span>
 
 		<?php /* Tarjeta "Momentos que te acompanan": fondo+iconos+separadores en imagen, textos en HTML */ ?>
 		<div class="prodx-mom">
